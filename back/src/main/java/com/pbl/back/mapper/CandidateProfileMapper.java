@@ -1,8 +1,8 @@
 package com.pbl.back.mapper;
 
 import com.pbl.back.domain.entity.CandidateProfile;
-import com.pbl.back.dto.candidateprofile.CandidateProfileRequest;
-import com.pbl.back.dto.candidateprofile.CandidateProfileResponse;
+import com.pbl.back.dto.CandidateProfileRequest;
+import com.pbl.back.dto.CandidateProfileResponse;
 
 public interface CandidateProfileMapper {
     public CandidateProfile toEntity(CandidateProfileRequest request);
