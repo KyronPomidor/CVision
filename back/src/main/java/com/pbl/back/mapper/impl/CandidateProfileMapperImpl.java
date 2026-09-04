@@ -1,8 +1,8 @@
 package com.pbl.back.mapper.impl;
 
 import com.pbl.back.domain.entity.CandidateProfile;
-import com.pbl.back.dto.candidateprofile.CandidateProfileRequest;
-import com.pbl.back.dto.candidateprofile.CandidateProfileResponse;
+import com.pbl.back.dto.CandidateProfileRequest;
+import com.pbl.back.dto.CandidateProfileResponse;
 import com.pbl.back.mapper.CandidateProfileMapper;
 import org.springframework.stereotype.Component;
 
@@ -20,7 +20,8 @@ public class CandidateProfileMapperImpl implements CandidateProfileMapper {
                 .build();
     }
 
-    public CandidateProfileResponse toResponse(CandidateProfile profile) {
+    public CandidateProfileResponse toResponse(
+            CandidateProfile profile) {
 
         return CandidateProfileResponse.builder()
                 .id(profile.getId())
