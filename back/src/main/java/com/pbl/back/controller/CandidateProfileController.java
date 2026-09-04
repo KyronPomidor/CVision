@@ -1,10 +1,9 @@
 package com.pbl.back.controller;
 
-import com.pbl.back.dto.CandidateProfileRequest;
-import com.pbl.back.dto.CandidateProfileResponse;
+import com.pbl.back.dto.candidateprofile.CandidateProfileRequest;
+import com.pbl.back.dto.candidateprofile.CandidateProfileResponse;
 import com.pbl.back.service.CandidateProfileService;
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
