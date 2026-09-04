@@ -1,8 +1,8 @@
 package com.pbl.back.service.impl;
 
 import com.pbl.back.domain.entity.CandidateProfile;
-import com.pbl.back.dto.CandidateProfileRequest;
-import com.pbl.back.dto.CandidateProfileResponse;
+import com.pbl.back.dto.candidateprofile.CandidateProfileRequest;
+import com.pbl.back.dto.candidateprofile.CandidateProfileResponse;
 import com.pbl.back.mapper.CandidateProfileMapper;
 import com.pbl.back.repository.CandidateProfileRepository;
 import com.pbl.back.service.CandidateProfileService;

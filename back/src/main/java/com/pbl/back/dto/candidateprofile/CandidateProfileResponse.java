@@ -8,7 +8,6 @@ import lombok.Getter;
 public class CandidateProfileResponse {
 
     private Long id;
-    private Long userId;
     private String name;
     private String location;
     private String education;
