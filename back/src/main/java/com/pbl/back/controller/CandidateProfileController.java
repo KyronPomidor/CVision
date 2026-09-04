@@ -3,6 +3,7 @@ package com.pbl.back.controller;
 import com.pbl.back.dto.CandidateProfileRequest;
 import com.pbl.back.dto.CandidateProfileResponse;
 import com.pbl.back.service.CandidateProfileService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,7 +18,7 @@ public class CandidateProfileController {
     }
 
     @PostMapping
-    public CandidateProfileResponse create(@RequestBody CandidateProfileRequest request) {
+    public CandidateProfileResponse create(@Valid @RequestBody CandidateProfileRequest request) {
 
         return service.create(request);
     }
