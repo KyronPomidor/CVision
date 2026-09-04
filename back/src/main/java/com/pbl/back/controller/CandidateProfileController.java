@@ -8,14 +8,16 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/profiles")
-@RequiredArgsConstructor
 public class CandidateProfileController {
 
     private final CandidateProfileService service;
 
+    public CandidateProfileController(CandidateProfileService service) {
+        this.service = service;
+    }
+
     @PostMapping
-    public CandidateProfileResponse create(
-            @RequestBody CandidateProfileRequest request) {
+    public CandidateProfileResponse create(@RequestBody CandidateProfileRequest request) {
 
         return service.create(request);
     }
