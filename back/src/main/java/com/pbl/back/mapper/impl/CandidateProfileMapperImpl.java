@@ -20,8 +20,7 @@ public class CandidateProfileMapperImpl implements CandidateProfileMapper {
                 .build();
     }
 
-    public CandidateProfileResponse toResponse(
-            CandidateProfile profile) {
+    public CandidateProfileResponse toResponse(CandidateProfile profile) {
 
         return CandidateProfileResponse.builder()
                 .id(profile.getId())
