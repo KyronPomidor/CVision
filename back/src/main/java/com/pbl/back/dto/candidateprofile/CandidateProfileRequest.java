@@ -10,6 +10,7 @@ public class CandidateProfileRequest {
 
     @NotBlank
     private String name;
+    private Long userId;
     private String location;
     private String education;
     private String experience;

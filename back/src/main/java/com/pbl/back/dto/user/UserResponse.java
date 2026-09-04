@@ -11,8 +11,8 @@ import java.time.LocalDateTime;
 public class UserResponse {
 
     private Long id;
-    private String accountName;
     private String email;
+    private String accountName;
     private Role role;
     private LocalDateTime createdAt;
 }
