@@ -1,4 +1,4 @@
-package com.pbl.back.dto;
+package com.pbl.back.dto.candidateprofile;
 
 import lombok.Builder;
 import lombok.Getter;
