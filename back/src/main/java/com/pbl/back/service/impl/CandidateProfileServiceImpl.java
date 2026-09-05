@@ -34,6 +34,14 @@ public class CandidateProfileServiceImpl implements CandidateProfileService {
     }
 
     @Override
+    public CandidateProfileResponse getByUserId(Long userId) {
+        CandidateProfile profile = repository.findByUserId(userId)
+                .orElseThrow();
+
+        return mapper.toResponse(profile);
+    }
+
+    @Override
     public CandidateProfileResponse update(Long userId, CandidateProfileRequest request) {
         CandidateProfile profile = repository.findByUserId(userId)
                 .orElseThrow();
@@ -64,11 +72,4 @@ public class CandidateProfileServiceImpl implements CandidateProfileService {
 //        return mapper.toResponse(profile);
 //    }
 
-    @Override
-    public CandidateProfileResponse getByUserId(Long userId) {
-        CandidateProfile profile = repository.findByUserId(userId)
-                .orElseThrow();
-
-        return mapper.toResponse(profile);
-    }
 }

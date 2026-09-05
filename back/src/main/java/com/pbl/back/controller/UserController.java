@@ -16,7 +16,21 @@ public class UserController {
 
     @PostMapping
     public UserResponse create(@Valid @RequestBody UserRequest request) {
-
         return service.create(request);
+    }
+
+    @GetMapping("/{id}")
+    public UserResponse getById(@PathVariable Long id) {
+        return service.getById(id);
+    }
+
+    @PutMapping("/{id}")
+    public UserResponse update(@PathVariable Long id, @Valid @RequestBody UserRequest request) {
+        return service.update(id, request);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteById(@PathVariable Long id) {
+        service.delete(id);
     }
 }
