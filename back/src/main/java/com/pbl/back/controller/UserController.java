@@ -4,7 +4,6 @@ import com.pbl.back.dto.user.UserRequest;
 import com.pbl.back.dto.user.UserResponse;
 import com.pbl.back.service.UserService;
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
