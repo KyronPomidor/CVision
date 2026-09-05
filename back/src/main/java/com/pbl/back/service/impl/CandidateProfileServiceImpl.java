@@ -20,8 +20,8 @@ public class CandidateProfileServiceImpl implements CandidateProfileService {
     private final UserRepository userRepository;
 
     // TODO: get user without client id
-    public CandidateProfileResponse create(CandidateProfileRequest request) {
-        User user = userRepository.findById(request.getUserId())
+    public CandidateProfileResponse create(Long userId, CandidateProfileRequest request) {
+        User user = userRepository.findById(userId)
                 .orElseThrow();
 
         CandidateProfile profile = mapper.toEntity(request);
@@ -42,8 +42,16 @@ public class CandidateProfileServiceImpl implements CandidateProfileService {
     }
 
     @Override
-    public CandidateProfileResponse update(Long userId, CandidateProfileRequest request) {
-        CandidateProfile profile = repository.findByUserId(userId)
+    public CandidateProfileResponse getById(Long id) {
+        CandidateProfile profile = repository.findById(id)
+                .orElseThrow();
+
+        return mapper.toResponse(profile);
+    }
+
+    @Override
+    public CandidateProfileResponse update(Long id, CandidateProfileRequest request) {
+        CandidateProfile profile = repository.findById(id)
                 .orElseThrow();
 
         profile.setName(request.getName());
@@ -56,20 +64,12 @@ public class CandidateProfileServiceImpl implements CandidateProfileService {
     }
 
     @Override
-    public void delete(Long userId) {
-        CandidateProfile profile = repository.findByUserId(userId)
+    public void delete(Long id) {
+        CandidateProfile profile = repository.findById(id)
                 .orElseThrow();
 
         repository.delete(profile);
     }
 
-    // Find the profile by userId passed from the front, later change to automatic read of id
-//    @Override
-//    public CandidateProfileResponse getById(Long id) {
-//        CandidateProfile profile = repository.findById(id)
-//                .orElseThrow();
-//
-//        return mapper.toResponse(profile);
-//    }
 
 }

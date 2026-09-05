@@ -2,33 +2,34 @@ package com.pbl.back.controller;
 
 import com.pbl.back.dto.candidateprofile.CandidateProfileRequest;
 import com.pbl.back.dto.candidateprofile.CandidateProfileResponse;
+import com.pbl.back.dto.cv.CVRequest;
+import com.pbl.back.dto.cv.CVResponse;
+import com.pbl.back.service.CVService;
 import com.pbl.back.service.CandidateProfileService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/profiles")
-public class CandidateProfileController {
+@RequestMapping("/api/cv")
+public class CVController {
+    private final CVService service;
 
-    private final CandidateProfileService service;
-
-    public CandidateProfileController(CandidateProfileService service) {
+    public CVController(CVService service) {
         this.service = service;
     }
 
     @PostMapping("/user/{userId}")
-    public CandidateProfileResponse create(@PathVariable Long userId,
-                                           @Valid @RequestBody CandidateProfileRequest request) {
+    public CVResponse create(@PathVariable Long userId, @Valid @RequestBody CVRequest request) {
         return service.create(userId, request);
     }
 
     @GetMapping("/user/{userId}")
-    public CandidateProfileResponse getByUserId(@PathVariable Long userId) {
+    public CVResponse getByUserId(@PathVariable Long userId) {
         return service.getByUserId(userId);
     }
 
     @PutMapping("/{id}")
-    public CandidateProfileResponse update(@PathVariable Long id, @Valid @RequestBody CandidateProfileRequest request) {
+    public CVResponse update(@PathVariable Long id, @Valid @RequestBody CVRequest request) {
         return service.update(id, request);
     }
 
@@ -38,7 +39,7 @@ public class CandidateProfileController {
     }
 
     @GetMapping("/{id}")
-    public CandidateProfileResponse getById(@PathVariable Long id) {
+    public CVResponse getById(@PathVariable Long id) {
         return service.getById(id);
     }
 }
