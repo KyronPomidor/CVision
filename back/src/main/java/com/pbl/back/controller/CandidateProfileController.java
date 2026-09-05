@@ -18,7 +18,21 @@ public class CandidateProfileController {
 
     @PostMapping
     public CandidateProfileResponse create(@Valid @RequestBody CandidateProfileRequest request) {
-
         return service.create(request);
+    }
+
+    @GetMapping("/user/{userId}")
+    public CandidateProfileResponse getByUserId(@PathVariable Long userId) {
+        return service.getByUserId(userId);
+    }
+
+    @PutMapping("/user/{userId}")
+    public CandidateProfileResponse update(@PathVariable Long userId, @Valid @RequestBody CandidateProfileRequest request) {
+        return service.update(userId, request);
+    }
+
+    @DeleteMapping("/user/{userId}")
+    public void deleteByUserId(@PathVariable Long userId) {
+        service.delete(userId);
     }
 }
