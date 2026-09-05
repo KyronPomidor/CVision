@@ -22,10 +22,10 @@ public class CV {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @Column(name = "file_name")
+    @Column(name = "file_name", nullable = false)
     private String fileName;
 
-    @Column(name = "file_path")
+    @Column(name = "file_path", nullable = false)
     private String filePath;
 
     @Column(name = "extracted_text", columnDefinition = "TEXT")
