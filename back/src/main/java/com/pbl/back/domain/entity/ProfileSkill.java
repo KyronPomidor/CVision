@@ -1,5 +1,6 @@
 package com.pbl.back.domain.entity;
 
+import com.pbl.back.domain.enums.SkillLevel;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -29,7 +30,9 @@ public class ProfileSkill {
     @JoinColumn(name = "skill_id", nullable = false)
     private Skill skill;
 
-    private String level;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private SkillLevel level;
 
     private Integer yearsOfExperience;
 }
