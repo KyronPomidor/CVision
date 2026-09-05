@@ -1,11 +1,8 @@
 package com.pbl.back.controller;
 
-import com.pbl.back.dto.candidateprofile.CandidateProfileRequest;
-import com.pbl.back.dto.candidateprofile.CandidateProfileResponse;
 import com.pbl.back.dto.cv.CVRequest;
 import com.pbl.back.dto.cv.CVResponse;
 import com.pbl.back.service.CVService;
-import com.pbl.back.service.CandidateProfileService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
