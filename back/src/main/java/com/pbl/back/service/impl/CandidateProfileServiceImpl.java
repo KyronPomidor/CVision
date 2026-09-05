@@ -32,4 +32,43 @@ public class CandidateProfileServiceImpl implements CandidateProfileService {
 
         return mapper.toResponse(savedProfile);
     }
+
+    @Override
+    public CandidateProfileResponse update(Long userId, CandidateProfileRequest request) {
+        CandidateProfile profile = repository.findByUserId(userId)
+                .orElseThrow();
+
+        profile.setName(request.getName());
+        profile.setLocation(request.getLocation());
+        profile.setEducation(request.getEducation());
+        profile.setExperience(request.getExperience());
+        profile.setDescription(request.getDescription());
+
+        return mapper.toResponse(repository.save(profile));
+    }
+
+    @Override
+    public void delete(Long userId) {
+        CandidateProfile profile = repository.findByUserId(userId)
+                .orElseThrow();
+
+        repository.delete(profile);
+    }
+
+    // Find the profile by userId passed from the front, later change to automatic read of id
+//    @Override
+//    public CandidateProfileResponse getById(Long id) {
+//        CandidateProfile profile = repository.findById(id)
+//                .orElseThrow();
+//
+//        return mapper.toResponse(profile);
+//    }
+
+    @Override
+    public CandidateProfileResponse getByUserId(Long userId) {
+        CandidateProfile profile = repository.findByUserId(userId)
+                .orElseThrow();
+
+        return mapper.toResponse(profile);
+    }
 }

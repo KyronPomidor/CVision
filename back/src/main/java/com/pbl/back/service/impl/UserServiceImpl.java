@@ -25,4 +25,22 @@ public class UserServiceImpl implements UserService {
 
         return mapper.toResponse(savedUser);
     }
+
+    @Override
+    public UserResponse update(Long id, UserRequest request) {
+        User user = repository.findById(id)
+                .orElseThrow();
+
+        user.setEmail(request.getEmail());
+        user.setAccountName(request.getAccountName());
+        user.setPassword(request.getPassword());
+        user.setRole(request.getRole());
+
+        return mapper.toResponse(repository.save(user));
+    }
+
+    @Override
+    public void delete(Long id) {
+
+    }
 }
