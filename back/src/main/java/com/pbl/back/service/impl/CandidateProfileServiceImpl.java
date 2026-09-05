@@ -20,8 +20,8 @@ public class CandidateProfileServiceImpl implements CandidateProfileService {
     private final UserRepository userRepository;
 
     // TODO: get user without client id
-    public CandidateProfileResponse create(CandidateProfileRequest request) {
-        User user = userRepository.findById(request.getUserId())
+    public CandidateProfileResponse create(Long userId, CandidateProfileRequest request) {
+        User user = userRepository.findById(userId)
                 .orElseThrow();
 
         CandidateProfile profile = mapper.toEntity(request);
@@ -32,4 +32,44 @@ public class CandidateProfileServiceImpl implements CandidateProfileService {
 
         return mapper.toResponse(savedProfile);
     }
+
+    @Override
+    public CandidateProfileResponse getByUserId(Long userId) {
+        CandidateProfile profile = repository.findByUserId(userId)
+                .orElseThrow();
+
+        return mapper.toResponse(profile);
+    }
+
+    @Override
+    public CandidateProfileResponse getById(Long id) {
+        CandidateProfile profile = repository.findById(id)
+                .orElseThrow();
+
+        return mapper.toResponse(profile);
+    }
+
+    @Override
+    public CandidateProfileResponse update(Long id, CandidateProfileRequest request) {
+        CandidateProfile profile = repository.findById(id)
+                .orElseThrow();
+
+        profile.setName(request.getName());
+        profile.setLocation(request.getLocation());
+        profile.setEducation(request.getEducation());
+        profile.setExperience(request.getExperience());
+        profile.setDescription(request.getDescription());
+
+        return mapper.toResponse(repository.save(profile));
+    }
+
+    @Override
+    public void delete(Long id) {
+        CandidateProfile profile = repository.findById(id)
+                .orElseThrow();
+
+        repository.delete(profile);
+    }
+
+
 }
