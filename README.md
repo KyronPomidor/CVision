@@ -1,1 +1,5 @@
+<div align="center">
+  <img src="./Logo_text.svg" alt="Logo" width="300">
+</div>
+
 A web application for job discovery with AI-powered assistance. Users upload their CVs, which are analyzed by AI to recommend suitable job opportunities based on their skills and experience. Employers can post job listings with requirements, while users can search and filter available positions.
