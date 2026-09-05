@@ -27,6 +27,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public UserResponse getById(Long id) {
+        User user = repository.findById(id)
+                .orElseThrow();
+
+        return mapper.toResponse(user);
+    }
+
+    @Override
     public UserResponse update(Long id, UserRequest request) {
         User user = repository.findById(id)
                 .orElseThrow();
@@ -41,6 +49,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void delete(Long id) {
+        User user = repository.findById(id)
+                .orElseThrow();
 
+        repository.delete(user);
     }
 }
