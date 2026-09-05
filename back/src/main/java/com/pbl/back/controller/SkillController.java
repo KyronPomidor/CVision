@@ -4,21 +4,22 @@ import com.pbl.back.dto.skill.SkillRequest;
 import com.pbl.back.dto.skill.SkillResponse;
 import com.pbl.back.service.SkillService;
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/skills")
-@RequiredArgsConstructor
 public class SkillController {
 
     private final SkillService service;
 
+    public SkillController(SkillService service) {
+        this.service = service;
+    }
+
     @PostMapping
-    public SkillResponse create(
-            @Valid @RequestBody SkillRequest request) {
+    public SkillResponse create(@Valid @RequestBody SkillRequest request) {
         return service.create(request);
     }
 
@@ -33,9 +34,7 @@ public class SkillController {
     }
 
     @PutMapping("/{id}")
-    public SkillResponse update(
-            @PathVariable Long id,
-            @Valid @RequestBody SkillRequest request) {
+    public SkillResponse update(@PathVariable Long id, @Valid @RequestBody SkillRequest request) {
         return service.update(id, request);
     }
 
