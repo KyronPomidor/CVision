@@ -3,11 +3,13 @@ package com.pbl.back.service;
 import com.pbl.back.dto.jobposting.JobPostingRequest;
 import com.pbl.back.dto.jobposting.JobPostingResponse;
 
+import java.util.List;
+
 public interface JobPostingService {
-    public JobPostingResponse create(Long companyId, JobPostingRequest request);
-    public JobPostingResponse getByCompanyId(Long companyId);
-    public JobPostingResponse getById(Long id);
-    public JobPostingResponse update(Long id, JobPostingRequest request);
-    public void delete(Long id);
+    JobPostingResponse create(Long companyId, JobPostingRequest request);
+    List<JobPostingResponse> getByCompanyId(Long companyId);
+    JobPostingResponse getById(Long id);
+    JobPostingResponse update(Long id, JobPostingRequest request);
+    void delete(Long id);
 
 }

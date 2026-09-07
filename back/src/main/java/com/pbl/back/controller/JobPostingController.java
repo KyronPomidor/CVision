@@ -6,6 +6,8 @@ import com.pbl.back.service.JobPostingService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("api/postings")
 public class JobPostingController {
@@ -22,7 +24,7 @@ public class JobPostingController {
     }
 
     @GetMapping("/company/{companyId}")
-    public JobPostingResponse getByUserId(@PathVariable Long companyId) {
+    public List<JobPostingResponse> getByUserId(@PathVariable Long companyId) {
         return service.getByCompanyId(companyId);
     }
 
