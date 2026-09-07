@@ -1,13 +1,10 @@
 package com.pbl.back.service.impl;
 
-import com.pbl.back.domain.entity.CandidateProfile;
 import com.pbl.back.domain.entity.Company;
 import com.pbl.back.domain.entity.User;
 import com.pbl.back.dto.company.CompanyRequest;
 import com.pbl.back.dto.company.CompanyResponse;
-import com.pbl.back.mapper.CandidateProfileMapper;
 import com.pbl.back.mapper.CompanyMapper;
-import com.pbl.back.repository.CandidateProfileRepository;
 import com.pbl.back.repository.CompanyRepository;
 import com.pbl.back.repository.UserRepository;
 import com.pbl.back.service.CompanyService;
