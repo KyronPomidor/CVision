@@ -6,7 +6,7 @@ import com.pbl.back.mapper.ProfileSkillMapper;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ProfileSkillMapperImpl implements ProfileSkillMapper {
+public class    ProfileSkillMapperImpl implements ProfileSkillMapper {
 
     @Override
     public ProfileSkillResponse toResponse(ProfileSkill profileSkill) {
