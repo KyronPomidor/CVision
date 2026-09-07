@@ -9,9 +9,6 @@ import lombok.Setter;
 public class JobRecommendationRequest {
 
     @NotNull
-    private Long userId;
-
-    @NotNull
     private Long jobPostingId;
 
     private Double matchScore;
