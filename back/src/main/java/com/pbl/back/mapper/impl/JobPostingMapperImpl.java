@@ -6,6 +6,8 @@ import com.pbl.back.dto.jobposting.JobPostingResponse;
 import com.pbl.back.mapper.JobPostingMapper;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+
 @Component
 public class JobPostingMapperImpl implements JobPostingMapper {
     @Override
@@ -29,7 +31,7 @@ public class JobPostingMapperImpl implements JobPostingMapper {
                 .location(posting.getLocation())
                 .employmentType(posting.getEmploymentType())
                 .salary(posting.getSalary())
-                .createdAt(posting.getCreatedAt())
+                .createdAt(LocalDateTime.now())
                 .status(posting.getStatus())
                 .build();
     }
