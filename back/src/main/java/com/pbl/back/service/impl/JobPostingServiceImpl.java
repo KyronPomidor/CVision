@@ -7,6 +7,7 @@ import com.pbl.back.domain.entity.Skill;
 import com.pbl.back.dto.jobposting.JobPostingRequest;
 import com.pbl.back.dto.jobposting.JobPostingResponse;
 import com.pbl.back.dto.skill.SkillResponse;
+import com.pbl.back.exception.ResourceNotFoundException;
 import com.pbl.back.mapper.JobPostingMapper;
 import com.pbl.back.mapper.JobPostingSkillMapper;
 import com.pbl.back.repository.CompanyRepository;
@@ -34,7 +35,7 @@ public class JobPostingServiceImpl implements JobPostingService {
     @Override
     public JobPostingResponse create(Long companyId, JobPostingRequest request) {
         Company company = companyRepository.findById(companyId)
-                .orElseThrow();
+                .orElseThrow(() -> new ResourceNotFoundException("Company with id '" + companyId + "' not found."));
 
         JobPosting jobPosting = mapper.toEntity(request);
 
@@ -47,7 +48,8 @@ public class JobPostingServiceImpl implements JobPostingService {
             for (Long skillId : request.getSkillIds()) {
 
                 Skill skill = skillRepository.findById(skillId)
-                        .orElseThrow();
+                        .orElseThrow(
+                                () -> new ResourceNotFoundException("Skill with id '" + skillId + "' not found."));
 
                 JobPostingSkill mapping = JobPostingSkill.builder()
                                 .jobPosting(savedJob)
@@ -78,7 +80,7 @@ public class JobPostingServiceImpl implements JobPostingService {
     @Override
     public JobPostingResponse getById(Long id) {
         JobPosting posting = repository.findById(id)
-                        .orElseThrow();
+                .orElseThrow(() -> new ResourceNotFoundException("JobPosting with id '" + id + "' not found."));
 
         List<SkillResponse> skills = jobPostingSkillMapper.toSkillResponse(
                 jobPostingSkillRepository.findByJobPostingId(id)
@@ -90,7 +92,7 @@ public class JobPostingServiceImpl implements JobPostingService {
     @Override
     public JobPostingResponse update(Long id, JobPostingRequest request) {
         JobPosting posting = repository.findById(id)
-                .orElseThrow();
+                .orElseThrow(() -> new ResourceNotFoundException("JobPosting with id '" + id + "' not found."));
 
         posting.setTitle(request.getTitle());
         posting.setDescription(request.getDescription());
@@ -105,7 +107,8 @@ public class JobPostingServiceImpl implements JobPostingService {
             for (Long skillId : request.getSkillIds()) {
 
                 Skill skill = skillRepository.findById(skillId)
-                        .orElseThrow();
+                        .orElseThrow(() -> new ResourceNotFoundException(
+                                "Skill with id '" + skillId + "' not found."));
 
                 JobPostingSkill mapping = JobPostingSkill.builder()
                         .jobPosting(posting)
@@ -122,7 +125,7 @@ public class JobPostingServiceImpl implements JobPostingService {
     @Override
     public void delete(Long id) {
         JobPosting posting = repository.findById(id)
-                .orElseThrow();
+                .orElseThrow(() -> new ResourceNotFoundException("JobPosting with id '" + id + "' not found."));
 
         jobPostingSkillRepository.deleteAll(jobPostingSkillRepository.findByJobPostingId(id));
 

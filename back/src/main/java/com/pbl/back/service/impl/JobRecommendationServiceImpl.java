@@ -5,6 +5,7 @@ import com.pbl.back.domain.entity.JobRecommendation;
 import com.pbl.back.domain.entity.User;
 import com.pbl.back.dto.jobrecommendation.JobRecommendationRequest;
 import com.pbl.back.dto.jobrecommendation.JobRecommendationResponse;
+import com.pbl.back.exception.ResourceNotFoundException;
 import com.pbl.back.mapper.JobRecommendationMapper;
 import com.pbl.back.repository.JobPostingRepository;
 import com.pbl.back.repository.JobRecommendationRepository;
@@ -28,10 +29,11 @@ public class JobRecommendationServiceImpl implements JobRecommendationService {
     @Override
     public JobRecommendationResponse create(Long userId, JobRecommendationRequest request) {
         User user = userRepository.findById(userId)
-                .orElseThrow();
+                .orElseThrow(() -> new ResourceNotFoundException("User with id '" + userId + "' not found."));
 
         JobPosting jobPosting = jobPostingRepository.findById(request.getJobPostingId())
-                .orElseThrow();
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        "JobPosting with id '" + request.getJobPostingId() + "' not found."));
 
         JobRecommendation recommendation = mapper.toEntity(request);
 
@@ -45,7 +47,8 @@ public class JobRecommendationServiceImpl implements JobRecommendationService {
     @Override
     public JobRecommendationResponse getById(Long id) {
         JobRecommendation recommendation = repository.findById(id)
-                .orElseThrow();
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        "JobRecommendation with id '" + id + "' not found."));
 
         return mapper.toResponse(recommendation);
     }
@@ -69,7 +72,8 @@ public class JobRecommendationServiceImpl implements JobRecommendationService {
     @Override
     public JobRecommendationResponse update(Long id, JobRecommendationRequest request) {
         JobRecommendation recommendation = repository.findById(id)
-                .orElseThrow();
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        "JobRecommendation with id '" + id + "' not found."));
 
         recommendation.setMatchScore(request.getMatchScore());
         recommendation.setExplanation(request.getExplanation());
@@ -80,7 +84,8 @@ public class JobRecommendationServiceImpl implements JobRecommendationService {
     @Override
     public void delete(Long id) {
         JobRecommendation recommendation = repository.findById(id)
-                        .orElseThrow();
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        "JobRecommendation with id '" + id + "' not found."));
 
         repository.delete(recommendation);
     }

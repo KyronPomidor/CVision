@@ -4,6 +4,7 @@ import com.pbl.back.dto.cv.CVRequest;
 import com.pbl.back.dto.cv.CVResponse;
 import com.pbl.back.service.CVService;
 import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -16,6 +17,7 @@ public class CVController {
     }
 
     @PostMapping("/user/{userId}")
+    @ResponseStatus(HttpStatus.CREATED)
     public CVResponse create(@PathVariable Long userId, @Valid @RequestBody CVRequest request) {
         return service.create(userId, request);
     }
@@ -36,6 +38,7 @@ public class CVController {
     }
 
     @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public CVResponse getById(@PathVariable Long id) {
         return service.getById(id);
     }

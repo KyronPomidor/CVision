@@ -4,6 +4,7 @@ import com.pbl.back.dto.candidateprofile.CandidateProfileRequest;
 import com.pbl.back.dto.candidateprofile.CandidateProfileResponse;
 import com.pbl.back.service.CandidateProfileService;
 import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -17,6 +18,7 @@ public class CandidateProfileController {
     }
 
     @PostMapping("/user/{userId}")
+    @ResponseStatus(HttpStatus.CREATED)
     public CandidateProfileResponse create(@PathVariable Long userId,
                                            @Valid @RequestBody CandidateProfileRequest request) {
         return service.create(userId, request);
@@ -38,6 +40,7 @@ public class CandidateProfileController {
     }
 
     @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public CandidateProfileResponse getById(@PathVariable Long id) {
         return service.getById(id);
     }
