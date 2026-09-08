@@ -4,6 +4,7 @@ import com.pbl.back.dto.skill.SkillRequest;
 import com.pbl.back.dto.skill.SkillResponse;
 import com.pbl.back.service.SkillService;
 import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,6 +20,7 @@ public class SkillController {
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public SkillResponse create(@Valid @RequestBody SkillRequest request) {
         return service.create(request);
     }
@@ -39,6 +41,7 @@ public class SkillController {
     }
 
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable Long id) {
         service.delete(id);
     }

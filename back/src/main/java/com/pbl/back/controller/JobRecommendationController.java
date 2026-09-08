@@ -4,6 +4,7 @@ import com.pbl.back.dto.jobrecommendation.JobRecommendationRequest;
 import com.pbl.back.dto.jobrecommendation.JobRecommendationResponse;
 import com.pbl.back.service.JobRecommendationService;
 import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,6 +20,7 @@ public class JobRecommendationController {
     }
 
     @PostMapping("/user/{userId}")
+    @ResponseStatus(HttpStatus.CREATED)
     public JobRecommendationResponse create(@PathVariable Long userId,
             @Valid @RequestBody JobRecommendationRequest request) {
         return service.create(userId, request);
@@ -46,6 +48,7 @@ public class JobRecommendationController {
     }
 
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable Long id) {
         service.delete(id);
     }

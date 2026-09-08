@@ -4,6 +4,7 @@ import com.pbl.back.dto.company.CompanyRequest;
 import com.pbl.back.dto.company.CompanyResponse;
 import com.pbl.back.service.CompanyService;
 import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -17,6 +18,7 @@ public class CompanyController {
     }
 
     @PostMapping("/user/{userId}")
+    @ResponseStatus(HttpStatus.CREATED)
     public CompanyResponse create(@PathVariable Long userId,
                                   @Valid @RequestBody CompanyRequest request) {
         return service.create(userId, request);
@@ -38,6 +40,7 @@ public class CompanyController {
     }
 
     @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public CompanyResponse getById(@PathVariable Long id) {
         return service.getById(id);
     }

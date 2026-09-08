@@ -5,6 +5,7 @@ import com.pbl.back.domain.entity.CVSkill;
 import com.pbl.back.domain.entity.Skill;
 import com.pbl.back.dto.cvskill.CVSkillRequest;
 import com.pbl.back.dto.cvskill.CVSkillResponse;
+import com.pbl.back.exception.ResourceNotFoundException;
 import com.pbl.back.mapper.CVSkillMapper;
 import com.pbl.back.repository.CVRepository;
 import com.pbl.back.repository.CVSkillRepository;
@@ -27,10 +28,11 @@ public class CVSkillServiceImpl implements CVSkillService {
     @Override
     public CVSkillResponse create(Long cvId, CVSkillRequest request) {
         CV cv = cvRepository.findById(cvId)
-                .orElseThrow();
+                .orElseThrow(() -> new ResourceNotFoundException("CV with id '" + cvId + "' not found."));
 
         Skill skill = skillRepository.findById(request.getSkillId())
-                .orElseThrow();
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        "Skill with id '" + request.getSkillId() + "' not found."));
 
         CVSkill cvSkill = mapper.toEntity(request);
 
@@ -43,7 +45,7 @@ public class CVSkillServiceImpl implements CVSkillService {
     @Override
     public CVSkillResponse getById(Long id) {
         CVSkill cvSkill = repository.findById(id)
-                .orElseThrow();
+                .orElseThrow(() -> new ResourceNotFoundException("CVSkill with id '" + id + "' not found."));
 
         return mapper.toResponse(cvSkill);
     }
@@ -67,7 +69,7 @@ public class CVSkillServiceImpl implements CVSkillService {
     @Override
     public CVSkillResponse update(Long id, CVSkillRequest request) {
         CVSkill cvSkill = repository.findById(id)
-                .orElseThrow();
+                .orElseThrow(() -> new ResourceNotFoundException("CVSkill with id '" + id + "' not found."));
 
         cvSkill.setConfidenceScore(request.getConfidenceScore());
         cvSkill.setYearsOfExperience(request.getYearsOfExperience());
@@ -79,7 +81,7 @@ public class CVSkillServiceImpl implements CVSkillService {
     public void delete(Long id) {
 
         CVSkill cvSkill = repository.findById(id)
-                .orElseThrow();
+                .orElseThrow(() -> new ResourceNotFoundException("CVSkill with id '" + id + "' not found."));
 
         repository.delete(cvSkill);
     }

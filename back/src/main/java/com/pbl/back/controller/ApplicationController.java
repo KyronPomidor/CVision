@@ -4,6 +4,7 @@ import com.pbl.back.dto.application.ApplicationRequest;
 import com.pbl.back.dto.application.ApplicationResponse;
 import com.pbl.back.service.ApplicationService;
 import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -16,6 +17,7 @@ public class ApplicationController {
     }
 
     @PostMapping("/user/{userId}")
+    @ResponseStatus(HttpStatus.CREATED)
     public ApplicationResponse create(@PathVariable Long userId,
                                       @Valid @RequestBody ApplicationRequest request) {
         return service.create(userId, request);
@@ -37,6 +39,7 @@ public class ApplicationController {
     }
 
     @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public ApplicationResponse getById(@PathVariable Long id) {
         return service.getById(id);
     }

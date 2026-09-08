@@ -4,6 +4,7 @@ import com.pbl.back.dto.profileskill.ProfileSkillRequest;
 import com.pbl.back.dto.profileskill.ProfileSkillResponse;
 import com.pbl.back.service.ProfileSkillService;
 import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,6 +20,7 @@ public class ProfileSkillController {
     }
 
     @PostMapping("/{profileId}/skills")
+    @ResponseStatus(HttpStatus.CREATED)
     public ProfileSkillResponse addSkill(
             @PathVariable Long profileId,
             @Valid @RequestBody ProfileSkillRequest request) {
@@ -41,6 +43,7 @@ public class ProfileSkillController {
     }
 
     @DeleteMapping("/skills/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable Long id) {
         service.delete(id);
     }

@@ -5,6 +5,7 @@ import com.pbl.back.domain.entity.User;
 import com.pbl.back.dto.candidateprofile.CandidateProfileRequest;
 import com.pbl.back.dto.candidateprofile.CandidateProfileResponse;
 import com.pbl.back.dto.profileskill.ProfileSkillResponse;
+import com.pbl.back.exception.ResourceNotFoundException;
 import com.pbl.back.mapper.CandidateProfileMapper;
 import com.pbl.back.mapper.ProfileSkillMapper;
 import com.pbl.back.repository.CandidateProfileRepository;
@@ -29,7 +30,7 @@ public class CandidateProfileServiceImpl implements CandidateProfileService {
     // TODO: get user without client id
     public CandidateProfileResponse create(Long userId, CandidateProfileRequest request) {
         User user = userRepository.findById(userId)
-                .orElseThrow();
+                .orElseThrow(() -> new ResourceNotFoundException("User with id '" + userId + "' not found."));
 
         CandidateProfile profile = mapper.toEntity(request);
 
@@ -44,7 +45,8 @@ public class CandidateProfileServiceImpl implements CandidateProfileService {
     public CandidateProfileResponse getByUserId(Long userId) {
 
         CandidateProfile profile = repository.findByUserId(userId)
-                .orElseThrow();
+                .orElseThrow(() -> new ResourceNotFoundException("" +
+                        "CandidateProfile for user with id '" + userId + "' not found."));
 
         List<ProfileSkillResponse> skills =
                 profileSkillRepository.findByProfileId(profile.getId())
@@ -58,7 +60,8 @@ public class CandidateProfileServiceImpl implements CandidateProfileService {
     @Override
     public CandidateProfileResponse getById(Long id) {
         CandidateProfile profile = repository.findById(id)
-                .orElseThrow();
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        "CandidateProfile with id '" + id + "' not found."));
 
         List<ProfileSkillResponse> skills =
                 profileSkillRepository.findByProfileId(profile.getId())
@@ -72,7 +75,8 @@ public class CandidateProfileServiceImpl implements CandidateProfileService {
     @Override
     public CandidateProfileResponse update(Long id, CandidateProfileRequest request) {
         CandidateProfile profile = repository.findById(id)
-                .orElseThrow();
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        "CandidateProfile with id '" + id + "' not found."));
 
         profile.setName(request.getName());
         profile.setLocation(request.getLocation());
@@ -92,7 +96,8 @@ public class CandidateProfileServiceImpl implements CandidateProfileService {
     @Override
     public void delete(Long id) {
         CandidateProfile profile = repository.findById(id)
-                .orElseThrow();
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        "CandidateProfile with id '" + id + "' not found."));
 
         repository.delete(profile);
     }
