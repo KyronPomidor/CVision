@@ -6,6 +6,8 @@ import com.pbl.back.dto.cv.CVResponse;
 import com.pbl.back.mapper.CVMapper;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+
 @Component
 public class CVMapperImpl implements CVMapper {
     @Override
@@ -14,6 +16,7 @@ public class CVMapperImpl implements CVMapper {
                 .fileName(request.getFileName())
                 .filePath(request.getFilePath())
                 .extractedText(request.getExtractedText())
+                .uploadedAt(LocalDateTime.now())
                 .build();
     }
 
