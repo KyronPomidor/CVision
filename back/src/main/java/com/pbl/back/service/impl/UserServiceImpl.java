@@ -3,6 +3,7 @@ package com.pbl.back.service.impl;
 import com.pbl.back.domain.entity.User;
 import com.pbl.back.dto.user.UserRequest;
 import com.pbl.back.dto.user.UserResponse;
+import com.pbl.back.exception.ConflictException;
 import com.pbl.back.exception.ResourceNotFoundException;
 import com.pbl.back.mapper.UserMapper;
 import com.pbl.back.repository.UserRepository;
@@ -19,6 +20,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserResponse create(UserRequest request) {
+        repository.findByEmail(request.getEmail())
+                .ifPresent(existing -> {
+                    throw new ConflictException(
+                            "A user with email '" + request.getEmail() + "' already exists."
+                    );
+                });
 
         User user = mapper.toEntity(request);
 
