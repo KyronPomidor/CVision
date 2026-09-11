@@ -31,7 +31,8 @@ public class ProfileSkillServiceImpl implements ProfileSkillService {
                 .orElseThrow(() -> new ResourceNotFoundException("Profile with id '" + profileId + "' not found."));
 
         Skill skill = skillRepository.findById(request.getSkillId())
-                .orElseThrow();
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        "Skill with id '" + request.getSkillId() + "' not found."));
 
         ProfileSkill profileSkill = ProfileSkill.builder()
                 .profile(profile)
@@ -65,7 +66,8 @@ public class ProfileSkillServiceImpl implements ProfileSkillService {
                 .orElseThrow(() -> new ResourceNotFoundException("ProfileSkill with id '" + id + "' not found."));
 
         Skill skill = skillRepository.findById(request.getSkillId())
-                .orElseThrow();
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        "Skill with id '" + request.getSkillId() + "' not found."));
 
         profileSkill.setSkill(skill);
         profileSkill.setLevel(request.getLevel());
