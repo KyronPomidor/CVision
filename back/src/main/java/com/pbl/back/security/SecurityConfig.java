@@ -34,7 +34,9 @@ public class SecurityConfig {
                                 "/v3/api-docs/**",
                                 "/h2-console/**"
                         ).permitAll()
-                        .anyRequest().authenticated()
+                        //.anyRequest().authenticated() Validates the authentication
+                        .anyRequest().permitAll()
+
                 ).exceptionHandling(exception -> exception
                         .authenticationEntryPoint(
                                 (request, response, authException) ->
