@@ -4,6 +4,7 @@ import com.pbl.back.dto.cvskill.CVSkillRequest;
 import com.pbl.back.dto.cvskill.CVSkillResponse;
 import com.pbl.back.service.CVSkillService;
 import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,6 +20,7 @@ public class CVSkillController {
     }
 
     @PostMapping("cv/{cvId}")
+    @ResponseStatus(HttpStatus.CREATED)
     public CVSkillResponse create(@PathVariable Long cvId, @Valid @RequestBody CVSkillRequest request) {
         return service.create(cvId, request);
     }
@@ -44,6 +46,7 @@ public class CVSkillController {
     }
 
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable Long id) {
         service.delete(id);
     }

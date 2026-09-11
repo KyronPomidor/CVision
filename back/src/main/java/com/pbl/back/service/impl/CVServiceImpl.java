@@ -4,6 +4,7 @@ import com.pbl.back.domain.entity.CV;
 import com.pbl.back.domain.entity.User;
 import com.pbl.back.dto.cv.CVRequest;
 import com.pbl.back.dto.cv.CVResponse;
+import com.pbl.back.exception.ResourceNotFoundException;
 import com.pbl.back.mapper.CVMapper;
 import com.pbl.back.repository.CVRepository;
 import com.pbl.back.repository.UserRepository;
@@ -24,7 +25,7 @@ public class CVServiceImpl implements CVService {
     @Override
     public CVResponse create(Long userId, CVRequest request) {
         User user = userRepository.findById(userId)
-                .orElseThrow();
+                .orElseThrow(() -> new ResourceNotFoundException("User with id '" + userId + "' not found."));
 
         CV cv = mapper.toEntity(request);
 
@@ -36,7 +37,7 @@ public class CVServiceImpl implements CVService {
     @Override
     public CVResponse getByUserId(Long userId) {
         CV cv = repository.findByUserId(userId)
-                .orElseThrow();
+                .orElseThrow(() -> new ResourceNotFoundException("CV for user with id '" + userId + "' not found."));
 
         return mapper.toResponse(cv);
     }
@@ -44,7 +45,7 @@ public class CVServiceImpl implements CVService {
     @Override
     public CVResponse getById(Long id) {
         CV cv = repository.findById(id)
-                .orElseThrow();
+                .orElseThrow(() -> new ResourceNotFoundException("CV with id '" + id + "' not found."));
 
         return mapper.toResponse(cv);
     }
@@ -52,7 +53,7 @@ public class CVServiceImpl implements CVService {
     @Override
     public CVResponse update(Long id, CVRequest request) {
         CV cv = repository.findById(id)
-                .orElseThrow();
+                .orElseThrow(() -> new ResourceNotFoundException("CV with id '" + id + "' not found."));
 
         cv.setFileName(request.getFileName());
         cv.setFilePath(request.getFilePath());
@@ -65,7 +66,7 @@ public class CVServiceImpl implements CVService {
     @Override
     public void delete(Long id) {
         CV cv = repository.findById(id)
-                .orElseThrow();
+                .orElseThrow(() -> new ResourceNotFoundException("CV with id '" + id + "' not found."));
 
         repository.delete(cv);
     }

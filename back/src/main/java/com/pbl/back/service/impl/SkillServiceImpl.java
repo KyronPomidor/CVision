@@ -3,6 +3,7 @@ package com.pbl.back.service.impl;
 import com.pbl.back.domain.entity.Skill;
 import com.pbl.back.dto.skill.SkillRequest;
 import com.pbl.back.dto.skill.SkillResponse;
+import com.pbl.back.exception.ResourceNotFoundException;
 import com.pbl.back.mapper.SkillMapper;
 import com.pbl.back.repository.SkillRepository;
 import com.pbl.back.service.SkillService;
@@ -28,7 +29,7 @@ public class SkillServiceImpl implements SkillService {
     @Override
     public SkillResponse getById(Long id) {
         Skill skill = repository.findById(id)
-                .orElseThrow();
+                .orElseThrow(() -> new ResourceNotFoundException("Skill with id '" + id + "' not found."));
 
         return mapper.toResponse(skill);
     }
@@ -44,7 +45,7 @@ public class SkillServiceImpl implements SkillService {
     @Override
     public SkillResponse update(Long id, SkillRequest request) {
         Skill skill = repository.findById(id)
-                .orElseThrow();
+                .orElseThrow(() -> new ResourceNotFoundException("Skill with id '" + id + "' not found."));
 
         skill.setName(request.getName());
 
@@ -54,7 +55,7 @@ public class SkillServiceImpl implements SkillService {
     @Override
     public void delete(Long id) {
         Skill skill = repository.findById(id)
-                .orElseThrow();
+                .orElseThrow(() -> new ResourceNotFoundException("Skill with id '" + id + "' not found."));
 
         repository.delete(skill);
     }

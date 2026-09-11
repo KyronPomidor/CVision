@@ -3,6 +3,8 @@ package com.pbl.back.service.impl;
 import com.pbl.back.domain.entity.User;
 import com.pbl.back.dto.user.UserRequest;
 import com.pbl.back.dto.user.UserResponse;
+import com.pbl.back.exception.ConflictException;
+import com.pbl.back.exception.ResourceNotFoundException;
 import com.pbl.back.mapper.UserMapper;
 import com.pbl.back.repository.UserRepository;
 import com.pbl.back.service.UserService;
@@ -18,6 +20,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserResponse create(UserRequest request) {
+        repository.findByEmail(request.getEmail())
+                .ifPresent(existing -> {
+                    throw new ConflictException(
+                            "A user with email '" + request.getEmail() + "' already exists."
+                    );
+                });
 
         User user = mapper.toEntity(request);
 
@@ -29,7 +37,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserResponse getById(Long id) {
         User user = repository.findById(id)
-                .orElseThrow();
+                .orElseThrow(() -> new ResourceNotFoundException("User with id '" + id + "' not found."));
 
         return mapper.toResponse(user);
     }
@@ -37,7 +45,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserResponse update(Long id, UserRequest request) {
         User user = repository.findById(id)
-                .orElseThrow();
+                .orElseThrow(() -> new ResourceNotFoundException("User with id '" + id + "' not found."));
 
         user.setEmail(request.getEmail());
         user.setAccountName(request.getAccountName());
@@ -50,7 +58,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void delete(Long id) {
         User user = repository.findById(id)
-                .orElseThrow();
+                .orElseThrow(() -> new ResourceNotFoundException("User with id '" + id + "' not found."));
 
         repository.delete(user);
     }

@@ -5,6 +5,7 @@ import com.pbl.back.domain.entity.ProfileSkill;
 import com.pbl.back.domain.entity.Skill;
 import com.pbl.back.dto.profileskill.ProfileSkillRequest;
 import com.pbl.back.dto.profileskill.ProfileSkillResponse;
+import com.pbl.back.exception.ResourceNotFoundException;
 import com.pbl.back.mapper.ProfileSkillMapper;
 import com.pbl.back.repository.CandidateProfileRepository;
 import com.pbl.back.repository.ProfileSkillRepository;
@@ -27,10 +28,11 @@ public class ProfileSkillServiceImpl implements ProfileSkillService {
     @Override
     public ProfileSkillResponse addSkill(Long profileId, ProfileSkillRequest request) {
         CandidateProfile profile = profileRepository.findById(profileId)
-                .orElseThrow();
+                .orElseThrow(() -> new ResourceNotFoundException("Profile with id '" + profileId + "' not found."));
 
         Skill skill = skillRepository.findById(request.getSkillId())
-                .orElseThrow();
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        "Skill with id '" + request.getSkillId() + "' not found."));
 
         ProfileSkill profileSkill = ProfileSkill.builder()
                 .profile(profile)
@@ -53,7 +55,7 @@ public class ProfileSkillServiceImpl implements ProfileSkillService {
     @Override
     public ProfileSkillResponse getById(Long id) {
         ProfileSkill profileSkill = repository.findById(id)
-                .orElseThrow();
+                .orElseThrow(() -> new ResourceNotFoundException("ProfileSkill with id '" + id + "' not found."));
 
         return mapper.toResponse(profileSkill);
     }
@@ -61,10 +63,11 @@ public class ProfileSkillServiceImpl implements ProfileSkillService {
     @Override
     public ProfileSkillResponse update(Long id, ProfileSkillRequest request) {
         ProfileSkill profileSkill = repository.findById(id)
-                .orElseThrow();
+                .orElseThrow(() -> new ResourceNotFoundException("ProfileSkill with id '" + id + "' not found."));
 
         Skill skill = skillRepository.findById(request.getSkillId())
-                .orElseThrow();
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        "Skill with id '" + request.getSkillId() + "' not found."));
 
         profileSkill.setSkill(skill);
         profileSkill.setLevel(request.getLevel());
@@ -76,7 +79,7 @@ public class ProfileSkillServiceImpl implements ProfileSkillService {
     @Override
     public void delete(Long id) {
         ProfileSkill profileSkill = repository.findById(id)
-                .orElseThrow();
+                .orElseThrow(() -> new ResourceNotFoundException("ProfileSkill with id '" + id + "' not found."));
 
         repository.delete(profileSkill);
     }

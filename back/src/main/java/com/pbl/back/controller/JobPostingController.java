@@ -4,6 +4,7 @@ import com.pbl.back.dto.jobposting.JobPostingRequest;
 import com.pbl.back.dto.jobposting.JobPostingResponse;
 import com.pbl.back.service.JobPostingService;
 import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,6 +19,7 @@ public class JobPostingController {
     }
 
     @PostMapping("/company/{companyId}")
+    @ResponseStatus(HttpStatus.CREATED)
     public JobPostingResponse create(@PathVariable Long companyId,
                                      @Valid @RequestBody JobPostingRequest request) {
         return service.create(companyId, request);
@@ -33,13 +35,14 @@ public class JobPostingController {
         return service.update(id, request);
     }
 
-    @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
-        service.delete(id);
-    }
-
     @GetMapping("/{id}")
     public JobPostingResponse getById(@PathVariable Long id) {
         return service.getById(id);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable Long id) {
+        service.delete(id);
     }
 }
