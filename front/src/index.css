@@ -1,7 +1,28 @@
+:root {
+  --primary: #26BBA4;
+  --secondary: #52DBC7;
+  --backgroundGreen: #EBF9F7;
+  --borderGray: #E7EAF0;
+  --mainBackground: #FAFAFA;
+  --mainTextGray: #535E76;
+  --headerColor: #000000;
+  --lighText: #BAC0CC;
+  --headerBackground: #EEEEEE;
+
+  --header1: 32px;
+  --header2: 24px;
+  --mainText: 15px;
+  --mainComments: 12px;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
   font-family: 'Sora';
 
+}
+
+body {
+  margin-top: 152px;
 }
