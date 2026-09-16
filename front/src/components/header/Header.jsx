@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import styles from "./Header.module.css"
 import mainLogo from "../../assets/main-logo.svg";
 import searсhLogo from "../../assets/search-icon.svg";
@@ -11,7 +12,9 @@ function Header() {
         <header className={styles.header} >
               
             <div className={styles.logoBox}> 
-                <img src={mainLogo} alt="mainLogo" />
+                <Link to="/">
+                    <img src={mainLogo} alt="mainLogo" />
+                </Link>
             </div>
             
             <div className={styles.searchBox}> 
@@ -41,9 +44,9 @@ function Header() {
                     <button className={styles.notificationButton} aria-label="Notification button">
                         <img src={notificationLogo} alt="notificationLogo" className={styles.notificationLogo} />
                     </button>
-                    <button className={styles.profileButton} aria-label="Profile button">
+                    <Link to="/profile" className={styles.profileButton} aria-label="Profile button">
                         <img src={profileLogo} alt="profileLogo" className={styles.profileLogo} />
-                    </button>
+                    </Link>
                 </form>
             </div>
             
