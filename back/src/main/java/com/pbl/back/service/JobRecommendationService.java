@@ -14,6 +14,8 @@ public interface JobRecommendationService {
 
     List<JobRecommendationResponse> getByJobPostingId(Long jobPostingId);
 
+    List<JobRecommendationResponse> generateForUser(Long userId);
+
     JobRecommendationResponse update(Long id, JobRecommendationRequest request);
 
     void delete(Long id);

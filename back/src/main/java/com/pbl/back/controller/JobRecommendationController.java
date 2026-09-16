@@ -41,6 +41,11 @@ public class JobRecommendationController {
         return service.getByJobPostingId(jobPostingId);
     }
 
+    @PostMapping("/user/{userId}/generate")
+    public List<JobRecommendationResponse> generateForUser(@PathVariable Long userId) {
+        return service.generateForUser(userId);
+    }
+
     @PutMapping("/{id}")
     public JobRecommendationResponse update(@PathVariable Long id,
             @Valid @RequestBody JobRecommendationRequest request) {
