@@ -1,0 +1,173 @@
+.jobCard {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px 20px;
+
+    border: 3px solid var(--borderGray);
+    border-radius: 10px;
+}
+
+.topRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.companyInfo {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.companyLogo {
+    width: 59px;
+
+    border-radius: 8px;
+    object-fit: contain;
+    background-color: var(--mainBackground);
+}
+
+.titleBlock {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.jobTitle {
+    font-size: var(--heading2);
+    font-weight: 700;
+}
+
+.companyName {
+    color: var(--primary);
+    font-weight: 600;
+}
+
+.metaRight {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+}
+
+.postedText {
+    color: var(--mainTextGray);
+    font-size: var(--mainText);
+    white-space: nowrap;
+}
+
+.starButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.starIcon,
+.starActive {
+    width: 22px;
+    height: 22px;
+}
+
+.starActive {
+    filter: brightness(0) saturate(100%) invert(60%) sepia(90%) saturate(500%) hue-rotate(0deg);
+}
+
+.detailsRow {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 0 15px;
+}
+
+.detailItem {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--mainTextGray);
+    font-size: var(--mainText);
+}
+
+.detailItem img {
+    width: 20px;
+    height: 20px;
+}
+
+.matchSection {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.matchLabel {
+    font-size: var(--mainText);
+}
+
+.matchPercent {
+    font-weight: 700;
+}
+
+.matchPercent.green {
+    color: #1fae8e;
+}
+
+.matchPercent.olive {
+    color: #a9a232;
+}
+
+.matchPercent.red {
+    color: #e0483e;
+}
+
+.progressTrack {
+    width: 100%;
+    height: 19px;
+
+    background-color: var(--borderGray);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progressFill {
+    height: 100%;
+    border-radius: 10px;
+}
+
+.progressFill.green {
+    background-color: #1fae8e;
+}
+
+.progressFill.olive {
+    background-color: #a9a232;
+}
+
+.progressFill.red {
+    background-color: #e0483e;
+}
+
+.bottomRow {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.applyButton {
+    padding: 8px 28px;
+
+    border: none;
+    border-radius: 20px;
+    background-color: var(--primary);
+    color: var(--mainBackground);
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.applyButton:hover {
+    opacity: 0.85;
+}
