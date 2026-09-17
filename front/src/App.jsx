@@ -3,6 +3,7 @@ import Header from './components/header/Header'
 import HomePage from './pages/HomePage/HomePage'
 import ProfilePage from './pages/ProfilePage/ProfilePage'
 import LoginPage from './pages/LoginPage/LoginPage'
+import SignUpPage from './pages/SignUpPage/SignUpPage'
 
 function MainLayout() {
   return (
@@ -25,6 +26,7 @@ function App() {
 
         {/* Pages without Header - add outside of MainLayout */}
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={<SignUpPage />} />
       </Routes>
     </BrowserRouter>
   )

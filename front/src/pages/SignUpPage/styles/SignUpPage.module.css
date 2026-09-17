@@ -1,0 +1,84 @@
+.card {
+    width: 460px;
+    max-width: 90vw;
+    background: rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(0.5px);
+    -webkit-backdrop-filter: blur(0.5px);
+    border-radius: 17px;
+    padding: 40px 36px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+    font-size: var(--heading1);
+    white-space: nowrap;
+    color: var(--primary);
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+@media (max-width: 400px) {
+    .title {
+        font-size: 24px;
+    }
+}
+
+.agreement {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: var(--mainComments);
+    font-weight: 600;
+    color: var(--headerColor);
+    cursor: pointer;
+}
+
+.agreement input {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--primary);
+    flex-shrink: 0;
+}
+
+.agreement a {
+    color: var(--primary);
+    text-decoration: none;
+}
+
+.agreement a:hover {
+    text-decoration: underline;
+}
+
+.submitButton {
+    height: 44px;
+    border: none;
+    border-radius: 10px;
+    background: var(--primary);
+    color: #fff;
+    font-size: var(--mainText);
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.submitButton:hover {
+    background: var(--secondary);
+}
+
+.switchText {
+    text-align: center;
+    font-size: var(--mainText);
+    font-weight: 700;
+    color: var(--headerColor);
+}
+
+.switchLink {
+    color: var(--primary);
+    text-decoration: none;
+}
+
+.switchLink:hover {
+    text-decoration: underline;
+}
