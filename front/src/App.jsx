@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom'
 import Header from './components/header/Header'
 import HomePage from './pages/HomePage/HomePage'
 import ProfilePage from './pages/ProfilePage/ProfilePage'
+import LoginPage from './pages/LoginPage/LoginPage'
 
 function MainLayout() {
   return (
@@ -23,7 +24,7 @@ function App() {
         </Route>
 
         {/* Pages without Header - add outside of MainLayout */}
-        {/*Example: <Route path="/login" element={<LoginPage />} /> */}
+        <Route path="/login" element={<LoginPage />} />
       </Routes>
     </BrowserRouter>
   )
