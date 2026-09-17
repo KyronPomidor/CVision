@@ -3,6 +3,7 @@ package com.pbl.back.controller;
 import com.pbl.back.dto.cv.CVRequest;
 import com.pbl.back.dto.cv.CVResponse;
 import com.pbl.back.service.CVService;
+import com.pbl.back.service.CurrentUserService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/cv")
 public class CVController {
     private final CVService service;
+    private final CurrentUserService currentUserService;
 
     public CVController(CVService service) {
         this.service = service;
@@ -41,5 +43,10 @@ public class CVController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable Long id) {
         service.delete(id);
+    }
+
+    @GetMapping("/me")
+    public CVResponse getMyCv() {
+        return service.getByUserId(currentUserService.getId());
     }
 }

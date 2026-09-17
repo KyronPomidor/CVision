@@ -35,7 +35,19 @@ public class SecurityConfig {
                                 "/h2-console/**"
                         ).permitAll()
                         //.anyRequest().authenticated() Validates the authentication
-                        .anyRequest().permitAll()
+                        .requestMatchers("/api/cv/**", "/api/profiles/**", "/api/applications/**",
+                                "/api/recommendations/**")
+                        .hasRole("EMPLOYEE")
+
+                        // Company features
+                        .requestMatchers("/api/companies/**", "/api/postings/**")
+                        .hasRole("EMPLOYER")
+
+                        // Shared authenticated endpoints, if applicable
+                        .requestMatchers("/api/skills/**").authenticated()
+
+                        .anyRequest().authenticated()
+
 
                 ).exceptionHandling(exception -> exception
                         .authenticationEntryPoint(
