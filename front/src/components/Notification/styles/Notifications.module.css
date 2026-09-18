@@ -1,0 +1,9 @@
+.Notifications{
+    z-index: 1000;
+    position: fixed;
+    width: clamp(200px, 40vw, 400px);
+    height: 400px;
+    top: 120px;
+    right: 20px;
+    background-color: blueviolet;
+}

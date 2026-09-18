@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom"
 import styles from "./Header.module.css"
+import Notifications from "../Notification/Notifications";
 import mainLogo from "../../assets/main-logo.svg";
 import searchLogo from "../../assets/search-icon.svg";
 import settingsLogo from "../../assets/settings-icon.svg";
@@ -50,8 +51,8 @@ function Header() {
                 </form>
             </div>
             
+            <Notifications></Notifications>
         </header>
-        
     )
 }
 
