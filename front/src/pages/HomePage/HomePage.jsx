@@ -43,6 +43,42 @@ const jobs = [
         matchPercent: 15,
         isStarred: false,
     },
+    {
+        id: 4,
+        logo: roslinLogo,
+        title: "Middle Golang Engineer",
+        company: "Roslin Solutions",
+        postedAt: "Posted 45 min ago",
+        employmentType: "Full-time",
+        salary: "5,200 per year",
+        experience: "6-7 years of experience",
+        matchPercent: 15,
+        isStarred: false,
+    },
+    {
+        id: 5,
+        logo: roslinLogo,
+        title: "Middle Golang Engineer",
+        company: "Roslin Solutions",
+        postedAt: "Posted 45 min ago",
+        employmentType: "Full-time",
+        salary: "5,200 per year",
+        experience: "6-7 years of experience",
+        matchPercent: 15,
+        isStarred: false,
+    },
+    {
+        id: 6,
+        logo: roslinLogo,
+        title: "Middle Golang Engineer",
+        company: "Roslin Solutions",
+        postedAt: "Posted 45 min ago",
+        employmentType: "Full-time",
+        salary: "5,200 per year",
+        experience: "6-7 years of experience",
+        matchPercent: 15,
+        isStarred: false,
+    },
 ]
 
 function HomePage () {
@@ -58,7 +94,7 @@ function HomePage () {
                     aboutMe="A junior IT professional passionate about technology and problem-solving. 
  I am eager to grow my skills, learn from experienced teams, and contribute to meaningful projects."
                     appliedJobsCount={3}
-                    savedJobsCount={2}
+                    savedJobsCount={200}
                     cvViewsCount={1}
                     reachoutsCount={10}
                     onEditProfile={() => console.log("edit clicked")}
