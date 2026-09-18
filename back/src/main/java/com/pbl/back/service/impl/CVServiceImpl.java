@@ -1,5 +1,6 @@
 package com.pbl.back.service.impl;
 
+import org.springframework.security.access.AccessDeniedException;
 import com.pbl.back.domain.entity.CV;
 import com.pbl.back.domain.entity.User;
 import com.pbl.back.dto.cv.CVRequest;
@@ -9,6 +10,7 @@ import com.pbl.back.mapper.CVMapper;
 import com.pbl.back.repository.CVRepository;
 import com.pbl.back.repository.UserRepository;
 import com.pbl.back.service.CVService;
+import com.pbl.back.service.CurrentUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +23,7 @@ public class CVServiceImpl implements CVService {
     private final CVRepository repository;
     private final CVMapper mapper;
     private final UserRepository userRepository;
+    private final CurrentUserService currentUserService;
 
     @Override
     public CVResponse create(Long userId, CVRequest request) {
@@ -69,5 +72,16 @@ public class CVServiceImpl implements CVService {
                 .orElseThrow(() -> new ResourceNotFoundException("CV with id '" + id + "' not found."));
 
         repository.delete(cv);
+    }
+
+    private CV getOwnedCv(Long id) {
+        CV cv = repository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("CV not found"));
+
+        if (!cv.getUser().getId().equals(currentUserService.getId())) {
+            throw new AccessDeniedException("You do not own this CV");
+        }
+
+        return cv;
     }
 }

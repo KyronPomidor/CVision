@@ -14,20 +14,23 @@ public class CVController {
     private final CVService service;
     private final CurrentUserService currentUserService;
 
-    public CVController(CVService service) {
+    public CVController(CVService service, CurrentUserService currentUserService) {
         this.service = service;
+        this.currentUserService = currentUserService;
     }
 
-    @PostMapping("/user/{userId}")
+    @PostMapping("/me")
     @ResponseStatus(HttpStatus.CREATED)
-    public CVResponse create(@PathVariable Long userId, @Valid @RequestBody CVRequest request) {
-        return service.create(userId, request);
+    public CVResponse create(@Valid @RequestBody CVRequest request) {
+        return service.create(currentUserService.getId(), request);
     }
 
-    @GetMapping("/user/{userId}")
-    public CVResponse getByUserId(@PathVariable Long userId) {
-        return service.getByUserId(userId);
+    @GetMapping("/me")
+    public CVResponse getMyCv() {
+        return service.getByUserId(currentUserService.getId());
     }
+
+
 
     @PutMapping("/{id}")
     public CVResponse update(@PathVariable Long id, @Valid @RequestBody CVRequest request) {
@@ -45,8 +48,4 @@ public class CVController {
         service.delete(id);
     }
 
-    @GetMapping("/me")
-    public CVResponse getMyCv() {
-        return service.getByUserId(currentUserService.getId());
-    }
 }
