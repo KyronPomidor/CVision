@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 import styles from "./Header.module.css"
 import mainLogo from "../../assets/main-logo.svg";
-import searсhLogo from "../../assets/search-icon.svg";
+import searchLogo from "../../assets/search-icon.svg";
 import settingsLogo from "../../assets/settings-icon.svg";
 import notificationLogo from "../../assets/notification-icon.svg";
 import profileLogo from "../../assets/profile-photo.png";
@@ -30,7 +30,7 @@ function Header() {
                     />
 
                     <button type="submit" className={styles.searchButton} aria-label="Search button">
-                        <img src={searсhLogo} alt="searсhLogo" className={styles.searсhLogo}/>
+                        <img src={searchLogo} alt="searchLogo" className={styles.searchLogo}/>
                     </button>
                 </form>
                 
