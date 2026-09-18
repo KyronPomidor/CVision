@@ -1,0 +1,90 @@
+.notificationCard {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    padding: 10px 0;
+
+    border: none;
+    border-bottom: 3px solid var(--borderGray);
+    background: none;
+    font: inherit;
+    color: inherit;
+    text-align: left;
+    cursor: pointer;
+}
+
+.notificationCard:hover {
+    background-color: #f6f7f9;
+}
+
+.notificationCard:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}
+
+.avatarBox {
+    position: relative;
+    flex-shrink: 0;
+}
+
+.avatar {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+
+
+    background-color: var(--mainBackground);
+}
+
+.badgeIcon {
+    position: absolute;
+    right: -5px;
+    bottom: 0px;
+    width: 20px;
+    height: 20px;
+    padding: 2px;
+
+    border: 2px solid var(--borderGray);
+    border-radius: 50%;
+    background-color: var(--primary);
+}
+
+.textBlock {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 1;
+    min-width: 0;
+}
+
+.company {
+    font-weight: 700;
+    font-size: var(--mainText);
+    color: var(--primary);
+}
+
+.message {
+    color: var(--mainTextGray);
+    font-size: var(--mainText);
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.metaBox {
+    display: flex;
+    align-items: flex-start;
+    height: 40px;
+}
+
+.time {
+    color: var(--mainTextGray);
+    font-size: var(--mainComments);
+}
+
+.readArrow {
+    color: var(--mainTextGray);
+    font-size: var(--mainText);
+}

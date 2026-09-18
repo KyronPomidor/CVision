@@ -1,3 +1,4 @@
+import { useState } from "react"
 import { Link } from "react-router-dom"
 import styles from "./Header.module.css"
 import Notifications from "../Notification/Notifications";
@@ -8,6 +9,7 @@ import notificationLogo from "../../assets/notification-icon.svg";
 import profileLogo from "../../assets/profile-photo.png";
 
 function Header() {
+    const [isNotificationsOpen, setIsNotificationsOpen] = useState(false)
 
     return (
         <header className={styles.header} >
@@ -38,20 +40,32 @@ function Header() {
 
             </div>
             <div className={styles.toolsBox}>  
-                <form action="" className={styles.toolsChoose}>
-                    <button className={styles.setingsButton} aria-label="Settings button">
+                <div className={styles.toolsChoose}>
+                    <button
+                        type="button"
+                        className={styles.setingsButton}
+                        aria-label="Settings button"
+                    >
                         <img src={settingsLogo} alt="settingsLogo" className={styles.settingsLogo} />
                     </button>
-                    <button className={styles.notificationButton} aria-label="Notification button">
+
+                    <button
+                        type="button"
+                        className={styles.notificationButton}
+                        aria-label="Notification button"
+                        aria-expanded={isNotificationsOpen}
+                        onClick={() => setIsNotificationsOpen((prev) => !prev)}
+                    >
                         <img src={notificationLogo} alt="notificationLogo" className={styles.notificationLogo} />
                     </button>
+
                     <Link to="/profile" className={styles.profileButton} aria-label="Profile button">
                         <img src={profileLogo} alt="profileLogo" className={styles.profileLogo} />
                     </Link>
-                </form>
+                </div>
             </div>
             
-            <Notifications></Notifications>
+            {isNotificationsOpen && <Notifications />}
         </header>
     )
 }
