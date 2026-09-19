@@ -14,6 +14,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.http.HttpMethod;
+
 
 @Configuration
 @EnableWebSecurity
@@ -28,23 +30,34 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
                                 "/api/auth/**",
+                                "/error",
                                 "/scalar/**",
                                 "/swagger-ui/**",
                                 "/swagger-ui.html",
                                 "/v3/api-docs/**",
                                 "/h2-console/**"
                         ).permitAll()
-                        //.anyRequest().authenticated() Validates the authentication
-                        .anyRequest().permitAll()
 
+                        // Public registration only
+                        .requestMatchers(HttpMethod.POST, "/api/users").permitAll()
+
+                        .requestMatchers("/api/cv/**", "/api/profiles/**",
+                                "/api/applications/**", "/api/recommendations/**")
+                        .hasRole("EMPLOYEE")
+
+                        .requestMatchers("/api/companies/**", "/api/postings/**")
+                        .hasRole("EMPLOYER")
+
+                        .requestMatchers("/api/skills/**").authenticated()
+
+                        .anyRequest().authenticated()
                 ).exceptionHandling(exception -> exception
-                        .authenticationEntryPoint(
-                                (request, response, authException) ->
-                                        response.sendError(
-                                                HttpServletResponse.SC_UNAUTHORIZED,
-                                                "Unauthorized"
-                                        )
-                        )
+                        .authenticationEntryPoint((request, response, authException) -> {
+                            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                        })
+                        .accessDeniedHandler((request, response, accessDeniedException) -> {
+                            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+                        })
                 )
                 .headers(headers -> headers
                         .frameOptions(frame -> frame.disable())
