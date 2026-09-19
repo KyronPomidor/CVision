@@ -10,7 +10,7 @@ function MiniJobCard({ logo, title, schedule, salary, experience }) {
         <li className={styles.jobCard}>
             <img className={styles.logo} src={logo} alt="" />
             <div className={styles.content}>
-                <h3 className={styles.title}>{title}</h3>
+                <span className={styles.title}>{title}</span>
                 <div className={styles.meta}>
                     <MetaItem icon={clockLogo}>{schedule}</MetaItem>
                     <MetaItem icon={dollarLogo}>{salary}</MetaItem>
