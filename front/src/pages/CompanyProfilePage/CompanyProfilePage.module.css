@@ -1,4 +1,16 @@
 .CompanyProfilePage {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 380px;
+    gap: 1.5rem;
+    align-items: start;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1.5rem;
+    background-color: lightblue;
+}
+
+.column {
     display: flex;
-    background-color: blueviolet;
+    flex-direction: column;
+    gap: 25px;
 }
