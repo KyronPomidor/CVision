@@ -1,6 +1,6 @@
 .row {
     display: grid;
-    grid-template-columns: 3fr 12fr minmax(0,11fr);
+    grid-template-columns: 3fr 12fr minmax(0,28fr);
     align-items: center;
 }
 
