@@ -1,0 +1,16 @@
+.item {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    white-space: nowrap;
+}
+
+.icon {
+    width: 12px;
+    height: 12px;
+}
+
+.text {
+    font-size: var(--mainComments);
+    color: var(--mainTextGray);
+}

@@ -1,0 +1,17 @@
+.card {
+    border: var(--heavyBorderWeight) solid var(--borderGray);
+    border-radius: 5px;
+}
+
+.title {
+    font-size: var(--heading2);
+}
+
+.link {
+    color: var(--primary);
+    text-decoration: none;
+}
+
+.link:hover {
+    text-decoration: underline;
+}
