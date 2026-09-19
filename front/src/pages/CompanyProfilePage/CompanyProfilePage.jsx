@@ -1,7 +1,17 @@
+import styles from "./CompanyProfilePage.module.css"
+
 function CompanyProfilePage() {
     return (
-      <div>
-        <h1>PROFILE PAGE!</h1>
+      <div className={styles.CompanyProfilePage}>
+        <div>
+            <CompanyHeaderCard />
+            <AboutCard />
+            <GalleryCard />
+        </div>
+        <div>
+            <CompanyDetailsCard />
+            <JobOffersCard />
+        </div>
       </div>
     )
   }
