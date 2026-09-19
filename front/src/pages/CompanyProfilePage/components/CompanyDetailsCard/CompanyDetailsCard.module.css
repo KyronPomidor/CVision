@@ -1,0 +1,45 @@
+
+.card {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 17px;
+    border: var(--heavyBorderWeight) solid var(--borderGray);
+    border-radius: 5px;
+}
+
+.social {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-top: 20px;  
+    border-top: 1px solid var(--borderGray);
+}
+
+.title {
+    margin: 0;
+    font-size: var(--heading2);
+}
+
+.details {
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+}
+
+.subTitle {
+    font-size: var(--mainText);
+    color: var(--mainTextGray);
+    font-weight: 700;
+}
+
+.socialList {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+}
+
+.socialIcon {
+    width: 30px;
+    height: 30px;
+}
