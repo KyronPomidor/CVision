@@ -3,7 +3,7 @@
     flex-direction: column;
     align-items: center;
     gap: 39px;
-    width: clamp(200px, 30vw, 360px);
+    width: clamp(200px, 35vw, 360px);
     padding: 15px 20px;
 
     border: 5px solid var(--borderGray);

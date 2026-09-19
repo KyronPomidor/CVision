@@ -3,6 +3,7 @@
     flex-direction: column;
     gap: 35px;
     width: clamp(350px, 60vw, 773px);
+    height: 100vh;
     padding: 20px 15px;
 
     border: 5px solid var(--borderGray);
@@ -13,7 +14,6 @@
     display: flex;
     align-items: center;
     gap: 13px;
-    font-size: var(--heading1);
 }
 
 .headerIcon {
@@ -24,10 +24,13 @@
 .headerTitle {
     font-size: clamp(20px, 2.5vw, 28px);
     font-weight: 700;
+    font-size: var(--heading1);
 }
 
 .jobsList {
     display: flex;
     flex-direction: column;
     gap: 16px;
+    overflow: scroll;
+    scrollbar-width: none;
 }
