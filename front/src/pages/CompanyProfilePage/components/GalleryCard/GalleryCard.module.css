@@ -1,0 +1,37 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.title {
+    font-size: var(--heading2);
+}
+
+.arrows {
+    display: flex;
+    gap: 17px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.grid img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.card {
+    border: var(--heavyBorderWeight) solid var(--borderGray);
+    border-radius: 5px;
+}
+
+.galleryCard {
+    padding: 20px 15px;
+}
