@@ -2,7 +2,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1rem;
 }
 
 .title {
@@ -33,5 +32,8 @@
 }
 
 .galleryCard {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
     padding: 20px 15px;
 }

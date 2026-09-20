@@ -27,7 +27,7 @@
 .perkRow > * {
     flex: 1;
     position: relative;
-    padding: 0 1rem;
+    padding: 0 15px;
 }
 
 .perkRow > *:first-child {
@@ -41,7 +41,7 @@
     top: 50%;
     transform: translateY(-50%);
     width: 3px;
-    height: 2.5rem;
+    height: 45px;
     border-radius: 999px;
     background-color: var(--borderGray);
 }
