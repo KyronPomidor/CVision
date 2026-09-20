@@ -6,7 +6,9 @@ function AboutCard({ name, description, perks }) {
         <div className={styles.card}>
             <h2 className={styles.title}>About {name}</h2>
             <div className={styles.text}>
-                <p>{description}</p>
+                {description.split("\n").filter(Boolean).map((paragraph, i) => (
+                    <p key={i}>{paragraph}</p>
+                ))}
             </div>
             <div className={styles.perkRow}>
                 {perks.map((type) => (
