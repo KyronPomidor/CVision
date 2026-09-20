@@ -1,17 +1,6 @@
 import styles from "./GalleryCard.module.css";
-import img1 from "./gallery/image1.jpg";
-import img2 from "./gallery/image2.jpg";
-import img3 from "./gallery/image3.jpg";
-import img4 from "./gallery/image4.jpg";
 
-const images = [
-    { src: img1, alt: "Roslin logo on wall" },
-    { src: img2, alt: "Roslin notebook and flowers" },
-    { src: img3, alt: "Team at a table" },
-    { src: img4, alt: "Team relaxing on bean bags" },
-  ];
-
-function GalleryCard() {
+function GalleryCard({ gallery }) {
     return (
         <div className={`${styles.card} ${styles.galleryCard}`}>
             <div className={styles.header}>
@@ -22,7 +11,7 @@ function GalleryCard() {
                 </div>
             </div>
             <div className={styles.grid}>
-                {images.map((img) => 
+                {gallery.map((img) => 
                     <img key={img.src} src={img.src} alt={img.alt} />)
                 }
             </div>

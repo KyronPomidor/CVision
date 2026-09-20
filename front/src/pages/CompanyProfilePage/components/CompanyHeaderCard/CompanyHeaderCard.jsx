@@ -1,7 +1,6 @@
 import styles from "./CompanyHeaderCard.module.css";
-import logo from "./assets/roslinLogo.webp";
 
-function CompanyHeaderCard({ name = "Roslin Solutions", category = "IT Company" }) {
+function CompanyHeaderCard({ name, logo, category }) {
     return (
         <div className={styles.card}>
             <div className={styles.row}>
