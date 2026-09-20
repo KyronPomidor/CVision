@@ -1,10 +1,11 @@
 import styles from "./CompanyDetailsCard.module.css";
 import DetailRow from "./DetailRow";
-import globe from "./assets/Navigation/Globe.svg";
-import mail from "./assets/Communication/Mail.svg";
-import mapPin from "./assets/Navigation/Map_Pin.svg";
-import users from "./assets/User/Users.svg";
-import calendar from "./assets/Calendar/Calendar_Days.svg";
+
+import globe from "./assets/icons/globe.svg";
+import mail from "./assets/icons/mail.svg";
+import mapPin from "./assets/icons/map_pin.svg";
+import users from "./assets/icons/users.svg";
+import calendar from "./assets/icons/calendar.svg";
 
 import linkedin from "./assets/Socials/linkedin.svg"
 import facebook from "./assets/Socials/facebook.svg"

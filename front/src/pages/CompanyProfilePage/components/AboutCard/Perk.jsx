@@ -1,8 +1,8 @@
 import styles from "./Perk.module.css";
-import CoffeeIcon from "./assets/Environment/Coffee.svg";
-import LaptopIcon from "./assets/System/Laptop.svg";
-import UsersIcon from "./assets/User/Users_Group.svg";
-import TrendingIcon from "./assets/Interface/Trending_Up.svg";
+import CoffeeIcon from "./assets/coffee.svg";
+import LaptopIcon from "./assets/laptop.svg";
+import UsersIcon from "./assets/users.svg";
+import TrendingIcon from "./assets/trending.svg";
 
 const PERK_TYPES = {
     coffee:   { icon: CoffeeIcon,       label: "Free Coffee" },
