@@ -1,38 +1,38 @@
 .card {
-    border: var(--heavyBorderWeight) solid var(--borderGray);
-    border-radius: 5px;
+  border: var(--heavyBorderWeight) solid var(--borderGray);
+  border-radius: 5px;
 }
 
 .row {
-    display: flex;
-    flex-direction: row;
-    gap: 15px;
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
 
-    padding: 20px 15px;
+  padding: 20px 15px;
 }
 
 .logo {
-    border-radius: 15px;
-    width: 112px;
-    height: 112px;
+  border-radius: 15px;
+  width: 112px;
+  height: 112px;
 }
 
 .info {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
 }
 
 .name {
-    font-size: var(--heading1);
+  font-size: var(--heading1);
 }
 
 .tag {
-    font-size: var(--mainText);
-    font-weight: 700;
-    border-radius: 999px; 
-    padding: 8px 16px;
-    background: var(--backgroundGreen);
-    color: var(--primary);
+  font-size: var(--mainText);
+  font-weight: 700;
+  border-radius: 999px;
+  padding: 8px 16px;
+  background: var(--backgroundGreen);
+  color: var(--primary);
 }

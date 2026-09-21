@@ -1,0 +1,10 @@
+.FilterCard {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  width: fit-content;
+  padding: 20px;
+
+  border: 5px solid var(--borderGray);
+  border-radius: 10px;
+}
