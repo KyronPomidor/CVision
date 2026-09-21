@@ -7,10 +7,10 @@ import mapPin from "./assets/icons/map_pin.svg?react";
 import users from "./assets/icons/users.svg?react";
 import calendar from "./assets/icons/calendar.svg?react";
 
-import linkedin from "./assets/Socials/linkedin.svg?react"
-import facebook from "./assets/Socials/facebook.svg?react"
-import instagram from "./assets/Socials/instagram.svg?react"
-import twitter from "./assets/Socials/twitter.svg?react"
+import linkedin from "./assets/socials/linkedin.svg?react"
+import facebook from "./assets/socials/facebook.svg?react"
+import instagram from "./assets/socials/instagram.svg?react"
+import twitter from "./assets/socials/twitter.svg?react"
 
 const DETAIL_ROWS = [
     { key: "website", label: "Website",       icon: globe },
