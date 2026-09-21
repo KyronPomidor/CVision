@@ -3,7 +3,7 @@ function ProfilePage() {
     <div>
       <h1>PROFILE PAGE!</h1>
     </div>
-  )
+  );
 }
 
-export default ProfilePage
+export default ProfilePage;

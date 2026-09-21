@@ -1,70 +1,70 @@
 .sortBy {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .header {
-    display: flex;
-    align-items: center;
-    gap: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
-.headerIcon path{
-    width: 30px;
-    height: 30px;
-    stroke: var(--primary);
+.headerIcon path {
+  width: 30px;
+  height: 30px;
+  stroke: var(--primary);
 }
 
 .headerTitle {
-    font-size: var(--heading2);
-    font-weight: 700;
+  font-size: var(--heading2);
+  font-weight: 700;
 }
 
 .optionsList {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .option {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 
-    color: var(--mainTextGray);
-    font-size: var(--mainText);
-    cursor: pointer;
+  color: var(--mainTextGray);
+  font-size: var(--mainText);
+  cursor: pointer;
 }
 
 .radioInput {
-    appearance: none;
-    -webkit-appearance: none;
+  appearance: none;
+  -webkit-appearance: none;
 
-    width: 18px;
-    height: 18px;
+  width: 18px;
+  height: 18px;
 
-    border: 2px solid var(--mainTextGray);
-    border-radius: 50%;
+  border: 2px solid var(--mainTextGray);
+  border-radius: 50%;
 
-    cursor: pointer;
+  cursor: pointer;
 
-    display: grid;
-    place-content: center;
+  display: grid;
+  place-content: center;
 }
 
 .radioInput::before {
-    content: "";
+  content: "";
 
-    width: 10px;
-    height: 10px;
+  width: 10px;
+  height: 10px;
 
-    border-radius: 50%;
-    background-color: var(--primary);
+  border-radius: 50%;
+  background-color: var(--primary);
 
-    transform: scale(0);
+  transform: scale(0);
 }
 
 .radioInput:checked::before {
-    transform: scale(1);
+  transform: scale(1);
 }

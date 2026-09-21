@@ -1,14 +1,14 @@
 .CompanyProfilePage {
-    display: grid;
-    grid-template-columns: 62fr 38fr;
-    gap: 25px;
-    align-items: start;
-    padding: 15px 10px;
-    background-color: var(--mainBackground);
+  display: grid;
+  grid-template-columns: 62fr 38fr;
+  gap: 25px;
+  align-items: start;
+  padding: 15px 10px;
+  background-color: var(--mainBackground);
 }
 
 .column {
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
 }

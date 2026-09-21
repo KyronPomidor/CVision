@@ -1,55 +1,55 @@
 .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .title {
-    font-size: var(--heading2);
+  font-size: var(--heading2);
 }
 
 .arrows {
-    display: flex;
-    gap: 17px;
+  display: flex;
+  gap: 17px;
 }
 
-.arrowButton{
-    border: none;
-    background: none;
-    cursor: pointer;
+.arrowButton {
+  border: none;
+  background: none;
+  cursor: pointer;
 }
 
 .arrowButton:hover {
-    opacity: 0.7;
+  opacity: 0.7;
 }
 
 .arrowIcon {
-    display: block;
-    width: 40px;
-    height: 40px;
+  display: block;
+  width: 40px;
+  height: 40px;
 }
 
 .grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
 }
 
 .grid img {
-    width: 100%;
-    aspect-ratio: 4 / 3;
-    object-fit: cover;
-    border-radius: 10px;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 10px;
 }
 
 .card {
-    border: var(--heavyBorderWeight) solid var(--borderGray);
-    border-radius: 5px;
+  border: var(--heavyBorderWeight) solid var(--borderGray);
+  border-radius: 5px;
 }
 
 .galleryCard {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    padding: 20px 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 20px 15px;
 }

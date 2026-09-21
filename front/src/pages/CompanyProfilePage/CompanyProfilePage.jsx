@@ -17,13 +17,13 @@ import img4 from "./assets/gallery/image4.jpg";
 import img5 from "./assets/gallery/image5.png";
 
 async function getCompany(id) {
-  const mockCompany  = {
+  const mockCompany = {
     name: "Roslin Solutions",
     logo: logo,
     category: "IT Company",
     description: `Roslin Solutions is a forward-thinking technology company focused on building modern software solutions for global clients. We specialize in web and mobile application development, cloud solutions, and digital transformation services.
   Our mission is to empower businesses with innovative technology and talented people. We value creativity, collaboration, and continuous growth, and we’re always looking for passionate professionals to join our team.`,
-  
+
     perks: ["coffee", "growth", "flexible", "team"],
     gallery: [
       { src: img1, alt: "Roslin logo on wall" },
@@ -38,22 +38,40 @@ async function getCompany(id) {
       address: "182 Stefan cel Mare Street, Chisinau, Moldova",
       size: 500,
       founded: 2019,
-      socials:{
+      socials: {
         linkedin: "https://linkedin.com/company/roslin",
         instagram: "https://instagram.com/roslin",
         twitter: "https://twitter.com",
-        facebook: "https://facebook.com"
-      }
+        facebook: "https://facebook.com",
+      },
     },
     jobs: [
-      { id: 1, title: "Frontend Developer", schedule: "Flexible", salary: "$4,373 per year", experience: "No experience" },
-      { id: 2, title: "Frontend Developer", schedule: "Flexible", salary: "$4,373 per year", experience: "No experience" },
-      { id: 3, title: "Frontend Developer", schedule: "Flexible", salary: "$4,373 per year", experience: "No experience" },
-    ]
+      {
+        id: 1,
+        title: "Frontend Developer",
+        schedule: "Flexible",
+        salary: "$4,373 per year",
+        experience: "No experience",
+      },
+      {
+        id: 2,
+        title: "Frontend Developer",
+        schedule: "Flexible",
+        salary: "$4,373 per year",
+        experience: "No experience",
+      },
+      {
+        id: 3,
+        title: "Frontend Developer",
+        schedule: "Flexible",
+        salary: "$4,373 per year",
+        experience: "No experience",
+      },
+    ],
   };
 
   await new Promise((resolve) => setTimeout(resolve, 800));
-  return mockCompany
+  return mockCompany;
 }
 
 function CompanyProfilePage() {
@@ -80,32 +98,16 @@ function CompanyProfilePage() {
   return (
     <div className={styles.CompanyProfilePage}>
       <div className={styles.column}>
-          <CompanyHeaderCard
-              name={company.name}
-              logo={company.logo}
-              category={company.category}
-          />
-          <AboutCard
-              name={company.name}
-              description={company.description}
-              perks={company.perks}
-          />
-          <GalleryCard
-              gallery={company.gallery}
-          />
+        <CompanyHeaderCard name={company.name} logo={company.logo} category={company.category} />
+        <AboutCard name={company.name} description={company.description} perks={company.perks} />
+        <GalleryCard gallery={company.gallery} />
       </div>
       <div className={styles.column}>
-          <CompanyDetailsCard 
-              details={company.details}
-          />
-          <JobOffersCard
-              name={company.name}
-              logo={company.logo}
-              jobs={company.jobs}
-          />
+        <CompanyDetailsCard details={company.details} />
+        <JobOffersCard name={company.name} logo={company.logo} jobs={company.jobs} />
       </div>
     </div>
-  )
+  );
 }
-  
-export default CompanyProfilePage
+
+export default CompanyProfilePage;

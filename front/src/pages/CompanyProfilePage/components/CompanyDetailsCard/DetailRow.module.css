@@ -1,23 +1,23 @@
 .row {
-    display: grid;
-    grid-template-columns: 3fr 12fr minmax(0,28fr);
-    align-items: center;
+  display: grid;
+  grid-template-columns: 3fr 12fr minmax(0, 28fr);
+  align-items: center;
 }
 
 .icon {
-    width: 30px;
-    height: 30px;
-    color: var(--mainTextGray);
+  width: 30px;
+  height: 30px;
+  color: var(--mainTextGray);
 }
 
 .label {
-    font-size: var(--mainComments);
-    color: var(--mainTextGray);
+  font-size: var(--mainComments);
+  color: var(--mainTextGray);
 }
 
 .value {
-    font-size: var(--mainComments);
-    font-weight: 700;
-    color: var(--primary);
-    overflow-wrap: anywhere;
+  font-size: var(--mainComments);
+  font-weight: 700;
+  color: var(--primary);
+  overflow-wrap: anywhere;
 }

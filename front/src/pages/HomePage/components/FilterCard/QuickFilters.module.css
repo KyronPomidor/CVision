@@ -1,64 +1,64 @@
 .quickFilters {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .header {
-    display: flex;
-    align-items: center;
-    gap: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
-.headerIcon path{
-    width: 30px;
-    height: 30px;
-    fill: none;
-    stroke: var(--primary);
+.headerIcon path {
+  width: 30px;
+  height: 30px;
+  fill: none;
+  stroke: var(--primary);
 }
 
 .headerTitle {
-    font-size: var(--heading2);
-    font-weight: 700;
+  font-size: var(--heading2);
+  font-weight: 700;
 }
 
 .groupsList {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .group {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .groupTitle {
-    font-size: var(--mainText);
-    font-weight: 700;
+  font-size: var(--mainText);
+  font-weight: 700;
 }
 
 .optionsList {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .option {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 
-    color: var(--mainTextGray);
-    font-size: var(--mainText);
-    cursor: pointer;
+  color: var(--mainTextGray);
+  font-size: var(--mainText);
+  cursor: pointer;
 }
 
 .checkboxInput {
-    width: 18px;
-    height: 18px;
+  width: 18px;
+  height: 18px;
 
-    accent-color: var(--primary);
-    cursor: pointer;
+  accent-color: var(--primary);
+  cursor: pointer;
 }

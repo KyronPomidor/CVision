@@ -1,71 +1,71 @@
 .Notifications {
-    z-index: 1000;
-    position: fixed;
-    top: 120px;
-    right: 20px;
-    width: clamp(200px, 40vw, 400px);
-    padding: 10px;
+  z-index: 1000;
+  position: fixed;
+  top: 120px;
+  right: 20px;
+  width: clamp(200px, 40vw, 400px);
+  padding: 10px;
 
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 
-    background-color: var(--mainBackground);
-    border: 3px solid var(--borderGray);
-    border-radius: 8px;
-    box-shadow: 0 0px 20px var(--lighText);
+  background-color: var(--mainBackground);
+  border: 3px solid var(--borderGray);
+  border-radius: 8px;
+  box-shadow: 0 0px 20px var(--lighText);
 }
 
 .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-bottom: 5px;
-    border-bottom: 3px solid var(--borderGray);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 5px;
+  border-bottom: 3px solid var(--borderGray);
 }
 
 .headerTitle {
-    font-size: var(--heading2);
-    font-weight: 700;
+  font-size: var(--heading2);
+  font-weight: 700;
 }
 
 .markAllButton {
-    padding: 0;
+  padding: 0;
 
-    border: none;
-    background: none;
-    color: var(--primary);
-    font-size: var(--mainText);
-    cursor: pointer;
+  border: none;
+  background: none;
+  color: var(--primary);
+  font-size: var(--mainText);
+  cursor: pointer;
 }
 
 .markAllButton:hover {
-    opacity: 0.8;
+  opacity: 0.8;
 }
 
 .cardsList {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
 .viewAllButton {
-    display: flex;
-    align-items: center;
-    gap: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 
-    border: none;
-    background: none;
-    color: var(--primary);
-    font-weight: 600;
-    font-size: var(--mainText);
-    cursor: pointer;
+  border: none;
+  background: none;
+  color: var(--primary);
+  font-weight: 600;
+  font-size: var(--mainText);
+  cursor: pointer;
 }
 
 .viewAllButton:hover {
-    opacity: 0.8;
+  opacity: 0.8;
 }
 
 .arrow {
-    font-weight: 700;
+  font-weight: 700;
 }
