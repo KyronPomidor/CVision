@@ -3,9 +3,8 @@
     grid-template-columns: 62fr 38fr;
     gap: 25px;
     align-items: start;
-
     padding: 15px 10px;
-    background-color: lightblue;
+    background-color: var(--mainBackground);
 }
 
 .column {
