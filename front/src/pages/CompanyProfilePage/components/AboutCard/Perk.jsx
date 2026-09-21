@@ -1,8 +1,8 @@
 import styles from "./Perk.module.css";
-import CoffeeIcon from "./assets/coffee.svg";
-import LaptopIcon from "./assets/laptop.svg";
-import UsersIcon from "./assets/users.svg";
-import TrendingIcon from "./assets/trending.svg";
+import CoffeeIcon from "./assets/coffee.svg?react";
+import LaptopIcon from "./assets/laptop.svg?react";
+import UsersIcon from "./assets/users.svg?react";
+import TrendingIcon from "./assets/trending.svg?react";
 
 const PERK_TYPES = {
     coffee:   { icon: CoffeeIcon,       label: "Free Coffee" },
@@ -14,11 +14,12 @@ const PERK_TYPES = {
 function Perk({ type }) {
     const perk = PERK_TYPES[type];
     if (!perk) return null;
+    const Icon = perk.icon;
 
     return (
         <div className={styles.perk}>
             <span className={styles.iconCircle}>
-                <img src={perk.icon} className={styles.perkLogo}/>
+                <Icon className={styles.perkLogo} aria-hidden="true" />
             </span>
             <span className={styles.perkDescription}>
                 {perk.label}

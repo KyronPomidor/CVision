@@ -1,16 +1,16 @@
 import styles from "./CompanyDetailsCard.module.css";
 import DetailRow from "./DetailRow";
 
-import globe from "./assets/icons/globe.svg";
-import mail from "./assets/icons/mail.svg";
-import mapPin from "./assets/icons/map_pin.svg";
-import users from "./assets/icons/users.svg";
-import calendar from "./assets/icons/calendar.svg";
+import globe from "./assets/icons/globe.svg?react";
+import mail from "./assets/icons/mail.svg?react";
+import mapPin from "./assets/icons/map_pin.svg?react";
+import users from "./assets/icons/users.svg?react";
+import calendar from "./assets/icons/calendar.svg?react";
 
-import linkedin from "./assets/Socials/linkedin.svg"
-import facebook from "./assets/Socials/facebook.svg"
-import instagram from "./assets/Socials/instagram.svg"
-import twitter from "./assets/Socials/twitter.svg"
+import linkedin from "./assets/Socials/linkedin.svg?react"
+import facebook from "./assets/Socials/facebook.svg?react"
+import instagram from "./assets/Socials/instagram.svg?react"
+import twitter from "./assets/Socials/twitter.svg?react"
 
 const DETAIL_ROWS = [
     { key: "website", label: "Website",       icon: globe },
@@ -48,7 +48,7 @@ function CompanyDetailsCard({ details }) {
                 <div className={styles.social}>
                     <span className={styles.subTitle}>Social Media</span>
                     <div className={styles.socialList}>
-                        {availableSocials.map(({ key, label, icon }) => (
+                        {availableSocials.map(({ key, label, icon: Icon }) => (
                             <a
                                 key={key}
                                 href={socials[key]}
@@ -57,7 +57,7 @@ function CompanyDetailsCard({ details }) {
                                 aria-label={label}
                                 className={styles.socialLink}
                             >
-                                <img src={icon} alt="" className={styles.socialIcon} />
+                                <Icon className={styles.socialIcon} aria-hidden="true" />
                             </a>
                         ))}
                     </div>
