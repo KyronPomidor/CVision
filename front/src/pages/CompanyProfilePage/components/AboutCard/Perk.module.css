@@ -1,0 +1,29 @@
+.perk {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+}
+
+.iconCircle {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background-color: var(--backgroundGreen);
+    width: 60px;
+    height: 60px;
+}
+
+.perkLogo {
+    width: 40px;
+    height: 40px;
+    color: var(--primary);
+}
+
+.perkDescription {
+    width: min-content;
+    color: var(--mainTextGray);
+    font-size: var(--mainText);
+    font-weight: 700;
+}
