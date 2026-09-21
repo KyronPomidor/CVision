@@ -11,6 +11,7 @@ import img1 from "./assets/gallery/image1.jpg";
 import img2 from "./assets/gallery/image2.jpg";
 import img3 from "./assets/gallery/image3.jpg";
 import img4 from "./assets/gallery/image4.jpg";
+import img5 from "./assets/gallery/image5.png";
 
 const mockCompany  = {
   name: "Roslin Solutions",
@@ -25,6 +26,7 @@ Our mission is to empower businesses with innovative technology and talented peo
     { src: img2, alt: "Roslin notebook and flowers" },
     { src: img3, alt: "Team at a table" },
     { src: img4, alt: "Team relaxing on bean bags" },
+    { src: img5, alt: "Team celebrating an anniversary" },
   ],
   details: {
     website: "www.roslin.us",
