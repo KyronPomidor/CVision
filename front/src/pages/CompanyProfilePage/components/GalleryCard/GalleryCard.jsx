@@ -1,4 +1,6 @@
 import styles from "./GalleryCard.module.css";
+import caretLeft from "./assets/caret_circle_left.svg"
+import caretRight from "./assets/caret_circle_right.svg"
 
 function GalleryCard({ gallery }) {
     return (
@@ -6,8 +8,12 @@ function GalleryCard({ gallery }) {
             <div className={styles.header}>
                 <h2 className={styles.title}>Company Gallery</h2>
                 <div className={styles.arrows}>
-                    <button aria-label="Previous">‹</button>
-                    <button aria-label="Next">›</button>
+                    <button type="button" className={styles.arrowButton} aria-label="Previous" aria-label="Previous">
+                        <img src={caretLeft} alt="" className={styles.arrowIcon} />
+                    </button>
+                    <button type="button" className={styles.arrowButton} aria-label="Next" aria-label="Next">
+                        <img src={caretRight} alt="" className={styles.arrowIcon} />
+                    </button>
                 </div>
             </div>
             <div className={styles.grid}>
