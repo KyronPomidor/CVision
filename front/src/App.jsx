@@ -21,7 +21,7 @@ function App() {
         <Route element={<MainLayout />}>
           <Route path="/" element={<HomePage />} />
           <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/companyprofile" element={<CompanyProfilePage />} />
+          <Route path="/companies/:companyId" element={<CompanyProfilePage />} />
         </Route>
 
         {/* Pages without Header - add outside of MainLayout */}

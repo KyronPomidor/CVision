@@ -1,3 +1,6 @@
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+
 import styles from "./CompanyProfilePage.module.css";
 import CompanyHeaderCard from "./components/CompanyHeaderCard/CompanyHeaderCard";
 import AboutCard from "./components/AboutCard/AboutCard";
@@ -13,42 +16,67 @@ import img3 from "./assets/gallery/image3.jpg";
 import img4 from "./assets/gallery/image4.jpg";
 import img5 from "./assets/gallery/image5.png";
 
-const mockCompany  = {
-  name: "Roslin Solutions",
-  logo: logo,
-  category: "IT Company",
-  description: `Roslin Solutions is a forward-thinking technology company focused on building modern software solutions for global clients. We specialize in web and mobile application development, cloud solutions, and digital transformation services.
-Our mission is to empower businesses with innovative technology and talented people. We value creativity, collaboration, and continuous growth, and we’re always looking for passionate professionals to join our team.`,
+async function getCompany(id) {
+  const mockCompany  = {
+    name: "Roslin Solutions",
+    logo: logo,
+    category: "IT Company",
+    description: `Roslin Solutions is a forward-thinking technology company focused on building modern software solutions for global clients. We specialize in web and mobile application development, cloud solutions, and digital transformation services.
+  Our mission is to empower businesses with innovative technology and talented people. We value creativity, collaboration, and continuous growth, and we’re always looking for passionate professionals to join our team.`,
+  
+    perks: ["coffee", "growth", "flexible", "team"],
+    gallery: [
+      { src: img1, alt: "Roslin logo on wall" },
+      { src: img2, alt: "Roslin notebook and flowers" },
+      { src: img3, alt: "Team at a table" },
+      { src: img4, alt: "Team relaxing on bean bags" },
+      { src: img5, alt: "Team celebrating an anniversary" },
+    ],
+    details: {
+      website: "www.roslin.us",
+      email: "hr@roslin.us",
+      address: "182 Stefan cel Mare Street, Chisinau, Moldova",
+      size: 500,
+      founded: 2019,
+      socials:{
+        linkedin: "https://linkedin.com/company/roslin",
+        instagram: "https://instagram.com/roslin",
+        twitter: "https://twitter.com",
+        facebook: "https://facebook.com"
+      }
+    },
+    jobs: [
+      { id: 1, title: "Frontend Developer", schedule: "Flexible", salary: "$4,373 per year", experience: "No experience" },
+      { id: 2, title: "Frontend Developer", schedule: "Flexible", salary: "$4,373 per year", experience: "No experience" },
+      { id: 3, title: "Frontend Developer", schedule: "Flexible", salary: "$4,373 per year", experience: "No experience" },
+    ]
+  };
 
-  perks: ["coffee", "growth", "flexible", "team"],
-  gallery: [
-    { src: img1, alt: "Roslin logo on wall" },
-    { src: img2, alt: "Roslin notebook and flowers" },
-    { src: img3, alt: "Team at a table" },
-    { src: img4, alt: "Team relaxing on bean bags" },
-    { src: img5, alt: "Team celebrating an anniversary" },
-  ],
-  details: {
-    website: "www.roslin.us",
-    email: "hr@roslin.us",
-    address: "182 Stefan cel Mare Street, Chisinau, Moldova",
-    size: 500,
-    founded: 2019,
-    socials:{
-      linkedin: "https://linkedin.com/company/roslin",
-      instagram: "https://instagram.com/roslin",
-      twitter: "https://twitter.com",
-      facebook: "https://facebook.com"
-    }
-  },
-  jobs: [
-    { id: 1, title: "Frontend Developer", schedule: "Flexible", salary: "$4,373 per year", experience: "No experience" },
-    { id: 2, title: "Frontend Developer", schedule: "Flexible", salary: "$4,373 per year", experience: "No experience" },
-    { id: 3, title: "Frontend Developer", schedule: "Flexible", salary: "$4,373 per year", experience: "No experience" },
-  ]
-};
+  await new Promise((resolve) => setTimeout(resolve, 800));
+  return mockCompany
+}
 
-function CompanyProfilePage({ company = mockCompany }) {
+function CompanyProfilePage() {
+  const params = useParams();
+  const { companyId } = params;
+
+  const [company, setCompany] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    setLoading(true);
+    setError(null);
+
+    getCompany(companyId)
+      .then((data) => setCompany(data))
+      .catch((err) => setError(err))
+      .finally(() => setLoading(false));
+  }, [companyId]);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Something went wrong.</p>;
+
   return (
     <div className={styles.CompanyProfilePage}>
       <div className={styles.column}>
