@@ -1,4 +1,4 @@
-import styles from "./styles/FilterCard.module.css"
+import styles from "./FilterCard.module.css"
 import SortBy from "./SortBy"
 import QuickFilters from "./QuickFilters"
 

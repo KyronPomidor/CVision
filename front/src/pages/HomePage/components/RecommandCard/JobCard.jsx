@@ -1,4 +1,4 @@
-import styles from "./styles/JobCard.module.css"
+import styles from "./JobCard.module.css"
 import clockLogo from "../../../../assets/clock-logo.svg";
 import dollarLogo from "../../../../assets/dollar-logo.svg";
 import briefcaseLogo from "../../../../assets/briefcase-logo.svg";

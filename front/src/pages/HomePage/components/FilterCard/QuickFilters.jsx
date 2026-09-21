@@ -1,4 +1,4 @@
-import styles from "./styles/QuickFilters.module.css"
+import styles from "./QuickFilters.module.css"
 import filterLogo from "../../../../assets/filter-logo.svg";
 
 function QuickFilters({ groups, onChange }) {

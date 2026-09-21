@@ -1,4 +1,4 @@
-import styles from "./styles/Notifications.module.css"
+import styles from "./Notifications.module.css"
 import NotificationCard from "./NotificationCard"
 import endavaLogo from "../../assets/endava-logo.png";
 import pentalogLogo from "../../assets/pentalog-logo.png";

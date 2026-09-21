@@ -1,4 +1,4 @@
-import styles from "./styles/Achievements.module.css"
+import styles from "./Achievements.module.css"
 import bagLogo from "../../../../assets/bag-logo.svg";
 import starLogo from "../../../../assets/star-logo.svg";
 import paperLogo from "../../../../assets/paper-logo.svg";

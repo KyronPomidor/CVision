@@ -1,4 +1,4 @@
-import styles from "./styles/ProfileCard.module.css"
+import styles from "./ProfileCard.module.css"
 import profileLogo from "../../../../assets/profile-photo.png";
 import ContactInfo from "./ContactInfo";
 import AboutMe from "./AboutMe";

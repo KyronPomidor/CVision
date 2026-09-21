@@ -1,4 +1,4 @@
-import styles from "./styles/AboutMe.module.css"
+import styles from "./AboutMe.module.css"
 import pencilLogo from "../../../../assets/pencil-logo.svg";
 
 function AboutMe({ aboutMe, onEditProfile }) {

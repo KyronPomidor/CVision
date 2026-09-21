@@ -1,4 +1,4 @@
-import styles from "./styles/RecommandCard.module.css"
+import styles from "./RecommandCard.module.css"
 import bookLogo from "../../../../assets/book-logo.svg";
 import JobCard from "./JobCard";
 

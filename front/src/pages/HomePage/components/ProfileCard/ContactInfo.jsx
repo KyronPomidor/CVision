@@ -1,4 +1,4 @@
-import styles from "./styles/ContactInfo.module.css"
+import styles from "./ContactInfo.module.css"
 import emailLogo from "../../../../assets/mail-icon.svg";
 import telephoneLogo from "../../../../assets/telephone-logo.svg";
 import locationLogo from "../../../../assets/location-logo.svg";
