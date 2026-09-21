@@ -8,10 +8,10 @@ function GalleryCard({ gallery }) {
             <div className={styles.header}>
                 <h2 className={styles.title}>Company Gallery</h2>
                 <div className={styles.arrows}>
-                    <button type="button" className={styles.arrowButton} aria-label="Previous" aria-label="Previous">
+                    <button type="button" className={styles.arrowButton} aria-label="Previous">
                         <img src={caretLeft} alt="" className={styles.arrowIcon} />
                     </button>
-                    <button type="button" className={styles.arrowButton} aria-label="Next" aria-label="Next">
+                    <button type="button" className={styles.arrowButton} aria-label="Next">
                         <img src={caretRight} alt="" className={styles.arrowIcon} />
                     </button>
                 </div>
