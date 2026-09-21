@@ -3,6 +3,8 @@ package com.pbl.back.domain.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "companies")
 @Getter
@@ -27,6 +29,9 @@ public class Company {
     private String description;
 
     private String location;
+
+    @ElementCollection
+    private List<String> photos;
 
     @Embedded
     private CompanyDetails details;

@@ -30,6 +30,7 @@ public class CompanyMapperImpl implements CompanyMapper {
                 .name(request.getName())
                 .description(request.getDescription())
                 .location(request.getLocation())
+                .photos(request.getPhotos())
                 .details(details)
                 .build();
     }
@@ -55,6 +56,7 @@ public class CompanyMapperImpl implements CompanyMapper {
                 .name(company.getName())
                 .description(company.getDescription())
                 .location(company.getLocation())
+                .photos(company.getPhotos())
                 .details(details)
                 .build();
     }
