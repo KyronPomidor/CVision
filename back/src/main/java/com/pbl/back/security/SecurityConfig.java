@@ -5,6 +5,7 @@ import com.pbl.back.service.impl.JWTService;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -34,23 +35,34 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
                                 "/api/auth/**",
+                                "/error",
                                 "/scalar/**",
                                 "/swagger-ui/**",
                                 "/swagger-ui.html",
                                 "/v3/api-docs/**",
                                 "/h2-console/**"
                         ).permitAll()
-                        //.anyRequest().authenticated() Validates the authentication
-                        .anyRequest().permitAll()
 
+                        // Public registration only
+                        .requestMatchers(HttpMethod.POST, "/api/users").permitAll()
+
+                        .requestMatchers("/api/cv/**", "/api/profiles/**",
+                                "/api/applications/**", "/api/recommendations/**")
+                        .hasRole("EMPLOYEE")
+
+                        .requestMatchers("/api/companies/**", "/api/postings/**")
+                        .hasRole("EMPLOYER")
+
+                        .requestMatchers("/api/skills/**").authenticated()
+
+                        .anyRequest().authenticated()
                 ).exceptionHandling(exception -> exception
-                        .authenticationEntryPoint(
-                                (request, response, authException) ->
-                                        response.sendError(
-                                                HttpServletResponse.SC_UNAUTHORIZED,
-                                                "Unauthorized"
-                                        )
-                        )
+                        .authenticationEntryPoint((request, response, authException) -> {
+                            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                        })
+                        .accessDeniedHandler((request, response, accessDeniedException) -> {
+                            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+                        })
                 )
                 .headers(headers -> headers
                         .frameOptions(frame -> frame.disable())

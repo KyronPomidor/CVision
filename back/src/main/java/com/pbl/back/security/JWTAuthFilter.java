@@ -24,10 +24,11 @@ public class JWTAuthFilter extends OncePerRequestFilter {
     }
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request,
+    protected void doFilterInternal(
+            HttpServletRequest request,
             HttpServletResponse response,
-            FilterChain filterChain)
-            throws ServletException, IOException {
+            FilterChain filterChain
+    ) throws ServletException, IOException {
 
         String authHeader = request.getHeader("Authorization");
 
@@ -36,20 +37,30 @@ public class JWTAuthFilter extends OncePerRequestFilter {
             return;
         }
 
-        String jwt = authHeader.substring(7);
+        try {
+            String jwt = authHeader.substring(7);
+            Long userId = jwtService.extractUserId(jwt);
+            UserDetails userDetails = userDetailsService.loadUserByUserId(userId);
 
-        Long userId = jwtService.extractUserId(jwt);
+            UsernamePasswordAuthenticationToken authentication =
+                    new UsernamePasswordAuthenticationToken(
+                            userDetails,
+                            null,
+                            userDetails.getAuthorities()
+                    );
 
-        UserDetails userDetails = userDetailsService.loadUserByUserId(userId);
+            SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
-                userDetails,
-                null,
-                userDetails.getAuthorities()
-        );
+            System.out.println("JWT authenticated: " + userDetails.getUsername()
+                    + " " + userDetails.getAuthorities());
 
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-
-        filterChain.doFilter(request, response);
+            filterChain.doFilter(request, response);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            response.sendError(
+                    HttpServletResponse.SC_UNAUTHORIZED,
+                    "Invalid authentication token"
+            );
+        }
     }
 }
