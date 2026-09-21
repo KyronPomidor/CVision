@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom'
 import Header from './components/header/Header'
 import HomePage from './pages/HomePage/HomePage'
 import ProfilePage from './pages/ProfilePage/ProfilePage'
+import CompanyProfilePage from './pages/CompanyProfilePage/CompanyProfilePage'
 import apiClient from './api/client'
 
 function MainLayout() {
@@ -29,6 +30,7 @@ function App() {
         <Route element={<MainLayout />}>
           <Route path="/" element={<HomePage />} />
           <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/companies/:companyId" element={<CompanyProfilePage />} />
         </Route>
 
         {/* Pages without Header - add outside of MainLayout */}

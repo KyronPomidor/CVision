@@ -1,0 +1,27 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border: var(--heavyBorderWeight) solid var(--borderGray);
+    border-radius: 5px;
+    padding: 15px;
+}
+
+.title {
+    font-size: var(--heading2);
+}
+
+.jobList {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.link {
+    color: var(--primary);
+    text-decoration: none;
+}
+
+.link:hover {
+    text-decoration: underline;
+}

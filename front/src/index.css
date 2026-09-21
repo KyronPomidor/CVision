@@ -13,6 +13,9 @@
   --heading2: 24px;
   --mainText: 15px;
   --mainComments: 12px;
+
+  --heavyBorderWeight: 5px;
+  --lightBorderWeight: 3px;
 }
 
 * {
