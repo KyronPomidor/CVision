@@ -11,6 +11,6 @@ public class CompanyResponse {
     private Long userId;
     private String name;
     private String description;
-    private String website;
     private String location;
+    private CompanyDetailsResponse details;
 }

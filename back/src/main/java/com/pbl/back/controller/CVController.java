@@ -30,8 +30,6 @@ public class CVController {
         return service.getByUserId(currentUserService.getId());
     }
 
-
-
     @PutMapping("/{id}")
     public CVResponse update(@PathVariable Long id, @Valid @RequestBody CVRequest request) {
         return service.update(id, request);

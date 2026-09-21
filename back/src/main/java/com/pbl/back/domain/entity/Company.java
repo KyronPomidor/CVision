@@ -26,7 +26,8 @@ public class Company {
     @Column(columnDefinition = "TEXT")
     private String description;
 
-    private String website;
-
     private String location;
+
+    @Embedded
+    private CompanyDetails details;
 }
