@@ -2,10 +2,10 @@ import { useState } from "react"
 import { Link } from "react-router-dom"
 import styles from "./Header.module.css"
 import Notifications from "../Notification/Notifications";
-import mainLogo from "../../assets/main-logo.svg";
+import mainLogo from "../../../../Logo.svg";
 import searchLogo from "../../assets/search-icon.svg";
-import settingsLogo from "../../assets/settings-icon.svg";
-import notificationLogo from "../../assets/notification-icon.svg";
+import settingsLogo from "./assets/settings-icon.svg";
+import notificationLogo from "./assets/notification-icon.svg";
 import profileLogo from "../../assets/profile-photo.png";
 
 function Header() {
@@ -16,7 +16,7 @@ function Header() {
               
             <div className={styles.logoBox}> 
                 <Link to="/">
-                    <img src={mainLogo} alt="mainLogo" />
+                    <img src={mainLogo} alt="mainLogo" className={styles.mainLogo}/>
                 </Link>
             </div>
             

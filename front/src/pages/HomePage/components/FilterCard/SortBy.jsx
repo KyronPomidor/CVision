@@ -1,5 +1,5 @@
 import styles from "./SortBy.module.css"
-import sortLogo from "../../../../assets/sort-logo.svg";
+import sortLogo from "./assets/sort-logo.svg";
 
 function SortBy({ options, onChange }) {
 

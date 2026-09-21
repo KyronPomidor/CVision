@@ -24,6 +24,7 @@
 .companyLogo {
     width: 59px;
 
+    border: 3px solid var(--borderGray);
     border-radius: 8px;
     object-fit: contain;
     background-color: var(--mainBackground);

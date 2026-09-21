@@ -1,7 +1,7 @@
 import styles from "./NotificationCard.module.css"
-import profileViewLogo from "../../assets/eye-logo.svg";
-import applicationReviewLogo from "../../assets/search-light-logo.svg";
-import reachOutLogo from "../../assets/chat-logo.svg";
+import profileViewLogo from "./assets/eye-logo.svg";
+import applicationReviewLogo from "./assets/search-light-logo.svg";
+import reachOutLogo from "./assets/chat-logo.svg";
 
 const TYPE_BADGES = {
     profileView: profileViewLogo,

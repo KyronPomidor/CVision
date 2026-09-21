@@ -16,7 +16,10 @@
     flex: 1;
     align-content: center;
     padding-left: clamp(0px, 5vw, 50px);
+}
 
+.mainLogo{
+    height: 81px;
 }
 
 .searchBox {

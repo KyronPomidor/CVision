@@ -1,5 +1,5 @@
 import styles from "./RecommandCard.module.css"
-import bookLogo from "../../../../assets/book-logo.svg";
+import bookLogo from "./assets/book-logo.svg";
 import JobCard from "./JobCard";
 
 function RecommandCard({ jobs = [] }) {
