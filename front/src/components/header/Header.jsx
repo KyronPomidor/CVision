@@ -3,9 +3,9 @@ import { Link } from "react-router-dom"
 import styles from "./Header.module.css"
 import Notifications from "../Notification/Notifications";
 import mainLogo from "../../../../Logo.svg";
-import searchLogo from "../../assets/search-icon.svg";
-import settingsLogo from "./assets/settings-icon.svg";
-import notificationLogo from "./assets/notification-icon.svg";
+import SearchLogo from "../../assets/search-icon.svg?react";
+import SettingsLogo from "./assets/settings-icon.svg?react";
+import NotificationLogo from "./assets/notification-icon.svg?react";
 import profileLogo from "../../assets/profile-photo.png";
 
 function Header() {
@@ -33,7 +33,7 @@ function Header() {
                     />
 
                     <button type="submit" className={styles.searchButton} aria-label="Search button">
-                        <img src={searchLogo} alt="searchLogo" className={styles.searchLogo}/>
+                        <SearchLogo className={styles.searchLogo}/>
                     </button>
                 </form>
                 
@@ -46,7 +46,7 @@ function Header() {
                         className={styles.setingsButton}
                         aria-label="Settings button"
                     >
-                        <img src={settingsLogo} alt="settingsLogo" className={styles.settingsLogo} />
+                        <SettingsLogo className={styles.settingsLogo} />
                     </button>
 
                     <button
@@ -56,7 +56,7 @@ function Header() {
                         aria-expanded={isNotificationsOpen}
                         onClick={() => setIsNotificationsOpen((prev) => !prev)}
                     >
-                        <img src={notificationLogo} alt="notificationLogo" className={styles.notificationLogo} />
+                        <NotificationLogo className={styles.notificationLogo} />
                     </button>
 
                     <Link to="/profile" className={styles.profileButton} aria-label="Profile button">

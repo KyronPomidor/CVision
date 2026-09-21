@@ -1,8 +1,8 @@
 import styles from "./Achievements.module.css"
-import bagLogo from "./assets/bag-logo.svg";
-import starLogo from "../../../../assets/star-logo.svg";
-import paperLogo from "./assets/paper-logo.svg";
-import envelopeLogo from "./assets/envelope-logo.svg";
+import BagLogo from "./assets/bag-logo.svg?react";
+import StarLogo from "../../../../assets/star-logo.svg?react";
+import PaperLogo from "./assets/paper-logo.svg?react";
+import EnvelopeLogo from "./assets/envelope-logo.svg?react";
 
 function Achievements({ appliedJobsCount, savedJobsCount, cvViewsCount, reachoutsCount }) {
 
@@ -13,7 +13,7 @@ function Achievements({ appliedJobsCount, savedJobsCount, cvViewsCount, reachout
                     <div className={styles.appliedJobs}>
                         <div className={styles.appliedJobs_contactItem}>
                             <div className={styles.appliedJobs_imageBox}>
-                                <img src={bagLogo} alt="bagLogo" className={styles.bagLogo}/>
+                                <BagLogo className={styles.bagLogo}/>
                             </div>
                             <h2 className={styles.appliedJobs_quantity}>{appliedJobsCount}</h2>
                         </div>
@@ -26,7 +26,7 @@ function Achievements({ appliedJobsCount, savedJobsCount, cvViewsCount, reachout
                     <div className={styles.savedJobs}>
                         <div className={styles.savedJobs_contactItem}>
                             <div className={styles.appliedJobs_imageBox}>
-                                <img src={starLogo} alt="starLogo" className={styles.starLogo}/>
+                                <StarLogo className={styles.starLogo}/>
                             </div>
                             <h2 className={styles.savedJobs_quantity}>{savedJobsCount}</h2>
                         </div>
@@ -42,7 +42,7 @@ function Achievements({ appliedJobsCount, savedJobsCount, cvViewsCount, reachout
                     <div className={styles.curriculumViews}>
                         <div className={styles.curriculumViews_contactItem}>
                             <div className={styles.appliedJobs_imageBox}>
-                                <img src={paperLogo} alt="paperLogo" className={styles.paperLogo}/>
+                                <PaperLogo className={styles.paperLogo}/>
                             </div>
                             <h2 className={styles.curriculumViews_quantity}>{cvViewsCount}</h2>
                         </div>
@@ -55,7 +55,7 @@ function Achievements({ appliedJobsCount, savedJobsCount, cvViewsCount, reachout
                     <div className={styles.reachouts}>
                         <div className={styles.reachouts_contactItem}>
                             <div className={styles.appliedJobs_imageBox}>
-                                <img src={envelopeLogo} alt="envelopeLogo" className={styles.envelopeLogo}/>
+                                <EnvelopeLogo className={styles.envelopeLogo}/>
                             </div>
                             <h2 className={styles.reachouts_quantity}>{reachoutsCount}</h2>
                         </div>

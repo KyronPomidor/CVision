@@ -29,7 +29,7 @@ const jobs = [
         salary: "5,200 per year",
         experience: "6-7 years of experience",
         matchPercent: 60,
-        isStarred: false,
+        isStarred: true,
     },
     {
         id: 3,
@@ -41,7 +41,7 @@ const jobs = [
         salary: "5,200 per year",
         experience: "6-7 years of experience",
         matchPercent: 15,
-        isStarred: false,
+        isStarred: true,
     },
     {
         id: 4,

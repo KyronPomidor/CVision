@@ -65,6 +65,10 @@
 
 }
 
+.searchLogo path{
+    fill: var(--headerColor);
+}
+
 .searchButton:hover{
     opacity: 0.8;
 }
@@ -94,14 +98,21 @@
     cursor: pointer;
 }
 
+.settingsLogo path{
+    stroke: var(--primary);
+}
+
 .settingsLogo:hover{
     opacity: 0.8;
 }
 
-
 .notificationLogo{
     height: clamp(24px, 9vw, 54px);
     cursor: pointer;
+}  
+
+.notificationLogo path{
+    stroke: var(--primary);
 }  
 
 .notificationLogo:hover{

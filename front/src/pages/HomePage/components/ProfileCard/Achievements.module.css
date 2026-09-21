@@ -93,3 +93,10 @@
 .curriculumViews_contactItem { composes: contactItem; }
 
 .reachouts_contactItem { composes: contactItem; }
+
+.bagLogo path,
+.starLogo path,
+.paperLogo path,
+.envelopeLogo path{
+    stroke: var(--primary);
+}

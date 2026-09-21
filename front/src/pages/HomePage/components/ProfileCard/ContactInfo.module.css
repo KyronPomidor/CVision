@@ -14,7 +14,11 @@
     font-size: var(--mainText);
 }
 
-.contactInfo img {
+.emailLogo path,
+.telephoneLogo path,
+.locationLogo path
+ {
     width: 23px;
     height: 23px;
+    stroke: var(--mainTextGray);
 }

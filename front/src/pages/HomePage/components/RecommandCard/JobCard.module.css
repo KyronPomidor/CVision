@@ -74,10 +74,14 @@
 .starActive {
     width: 22px;
     height: 22px;
+    stroke: var(--primary);
 }
 
+.starIcon path,
+.starActive path { stroke: var(--primary);}
+
 .starActive {
-    filter: brightness(0) saturate(100%) invert(60%) sepia(90%) saturate(500%) hue-rotate(0deg);
+    fill: var(--primary);
 }
 
 .detailsRow {
@@ -96,9 +100,17 @@
     font-size: var(--mainText);
 }
 
-.detailItem img {
+.clockLogo,
+.dollarLogo,
+.briefcaseLogo {
     width: 20px;
     height: 20px;
+}
+
+.clockLogo path,
+.dollarLogo path,
+.briefcaseLogo {
+    stroke: var(--mainTextGray);
 }
 
 .matchSection {

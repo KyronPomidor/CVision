@@ -1,12 +1,12 @@
 import styles from "./SortBy.module.css"
-import sortLogo from "./assets/sort-logo.svg";
+import SortLogo from "./assets/sort-logo.svg?react";
 
 function SortBy({ options, onChange }) {
 
     return (
         <div className={styles.sortBy}>
             <div className={styles.header}>
-                <img src={sortLogo} alt="sortLogo" className={styles.headerIcon} />
+                <SortLogo className={styles.headerIcon} />
                 <h2 className={styles.headerTitle}>Sort by</h2>
             </div>
 

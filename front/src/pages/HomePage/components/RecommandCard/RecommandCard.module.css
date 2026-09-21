@@ -16,9 +16,10 @@
     gap: 13px;
 }
 
-.headerIcon {
+.headerIcon path{
     width: 32px;
     height: 32px;
+    stroke: var(--primary);
 }
 
 .headerTitle {

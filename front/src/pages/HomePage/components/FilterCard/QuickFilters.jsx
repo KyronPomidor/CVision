@@ -1,12 +1,12 @@
 import styles from "./QuickFilters.module.css"
-import filterLogo from "./assets/filter-logo.svg";
+import FilterLogo from "./assets/filter-logo.svg?react";
 
 function QuickFilters({ groups, onChange }) {
 
     return (
         <div className={styles.quickFilters}>
             <div className={styles.header}>
-                <img src={filterLogo} alt="filterLogo" className={styles.headerIcon} />
+                <FilterLogo className={styles.headerIcon} />
                 <h2 className={styles.headerTitle}>Quick Filters</h2>
             </div>
 

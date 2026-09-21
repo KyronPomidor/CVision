@@ -1,8 +1,8 @@
 import styles from "./JobCard.module.css"
-import clockLogo from "../../../../assets/clock-logo.svg";
-import dollarLogo from "../../../../assets/dollar-logo.svg";
-import briefcaseLogo from "../../../../assets/briefcase-logo.svg";
-import starOutlineLogo from "../../../../assets/star-logo.svg";
+import ClockLogo from "../../../../assets/clock-logo.svg?react";
+import DollarLogo from "../../../../assets/dollar-logo.svg?react";
+import BriefcaseLogo from "../../../../assets/briefcase-logo.svg?react";
+import StarOutlineLogo from "../../../../assets/star-logo.svg?react";
 
 function getMatchLevel(matchPercent) {
     if (matchPercent >= 80) return "green";
@@ -47,9 +47,7 @@ function JobCard({
                         onClick={onToggleStar}
                         aria-pressed={isStarred}
                     >
-                        <img
-                            src={starOutlineLogo}
-                            alt="starLogo"
+                        <StarOutlineLogo
                             className={isStarred ? styles.starActive : styles.starIcon}
                         />
                     </button>
@@ -58,17 +56,17 @@ function JobCard({
 
             <div className={styles.detailsRow}>
                 <div className={styles.detailItem}>
-                    <img src={clockLogo} alt="clockLogo" />
+                    <ClockLogo className={styles.clockLogo} />
                     <p>{employmentType}</p>
                 </div>
 
                 <div className={styles.detailItem}>
-                    <img src={dollarLogo} alt="dollarLogo" />
+                    <DollarLogo className={styles.dollarLogo} />
                     <p>{salary}</p>
                 </div>
 
                 <div className={styles.detailItem}>
-                    <img src={briefcaseLogo} alt="briefcaseLogo" />
+                    <BriefcaseLogo className={styles.briefcaseLogo} />
                     <p>{experience}</p>
                 </div>
             </div>

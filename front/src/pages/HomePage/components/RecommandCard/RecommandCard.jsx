@@ -1,5 +1,5 @@
 import styles from "./RecommandCard.module.css"
-import bookLogo from "./assets/book-logo.svg";
+import BookLogo from "./assets/book-logo.svg?react";
 import JobCard from "./JobCard";
 
 function RecommandCard({ jobs = [] }) {
@@ -7,7 +7,7 @@ function RecommandCard({ jobs = [] }) {
     return (
         <div className={styles.RecommandCard}>
             <div className={styles.header}>
-                <img src={bookLogo} alt="bookLogo" className={styles.headerIcon} />
+                <BookLogo className={styles.headerIcon} />
                 <h2 className={styles.headerTitle}>Recommended Opportunities</h2>
             </div>
 
