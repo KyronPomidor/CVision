@@ -24,8 +24,6 @@
 
 .headerTitle {
   font-size: clamp(20px, 2.5vw, 28px);
-  font-weight: 700;
-  font-size: var(--font-size-heading-1);
 }
 
 .jobsList {

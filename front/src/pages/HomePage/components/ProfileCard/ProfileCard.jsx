@@ -1,4 +1,5 @@
 import styles from "./ProfileCard.module.css";
+import typography from "../../../../Typography.module.css";
 import profileLogo from "../../../../assets/profile-photo.png";
 import ContactInfo from "./ContactInfo";
 import AboutMe from "./AboutMe";
@@ -20,7 +21,7 @@ function ProfileCard({
     <div className={styles.profileCard}>
       <div className={styles.photoBox}>
         <img src={profileLogo} alt="profileLogo" className={styles.profileLogo} />
-        <h2 className={styles.profileName}>{name}</h2>
+        <h2 className={`${typography.heading2} ${styles.profileName}`}>{name}</h2>
       </div>
 
       <ContactInfo email={email} phone={phone} location={location} />

@@ -36,11 +36,6 @@
   gap: 2px;
 }
 
-.jobTitle {
-  font-size: var(--font-size-heading-2);
-  font-weight: 700;
-}
-
 .companyName {
   color: var(--color-primary);
   font-weight: 600;
@@ -54,8 +49,6 @@
 }
 
 .postedText {
-  color: var(--color-text-body);
-  font-size: var(--font-size-body);
   white-space: nowrap;
 }
 
@@ -98,8 +91,6 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  color: var(--color-text-body);
-  font-size: var(--font-size-body);
 }
 
 .clockLogo,
@@ -107,6 +98,7 @@
 .briefcaseLogo {
   width: 20px;
   height: 20px;
+  color: var(--color-text-body);
 }
 
 .clockLogo path,
@@ -119,10 +111,6 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
-}
-
-.matchLabel {
-  font-size: var(--font-size-body);
 }
 
 .matchPercent {

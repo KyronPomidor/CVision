@@ -1,4 +1,5 @@
 import styles from "./JobCard.module.css";
+import typography from "../../../../Typography.module.css";
 import ClockLogo from "../../../../assets/clock-logo.svg?react";
 import DollarLogo from "../../../../assets/dollar-logo.svg?react";
 import BriefcaseLogo from "../../../../assets/briefcase-logo.svg?react";
@@ -32,13 +33,13 @@ function JobCard({
           <img src={logo} alt={`${company} logo`} className={styles.companyLogo} />
 
           <div className={styles.titleBlock}>
-            <h3 className={styles.jobTitle}>{title}</h3>
+            <h3 className={typography.heading2}>{title}</h3>
             <p className={styles.companyName}>{company}</p>
           </div>
         </div>
 
         <div className={styles.metaRight}>
-          <p className={styles.postedText}>{postedAt}</p>
+          <p className={`${typography.mainText} ${styles.postedText}`}>{postedAt}</p>
 
           <button
             type="button"
@@ -54,22 +55,22 @@ function JobCard({
       <div className={styles.detailsRow}>
         <div className={styles.detailItem}>
           <ClockLogo className={styles.clockLogo} />
-          <p>{employmentType}</p>
+          <p className={typography.mainText}>{employmentType}</p>
         </div>
 
         <div className={styles.detailItem}>
           <DollarLogo className={styles.dollarLogo} />
-          <p>{salary}</p>
+          <p className={typography.mainText}>{salary}</p>
         </div>
 
         <div className={styles.detailItem}>
           <BriefcaseLogo className={styles.briefcaseLogo} />
-          <p>{experience}</p>
+          <p className={typography.mainText}>{experience}</p>
         </div>
       </div>
 
       <div className={styles.matchSection}>
-        <p className={styles.matchLabel}>
+        <p className={typography.mainTextImportant}>
           <span className={`${styles.matchPercent} ${styles[matchLevel]}`}>
             {matchPercent}% Match
           </span>{" "}

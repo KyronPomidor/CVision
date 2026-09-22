@@ -10,13 +10,10 @@
 
 .aboutMeHeading {
   margin-bottom: 14px;
-  font-size: var(--font-size-heading-2);
 }
 
 .aboutMeInfo {
   margin-bottom: 14px;
-  color: var(--color-text-body);
-  font-size: var(--font-size-body);
 }
 
 .editButtonWrapper {

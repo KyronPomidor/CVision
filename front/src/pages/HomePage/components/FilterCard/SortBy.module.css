@@ -16,11 +16,6 @@
   stroke: var(--color-primary);
 }
 
-.headerTitle {
-  font-size: var(--font-size-heading-2);
-  font-weight: 700;
-}
-
 .optionsList {
   display: flex;
   flex-direction: column;
@@ -31,9 +26,6 @@
   display: flex;
   align-items: center;
   gap: 10px;
-
-  color: var(--color-text-body);
-  font-size: var(--font-size-body);
   cursor: pointer;
 }
 
