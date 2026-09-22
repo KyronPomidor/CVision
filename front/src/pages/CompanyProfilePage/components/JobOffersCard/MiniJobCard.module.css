@@ -3,7 +3,7 @@
   align-items: center;
   padding: 10px;
   gap: 15px;
-  border: var(--lightBorderWeight) solid var(--borderGray);
+  border: var(--border-weight-light) solid var(--color-border);
   border-radius: 5px;
 }
 
@@ -11,12 +11,12 @@
   align-self: flex-start;
   width: 40px;
   height: 40px;
-  border: var(--lightBorderWeight) solid var(--borderGray);
+  border: var(--border-weight-light) solid var(--color-border);
   border-radius: 5px;
 }
 
 .title {
-  font-size: var(--mainText);
+  font-size: var(--font-size-body);
   font-weight: 700;
 }
 
@@ -36,8 +36,8 @@
 
 .apply {
   align-self: flex-end;
-  background-color: var(--primary);
-  color: var(--backgroundGreen);
+  background-color: var(--color-primary);
+  color: var(--color-background-accent);
   border: none;
   border-radius: 999px;
   padding: 8px 16px;

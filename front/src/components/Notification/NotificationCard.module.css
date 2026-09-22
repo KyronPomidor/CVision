@@ -6,7 +6,7 @@
   padding: 10px 0;
 
   border: none;
-  border-bottom: 3px solid var(--borderGray);
+  border-bottom: 3px solid var(--color-border);
   background: none;
   font: inherit;
   color: inherit;
@@ -15,11 +15,11 @@
 }
 
 .notificationCard:hover {
-  background-color: var(--headerBackground);
+  background-color: var(--color-background-header);
 }
 
 .notificationCard:focus-visible {
-  outline: 2px solid var(--primary);
+  outline: 2px solid var(--color-primary);
   outline-offset: 2px;
 }
 
@@ -32,7 +32,7 @@
   width: 48px;
   height: 48px;
   object-fit: contain;
-  border: 3px solid var(--borderGray);
+  border: 3px solid var(--color-border);
   border-radius: 5px;
 }
 
@@ -44,9 +44,9 @@
   height: 20px;
   padding: 2px;
 
-  border: 2px solid var(--borderGray);
+  border: 2px solid var(--color-border);
   border-radius: 50%;
-  background-color: var(--primary);
+  background-color: var(--color-primary);
 }
 
 .textBlock {
@@ -59,13 +59,13 @@
 
 .company {
   font-weight: 700;
-  font-size: var(--mainText);
-  color: var(--primary);
+  font-size: var(--font-size-body);
+  color: var(--color-primary);
 }
 
 .message {
-  color: var(--mainTextGray);
-  font-size: var(--mainText);
+  color: var(--color-text-body);
+  font-size: var(--font-size-body);
 
   overflow: hidden;
   text-overflow: ellipsis;
@@ -79,11 +79,11 @@
 }
 
 .time {
-  color: var(--mainTextGray);
-  font-size: var(--mainComments);
+  color: var(--color-text-body);
+  font-size: var(--font-size-comment);
 }
 
 .readArrow {
-  color: var(--mainTextGray);
-  font-size: var(--mainText);
+  color: var(--color-text-body);
+  font-size: var(--font-size-body);
 }

@@ -11,6 +11,6 @@
 }
 
 .text {
-  font-size: var(--mainComments);
-  color: var(--mainTextGray);
+  font-size: var(--font-size-comment);
+  color: var(--color-text-body);
 }

@@ -3,7 +3,7 @@
   flex-direction: column;
   gap: 20px;
   padding: 15px;
-  border: var(--heavyBorderWeight) solid var(--borderGray);
+  border: var(--border-weight-heavy) solid var(--color-border);
   border-radius: 5px;
 }
 
@@ -12,12 +12,12 @@
   flex-direction: column;
   gap: 20px;
   padding-top: 20px;
-  border-top: 1px solid var(--borderGray);
+  border-top: 1px solid var(--color-border);
 }
 
 .title {
   margin: 0;
-  font-size: var(--heading2);
+  font-size: var(--font-size-heading-2);
 }
 
 .details {
@@ -27,8 +27,8 @@
 }
 
 .subTitle {
-  font-size: var(--mainText);
-  color: var(--mainTextGray);
+  font-size: var(--font-size-body);
+  color: var(--color-text-body);
   font-weight: 700;
 }
 
@@ -41,5 +41,5 @@
 .socialIcon {
   width: 30px;
   height: 30px;
-  color: var(--primary);
+  color: var(--color-primary);
 }

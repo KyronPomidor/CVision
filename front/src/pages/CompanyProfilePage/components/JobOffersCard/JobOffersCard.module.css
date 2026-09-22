@@ -2,13 +2,13 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
-  border: var(--heavyBorderWeight) solid var(--borderGray);
+  border: var(--border-weight-heavy) solid var(--color-border);
   border-radius: 5px;
   padding: 15px;
 }
 
 .title {
-  font-size: var(--heading2);
+  font-size: var(--font-size-heading-2);
 }
 
 .jobList {
@@ -18,7 +18,7 @@
 }
 
 .link {
-  color: var(--primary);
+  color: var(--color-primary);
   text-decoration: none;
 }
 

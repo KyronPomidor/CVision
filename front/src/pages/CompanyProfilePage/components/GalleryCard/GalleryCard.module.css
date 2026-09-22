@@ -5,7 +5,7 @@
 }
 
 .title {
-  font-size: var(--heading2);
+  font-size: var(--font-size-heading-2);
 }
 
 .arrows {
@@ -43,7 +43,7 @@
 }
 
 .card {
-  border: var(--heavyBorderWeight) solid var(--borderGray);
+  border: var(--border-weight-heavy) solid var(--color-border);
   border-radius: 5px;
 }
 

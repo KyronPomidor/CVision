@@ -10,10 +10,10 @@
   flex-direction: column;
   gap: 10px;
 
-  background-color: var(--mainBackground);
-  border: 3px solid var(--borderGray);
+  background-color: var(--color-background);
+  border: 3px solid var(--color-border);
   border-radius: 8px;
-  box-shadow: 0 0px 20px var(--lighText);
+  box-shadow: 0 0px 20px var(--color-text-muted);
 }
 
 .header {
@@ -21,11 +21,11 @@
   justify-content: space-between;
   align-items: center;
   padding-bottom: 5px;
-  border-bottom: 3px solid var(--borderGray);
+  border-bottom: 3px solid var(--color-border);
 }
 
 .headerTitle {
-  font-size: var(--heading2);
+  font-size: var(--font-size-heading-2);
   font-weight: 700;
 }
 
@@ -34,8 +34,8 @@
 
   border: none;
   background: none;
-  color: var(--primary);
-  font-size: var(--mainText);
+  color: var(--color-primary);
+  font-size: var(--font-size-body);
   cursor: pointer;
 }
 
@@ -56,9 +56,9 @@
 
   border: none;
   background: none;
-  color: var(--primary);
+  color: var(--color-primary);
   font-weight: 600;
-  font-size: var(--mainText);
+  font-size: var(--font-size-body);
   cursor: pointer;
 }
 

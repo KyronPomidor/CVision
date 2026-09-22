@@ -13,11 +13,11 @@
 .headerIcon path {
   width: 30px;
   height: 30px;
-  stroke: var(--primary);
+  stroke: var(--color-primary);
 }
 
 .headerTitle {
-  font-size: var(--heading2);
+  font-size: var(--font-size-heading-2);
   font-weight: 700;
 }
 
@@ -32,8 +32,8 @@
   align-items: center;
   gap: 10px;
 
-  color: var(--mainTextGray);
-  font-size: var(--mainText);
+  color: var(--color-text-body);
+  font-size: var(--font-size-body);
   cursor: pointer;
 }
 
@@ -44,7 +44,7 @@
   width: 18px;
   height: 18px;
 
-  border: 2px solid var(--mainTextGray);
+  border: 2px solid var(--color-text-body);
   border-radius: 50%;
 
   cursor: pointer;
@@ -60,7 +60,7 @@
   height: 10px;
 
   border-radius: 50%;
-  background-color: var(--primary);
+  background-color: var(--color-primary);
 
   transform: scale(0);
 }

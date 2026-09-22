@@ -14,11 +14,11 @@
   width: 30px;
   height: 30px;
   fill: none;
-  stroke: var(--primary);
+  stroke: var(--color-primary);
 }
 
 .headerTitle {
-  font-size: var(--heading2);
+  font-size: var(--font-size-heading-2);
   font-weight: 700;
 }
 
@@ -35,7 +35,7 @@
 }
 
 .groupTitle {
-  font-size: var(--mainText);
+  font-size: var(--font-size-body);
   font-weight: 700;
 }
 
@@ -50,8 +50,8 @@
   align-items: center;
   gap: 10px;
 
-  color: var(--mainTextGray);
-  font-size: var(--mainText);
+  color: var(--color-text-body);
+  font-size: var(--font-size-body);
   cursor: pointer;
 }
 
@@ -59,6 +59,6 @@
   width: 18px;
   height: 18px;
 
-  accent-color: var(--primary);
+  accent-color: var(--color-primary);
   cursor: pointer;
 }
