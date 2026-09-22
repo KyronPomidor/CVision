@@ -1,5 +1,6 @@
 .card {
     border: var(--border-weight-heavy) solid var(--color-border);
+    padding: 15px;
     background: lightblue;
 }
 
