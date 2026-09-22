@@ -1,5 +1,5 @@
 import styles from "./JobOffersCard.module.css";
-import typography from "../../../../Typography.module.css"
+import typography from "../../../../Typography.module.css";
 import MiniJobCard from "./MiniJobCard";
 
 function JobOffersCard({ name, logo, jobs }) {

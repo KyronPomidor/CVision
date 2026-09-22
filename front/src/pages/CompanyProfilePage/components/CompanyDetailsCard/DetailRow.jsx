@@ -1,5 +1,5 @@
 import styles from "./DetailRow.module.css";
-import typography from "../../../../Typography.module.css"
+import typography from "../../../../Typography.module.css";
 
 function DetailRow({ icon: Icon, label, value }) {
   return (

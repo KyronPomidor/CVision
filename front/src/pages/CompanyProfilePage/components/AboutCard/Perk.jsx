@@ -22,7 +22,9 @@ function Perk({ type }) {
       <span className={styles.iconCircle}>
         <Icon className={styles.perkLogo} aria-hidden="true" />
       </span>
-      <span className={`${typography.mainTextImportant} ${styles.perkDescription}`}>{perk.label}</span>
+      <span className={`${typography.mainTextImportant} ${styles.perkDescription}`}>
+        {perk.label}
+      </span>
     </div>
   );
 }

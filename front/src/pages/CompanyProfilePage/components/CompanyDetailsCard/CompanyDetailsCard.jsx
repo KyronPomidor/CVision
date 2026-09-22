@@ -1,5 +1,5 @@
 import styles from "./CompanyDetailsCard.module.css";
-import typography from "../../../../Typography.module.css"
+import typography from "../../../../Typography.module.css";
 import DetailRow from "./DetailRow";
 
 import globe from "./assets/icons/globe.svg?react";

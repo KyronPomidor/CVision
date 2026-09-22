@@ -1,5 +1,5 @@
 import styles from "./AboutCard.module.css";
-import typography from "../../../../Typography.module.css"
+import typography from "../../../../Typography.module.css";
 import Perk from "./Perk";
 
 function AboutCard({ name, description, perks }) {

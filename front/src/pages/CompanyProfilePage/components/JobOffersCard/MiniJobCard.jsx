@@ -1,5 +1,5 @@
 import styles from "./MiniJobCard.module.css";
-import typography from "../../../../Typography.module.css"
+import typography from "../../../../Typography.module.css";
 import MetaItem from "./MetaItem";
 
 import clockLogo from "../../../../assets/clock-logo.svg";

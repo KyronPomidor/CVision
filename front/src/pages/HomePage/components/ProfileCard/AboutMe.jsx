@@ -1,5 +1,5 @@
 import styles from "./AboutMe.module.css";
-import typography from "../../../../Typography.module.css"
+import typography from "../../../../Typography.module.css";
 import pencilLogo from "../../../../assets/pencil-logo.svg";
 
 function AboutMe({ aboutMe, onEditProfile }) {

@@ -1,5 +1,5 @@
 import styles from "./CompanyHeaderCard.module.css";
-import typography from "../../../../Typography.module.css"
+import typography from "../../../../Typography.module.css";
 
 function CompanyHeaderCard({ name, logo, category }) {
   return (
