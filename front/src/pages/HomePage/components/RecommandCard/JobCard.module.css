@@ -4,7 +4,7 @@
   gap: 20px;
   padding: 20px 20px;
 
-  border: 3px solid var(--borderGray);
+  border: 3px solid var(--color-border);
   border-radius: 10px;
 }
 
@@ -24,10 +24,10 @@
 .companyLogo {
   width: 59px;
 
-  border: 3px solid var(--borderGray);
+  border: 3px solid var(--color-border);
   border-radius: 8px;
   object-fit: contain;
-  background-color: var(--mainBackground);
+  background-color: var(--color-background);
 }
 
 .titleBlock {
@@ -36,13 +36,8 @@
   gap: 2px;
 }
 
-.jobTitle {
-  font-size: var(--heading2);
-  font-weight: 700;
-}
-
 .companyName {
-  color: var(--primary);
+  color: var(--color-primary);
   font-weight: 600;
 }
 
@@ -54,8 +49,6 @@
 }
 
 .postedText {
-  color: var(--mainTextGray);
-  font-size: var(--mainText);
   white-space: nowrap;
 }
 
@@ -74,16 +67,16 @@
 .starActive {
   width: 22px;
   height: 22px;
-  stroke: var(--primary);
+  stroke: var(--color-primary);
 }
 
 .starIcon path,
 .starActive path {
-  stroke: var(--primary);
+  stroke: var(--color-primary);
 }
 
 .starActive {
-  fill: var(--primary);
+  fill: var(--color-primary);
 }
 
 .detailsRow {
@@ -98,8 +91,6 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  color: var(--mainTextGray);
-  font-size: var(--mainText);
 }
 
 .clockLogo,
@@ -107,22 +98,19 @@
 .briefcaseLogo {
   width: 20px;
   height: 20px;
+  color: var(--color-text-body);
 }
 
 .clockLogo path,
 .dollarLogo path,
 .briefcaseLogo {
-  stroke: var(--mainTextGray);
+  stroke: var(--color-text-body);
 }
 
 .matchSection {
   display: flex;
   flex-direction: column;
   gap: 8px;
-}
-
-.matchLabel {
-  font-size: var(--mainText);
 }
 
 .matchPercent {
@@ -145,7 +133,7 @@
   width: 100%;
   height: 19px;
 
-  background-color: var(--borderGray);
+  background-color: var(--color-border);
   border-radius: 10px;
   overflow: hidden;
 }
@@ -177,8 +165,8 @@
 
   border: none;
   border-radius: 20px;
-  background-color: var(--primary);
-  color: var(--mainBackground);
+  background-color: var(--color-primary);
+  color: var(--color-background);
   font-weight: 600;
   cursor: pointer;
 }

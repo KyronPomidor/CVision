@@ -6,7 +6,7 @@
   height: 100vh;
   padding: 20px 15px;
 
-  border: 5px solid var(--borderGray);
+  border: 5px solid var(--color-border);
   border-radius: 10px;
 }
 
@@ -19,13 +19,11 @@
 .headerIcon path {
   width: 32px;
   height: 32px;
-  stroke: var(--primary);
+  stroke: var(--color-primary);
 }
 
 .headerTitle {
   font-size: clamp(20px, 2.5vw, 28px);
-  font-weight: 700;
-  font-size: var(--heading1);
 }
 
 .jobsList {

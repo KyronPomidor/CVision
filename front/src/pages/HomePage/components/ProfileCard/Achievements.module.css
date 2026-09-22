@@ -6,7 +6,7 @@
   padding: 15px 20px;
   width: 90%;
 
-  border: 3px solid var(--borderGray);
+  border: 3px solid var(--color-border);
   border-radius: 5px;
 }
 
@@ -17,7 +17,7 @@
   width: 80%;
   height: 2px;
 
-  background: var(--borderGray);
+  background: var(--color-border);
 }
 
 .appliedJobs_imageBox {
@@ -47,7 +47,7 @@
   width: 3px;
   height: 100%;
 
-  background: var(--borderGray);
+  background: var(--color-border);
 }
 
 .jobSection_leftPart {
@@ -90,7 +90,7 @@
   width: 3px;
   height: 100%;
 
-  background: var(--borderGray);
+  background: var(--color-border);
 
   left: 50%;
 }
@@ -107,5 +107,5 @@
 .starLogo path,
 .paperLogo path,
 .envelopeLogo path {
-  stroke: var(--primary);
+  stroke: var(--color-primary);
 }

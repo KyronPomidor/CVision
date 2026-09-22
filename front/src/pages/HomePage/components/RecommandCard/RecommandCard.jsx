@@ -1,4 +1,5 @@
 import styles from "./RecommandCard.module.css";
+import typography from "../../../../Typography.module.css";
 import BookLogo from "./assets/book-logo.svg?react";
 import JobCard from "./JobCard";
 
@@ -7,7 +8,9 @@ function RecommandCard({ jobs = [] }) {
     <div className={styles.RecommandCard}>
       <div className={styles.header}>
         <BookLogo className={styles.headerIcon} />
-        <h2 className={styles.headerTitle}>Recommended Opportunities</h2>
+        <h2 className={`${typography.heading1} ${styles.headerTitle}`}>
+          Recommended Opportunities
+        </h2>
       </div>
 
       <div className={styles.jobsList}>

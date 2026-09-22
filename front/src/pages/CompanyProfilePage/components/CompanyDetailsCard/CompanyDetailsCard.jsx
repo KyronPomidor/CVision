@@ -1,4 +1,5 @@
 import styles from "./CompanyDetailsCard.module.css";
+import typography from "../../../../Typography.module.css";
 import DetailRow from "./DetailRow";
 
 import globe from "./assets/icons/globe.svg?react";
@@ -33,7 +34,7 @@ function CompanyDetailsCard({ details }) {
 
   return (
     <div className={styles.card}>
-      <h2 className={styles.title}>Company Details</h2>
+      <h2 className={typography.heading2}>Company Details</h2>
       <div className={styles.details}>
         {DETAIL_ROWS.map(({ key, label, icon }) => (
           <DetailRow key={key} icon={icon} label={label} value={details[key]} />
@@ -41,7 +42,7 @@ function CompanyDetailsCard({ details }) {
       </div>
       {availableSocials.length > 0 && (
         <div className={styles.social}>
-          <span className={styles.subTitle}>Social Media</span>
+          <span className={typography.mainTextImportant}>Social Media</span>
           <div className={styles.socialList}>
             {availableSocials.map(({ key, label, icon: Icon }) => (
               <a

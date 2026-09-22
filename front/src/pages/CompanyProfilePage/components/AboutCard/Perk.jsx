@@ -1,4 +1,5 @@
 import styles from "./Perk.module.css";
+import typography from "../../../../Typography.module.css";
 import CoffeeIcon from "./assets/coffee.svg?react";
 import LaptopIcon from "./assets/laptop.svg?react";
 import UsersIcon from "./assets/users.svg?react";
@@ -21,7 +22,9 @@ function Perk({ type }) {
       <span className={styles.iconCircle}>
         <Icon className={styles.perkLogo} aria-hidden="true" />
       </span>
-      <span className={styles.perkDescription}>{perk.label}</span>
+      <span className={`${typography.mainTextImportant} ${styles.perkDescription}`}>
+        {perk.label}
+      </span>
     </div>
   );
 }

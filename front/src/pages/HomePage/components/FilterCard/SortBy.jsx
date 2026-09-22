@@ -1,4 +1,5 @@
 import styles from "./SortBy.module.css";
+import typography from "../../../../Typography.module.css";
 import SortLogo from "./assets/sort-logo.svg?react";
 
 function SortBy({ options, onChange }) {
@@ -6,12 +7,12 @@ function SortBy({ options, onChange }) {
     <div className={styles.sortBy}>
       <div className={styles.header}>
         <SortLogo className={styles.headerIcon} />
-        <h2 className={styles.headerTitle}>Sort by</h2>
+        <h2 className={typography.heading2}>Sort by</h2>
       </div>
 
       <div className={styles.optionsList}>
         {options.map((option) => (
-          <label key={option} className={styles.option}>
+          <label key={option} className={`${typography.mainText} ${styles.option}`}>
             <input
               type="radio"
               name="sortBy"
