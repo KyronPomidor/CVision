@@ -1,0 +1,22 @@
+.card {
+    border: var(--border-weight-heavy) solid var(--color-border);
+    background: lightblue;
+}
+
+.page {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 200px 200px 200px 200px;
+    grid-template-areas:
+    "header   header"
+    "main     sidebar"
+    "gallery  gallery"
+    "offers   offers";
+    gap: 25px;
+}
+
+.jobHeader      { grid-area: header; }
+.jobDescription { grid-area: main; }
+.sidebar        { grid-area: sidebar; }
+.companyGallery { grid-area: gallery; }
+.jobOffers      { grid-area: offers; }

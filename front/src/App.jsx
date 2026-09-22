@@ -5,6 +5,7 @@ import HomePage from "./pages/HomePage/HomePage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import CompanyProfilePage from "./pages/CompanyProfilePage/CompanyProfilePage";
 import apiClient from "./api/client";
+import JobApplicationPage from "./pages/JobApplicationPage/JobApplicationPage";
 
 function MainLayout() {
   return (
@@ -32,6 +33,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/companies/:companyId" element={<CompanyProfilePage />} />
+          <Route path="/jobs/:jobId" element={<JobApplicationPage/>} />
         </Route>
 
         {/* Pages without Header - add outside of MainLayout */}
