@@ -1,0 +1,27 @@
+.heading1 {
+  font-size: var(--font-size-heading-1);
+  font-weight: 700;
+  color: var(--color-text-heading);
+}
+
+.heading2 {
+  font-size: var(--font-size-heading-2);
+  font-weight: 700;
+  color: var(--color-text-heading);
+}
+
+.mainText {
+  font-size: var(--font-size-body);
+  color: var(--color-text-body);
+}
+
+.mainTextImportant {
+  font-size: var(--font-size-body);
+  color: var(--color-text-body);
+  font-weight: 600;
+}
+
+.miniComments {
+  font-size: var(--font-size-comment);
+  color: var(--color-text-body);
+}
