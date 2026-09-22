@@ -3,7 +3,7 @@ import TechnicalSkills from "./TechnicalSkills"
 import Languages from "./Languages"
 import Objective from "./Objective"
 import Experience from "./Experience"
-{/*import AdditionalInfo from"./AdditionalInfo"*/}
+import AdditionalInfo from"./AdditionalInfo"
 
 function CVInformationCard({ technicalSkills, languages, objective, experience, additionalInfo }) {
 
@@ -11,12 +11,13 @@ function CVInformationCard({ technicalSkills, languages, objective, experience, 
         <div className={styles.cvInformationCard}>
             <h1 className={styles.title}>CV Information</h1>
 
-            
-            <TechnicalSkills skills={technicalSkills} />
-            <Languages languages={languages} />
-            <Objective text={objective} />
-            <Experience items={experience} />
-            {/*<AdditionalInfo text={additionalInfo} />*/}
+            <div className={styles.mainContent}>
+                <TechnicalSkills skills={technicalSkills} />
+                <Languages languages={languages} />
+                <Objective text={objective} />
+                <Experience items={experience} />
+                <AdditionalInfo text={additionalInfo} />
+            </div>
         </div>
     )
 }

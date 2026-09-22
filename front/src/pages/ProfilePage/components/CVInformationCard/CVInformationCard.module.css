@@ -1,8 +1,9 @@
 .cvInformationCard {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 20px;
     width: 100%;
+    height: 100vh;
     max-width: 830px;
     padding: 25px;
 
@@ -14,4 +15,12 @@
 .title {
     font-size: var(--heading1);
     color: var(--headerColor);
+}
+
+.mainContent{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow: scroll;
+    scrollbar-width: none; 
 }
