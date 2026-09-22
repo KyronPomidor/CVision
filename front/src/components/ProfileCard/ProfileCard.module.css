@@ -33,36 +33,59 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 39px;
 }
 
 .uploadCvButton {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 8px;
   width: 100%;
+  height: 118px;
   padding: 12px;
-  border: 2px solid var(--primary);
-  border-radius: 10px;
-  background: var(--backgroundGreen);
+  border: 5px solid var(--primary);
+  border-radius: 30px;
+  background-color: var(--backgroundGreen);
   color: var(--primary);
   font-weight: 700;
   cursor: pointer;
+  font-size: var(--heading2);
+}
+
+.uploadCvButton:hover{
+  border: 5px solid var(--secondary);
+  color: var(--secondary);
 }
 
 .uploadIcon {
-  width: 20px;
-  height: 20px;
+  width: 48px;
+  height: 48px;
 }
 
 .editButtonBottom {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
   width: 100%;
   padding: 12px;
   border: none;
   border-radius: 10px;
-  background: var(--primary);
-  color: #fff;
+  background-color: var(--primary);
+  color: var(--mainBackground);
+
+  font-size: var(--heading2);
   font-weight: 700;
   cursor: pointer;
+}
+
+.editButtonBottom:hover {
+  background-color: var(--secondary);
+}
+
+.pencilLogo{
+  width: 30px;
+  height: 30px;
 }

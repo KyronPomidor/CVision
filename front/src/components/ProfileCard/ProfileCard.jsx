@@ -4,6 +4,7 @@ import ContactInfo from "./ContactInfo";
 import AboutMe from "./AboutMe";
 import Achievements from "./Achievements";
 import UploadIcon from "./assets/upload-logo.svg?react";
+import PencilLogo from "../../assets/pencil-logo.svg?react";
 
 function ProfileCard({
   variant = "home",
@@ -40,10 +41,11 @@ function ProfileCard({
         <div className={styles.profileActions}>
           <button type="button" className={styles.uploadCvButton} onClick={onUploadCV}>
             <UploadIcon className={styles.uploadIcon} />
-            <span>Upload CV</span>
+            <span className={styles.uploadContent}>Upload CV</span>
           </button>
           <button type="button" className={styles.editButtonBottom} onClick={onEditProfile}>
-            Edit
+            <PencilLogo className={styles.pencilLogo} />
+            <p className={styles.editContent}>Edit</p>
           </button>
         </div>
       ) : (
