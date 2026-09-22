@@ -5,7 +5,7 @@ function MetaItem({ icon, children }) {
   return (
     <span className={styles.item}>
       <img src={icon} alt="" className={styles.icon} />
-      <span className={typography.miniComments}>{children}</span>
+      <span className={typography.comment}>{children}</span>
     </span>
   );
 }

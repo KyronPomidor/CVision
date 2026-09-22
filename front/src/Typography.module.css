@@ -21,7 +21,7 @@
   font-weight: 600;
 }
 
-.miniComments {
+.comment {
   font-size: var(--font-size-comment);
   color: var(--color-text-body);
 }

@@ -5,8 +5,8 @@ function DetailRow({ icon: Icon, label, value }) {
   return (
     <div className={styles.row}>
       <Icon className={styles.icon} aria-hidden="true" />
-      <span className={typography.miniComments}>{label}</span>
-      <span className={`${typography.miniComments} ${styles.value}`}>{value}</span>
+      <span className={typography.comment}>{label}</span>
+      <span className={`${typography.comment} ${styles.value}`}>{value}</span>
     </div>
   );
 }
