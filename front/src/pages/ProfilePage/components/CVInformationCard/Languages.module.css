@@ -5,7 +5,7 @@
     padding: 20px;
 
     border: var(--lightBorderWeight) solid var(--borderGray);
-    border-radius: 16px;
+    border-radius: 8px;
 }
 
 .heading {
