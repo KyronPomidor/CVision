@@ -19,12 +19,15 @@
     gap: 18px;
 }
 
+.item:not(:last-child) {
+    padding-bottom: 10px;
+    border-bottom: var(--lightBorderWeight) solid var(--borderGray);
+}
+
 .item {
     display: flex;
     flex-direction: column;
     gap: 6px;
-    padding-bottom: 10px;
-    border-bottom: var(--lightBorderWeight) solid var(--borderGray);
 }
 
 .itemHeader {
