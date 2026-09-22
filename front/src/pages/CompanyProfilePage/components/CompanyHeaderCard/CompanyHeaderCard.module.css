@@ -24,13 +24,7 @@
   gap: 10px;
 }
 
-.name {
-  font-size: var(--font-size-heading-1);
-}
-
 .tag {
-  font-size: var(--font-size-body);
-  font-weight: 700;
   border-radius: 999px;
   padding: 8px 16px;
   background: var(--color-background-accent);

@@ -9,8 +9,3 @@
   width: 12px;
   height: 12px;
 }
-
-.text {
-  font-size: var(--font-size-comment);
-  color: var(--color-text-body);
-}

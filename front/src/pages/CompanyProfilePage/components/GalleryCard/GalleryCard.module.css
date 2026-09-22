@@ -4,10 +4,6 @@
   align-items: center;
 }
 
-.title {
-  font-size: var(--font-size-heading-2);
-}
-
 .arrows {
   display: flex;
   gap: 17px;

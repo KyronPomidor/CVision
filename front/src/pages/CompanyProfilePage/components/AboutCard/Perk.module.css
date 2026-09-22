@@ -23,7 +23,4 @@
 
 .perkDescription {
   width: min-content;
-  color: var(--color-text-body);
-  font-size: var(--font-size-body);
-  font-weight: 700;
 }

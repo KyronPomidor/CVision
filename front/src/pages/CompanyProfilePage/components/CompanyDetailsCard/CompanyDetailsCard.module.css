@@ -15,21 +15,10 @@
   border-top: 1px solid var(--color-border);
 }
 
-.title {
-  margin: 0;
-  font-size: var(--font-size-heading-2);
-}
-
 .details {
   display: flex;
   flex-direction: column;
   gap: 13px;
-}
-
-.subTitle {
-  font-size: var(--font-size-body);
-  color: var(--color-text-body);
-  font-weight: 700;
 }
 
 .socialList {
