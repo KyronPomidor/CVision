@@ -1,0 +1,59 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.body {
+    white-space: pre-line;
+    border-bottom: 2px solid var(--color-border);
+    padding-bottom: 20px;
+}
+
+.skillSection {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.subTitle {
+    color: var(--color-heading);
+}
+
+.skillsRow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.skillPill {
+    color: var(--color-primary);
+    background: var(--color-background-accent);
+    padding: 10px 20px;
+    border-radius: 999px;
+}
+
+.buttonRow {
+    display:flex;
+    gap: 20px;
+}
+
+.apply {
+    color: var(--color-background-accent);
+    background: var(--color-primary);
+    border: none;
+    border-radius: 999px;
+    padding: 10px 20px;
+    flex: 1;
+}
+
+.favorite {
+    background: var(--color-background-accent);
+    border: var(--border-weight-light) solid var(--color-primary);
+    border-radius: 999px;
+    padding: 10px 20px;
+}
+
+.starLogo {
+    color: var(--color-primary);
+}
