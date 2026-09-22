@@ -1,0 +1,59 @@
+.experience {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px;
+
+    border: var(--lightBorderWeight) solid var(--borderGray);
+    border-radius: 8px;
+}
+
+.heading {
+    font-size: var(--heading2);
+    color: var(--headerColor);
+}
+
+.itemsList {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.item {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding-bottom: 10px;
+    border-bottom: var(--lightBorderWeight) solid var(--borderGray);
+}
+
+.itemHeader {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.itemTitle {
+    font-size: var(--mainText);
+    font-weight: 700;
+    color: var(--mainTextGray);
+}
+
+.itemDates {
+    font-size: var(--mainComments);
+    color: var(--mainTextGray);
+}
+
+.itemCompany {
+    font-size: var(--mainComments);
+    font-weight: 600;
+    color: var(--primary);
+}
+
+.itemDescription {
+    font-size: var(--mainText);
+    line-height: 1.5;
+    color: var(--mainTextGray);
+}

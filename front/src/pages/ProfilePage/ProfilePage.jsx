@@ -23,6 +23,26 @@ const cv = {
             description:
                 "When creating a professional profile, blog or website, an \"about me\" statement can quickly show employers, clients or customers who you are and what you offer.",
         },
+        {
+            id: 1,
+            title: "IT Support Intern",
+            company: "Endava",
+            location: "Chișinău",
+            startDate: "March 2025",
+            endDate: "June 2026",
+            description:
+                "When creating a professional profile, blog or website, an \"about me\" statement can quickly show employers, clients or customers who you are and what you offer.",
+        },
+        {
+            id: 1,
+            title: "IT Support Intern",
+            company: "Endava",
+            location: "Chișinău",
+            startDate: "March 2025",
+            endDate: "June 2026",
+            description:
+                "When creating a professional profile, blog or website, an \"about me\" statement can quickly show employers, clients or customers who you are and what you offer.",
+        },
     ],
     additionalInfo :
         "When creating a professional profile, blog or website, an “about me” statement can quickly show employers, clients or customers who you are and what you offer. ",
