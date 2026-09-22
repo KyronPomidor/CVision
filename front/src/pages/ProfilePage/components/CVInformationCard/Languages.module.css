@@ -1,0 +1,59 @@
+.languages {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+
+    border: var(--lightBorderWeight) solid var(--borderGray);
+    border-radius: 16px;
+}
+
+.heading {
+    font-size: var(--heading2);
+    color: var(--headerColor);
+}
+
+.languagesList {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.languageRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.languageName {
+    min-width: 90px;
+    font-size: var(--mainText);
+    font-weight: 600;
+    color: var(--headerColor);
+}
+
+.levelsList {
+    display: flex;
+    gap: 20px;
+}
+
+.levelPill {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 30px;
+    padding: 8px 10px;
+
+    background-color: var(--headerBackground);
+    color: var(--mainTextGray);
+    font-size: var(--mainComments);
+    font-weight: 600;
+    border-radius: 100px;
+}
+
+.levelPillActive {
+    background-color: var(--primary);
+    color: var(--mainBackground);
+}

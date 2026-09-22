@@ -1,7 +1,7 @@
 import styles from "./CVInformationCard.module.css"
 import TechnicalSkills from "./TechnicalSkills"
-{/*import Languages from "./Languages"
-import Objective from "./Objective"
+import Languages from "./Languages"
+{/*import Objective from "./Objective"
 import Experience from "./Experience"
 import AdditionalInfo from"./AdditionalInfo"*/}
 
@@ -13,8 +13,8 @@ function CVInformationCard({ technicalSkills, languages, objective, experience, 
 
             
             <TechnicalSkills skills={technicalSkills} />
-            {/*<Languages languages={languages} />
-            <Objective text={objective} />
+            <Languages languages={languages} />
+            {/*<Objective text={objective} />
             <Experience items={experience} />
             <AdditionalInfo text={additionalInfo} />*/}
         </div>
