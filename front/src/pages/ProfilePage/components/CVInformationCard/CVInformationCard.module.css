@@ -1,0 +1,17 @@
+.cvInformationCard {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    max-width: 830px;
+    padding: 25px;
+
+    background-color: var(--mainBackground);
+    border: var(--heavyBorderWeight) solid var(--borderGray);
+    border-radius: 20px;
+}
+
+.title {
+    font-size: var(--heading1);
+    color: var(--headerColor);
+}

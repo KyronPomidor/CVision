@@ -1,6 +1,6 @@
 import styles from "./ProfilePage.module.css"
 import ProfileCard from "../../components/ProfileCard/ProfileCard";
-{/*import CVInformationCard from "./components/CVInformationCard/CVInformationCard"*/}
+    import CVInformationCard from "./components/CVInformationCard/CVInformationCard"
 
 // TODO: replace with data coming from the backend
 const cv = {
@@ -45,14 +45,13 @@ function ProfilePage () {
                 onUploadCV={() => console.log("upload cv clicked")}
             />
 
-            {/*
             <CVInformationCard
                 technicalSkills={cv.technicalSkills}
                 languages={cv.languages}
                 objective={cv.objective}
                 experience={cv.experience}
                 additionalInfo={cv.additionalInfo}
-            />*/}
+            />
         </div>
     )
 }
