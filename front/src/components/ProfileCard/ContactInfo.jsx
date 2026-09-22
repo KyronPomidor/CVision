@@ -1,7 +1,7 @@
 import styles from "./ContactInfo.module.css";
-import EmailLogo from "../../../../assets/mail-icon.svg?react";
-import TelephoneLogo from "../../../../assets/telephone-logo.svg?react";
-import LocationLogo from "../../../../assets/location-logo.svg?react";
+import EmailLogo from "../../assets/mail-icon.svg?react";
+import TelephoneLogo from "../../assets/telephone-logo.svg?react";
+import LocationLogo from "../../assets/location-logo.svg?react";
 
 function ContactInfo({ email, phone, location }) {
   return (

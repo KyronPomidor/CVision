@@ -1,0 +1,68 @@
+.profileCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 39px;
+  width: clamp(200px, 35vw, 360px);
+  padding: 15px 20px;
+
+  border: 5px solid var(--borderGray);
+  border-radius: 10px;
+}
+
+.profileCard.profileVariant {
+  width: clamp(200px, 45vw, 450px);
+}
+
+.photoBox {
+  text-align: center;
+}
+
+.profileLogo {
+  border: 4px solid var(--primary);
+  border-radius: 100px;
+  width: clamp(100px, 15vw, 150px);
+}
+
+.profileName {
+  margin-top: 12px;
+  font-size: var(--heading2);
+}
+
+.profileActions {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.uploadCvButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 12px;
+  border: 2px solid var(--primary);
+  border-radius: 10px;
+  background: var(--backgroundGreen);
+  color: var(--primary);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.uploadIcon {
+  width: 20px;
+  height: 20px;
+}
+
+.editButtonBottom {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  background: var(--primary);
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+}

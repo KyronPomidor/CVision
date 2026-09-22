@@ -1,6 +1,6 @@
 import styles from "./Achievements.module.css";
 import BagLogo from "./assets/bag-logo.svg?react";
-import StarLogo from "../../../../assets/star-logo.svg?react";
+import StarLogo from "../../assets/star-logo.svg?react";
 import PaperLogo from "./assets/paper-logo.svg?react";
 import EnvelopeLogo from "./assets/envelope-logo.svg?react";
 

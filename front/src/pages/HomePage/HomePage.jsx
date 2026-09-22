@@ -1,5 +1,5 @@
 import styles from "./HomePage.module.css";
-import ProfileCard from "./components/ProfileCard/ProfileCard";
+import ProfileCard from "../../components/ProfileCard/ProfileCard";;
 import RecommandCard from "./components/RecommandCard/RecommandCard";
 import FilterCard from "./components/FilterCard/FilterCard";
 import endavaLogo from "../../assets/endava-logo.png";
