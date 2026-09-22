@@ -4,7 +4,7 @@ import ProfileCard from "../../components/ProfileCard/ProfileCard";
 
 // TODO: replace with data coming from the backend
 const cv = {
-    technicalSkills: ["Microsoft Office", "Java", "Git", "Python", "C#", "php", "Golang"],
+    technicalSkills: ["Microsoft Office", "Java", "Git", "Python", "C#", "php", "Golang", "Golang"],
     languages: [
         { name: "English", level: "B2" },
         { name: "Romanian", level: "Native" },
