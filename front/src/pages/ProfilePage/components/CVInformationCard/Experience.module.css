@@ -34,8 +34,6 @@
 }
 
 .itemCompany {
-    font-size: var(--font-size-comment);
-    font-weight: 600;
     color: var(--color-primary);
 }
 

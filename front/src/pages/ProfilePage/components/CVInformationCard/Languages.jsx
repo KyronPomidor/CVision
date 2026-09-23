@@ -20,8 +20,8 @@ function Languages({ languages = [] }) {
                                     key={level}
                                     className={
                                         level === language.level
-                                            ? `${styles.levelPill} ${styles.levelPillActive}`
-                                            : styles.levelPill
+                                            ? `${styles.levelPill} ${styles.levelPillActive} ${typography.mainTextImportant}`
+                                            : `${styles.levelPill} ${typography.mainTextImportant}`
                                     }
                                 >
                                     {level}

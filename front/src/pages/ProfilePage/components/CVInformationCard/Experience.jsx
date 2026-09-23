@@ -15,7 +15,7 @@ function Experience({ items = [] }) {
                             <p className={typography.comment}>{item.startDate} - {item.endDate}</p>
                         </div>
 
-                        <p className={styles.itemCompany}>
+                        <p className={`${styles.itemCompany} ${typography.mainText}`}>
                             {item.company}{item.location ? `, ${item.location}` : ""}
                         </p>
 
