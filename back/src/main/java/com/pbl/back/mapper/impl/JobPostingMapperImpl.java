@@ -26,8 +26,12 @@ public class JobPostingMapperImpl implements JobPostingMapper {
                 .build();
     }
 
-    @Override
     public JobPostingResponse toResponse(JobPosting posting, List<SkillResponse> skills) {
+        return toResponse(posting, skills, null);
+    }
+
+    @Override
+    public JobPostingResponse toResponse(JobPosting posting, List<SkillResponse> skills, Double matchScore) {
         return JobPostingResponse.builder()
                 .id(posting.getId())
                 .companyId(posting.getCompany().getId())
@@ -39,6 +43,7 @@ public class JobPostingMapperImpl implements JobPostingMapper {
                 .createdAt(LocalDateTime.now())
                 .status(posting.getStatus())
                 .skills(skills)
+                .matchScore(matchScore)
                 .build();
     }
 }

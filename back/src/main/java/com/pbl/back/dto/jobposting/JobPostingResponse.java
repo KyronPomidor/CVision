@@ -23,4 +23,5 @@ public class JobPostingResponse {
     private LocalDateTime createdAt;
     private JobStatus status;
     private List<SkillResponse> skills;
+    private Double matchScore;
 }

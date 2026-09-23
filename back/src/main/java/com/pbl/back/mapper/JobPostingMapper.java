@@ -11,4 +11,6 @@ public interface JobPostingMapper {
     JobPosting toEntity(JobPostingRequest request);
 
     JobPostingResponse toResponse(JobPosting posting, List<SkillResponse> skills);
+
+    JobPostingResponse toResponse(JobPosting posting, List<SkillResponse> skills, Double matchScore);
 }

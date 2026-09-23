@@ -1,10 +1,12 @@
 package com.pbl.back.dto.company;
 
-import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
-@Builder
+@Setter
+@NoArgsConstructor
 public class CompanyDetailsRequest {
 
     private String website;

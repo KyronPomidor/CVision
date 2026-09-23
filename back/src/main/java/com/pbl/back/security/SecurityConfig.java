@@ -50,6 +50,9 @@ public class SecurityConfig {
                                 "/api/applications/**", "/api/recommendations/**")
                         .hasRole("EMPLOYEE")
 
+                        .requestMatchers(HttpMethod.GET, "/api/postings/matches/me")
+                        .hasRole("EMPLOYEE")
+
                         .requestMatchers("/api/companies/**", "/api/postings/**")
                         .hasRole("EMPLOYER")
 
