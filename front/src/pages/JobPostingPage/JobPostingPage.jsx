@@ -1,4 +1,4 @@
-import styles from "./JobApplicationPage.module.css";
+import styles from "./JobPostingPage.module.css";
 import JobHeader from "./components/JobHeader/JobHeader";
 import JobDescription from "./components/JobDescription/JobDescription";
 import Sidebar from "./components/Sidebar/Sidebar";
@@ -68,7 +68,7 @@ const mockCompany = {
     ],
   };
 
-const mockJobApplication = {
+const mockJobPosting = {
   title: "Middle Golang Engineer",
   description: description,
   skills: [
@@ -91,16 +91,16 @@ const mockJobApplication = {
   },
 };
 
-function JobApplicationPage() {
+function JobPostingPage() {
     return (
         <div className={styles.page}>
-            <JobHeader className={`${styles.card} ${styles.jobHeader}`} logo={logo} jobName={mockJobApplication.title} companyName={mockCompany.name} />
-            <JobDescription className={`${styles.card} ${styles.jobDescription}`} skills={mockJobApplication.skills} description={description}/>
-            <Sidebar className={`${styles.sidebar}`} data={mockJobApplication.details} perks={mockCompany.perks} />
+            <JobHeader className={`${styles.card} ${styles.jobHeader}`} logo={logo} jobName={mockJobPosting.title} companyName={mockCompany.name} />
+            <JobDescription className={`${styles.card} ${styles.jobDescription}`} skills={mockJobPosting.skills} description={description}/>
+            <Sidebar className={`${styles.sidebar}`} data={mockJobPosting.details} perks={mockCompany.perks} />
             <GalleryCard className={styles.companyGallery} gallery={mockCompany.gallery} />
             <JobOffersCard className={`${styles.card} ${styles.jobOffers} `} name={mockCompany.name} logo={logo} jobs={mockCompany.jobs} />
         </div>
     );
 }
 
-export default JobApplicationPage;
+export default JobPostingPage;
