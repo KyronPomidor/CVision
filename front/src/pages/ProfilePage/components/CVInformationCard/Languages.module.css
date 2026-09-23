@@ -4,13 +4,8 @@
     gap: 20px;
     padding: 20px;
 
-    border: var(--lightBorderWeight) solid var(--borderGray);
+    border: var(--border-weight-light) solid var(--color-border);
     border-radius: 8px;
-}
-
-.heading {
-    font-size: var(--heading2);
-    color: var(--headerColor);
 }
 
 .languagesList {
@@ -29,9 +24,6 @@
 
 .languageName {
     min-width: 90px;
-    font-size: var(--mainText);
-    font-weight: 600;
-    color: var(--headerColor);
 }
 
 .levelsList {
@@ -46,14 +38,14 @@
     min-width: 30px;
     padding: 8px 10px;
 
-    background-color: var(--headerBackground);
-    color: var(--mainTextGray);
-    font-size: var(--mainComments);
+    background-color: var(--color-background-header);
+    color: var(--color-text-body);
+    font-size: var(--font-size-body);
     font-weight: 600;
     border-radius: 100px;
 }
 
 .levelPillActive {
-    background-color: var(--primary);
-    color: var(--mainBackground);
+    background-color: var(--color-primary);
+    color: var(--color-background);
 }

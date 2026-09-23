@@ -1,17 +1,18 @@
 import styles from "./Experience.module.css"
+import typography from "../../../../Typography.module.css";
 
 function Experience({ items = [] }) {
 
     return (
         <div className={styles.experience}>
-            <h2 className={styles.heading}>Experience</h2>
+            <h2 className={typography.heading2}>Experience</h2>
 
             <div className={styles.itemsList}>
                 {items.map((item) => (
                     <div key={item.id} className={styles.item}>
                         <div className={styles.itemHeader}>
-                            <h3 className={styles.itemTitle}>{item.title}</h3>
-                            <p className={styles.itemDates}>{item.startDate} - {item.endDate}</p>
+                            <h3 className={typography.mainTextImportant}>{item.title}</h3>
+                            <p className={typography.comment}>{item.startDate} - {item.endDate}</p>
                         </div>
 
                         <p className={styles.itemCompany}>
@@ -19,7 +20,7 @@ function Experience({ items = [] }) {
                         </p>
 
                         {item.description && (
-                            <p className={styles.itemDescription}>{item.description}</p>
+                            <p className={typography.mainText}>{item.description}</p>
                         )}
                     </div>
                 ))}

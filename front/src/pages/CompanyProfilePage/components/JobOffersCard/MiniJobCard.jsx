@@ -1,4 +1,5 @@
 import styles from "./MiniJobCard.module.css";
+import typography from "../../../../Typography.module.css";
 import MetaItem from "./MetaItem";
 
 import clockLogo from "../../../../assets/clock-logo.svg";
@@ -10,7 +11,7 @@ function MiniJobCard({ logo, title, schedule, salary, experience }) {
     <li className={styles.jobCard}>
       <img className={styles.logo} src={logo} alt="" />
       <div className={styles.content}>
-        <span className={styles.title}>{title}</span>
+        <span className={`${typography.mainTextImportant} ${styles.title}`}>{title}</span>
         <div className={styles.meta}>
           <MetaItem icon={clockLogo}>{schedule}</MetaItem>
           <MetaItem icon={dollarLogo}>{salary}</MetaItem>

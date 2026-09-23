@@ -7,17 +7,11 @@
 .icon {
   width: 30px;
   height: 30px;
-  color: var(--mainTextGray);
-}
-
-.label {
-  font-size: var(--mainComments);
-  color: var(--mainTextGray);
+  color: var(--color-text-body);
 }
 
 .value {
-  font-size: var(--mainComments);
   font-weight: 700;
-  color: var(--primary);
+  color: var(--color-primary);
   overflow-wrap: anywhere;
 }

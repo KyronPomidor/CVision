@@ -3,7 +3,7 @@
   flex-direction: column;
   gap: 20px;
   padding: 15px;
-  border: var(--heavyBorderWeight) solid var(--borderGray);
+  border: var(--border-weight-heavy) solid var(--color-border);
   border-radius: 5px;
 }
 
@@ -12,24 +12,13 @@
   flex-direction: column;
   gap: 20px;
   padding-top: 20px;
-  border-top: 1px solid var(--borderGray);
-}
-
-.title {
-  margin: 0;
-  font-size: var(--heading2);
+  border-top: 1px solid var(--color-border);
 }
 
 .details {
   display: flex;
   flex-direction: column;
   gap: 13px;
-}
-
-.subTitle {
-  font-size: var(--mainText);
-  color: var(--mainTextGray);
-  font-weight: 700;
 }
 
 .socialList {
@@ -41,5 +30,5 @@
 .socialIcon {
   width: 30px;
   height: 30px;
-  color: var(--primary);
+  color: var(--color-primary);
 }

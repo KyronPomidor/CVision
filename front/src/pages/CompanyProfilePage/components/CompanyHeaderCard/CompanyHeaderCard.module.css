@@ -1,5 +1,5 @@
 .card {
-  border: var(--heavyBorderWeight) solid var(--borderGray);
+  border: var(--border-weight-heavy) solid var(--color-border);
   border-radius: 5px;
 }
 
@@ -24,15 +24,9 @@
   gap: 10px;
 }
 
-.name {
-  font-size: var(--heading1);
-}
-
 .tag {
-  font-size: var(--mainText);
-  font-weight: 700;
   border-radius: 999px;
   padding: 8px 16px;
-  background: var(--backgroundGreen);
-  color: var(--primary);
+  background: var(--color-background-accent);
+  color: var(--color-primary);
 }

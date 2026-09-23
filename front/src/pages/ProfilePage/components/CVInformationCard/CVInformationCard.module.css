@@ -7,14 +7,9 @@
     max-width: 830px;
     padding: 25px;
 
-    background-color: var(--mainBackground);
-    border: var(--heavyBorderWeight) solid var(--borderGray);
-    border-radius: 20px;
-}
-
-.title {
-    font-size: var(--heading1);
-    color: var(--headerColor);
+    background-color: var(--color-background);
+    border: var(--border-weight-heavy) solid var(--color-border);
+    border-radius: 10px;
 }
 
 .mainContent{

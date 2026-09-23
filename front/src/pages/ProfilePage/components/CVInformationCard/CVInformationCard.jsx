@@ -1,4 +1,6 @@
 import styles from "./CVInformationCard.module.css"
+import typography from "../../../../Typography.module.css";
+
 import TechnicalSkills from "./TechnicalSkills"
 import Languages from "./Languages"
 import Objective from "./Objective"
@@ -9,7 +11,7 @@ function CVInformationCard({ technicalSkills, languages, objective, experience, 
 
     return (
         <div className={styles.cvInformationCard}>
-            <h1 className={styles.title}>CV Information</h1>
+            <h1 className={typography.heading1}>CV Information</h1>
 
             <div className={styles.mainContent}>
                 <TechnicalSkills skills={technicalSkills} />

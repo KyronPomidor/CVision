@@ -4,16 +4,6 @@
     gap: 20px;
     padding: 20px;
 
-    border: var(--lightBorderWeight) solid var(--borderGray);
+    border: var(--border-weight-light) solid var(--color-border);
     border-radius: 8px;
-}
-
-.heading {
-    font-size: var(--heading2);
-    color: var(--headerColor);
-}
-
-.text {
-    font-size: var(--mainText);
-    color: var(--mainTextGray);
 }

@@ -4,13 +4,8 @@
     gap: 15px;
     padding: 20px;
 
-    border: var(--lightBorderWeight) solid var(--borderGray);
-    border-radius: 8px;
-}
-
-.heading {
-    font-size: var(--heading2);
-    color: var(--headerColor);
+    border: var(--border-weight-light) solid var(--color-border);
+    border-radius: 6px;
 }
 
 .itemsList {
@@ -21,13 +16,13 @@
 
 .item:not(:last-child) {
     padding-bottom: 10px;
-    border-bottom: var(--lightBorderWeight) solid var(--borderGray);
+    border-bottom: var(--border-weight-light) solid var(--color-border);
 }
 
 .item {
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 8px;
 }
 
 .itemHeader {
@@ -38,25 +33,9 @@
     gap: 8px;
 }
 
-.itemTitle {
-    font-size: var(--mainText);
-    font-weight: 700;
-    color: var(--mainTextGray);
-}
-
-.itemDates {
-    font-size: var(--mainComments);
-    color: var(--mainTextGray);
-}
-
 .itemCompany {
-    font-size: var(--mainComments);
+    font-size: var(--font-size-comment);
     font-weight: 600;
-    color: var(--primary);
+    color: var(--color-primary);
 }
 
-.itemDescription {
-    font-size: var(--mainText);
-    line-height: 1.5;
-    color: var(--mainTextGray);
-}

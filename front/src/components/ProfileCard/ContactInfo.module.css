@@ -10,8 +10,6 @@
   display: flex;
   gap: 10px;
   align-items: center;
-  color: var(--mainTextGray);
-  font-size: var(--mainText);
 }
 
 .emailLogo path,
@@ -19,5 +17,5 @@
 .locationLogo path {
   width: 23px;
   height: 23px;
-  stroke: var(--mainTextGray);
+  stroke: var(--color-text-body);
 }

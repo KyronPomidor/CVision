@@ -4,10 +4,6 @@
   align-items: center;
 }
 
-.title {
-  font-size: var(--heading2);
-}
-
 .arrows {
   display: flex;
   gap: 17px;
@@ -43,7 +39,7 @@
 }
 
 .card {
-  border: var(--heavyBorderWeight) solid var(--borderGray);
+  border: var(--border-weight-heavy) solid var(--color-border);
   border-radius: 5px;
 }
 
