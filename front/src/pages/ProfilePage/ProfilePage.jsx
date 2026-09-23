@@ -4,7 +4,7 @@ import ProfileCard from "../../components/ProfileCard/ProfileCard";
 
 // TODO: replace with data coming from the backend
 const cv = {
-    technicalSkills: ["Microsoft Office", "Java", "Git", "Python", "C#", "php", "Golang", "Golang"],
+    technicalSkills: ["Microsoft Office", "Java", "Git", "Python", "C#", "php", "Golang"],
     languages: [
         { name: "English", level: "B2" },
         { name: "Romanian", level: "Native" },
@@ -24,7 +24,7 @@ const cv = {
                 "When creating a professional profile, blog or website, an \"about me\" statement can quickly show employers, clients or customers who you are and what you offer.",
         },
         {
-            id: 1,
+            id: 2,
             title: "IT Support Intern",
             company: "Endava",
             location: "Chișinău",
@@ -34,7 +34,7 @@ const cv = {
                 "When creating a professional profile, blog or website, an \"about me\" statement can quickly show employers, clients or customers who you are and what you offer.",
         },
         {
-            id: 1,
+            id: 3,
             title: "IT Support Intern",
             company: "Endava",
             location: "Chișinău",

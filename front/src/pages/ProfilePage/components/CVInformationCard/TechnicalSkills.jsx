@@ -9,7 +9,7 @@ function TechnicalSkills({ skills = [] }) {
 
             <div className={styles.skillsList}>
                 {skills.map((skill) => (
-                    <span key={skill} className={`${styles.skillPill} ${typography.mainText}`}>
+                    <span key={skill} className={`${styles.skillPill} ${typography.mainTextImportant}`}>
                         {skill}
                     </span>
                 ))}
