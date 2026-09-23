@@ -1,3 +1,6 @@
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+
 import styles from "./JobPostingPage.module.css";
 import JobHeader from "./components/JobHeader/JobHeader";
 import JobDescription from "./components/JobDescription/JobDescription";
@@ -15,7 +18,30 @@ import logo from "../../assets/roslin-logo.png";
 
 import description from "./assets/yapping.txt?raw";
 
-const mockCompany = {
+async function getJobPosting(id) {
+const mockJobPosting = {
+  id: 101,
+  title: "Middle Golang Engineer",
+  description: description,
+  skills: [
+      "Golang",
+      "Kubernetes",
+      "Docker",
+      "gRPC",
+      "Kafka",
+      "PostgreSQL",
+  ],
+  details: {
+      jobType: "Full-time Contract",
+      workSetting: "Remote",
+      location: "Chisinau, Moldova",
+      salary: 5200,
+      schedule: "Full-time",
+      experience: 6,
+      education: "Does not matter",
+      contactEmail: "hr@roslin.us",
+  },
+  company: {
     name: "Roslin Solutions",
     logo: logo,
     category: "IT Company",
@@ -66,39 +92,36 @@ const mockCompany = {
         experience: "No experience",
       },
     ],
-  };
-
-const mockJobPosting = {
-  title: "Middle Golang Engineer",
-  description: description,
-  skills: [
-      "Golang",
-      "Kubernetes",
-      "Docker",
-      "gRPC",
-      "Kafka",
-      "PostgreSQL",
-  ],
-  details: {
-      jobType: "Full-time Contract",
-      workSetting: "Remote",
-      location: "Chisinau, Moldova",
-      salary: 5200,
-      schedule: "Full-time",
-      experience: 6,
-      education: "Does not matter",
-      contactEmail: "hr@roslin.us",
   },
 };
+await new Promise((resolve) => setTimeout(resolve, 800));
+return mockJobPosting;
+}
 
 function JobPostingPage() {
+  const params = useParams();
+  const { jobId } = params;
+
+  const [job, setJob] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    getJobPosting(jobId)
+      .then((data) => setJob(data))
+      .finally(() => setLoading(false));
+  }, [jobId]);
+
+  if (loading) return <div>Loading...</div>;
+  if (!job) return <div>Job not found</div>;
+
     return (
         <div className={styles.page}>
-            <JobHeader className={`${styles.card} ${styles.jobHeader}`} logo={logo} jobName={mockJobPosting.title} companyName={mockCompany.name} />
-            <JobDescription className={`${styles.card} ${styles.jobDescription}`} skills={mockJobPosting.skills} description={description}/>
-            <Sidebar className={`${styles.sidebar}`} data={mockJobPosting.details} perks={mockCompany.perks} />
-            <GalleryCard className={styles.companyGallery} gallery={mockCompany.gallery} />
-            <JobOffersCard className={`${styles.card} ${styles.jobOffers} `} name={mockCompany.name} logo={logo} jobs={mockCompany.jobs} />
+            <JobHeader className={`${styles.card} ${styles.jobHeader}`} logo={logo} jobName={job.title} companyName={job.company.name} />
+            <JobDescription className={`${styles.card} ${styles.jobDescription}`} skills={job.skills} description={description}/>
+            <Sidebar className={`${styles.sidebar}`} data={job.details} perks={job.company.perks} />
+            <GalleryCard className={styles.companyGallery} gallery={job.company.gallery} />
+            <JobOffersCard className={`${styles.card} ${styles.jobOffers} `} name={job.company.name} logo={logo} jobs={job.company.jobs} />
         </div>
     );
 }
