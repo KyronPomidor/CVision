@@ -2,18 +2,7 @@ import styles from "./JobDescription.module.css";
 import typography from "../../../../Typography.module.css";
 import Star from "../../../../assets/star-logo.svg?react";
 
-import description from "./assets/yapping.txt?raw";
-
-const skills = [
-    "Golang",
-    "Kubernetes",
-    "Docker",
-    "gRPC",
-    "Kafka",
-    "PostgreSQL",
-]
-
-function JobDescription({ className='', ...props }) {
+function JobDescription({ className='', skills, description, ...props }) {
   return (
     <div className={`${className} ${styles.container}`} {...props}>
       <h2 className={typography.heading2}>Job Description</h2>

@@ -1,11 +1,8 @@
 import styles from "./CompanyBenefits.module.css";
 import typography from "../../../../Typography.module.css";
-
 import Perk from "../../../CompanyProfilePage/components/AboutCard/Perk";
 
-const perks = ["coffee", "growth", "flexible", "team"];
-
-function CompanyBenefits() {
+function CompanyBenefits({ perks }) {
     return (
         <div className={styles.container}>
             <h2 className={typography.heading2}>Company benefits</h2>

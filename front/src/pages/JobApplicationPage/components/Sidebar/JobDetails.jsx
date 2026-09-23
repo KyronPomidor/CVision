@@ -14,36 +14,39 @@ const JOB_DETAILS_CONFIG = [
   { key: "jobType", icon: DocIcon, label: "Job Type" },
   { key: "workSetting", icon: HomeIcon, label: "Work Setting" },
   { key: "location", icon: PinIcon, label: "Location" },
-  { key: "salary", icon: CoinIcon, label: "Salary" },
+  {
+    key: "salary",
+    icon: CoinIcon,
+    label: "Salary",
+    format: (value) => `$${value.toLocaleString()} per month`,
+  },
   { key: "schedule", icon: ClockIcon, label: "Schedule" },
-  { key: "experience", icon: BriefcaseIcon, label: "Experience" },
+  { key: 
+    "experience", 
+    icon: BriefcaseIcon, 
+    label: "Experience",
+    format: (value) => `${value} years`
+  },
   { key: "education", icon: GraduationIcon, label: "Education" },
   { key: "contactEmail", icon: MailIcon, label: "Contact Email" },
 ];
 
-const data = {
-  jobType: "Full-time Contract",
-  workSetting: "Remote",
-  location: "Chisinau, Moldova",
-  salary: "$5,200 per month",
-  schedule: "Full-time",
-  experience: "6 years",
-  education: "Does not matter",
-  contactEmail: "hr@roslin.us",
-};
-
-function JobDetails() {
+function JobDetails({ data }) {
   return (
     <div className={styles.container}>
       <h2 className={typography.heading2}>Job Details</h2>
       <div className={styles.grid}>
-        {JOB_DETAILS_CONFIG.map(({ key, icon: Icon, label }) => (
+        {JOB_DETAILS_CONFIG.map(({ key, icon: Icon, label, format }) => {
+          const rawValue = data[key];
+          const displayValue = format ? format(rawValue) : rawValue;
+
+          return (
           <div key={key} className={styles.row}>
             <Icon className={styles.icon} />
             <span className={typography.comment}>{label}</span>
-            <span className={`${typography.comment} ${styles.value}`}>{data[key]}</span>
+            <span className={`${typography.comment} ${styles.value}`}>{displayValue}</span>
           </div>
-        ))}
+        )})}
       </div>
     </div>
   );
