@@ -1,5 +1,6 @@
 .card {
     border: var(--border-weight-heavy) solid var(--color-border);
+    border-radius: 5px;
     padding: 15px;
     background: lightblue;
 }
@@ -7,7 +8,7 @@
 .page {
     display: grid;
     grid-template-columns: 2fr 1fr;
-    grid-template-rows: 200px 200px 200px 200px;
+
     grid-template-areas:
     "header   header"
     "main     sidebar"
