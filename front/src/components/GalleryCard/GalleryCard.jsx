@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styles from "./GalleryCard.module.css";
-import typography from "../../../../Typography.module.css";
+import typography from "../../Typography.module.css";
 import caretLeft from "./assets/caret_circle_left.svg";
 import caretRight from "./assets/caret_circle_right.svg";
 

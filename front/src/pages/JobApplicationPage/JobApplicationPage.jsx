@@ -2,8 +2,8 @@ import styles from "./JobApplicationPage.module.css";
 import JobHeader from "./components/JobHeader/JobHeader";
 import JobDescription from "./components/JobDescription/JobDescription";
 import Sidebar from "./components/Sidebar/Sidebar";
-import GalleryCard from "../CompanyProfilePage/components/GalleryCard/GalleryCard";
-import JobOffersCard from "../CompanyProfilePage/components/JobOffersCard/JobOffersCard";
+import GalleryCard from "../../components/GalleryCard/GalleryCard";
+import JobOffersCard from "../../components/JobOffersCard/JobOffersCard";
 
 import img1 from "../CompanyProfilePage/assets/gallery/image1.jpg";
 import img2 from "../CompanyProfilePage/assets/gallery/image2.jpg";
