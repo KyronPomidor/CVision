@@ -14,6 +14,7 @@ public class CompanyResponse {
     private String name;
     private String description;
     private String location;
+    private String logo;
     private List<String> photos;
     private CompanyDetailsResponse details;
 }
