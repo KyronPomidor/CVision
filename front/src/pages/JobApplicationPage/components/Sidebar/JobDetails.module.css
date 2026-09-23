@@ -9,7 +9,7 @@
 
 .grid {
     display: grid;
-    grid-template-columns: auto 1fr auto;
+    grid-template-columns: auto 0.5fr 1fr;
     row-gap: 15px;
     column-gap: 10px;
     align-items: center;
