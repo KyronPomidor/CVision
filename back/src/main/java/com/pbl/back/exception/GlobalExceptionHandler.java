@@ -38,4 +38,11 @@ public class GlobalExceptionHandler {
                 .status(HttpStatus.CONFLICT)
                 .body(ex.getMessage());
     }
+
+    @ExceptionHandler(FileStorageException.class)
+    public ResponseEntity<String> handleFileStorage(FileStorageException ex) {
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(ex.getMessage());
+    }
 }

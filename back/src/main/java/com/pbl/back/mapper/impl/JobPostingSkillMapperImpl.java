@@ -8,7 +8,8 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class JobPostingSkilMapperImpl implements JobPostingSkillMapper {
+public class JobPostingSkillMapperImpl implements JobPostingSkillMapper {
+
     @Override
     public List<SkillResponse> toSkillResponse(List<JobPostingSkill> mappings) {
         return mappings.stream()
