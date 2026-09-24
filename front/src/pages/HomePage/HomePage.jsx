@@ -13,7 +13,8 @@ import profilePhoto from "../../assets/profile-photo.png";
 async function getProfileByUser(userId) {
   const mockProfile = {
     cvId: 1,
-    name: "Nicholas Carnegie",
+    firstName: "Nicholas",
+    lastName: "Carnegie",
     photo: profilePhoto,
     email: "nick.carn@gmail.com",
     phone: "+373 62 123 456",
@@ -142,7 +143,7 @@ function HomePage() {
       <div>
         <ProfileCard
           variant="home"
-          name={profile.name}
+          name={`${profile.firstName} ${profile.lastName}`}
           photo={profile.photo}
           email={profile.email}
           phone={profile.phone}
