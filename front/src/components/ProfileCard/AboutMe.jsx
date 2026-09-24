@@ -3,7 +3,6 @@ import typography from "../../Typography.module.css";
 
 import pencilLogo from "../../assets/pencil-logo.svg";
 
-
 function AboutMe({ aboutMe, onEditProfile, showEditButton = true }) {
   return (
     <div className={styles.aboutMeBox}>

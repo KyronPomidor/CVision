@@ -51,7 +51,7 @@
   cursor: pointer;
 }
 
-.uploadCvButton:hover{
+.uploadCvButton:hover {
   border: var(--border-weight-heavy) solid var(--color-secondary);
   color: var(--color-secondary);
 }
@@ -92,7 +92,7 @@
   color: var(--color-background);
 }
 
-.pencilLogo{
+.pencilLogo {
   width: 30px;
   height: 30px;
 }

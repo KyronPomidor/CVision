@@ -1,9 +1,9 @@
 .ProfilePage {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 25px;
-    padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 25px;
+  padding: 20px;
 
-    background-color: var(--color-background);
+  background-color: var(--color-background);
 }

@@ -91,7 +91,7 @@ function ProfilePage() {
   useEffect(() => {
     setLoading(true);
     setError(null);
-    
+
     getProfileByUser(userId)
       .then((profileData) => {
         setProfile(profileData);

@@ -1,23 +1,23 @@
 .technicalSkills {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 20px;
 
-    border: var(--border-weight-light) solid var(--color-border);
-    border-radius: 8px;
+  border: var(--border-weight-light) solid var(--color-border);
+  border-radius: 8px;
 }
 
 .skillsList {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .skillPill {
-    padding: 10px 18px;
+  padding: 10px 18px;
 
-    background-color: var(--color-background-accent);
-    color: var(--color-primary);
-    border-radius: 20px;
+  background-color: var(--color-background-accent);
+  color: var(--color-primary);
+  border-radius: 20px;
 }

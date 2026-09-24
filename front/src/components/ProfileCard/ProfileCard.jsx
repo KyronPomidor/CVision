@@ -33,11 +33,7 @@ function ProfileCard({
 
       <ContactInfo email={email} phone={phone} location={location} />
 
-      <AboutMe
-        aboutMe={aboutMe}
-        onEditProfile={onEditProfile}
-        showEditButton={!isProfileVariant}
-      />
+      <AboutMe aboutMe={aboutMe} onEditProfile={onEditProfile} showEditButton={!isProfileVariant} />
 
       {isProfileVariant ? (
         <div className={styles.profileActions}>

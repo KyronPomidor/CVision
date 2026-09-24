@@ -1,9 +1,9 @@
 .additionalInfo {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
 
-    border: var(--border-weight-light) solid var(--color-border);
-    border-radius: 8px;
+  border: var(--border-weight-light) solid var(--color-border);
+  border-radius: 8px;
 }
