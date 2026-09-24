@@ -1,10 +1,13 @@
 import styles from "./Achievements.module.css";
+import typography from "../../Typography.module.css";
+
 import BagLogo from "./assets/bag-logo.svg?react";
-import StarLogo from "../../../../assets/star-logo.svg?react";
+import StarLogo from "../../assets/star-logo.svg?react";
 import PaperLogo from "./assets/paper-logo.svg?react";
 import EnvelopeLogo from "./assets/envelope-logo.svg?react";
 
-function Achievements({ appliedJobsCount, savedJobsCount, cvViewsCount, reachoutsCount }) {
+// appliedJobs / savedJobs: arrays of job posting ids
+function Achievements({ appliedJobs = [], savedJobs = [], cvViews = [], reachouts = [] }) {
   return (
     <div className={styles.achievements}>
       <div className={styles.jobSection}>
@@ -14,10 +17,10 @@ function Achievements({ appliedJobsCount, savedJobsCount, cvViewsCount, reachout
               <div className={styles.appliedJobs_imageBox}>
                 <BagLogo className={styles.bagLogo} />
               </div>
-              <h2 className={styles.appliedJobs_quantity}>{appliedJobsCount}</h2>
+              <h2 className={typography.heading2}>{appliedJobs.length}</h2>
             </div>
 
-            <p className={styles.appliedJobs_text}>Applied Jobs</p>
+            <p className={typography.mainTextImportant}>Applied Jobs</p>
           </div>
         </div>
 
@@ -27,10 +30,10 @@ function Achievements({ appliedJobsCount, savedJobsCount, cvViewsCount, reachout
               <div className={styles.appliedJobs_imageBox}>
                 <StarLogo className={styles.starLogo} />
               </div>
-              <h2 className={styles.savedJobs_quantity}>{savedJobsCount}</h2>
+              <h2 className={typography.heading2}>{savedJobs.length}</h2>
             </div>
 
-            <p className={styles.savedJobs_text}>Saved Jobs</p>
+            <p className={typography.mainTextImportant}>Saved Jobs</p>
           </div>
         </div>
       </div>
@@ -42,10 +45,10 @@ function Achievements({ appliedJobsCount, savedJobsCount, cvViewsCount, reachout
               <div className={styles.appliedJobs_imageBox}>
                 <PaperLogo className={styles.paperLogo} />
               </div>
-              <h2 className={styles.curriculumViews_quantity}>{cvViewsCount}</h2>
+              <h2 className={typography.heading2}>{cvViews.length}</h2>
             </div>
 
-            <p className={styles.curriculumViews_text}>CV Views</p>
+            <p className={typography.mainTextImportant}>CV Views</p>
           </div>
         </div>
 
@@ -55,10 +58,10 @@ function Achievements({ appliedJobsCount, savedJobsCount, cvViewsCount, reachout
               <div className={styles.appliedJobs_imageBox}>
                 <EnvelopeLogo className={styles.envelopeLogo} />
               </div>
-              <h2 className={styles.reachouts_quantity}>{reachoutsCount}</h2>
+              <h2 className={typography.heading2}>{reachouts.length}</h2>
             </div>
 
-            <p className={styles.reachouts_text}>Reachouts</p>
+            <p className={typography.mainTextImportant}>Reachouts</p>
           </div>
         </div>
       </div>

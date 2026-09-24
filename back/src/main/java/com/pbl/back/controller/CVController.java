@@ -6,7 +6,9 @@ import com.pbl.back.service.CVService;
 import com.pbl.back.service.CurrentUserService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/api/cv")
@@ -19,10 +21,16 @@ public class CVController {
         this.currentUserService = currentUserService;
     }
 
-    @PostMapping("/me")
+    @PostMapping(value = "/me", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
     public CVResponse create(@Valid @RequestBody CVRequest request) {
         return service.create(currentUserService.getId(), request);
+    }
+
+    @PostMapping(value = "/me", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @ResponseStatus(HttpStatus.CREATED)
+    public CVResponse upload(@RequestParam("file") MultipartFile file) {
+        return service.upload(currentUserService.getId(), file);
     }
 
     @GetMapping("/me")

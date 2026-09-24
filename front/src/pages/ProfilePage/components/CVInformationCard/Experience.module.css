@@ -1,0 +1,38 @@
+.experience {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 20px;
+
+  border: var(--border-weight-light) solid var(--color-border);
+  border-radius: 6px;
+}
+
+.itemsList {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.item:not(:last-child) {
+  padding-bottom: 10px;
+  border-bottom: var(--border-weight-light) solid var(--color-border);
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.itemHeader {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.itemCompany {
+  color: var(--color-primary);
+}

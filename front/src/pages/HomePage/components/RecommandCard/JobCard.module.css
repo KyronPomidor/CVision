@@ -4,7 +4,7 @@
   gap: 20px;
   padding: 20px 20px;
 
-  border: 3px solid var(--color-border);
+  border: var(--border-weight-light) solid var(--color-border);
   border-radius: 10px;
 }
 
@@ -24,7 +24,7 @@
 .companyLogo {
   width: 59px;
 
-  border: 3px solid var(--color-border);
+  border: var(--border-weight-light) solid var(--color-border);
   border-radius: 8px;
   object-fit: contain;
   background-color: var(--color-background);
