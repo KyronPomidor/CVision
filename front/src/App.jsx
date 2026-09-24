@@ -4,6 +4,7 @@ import Header from "./components/Header/Header";
 import HomePage from "./pages/HomePage/HomePage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import CompanyProfilePage from "./pages/CompanyProfilePage/CompanyProfilePage";
+import JobPostingPage from "./pages/JobPostingPage/JobPostingPage";
 
 function MainLayout() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/companies/:companyId" element={<CompanyProfilePage />} />
+          <Route path="/jobs/:jobId" element={<JobPostingPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

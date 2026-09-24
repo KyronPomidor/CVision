@@ -1,0 +1,47 @@
+Roslin – Building the Future of Transportation Technology
+
+At Roslin, we develop cutting-edge platforms and solutions for the transportation industry, powering everything from real-time fleet tracking to complete operational integration for the US market. You’ll be working on a world-class product suite built with a best-in-class tech stack and an A+ engineering team. We don’t just build software - we’re building AI-native platforms, applying an AI-first approach across every layer of our technology.
+
+We are looking for a Golang Engineer (Go Developer; BackEnd Developer (Go); Golang Developer; Backend Engineer) to design and optimize high-performance systems that keep global mobility moving.
+
+As a key member of our engineering team, you’ll own the delivery of scalable, production-grade services that operate under heavy load and demand absolute reliability. You’ll drive architectural decisions, implement robust integrations with messaging and streaming platforms, and ensure that every API we ship is secure, efficient, and built for scale. Collaborating closely with product owners, front-end developers, and DevOps, you’ll have the freedom to influence how features are shaped and the responsibility to see them through from concept to deployment. This is a role for an engineer (not just a coder) who thrives on solving complex technical challenges, optimizing for performance at scale, and delivering software that directly impacts hundreds of thousands of users in real time.
+
+What We’re Looking For
+Technical Skills
+
+2+ years of commercial Golang development experience in production systems
+Expertise in Kubernetes, Docker, and CI/CD pipelines
+Familiarity with gRPC and Kafka for high-performance service communication and event streaming
+Advanced database knowledge (PostgreSQL or Google Spanner) including schema design, indexing, and query optimization
+Experience with profiling and benchmarking Go applications (pprof or similar)
+Ability to design and implement complex automated processes such as cron jobs with dependencies, retries, and monitoring
+Skilled in writing clear API documentation and technical specifications
+Relevant Experience
+
+Designing and operating high-load, distributed architectures in production environments
+Delivering scalable microservices from concept to deployment
+Working in cross-functional teams to deliver mission-critical features
+Troubleshooting and optimizing systems in real-time, high-traffic environments
+Experience with ERP domain is considered a plus
+Proven motivation to grow as an engineer, with an interest in career development and continuous skill growth
+Soft Skills
+
+Fluent English (written and spoken)
+Strong analytical and problem-solving mindset
+Collaborative, proactive, and detail-oriented approach
+Self-driven with a commitment to quality and continuous improvement
+What We Offer
+
+Competitive compensation tailored to your skills and the impact you make.
+Employment based on a B2B or regular Employment.
+Work model: On-Site/Hybrid from Chisinau
+Work at your best - select from 9–6, 10–7, or 11–8 and keep your work-life balance in check.
+Brand-new office in Chisinau
+Fully in-house engineering team - no outsourcing or outstaffing.
+Opportunity to work on high-impact, mission-critical projects for the US market from day one.
+Clear path for career growth and professional skill development, with opportunities to take ownership and expand responsibilities.
+Work alongside a world-class engineering team where knowledge sharing, mentorship, and continuous learning are the standard.
+Company-paid access to Claude Opus 4.1 and Codex GPT-5 for advanced AI-assisted development.
+Be part of a team that’s reshaping how transportation technology works - from concept to scale. At Roslin, your code won’t just run, it will move industries forward!
+
+Send your CV to hr@roslin.us or hit that Apply button - your next challenge starts here!

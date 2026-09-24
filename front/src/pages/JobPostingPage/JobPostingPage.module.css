@@ -1,0 +1,34 @@
+.card {
+  border: var(--border-weight-heavy) solid var(--color-border);
+  border-radius: 5px;
+  padding: 15px;
+}
+
+.page {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+
+  grid-template-areas:
+    "header   header"
+    "main     sidebar"
+    "gallery  gallery"
+    "offers   offers";
+  gap: 25px;
+  padding: 15px 10px;
+}
+
+.jobHeader {
+  grid-area: header;
+}
+.jobDescription {
+  grid-area: main;
+}
+.sidebar {
+  grid-area: sidebar;
+}
+.companyGallery {
+  grid-area: gallery;
+}
+.jobOffers {
+  grid-area: offers;
+}
