@@ -43,11 +43,11 @@ function ProfileCard({
         <div className={styles.profileActions}>
           <button type="button" className={styles.uploadCvButton} onClick={onUploadCV}>
             <UploadIcon className={styles.uploadIcon} />
-            <span className={styles.uploadContent}>Upload CV</span>
+            <p className={`${styles.uploadContent} ${typography.heading2}`}>Upload CV</p>
           </button>
           <button type="button" className={styles.editButtonBottom} onClick={onEditProfile}>
             <PencilLogo className={styles.pencilLogo} />
-            <p className={styles.editContent}>Edit</p>
+            <p className={`${styles.editContent} ${typography.heading2}`}>Edit</p>
           </button>
         </div>
       ) : (

@@ -48,13 +48,19 @@
   border-radius: 30px;
   background-color: var(--color-background-accent);
   color: var(--color-primary);
-  font-weight: 700;
   cursor: pointer;
-  font-size: var(--font-size-heading-2);
 }
 
 .uploadCvButton:hover{
   border: var(--border-weight-heavy) solid var(--color-secondary);
+  color: var(--color-secondary);
+}
+
+.uploadCvButton p {
+  color: var(--color-primary);
+}
+
+.uploadCvButton:hover p {
   color: var(--color-secondary);
 }
 
@@ -75,13 +81,15 @@
   background-color: var(--color-primary);
   color: var(--color-background);
 
-  font-size: var(--font-size-heading-2);
-  font-weight: 700;
   cursor: pointer;
 }
 
 .editButtonBottom:hover {
   background-color: var(--color-secondary);
+}
+
+.editButtonBottom p {
+  color: var(--color-background);
 }
 
 .pencilLogo{
