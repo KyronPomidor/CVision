@@ -28,4 +28,5 @@ public class JobPostingResponse {
     private JobStatus status;
 
     private List<SkillResponse> skills;
+    private Double matchScore;
 }

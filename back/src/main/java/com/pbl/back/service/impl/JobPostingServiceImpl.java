@@ -1,26 +1,23 @@
 package com.pbl.back.service.impl;
 
-import com.pbl.back.domain.entity.Company;
-import com.pbl.back.domain.entity.JobPosting;
-import com.pbl.back.domain.entity.JobPostingSkill;
-import com.pbl.back.domain.entity.Skill;
+
+
+import com.pbl.back.domain.entity.*;
+import com.pbl.back.domain.enums.JobStatus;
 import com.pbl.back.dto.jobposting.JobPostingRequest;
 import com.pbl.back.dto.jobposting.JobPostingResponse;
 import com.pbl.back.dto.skill.SkillResponse;
 import com.pbl.back.exception.ResourceNotFoundException;
 import com.pbl.back.mapper.JobPostingMapper;
 import com.pbl.back.mapper.JobPostingSkillMapper;
-import com.pbl.back.repository.CompanyRepository;
-import com.pbl.back.repository.JobPostingRepository;
-import com.pbl.back.repository.JobPostingSkillRepository;
-import com.pbl.back.repository.SkillRepository;
+import com.pbl.back.repository.*;
 import com.pbl.back.service.JobPostingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -32,6 +29,9 @@ public class JobPostingServiceImpl implements JobPostingService {
     private final JobPostingSkillRepository jobPostingSkillRepository;
     private final SkillRepository skillRepository;
     private final JobPostingSkillMapper jobPostingSkillMapper;
+    private final CandidateProfileRepository candidateProfileRepository;
+    private final ProfileSkillRepository profileSkillRepository;
+
 
     @Override
     @Transactional
@@ -77,6 +77,40 @@ public class JobPostingServiceImpl implements JobPostingService {
             postingResponses.add(mapper.toResponse(posting, skills));
         });
         return postingResponses;
+    }
+
+    @Override
+    public List<JobPostingResponse> getMatchesForUser(Long userId) {
+        Set<Long> userSkillIds = candidateProfileRepository.findByUserId(userId)
+                .map(CandidateProfile::getId)
+                .map(profileSkillRepository::findByProfileId)
+                .orElseGet(List::of)
+                .stream()
+                .map(profileSkill -> profileSkill.getSkill().getId())
+                .collect(Collectors.toSet());
+
+        return repository.findByStatus(JobStatus.OPEN).stream()
+                .map(posting -> toMatchResponse(posting, userSkillIds))
+                .sorted(Comparator.comparing(JobPostingResponse::getMatchScore).reversed())
+                .toList();
+    }
+
+    private JobPostingResponse toMatchResponse(JobPosting posting, Set<Long> userSkillIds) {
+        List<JobPostingSkill> requiredSkills = jobPostingSkillRepository.findByJobPostingId(posting.getId());
+        Set<Long> requiredSkillIds = requiredSkills.stream()
+                .map(jobPostingSkill -> jobPostingSkill.getSkill().getId())
+                .collect(Collectors.toCollection(HashSet::new));
+
+        long matchedSkills = requiredSkillIds.stream()
+                .filter(userSkillIds::contains)
+                .count();
+        double matchScore = requiredSkillIds.isEmpty()
+                ? 0.0
+                : (matchedSkills * 100.0) / requiredSkillIds.size();
+
+        return mapper.toResponse(posting,
+                jobPostingSkillMapper.toSkillResponse(requiredSkills),
+                matchScore);
     }
 
     @Override

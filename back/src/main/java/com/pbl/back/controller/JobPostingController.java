@@ -2,6 +2,7 @@ package com.pbl.back.controller;
 
 import com.pbl.back.dto.jobposting.JobPostingRequest;
 import com.pbl.back.dto.jobposting.JobPostingResponse;
+import com.pbl.back.service.CurrentUserService;
 import com.pbl.back.service.JobPostingService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -13,9 +14,11 @@ import java.util.List;
 @RequestMapping("/api/postings")
 public class JobPostingController {
     private final JobPostingService service;
+    private final CurrentUserService currentUserService;
 
-    public JobPostingController(JobPostingService service) {
+    public JobPostingController(JobPostingService service, CurrentUserService currentUserService) {
         this.service = service;
+        this.currentUserService = currentUserService;
     }
 
     @PostMapping("/company/{companyId}")
@@ -29,6 +32,12 @@ public class JobPostingController {
     public List<JobPostingResponse> getByUserId(@PathVariable Long companyId) {
         return service.getByCompanyId(companyId);
     }
+
+    @GetMapping("/matches/me")
+    public List<JobPostingResponse> getMyMatches() {
+        return service.getMatchesForUser(currentUserService.getId());
+    }
+
 
     @PutMapping("/{id}")
     public JobPostingResponse update(@PathVariable Long id, @Valid @RequestBody JobPostingRequest request) {
