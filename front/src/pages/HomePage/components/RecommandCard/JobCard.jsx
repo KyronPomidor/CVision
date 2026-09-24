@@ -5,6 +5,40 @@ import DollarLogo from "../../../../assets/dollar-logo.svg?react";
 import BriefcaseLogo from "../../../../assets/briefcase-logo.svg?react";
 import StarOutlineLogo from "../../../../assets/star-logo.svg?react";
 
+function getPostedTime(dateString) {
+  const postedDate = new Date(dateString);
+  const now = new Date();
+
+  const diffMs = now - postedDate;
+  const diffMinutes = Math.floor(diffMs / (1000 * 60));
+
+  if (diffMinutes < 1) return "Posted just now";
+
+  if (diffMinutes < 60) {
+    return `Posted ${diffMinutes} min ago`;
+  }
+
+  const diffHours = Math.floor(diffMinutes / 60);
+
+  if (diffHours < 24) {
+    return `Posted ${diffHours} ${diffHours === 1 ? "hour" : "hours"} ago`;
+  }
+
+  const diffDays = Math.floor(diffHours / 24);
+
+  if (diffDays < 7) {
+    return `Posted ${diffDays} ${diffDays === 1 ? "day" : "days"} ago`;
+  }
+
+  const diffWeeks = Math.floor(diffDays / 7);
+
+  if (diffWeeks < 4) {
+    return `Posted ${diffWeeks} ${diffWeeks === 1 ? "week" : "weeks"} ago`;
+  }
+
+  return `Posted on ${postedDate.toLocaleDateString()}`;
+}
+
 function getMatchLevel(matchPercent) {
   if (matchPercent >= 80) return "green";
   if (matchPercent >= 40) return "olive";
@@ -25,6 +59,7 @@ function JobCard({
   onApply,
 }) {
   const matchLevel = getMatchLevel(matchPercent);
+  const postedText = getPostedTime(postedAt);
 
   return (
     <div className={styles.jobCard}>
@@ -39,7 +74,7 @@ function JobCard({
         </div>
 
         <div className={styles.metaRight}>
-          <p className={`${typography.mainText} ${styles.postedText}`}>{postedAt}</p>
+          <p className={`${typography.mainText} ${styles.postedText}`}>{postedText}</p>
 
           <button
             type="button"

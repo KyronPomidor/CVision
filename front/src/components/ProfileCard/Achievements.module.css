@@ -6,7 +6,7 @@
   padding: 15px 20px;
   width: 90%;
 
-  border: 3px solid var(--color-border);
+  border: var(--border-weight-light) solid var(--color-border);
   border-radius: 5px;
 }
 

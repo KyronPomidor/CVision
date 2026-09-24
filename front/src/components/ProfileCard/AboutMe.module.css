@@ -4,7 +4,7 @@
   align-items: center;
   padding: 12px 16px;
 
-  border: 3px solid var(--color-border);
+  border: var(--border-weight-light) solid var(--color-border);
   border-radius: 5px;
 }
 

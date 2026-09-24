@@ -32,7 +32,7 @@
   width: 48px;
   height: 48px;
   object-fit: contain;
-  border: 3px solid var(--color-border);
+  border: var(--border-weight-light) solid var(--color-border);
   border-radius: 5px;
 }
 
