@@ -1,0 +1,15 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.logo {
+  width: 112px;
+  height: 112px;
+  border-radius: 15px;
+}
+
+.companyName {
+  color: var(--color-primary);
+}

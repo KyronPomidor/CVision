@@ -5,8 +5,8 @@ import styles from "./CompanyProfilePage.module.css";
 import CompanyHeaderCard from "./components/CompanyHeaderCard/CompanyHeaderCard";
 import AboutCard from "./components/AboutCard/AboutCard";
 import CompanyDetailsCard from "./components/CompanyDetailsCard/CompanyDetailsCard";
-import JobOffersCard from "./components/JobOffersCard/JobOffersCard";
-import GalleryCard from "./components/GalleryCard/GalleryCard";
+import JobOffersCard from "../../components/JobOffersCard/JobOffersCard";
+import GalleryCard from "../../components/GalleryCard/GalleryCard";
 
 import logo from "./assets/roslinLogo.webp";
 
