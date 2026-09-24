@@ -1,35 +1,35 @@
 .container {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    padding: 15px;
-    border: var(--border-weight-heavy) solid var(--color-border);
-    border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 15px;
+  border: var(--border-weight-heavy) solid var(--color-border);
+  border-radius: 5px;
 }
 
 .grid {
-    display: grid;
-    grid-template-columns: auto 0.5fr 1fr;
-    row-gap: 15px;
-    column-gap: 10px;
-    align-items: center;
+  display: grid;
+  grid-template-columns: auto 0.5fr 1fr;
+  row-gap: 15px;
+  column-gap: 10px;
+  align-items: center;
 }
 
 .row {
-    display: contents;
+  display: contents;
 }
 
 .icon {
-    height: 30px;
-    width: 30px;
-    color: var(--color-text-body);
+  height: 30px;
+  width: 30px;
+  color: var(--color-text-body);
 }
 
 .icon path {
-    vector-effect: non-scaling-stroke;
+  vector-effect: non-scaling-stroke;
 }
 
 .value {
-    font-weight: 700;
-    color: var(--color-primary);
+  font-weight: 700;
+  color: var(--color-primary);
 }

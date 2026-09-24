@@ -1,72 +1,72 @@
 .container {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .body {
-    white-space: pre-line;
-    border-bottom: 2px solid var(--color-border);
-    padding-bottom: 20px;
+  white-space: pre-line;
+  border-bottom: 2px solid var(--color-border);
+  padding-bottom: 20px;
 }
 
 .skillSection {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .subTitle {
-    color: var(--color-heading);
+  color: var(--color-heading);
 }
 
 .skillsRow {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .skillPill {
-    color: var(--color-primary);
-    background: var(--color-background-accent);
-    padding: 10px 20px;
-    border-radius: 999px;
+  color: var(--color-primary);
+  background: var(--color-background-accent);
+  padding: 10px 20px;
+  border-radius: 999px;
 }
 
 .buttonRow {
-    display:flex;
-    gap: 20px;
+  display: flex;
+  gap: 20px;
 }
 
 .apply {
-    color: var(--color-background-accent);
-    background: var(--color-primary);
-    border: none;
-    border-radius: 999px;
-    padding: 10px 20px;
-    flex: 1;
+  color: var(--color-background-accent);
+  background: var(--color-primary);
+  border: none;
+  border-radius: 999px;
+  padding: 10px 20px;
+  flex: 1;
 }
 
 .favorite {
-    background: var(--color-background-accent);
-    border: var(--border-weight-light) solid var(--color-primary);
-    border-radius: 999px;
-    padding: 10px 20px;
+  background: var(--color-background-accent);
+  border: var(--border-weight-light) solid var(--color-primary);
+  border-radius: 999px;
+  padding: 10px 20px;
 
-    box-shadow: 0 7px var(--color-text-muted);
-    cursor: pointer;
+  box-shadow: 0 7px var(--color-text-muted);
+  cursor: pointer;
 }
 
 .favorite:active,
 .favorite[aria-pressed="true"] {
-    transform: translateY(4px);
-    box-shadow: 0 3px var(--color-text-muted);
- }
+  transform: translateY(4px);
+  box-shadow: 0 3px var(--color-text-muted);
+}
 
 .favorite[aria-pressed="true"] .starLogo {
-    fill: var(--color-primary);
+  fill: var(--color-primary);
 }
 
 .starLogo {
-    color: var(--color-primary);
+  color: var(--color-primary);
 }

@@ -6,7 +6,7 @@ import caretRight from "./assets/caret_circle_right.svg";
 
 const VISIBLE = 4;
 
-function GalleryCard({ className='', gallery }) {
+function GalleryCard({ className = "", gallery }) {
   const [start, setStart] = useState(0);
 
   const total = gallery.length;

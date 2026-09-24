@@ -2,9 +2,9 @@
 }
 
 .sticky {
-    position: sticky;
-    top: 167px;
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
+  position: sticky;
+  top: 167px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
 }

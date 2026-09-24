@@ -21,11 +21,11 @@ const JOB_DETAILS_CONFIG = [
     format: (value) => `$${value.toLocaleString()} per month`,
   },
   { key: "schedule", icon: ClockIcon, label: "Schedule" },
-  { key: 
-    "experience", 
-    icon: BriefcaseIcon, 
+  {
+    key: "experience",
+    icon: BriefcaseIcon,
     label: "Experience",
-    format: (value) => `${value} years`
+    format: (value) => `${value} years`,
   },
   { key: "education", icon: GraduationIcon, label: "Education" },
   { key: "contactEmail", icon: MailIcon, label: "Contact Email" },
@@ -41,12 +41,13 @@ function JobDetails({ data }) {
           const displayValue = format ? format(rawValue) : rawValue;
 
           return (
-          <div key={key} className={styles.row}>
-            <Icon className={styles.icon} />
-            <span className={typography.comment}>{label}</span>
-            <span className={`${typography.comment} ${styles.value}`}>{displayValue}</span>
-          </div>
-        )})}
+            <div key={key} className={styles.row}>
+              <Icon className={styles.icon} />
+              <span className={typography.comment}>{label}</span>
+              <span className={`${typography.comment} ${styles.value}`}>{displayValue}</span>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
