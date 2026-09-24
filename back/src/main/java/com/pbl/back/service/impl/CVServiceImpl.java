@@ -12,6 +12,10 @@ import com.pbl.back.repository.CVRepository;
 import com.pbl.back.repository.UserRepository;
 import com.pbl.back.service.CVService;
 import com.pbl.back.service.CurrentUserService;
+import com.pbl.back.service.PerplexityService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Value;
@@ -33,6 +37,8 @@ public class CVServiceImpl implements CVService {
     private final CVMapper mapper;
     private final UserRepository userRepository;
     private final CurrentUserService currentUserService;
+    private final PerplexityService perplexityService;
+    private final ObjectMapper objectMapper;
 
     @Value("${app.storage.cv-directory:uploads/cvs}")
     private String cvStorageDirectory;
@@ -79,14 +85,29 @@ public class CVServiceImpl implements CVService {
             throw new FileStorageException("Could not save the CV file.", ex);
         }
 
-        CV cv = CV.builder()
-                .user(user)
-                .fileName(originalFileName)
-                .filePath(target.toString())
-                .uploadedAt(LocalDateTime.now())
-                .build();
+        try {
+            String skillsJson = perplexityService.extractSkills(file);
+            objectMapper.readValue(skillsJson, new TypeReference<java.util.List<String>>() {});
 
-        return mapper.toResponse(repository.save(cv));
+            CV cv = CV.builder()
+                    .user(user)
+                    .fileName(originalFileName)
+                    .filePath(target.toString())
+                    .skills(skillsJson)
+                    .uploadedAt(LocalDateTime.now())
+                    .build();
+
+            return mapper.toResponse(repository.save(cv));
+        } catch (JsonProcessingException ex) {
+            throw new FileStorageException("Gemini returned invalid skills JSON.", ex);
+        } catch (RuntimeException ex) {
+            try {
+                Files.deleteIfExists(target);
+            } catch (IOException cleanupException) {
+                ex.addSuppressed(cleanupException);
+            }
+            throw ex;
+        }
     }
 
     @Override

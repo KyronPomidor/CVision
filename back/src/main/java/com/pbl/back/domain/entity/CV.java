@@ -31,6 +31,9 @@ public class CV {
     @Column(name = "extracted_text", columnDefinition = "TEXT")
     private String extractedText;
 
+    @Column(name = "skills", columnDefinition = "TEXT")
+    private String skills;
+
     @Column(name = "uploaded_at")
     private LocalDateTime uploadedAt;
 }

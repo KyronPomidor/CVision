@@ -3,6 +3,7 @@ package com.pbl.back.service.impl;
 import com.pbl.back.domain.entity.User;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
@@ -12,10 +13,11 @@ import java.util.Date;
 @Service
 public class JWTService {
 
-    private final SecretKey secretKey = Keys.hmacShaKeyFor(
-            "your-very-long-secret-key-at-least-32-bytes"
-                    .getBytes(StandardCharsets.UTF_8)
-    );
+    private final SecretKey secretKey;
+
+    public JWTService(@Value("${app.jwt.secret}") String jwtSecret) {
+        this.secretKey = Keys.hmacShaKeyFor(jwtSecret.getBytes(StandardCharsets.UTF_8));
+    }
 
     public String generateToken(User user) {
 
