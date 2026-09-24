@@ -7,12 +7,14 @@ import FilterCard from "./components/FilterCard/FilterCard";
 import endavaLogo from "../../assets/endava-logo.png";
 import pentalogLogo from "../../assets/pentalog-logo.png";
 import roslinLogo from "../../assets/roslin-logo.png";
+import profilePhoto from "../../assets/profile-photo.png";
 
 // TODO: replace with getProfileByUser(userId) from "../../api/profiles"
 async function getProfileByUser(userId) {
   const mockProfile = {
     cvId: 1,
     name: "Nicholas Carnegie",
+    photo: profilePhoto,
     email: "nick.carn@gmail.com",
     phone: "+373 62 123 456",
     location: "Chișinău, Moldova",
@@ -141,6 +143,7 @@ function HomePage() {
         <ProfileCard
           variant="home"
           name={profile.name}
+          photo={profile.photo}
           email={profile.email}
           phone={profile.phone}
           location={profile.location}

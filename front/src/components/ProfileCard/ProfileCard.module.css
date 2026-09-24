@@ -50,7 +50,7 @@
   color: var(--color-primary);
   font-weight: 700;
   cursor: pointer;
-  font-size: var(--heading2);
+  font-size: var(--font-size-heading-2);
 }
 
 .uploadCvButton:hover{
@@ -75,7 +75,7 @@
   background-color: var(--color-primary);
   color: var(--color-background);
 
-  font-size: var(--heading2);
+  font-size: var(--font-size-heading-2);
   font-weight: 700;
   cursor: pointer;
 }

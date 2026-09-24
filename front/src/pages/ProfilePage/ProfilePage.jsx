@@ -3,12 +3,14 @@ import { useEffect, useState } from "react";
 import styles from "./ProfilePage.module.css";
 import ProfileCard from "../../components/ProfileCard/ProfileCard";
 import CVInformationCard from "./components/CVInformationCard/CVInformationCard";
+import profilePhoto from "../../assets/profile-photo.png";
 
 // TODO: replace with getProfileByUser(userId) from "../../api/profiles"
 async function getProfileByUser(userId) {
   const mockProfile = {
     cvId: 1,
     name: "Nicholas Carnegie",
+    photo: profilePhoto,
     email: "nick.carn@gmail.com",
     phone: "+373 62 123 456",
     location: "Chișinău, Moldova",
@@ -107,6 +109,7 @@ function ProfilePage() {
       <ProfileCard
         variant="profile"
         name={profile.name}
+        photo={profile.photo}
         email={profile.email}
         phone={profile.phone}
         location={profile.location}
