@@ -1,13 +1,13 @@
 import { Link } from "react-router-dom"
-import mainLogo from "../../assets/main-logo.svg"
+import MainLogo from "../../../../Logo.svg?react"
 import worldMap from "../../assets/world-map.png"
 import styles from "./AuthLayout.module.css"
 
 function AuthLayout({ children, mapOffset = -220 }) {
     return (
         <div className={styles.page}>
-            <Link to="/" className={styles.logo}>
-                <img src={mainLogo} alt="CVision" />
+            <Link to="/" className={styles.logoBox} aria-label="CVision">
+                <MainLogo className={styles.logo}/>
             </Link>
 
             <div className={styles.stack}>
@@ -23,7 +23,6 @@ function AuthLayout({ children, mapOffset = -220 }) {
                     <img src={worldMap} alt="" className={styles.mapImage} />
                 </div>
             </div>
-
         </div>
     )
 }

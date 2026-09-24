@@ -2,19 +2,23 @@
     position: relative;
     min-height: 100vh;
     margin-top: -152px;
-    background: var(--headerBackground);
+    background: var(--color-background-header);
     overflow: hidden;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.logo {
+.logoBox {
     align-self: flex-start;
     margin: 40px 0 0 56px;
     line-height: 0;
+    height: 81px;
 }
 
+.logo {
+    height: 100%;
+}
 
 .stack {
     display: flex;
@@ -26,7 +30,7 @@
 
 .content {
     position: relative;
-    z-index: 2;
+    z-index: 10;
 }
 
 .mapWrapper {
@@ -40,24 +44,4 @@
     display: block;
     width: 100%;
     height: auto;
-}
-
-.footer {
-    position: relative;
-    z-index: 2;
-    margin-top: auto;
-    padding: 24px 0 32px;
-    display: flex;
-    gap: 32px;
-}
-
-.footer a {
-    color: var(--mainTextGray);
-    font-size: var(--mainComments);
-    font-weight: 600;
-    text-decoration: none;
-}
-
-.footer a:hover {
-    color: var(--primary);
 }

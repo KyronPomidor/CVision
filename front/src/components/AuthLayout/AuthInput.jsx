@@ -1,11 +1,15 @@
 import styles from "./AuthInput.module.css"
+import typography from "../../Typography.module.css"
 
-function AuthInput({ icon, options, ...inputProps }) {
+function AuthInput({ icon: Icon, options, ...inputProps }) {
     return (
         <label className={styles.field}>
-            <img src={icon} alt="" className={styles.icon} />
+            <Icon className={styles.icon} />
             {options ? (
-                <select {...inputProps} className={styles.select}>
+                <select
+                    {...inputProps}
+                    className={`${typography.mainTextImportant} ${styles.select}`}
+                >
                     {options.map((opt) => (
                         <option
                             key={opt.value}
@@ -18,7 +22,10 @@ function AuthInput({ icon, options, ...inputProps }) {
                     ))}
                 </select>
             ) : (
-                <input {...inputProps} />
+                <input
+                    {...inputProps}
+                    className={typography.mainTextImportant}
+                />
             )}
         </label>
     )

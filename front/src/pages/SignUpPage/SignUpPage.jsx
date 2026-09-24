@@ -2,11 +2,12 @@ import { useState } from "react"
 import { Link } from "react-router-dom"
 import AuthLayout from "../../components/AuthLayout/AuthLayout"
 import AuthInput from "../../components/AuthLayout/AuthInput"
-import userIcon from "../../assets/user-icon.svg"
-import mailIcon from "../../assets/mail-icon.svg"
-import lockIcon from "../../assets/lock-icon.svg"
-import bagIcon from "../../assets/bag-logo.svg"
-import styles from "./SignUpPage.module.css"
+import UserLogo from "../../assets/user-icon.svg?react"
+import MailLogo from "../../assets/mail-icon.svg?react"
+import LockLogo from "../../assets/lock-icon.svg?react"
+import BriefcaseLogo from "../../assets/briefcase-logo.svg?react"
+import typography from "../../Typography.module.css"
+import styles from "../../components/AuthLayout/AuthCard.module.css"
 
 const ROLE_OPTIONS = [
     { value: "", label: "Select Role", disabled: true, hidden: true },
@@ -35,10 +36,12 @@ function SignUpPage() {
     return (
         <AuthLayout mapOffset={-390}>
             <form className={styles.card} onSubmit={handleSubmit}>
-                <h1 className={styles.title}>Create CVision Account</h1>
+                <h1 className={`${typography.heading1} ${styles.title}`}>
+                    Create CVision Account
+                </h1>
 
                 <AuthInput
-                    icon={userIcon}
+                    icon={UserLogo}
                     type="text"
                     placeholder="Full Name"
                     value={form.fullName}
@@ -47,7 +50,7 @@ function SignUpPage() {
                 />
 
                 <AuthInput
-                    icon={mailIcon}
+                    icon={MailLogo}
                     type="email"
                     placeholder="Email Address"
                     value={form.email}
@@ -56,7 +59,7 @@ function SignUpPage() {
                 />
 
                 <AuthInput
-                    icon={bagIcon}
+                    icon={BriefcaseLogo}
                     options={ROLE_OPTIONS}
                     value={form.role}
                     onChange={updateField("role")}
@@ -64,7 +67,7 @@ function SignUpPage() {
                 />
 
                 <AuthInput
-                    icon={lockIcon}
+                    icon={LockLogo}
                     type="password"
                     placeholder="Password"
                     value={form.password}
@@ -73,7 +76,7 @@ function SignUpPage() {
                 />
 
                 <AuthInput
-                    icon={lockIcon}
+                    icon={LockLogo}
                     type="password"
                     placeholder="Confirm Password"
                     value={form.confirmPassword}
@@ -81,11 +84,14 @@ function SignUpPage() {
                     required
                 />
 
-                <button type="submit" className={styles.submitButton}>
+                <button
+                    type="submit"
+                    className={`${typography.mainTextImportant} ${styles.submitButton}`}
+                >
                     Sign Up
                 </button>
 
-                <p className={styles.switchText}>
+                <p className={`${typography.mainTextImportant} ${styles.switchText}`}>
                     Already have an account?{" "}
                     <Link to="/login" className={styles.switchLink}>
                         Log In Now
