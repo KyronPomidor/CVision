@@ -30,6 +30,8 @@ public class Company {
 
     private String location;
 
+    private String logo;
+
     @ElementCollection
     private List<String> photos;
 

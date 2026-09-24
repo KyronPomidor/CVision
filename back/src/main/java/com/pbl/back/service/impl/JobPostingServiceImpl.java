@@ -17,6 +17,7 @@ import com.pbl.back.repository.SkillRepository;
 import com.pbl.back.service.JobPostingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +34,7 @@ public class JobPostingServiceImpl implements JobPostingService {
     private final JobPostingSkillMapper jobPostingSkillMapper;
 
     @Override
+    @Transactional
     public JobPostingResponse create(Long companyId, JobPostingRequest request) {
         Company company = companyRepository.findById(companyId)
                 .orElseThrow(() -> new ResourceNotFoundException("Company with id '" + companyId + "' not found."));
@@ -52,9 +54,9 @@ public class JobPostingServiceImpl implements JobPostingService {
                                 () -> new ResourceNotFoundException("Skill with id '" + skillId + "' not found."));
 
                 JobPostingSkill mapping = JobPostingSkill.builder()
-                                .jobPosting(savedJob)
-                                .skill(skill)
-                                .build();
+                        .jobPosting(savedJob)
+                        .skill(skill)
+                        .build();
 
                 jobPostingSkillRepository.save(mapping);
             }
@@ -69,11 +71,11 @@ public class JobPostingServiceImpl implements JobPostingService {
         List<JobPostingResponse> postingResponses = new ArrayList<>();
         postings.forEach(posting -> {
 
-                    List<SkillResponse> skills = jobPostingSkillMapper.toSkillResponse(
-                            jobPostingSkillRepository.findByJobPostingId(posting.getId()));
+            List<SkillResponse> skills = jobPostingSkillMapper.toSkillResponse(
+                    jobPostingSkillRepository.findByJobPostingId(posting.getId()));
 
-                    postingResponses.add(mapper.toResponse(posting, skills));
-                });
+            postingResponses.add(mapper.toResponse(posting, skills));
+        });
         return postingResponses;
     }
 
@@ -90,15 +92,22 @@ public class JobPostingServiceImpl implements JobPostingService {
     }
 
     @Override
+    @Transactional
     public JobPostingResponse update(Long id, JobPostingRequest request) {
         JobPosting posting = repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("JobPosting with id '" + id + "' not found."));
 
         posting.setTitle(request.getTitle());
         posting.setDescription(request.getDescription());
-        posting.setLocation(request.getLocation());
-        posting.setEmploymentType(request.getEmploymentType());
-        posting.setSalary(request.getSalary());
+
+        posting.getDetails().setJobType(request.getDetails().getJobType());
+        posting.getDetails().setWorkSetting(request.getDetails().getWorkSetting());
+        posting.getDetails().setLocation(request.getDetails().getLocation());
+        posting.getDetails().setSalary(request.getDetails().getSalary());
+        posting.getDetails().setSchedule(request.getDetails().getSchedule());
+        posting.getDetails().setExperience(request.getDetails().getExperience());
+        posting.getDetails().setEducation(request.getDetails().getEducation());
+        posting.getDetails().setContactEmail(request.getDetails().getContactEmail());
 
         if (!request.getSkillIds().isEmpty()) {
 
@@ -123,6 +132,7 @@ public class JobPostingServiceImpl implements JobPostingService {
     }
 
     @Override
+    @Transactional
     public void delete(Long id) {
         JobPosting posting = repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("JobPosting with id '" + id + "' not found."));
