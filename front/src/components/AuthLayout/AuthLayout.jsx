@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 import mainLogo from "../../assets/main-logo.svg"
 import worldMap from "../../assets/world-map.png"
-import styles from "./styles/AuthLayout.module.css"
+import styles from "./AuthLayout.module.css"
 
 function AuthLayout({ children, mapOffset = -220 }) {
     return (
@@ -24,10 +24,6 @@ function AuthLayout({ children, mapOffset = -220 }) {
                 </div>
             </div>
 
-            <footer className={styles.footer}>
-                <Link to="/privacy-policy">Privacy Policy</Link>
-                <Link to="/terms-of-service">Terms of Service</Link>
-            </footer>
         </div>
     )
 }

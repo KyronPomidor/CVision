@@ -4,7 +4,7 @@ import AuthLayout from "../../components/AuthLayout/AuthLayout"
 import AuthInput from "../../components/AuthLayout/AuthInput"
 import mailIcon from "../../assets/mail-icon.svg"
 import lockIcon from "../../assets/lock-icon.svg"
-import styles from "./styles/LoginPage.module.css"
+import styles from "./LoginPage.module.css"
 
 function LoginPage() {
     const [email, setEmail] = useState("")
@@ -37,10 +37,6 @@ function LoginPage() {
                     onChange={(e) => setPassword(e.target.value)}
                     required
                 />
-
-                <Link to="/forgot-password" className={styles.forgotPassword}>
-                    Forgot password?
-                </Link>
 
                 <button type="submit" className={styles.submitButton}>
                     Login

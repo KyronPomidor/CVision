@@ -4,9 +4,6 @@ import HomePage from './pages/HomePage/HomePage'
 import ProfilePage from './pages/ProfilePage/ProfilePage'
 import LoginPage from './pages/LoginPage/LoginPage'
 import SignUpPage from './pages/SignUpPage/SignUpPage'
-import ForgotPasswordPage from './pages/ForgotPasswordPage/ForgotPasswordPage'
-import PrivacyPolicyPage from './pages/PrivacyPolicyPage/PrivacyPolicyPage'
-import TermsOfServicePage from './pages/TermsOfServicePage/TermsOfServicePage'
 
 function MainLayout() {
   return (
@@ -30,9 +27,6 @@ function App() {
         {/* Pages without Header - add outside of MainLayout */}
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpPage />} />
-        <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-        <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
-        <Route path="/terms-of-service" element={<TermsOfServicePage />} />
       </Routes>
     </BrowserRouter>
   )

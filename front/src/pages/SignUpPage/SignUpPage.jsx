@@ -4,19 +4,24 @@ import AuthLayout from "../../components/AuthLayout/AuthLayout"
 import AuthInput from "../../components/AuthLayout/AuthInput"
 import userIcon from "../../assets/user-icon.svg"
 import mailIcon from "../../assets/mail-icon.svg"
-import phoneIcon from "../../assets/phone-icon.svg"
 import lockIcon from "../../assets/lock-icon.svg"
-import styles from "./styles/SignUpPage.module.css"
+import bagIcon from "../../assets/bag-logo.svg"
+import styles from "./SignUpPage.module.css"
+
+const ROLE_OPTIONS = [
+    { value: "", label: "Select Role", disabled: true, hidden: true },
+    { value: "EMPLOYEE", label: "Employee" },
+    { value: "EMPLOYER", label: "Employer" },
+]
 
 function SignUpPage() {
     const [form, setForm] = useState({
         fullName: "",
         email: "",
-        phone: "",
+        role: "",
         password: "",
         confirmPassword: "",
     })
-    const [agreed, setAgreed] = useState(false)
 
     function updateField(field) {
         return (e) => setForm((prev) => ({ ...prev, [field]: e.target.value }))
@@ -51,11 +56,10 @@ function SignUpPage() {
                 />
 
                 <AuthInput
-                    icon={phoneIcon}
-                    type="tel"
-                    placeholder="Phone Number"
-                    value={form.phone}
-                    onChange={updateField("phone")}
+                    icon={bagIcon}
+                    options={ROLE_OPTIONS}
+                    value={form.role}
+                    onChange={updateField("role")}
                     required
                 />
 
@@ -76,20 +80,6 @@ function SignUpPage() {
                     onChange={updateField("confirmPassword")}
                     required
                 />
-
-                <label className={styles.agreement}>
-                    <input
-                        type="checkbox"
-                        checked={agreed}
-                        onChange={(e) => setAgreed(e.target.checked)}
-                        required
-                    />
-                    <span>
-                        I agree to the{" "}
-                        <Link to="/terms-of-service">Terms of Service</Link> and{" "}
-                        <Link to="/privacy-policy">Privacy Policy</Link>
-                    </span>
-                </label>
 
                 <button type="submit" className={styles.submitButton}>
                     Sign Up
