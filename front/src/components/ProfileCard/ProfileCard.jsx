@@ -15,17 +15,17 @@ function ProfileCard({
   phone,
   location,
   aboutMe,
-  appliedJobsCount,
-  savedJobsCount,
-  cvViewsCount,
-  reachoutsCount,
+  appliedJobs,
+  savedJobs,
+  cvViews,
+  reachouts,
   onEditProfile,
   onUploadCV,
 }) {
   const isProfileVariant = variant === "profile";
 
   return (
-        <div className={`${styles.profileCard} ${isProfileVariant ? styles.profileVariant : ""}`}>
+    <div className={`${styles.profileCard} ${isProfileVariant ? styles.profileVariant : ""}`}>
       <div className={styles.photoBox}>
         <img src={profileLogo} alt="profileLogo" className={styles.profileLogo} />
         <h2 className={`${styles.profileName} ${typography.heding1}`}>{name}</h2>
@@ -52,10 +52,10 @@ function ProfileCard({
         </div>
       ) : (
         <Achievements
-          appliedJobsCount={appliedJobsCount}
-          savedJobsCount={savedJobsCount}
-          cvViewsCount={cvViewsCount}
-          reachoutsCount={reachoutsCount}
+          appliedJobs={appliedJobs}
+          savedJobs={savedJobs}
+          cvViews={cvViews}
+          reachouts={reachouts}
         />
       )}
     </div>
