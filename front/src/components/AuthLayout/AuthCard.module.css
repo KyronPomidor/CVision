@@ -1,0 +1,46 @@
+.card {
+  width: 460px;
+  max-width: 90vw;
+  background: rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(0.5px);
+  -webkit-backdrop-filter: blur(0.5px);
+  border-radius: 17px;
+  padding: 40px 36px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+  white-space: nowrap;
+  color: var(--color-primary);
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.submitButton {
+  height: 44px;
+  border: none;
+  border-radius: 10px;
+  background: var(--color-primary);
+  color: var(--color-background);
+  cursor: pointer;
+}
+
+.submitButton:hover {
+  background: var(--color-secondary);
+}
+
+.switchText {
+  text-align: center;
+}
+
+.switchLink {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+.switchLink:hover {
+  text-decoration: underline;
+}
