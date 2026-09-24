@@ -44,8 +44,8 @@ async function getCV(cvId) {
         title: "IT Support Intern",
         company: "Endava",
         location: "Chișinău",
-        startDate: "March 2025",
-        endDate: "June 2026",
+        startDate: "2025-03-01",
+        endDate: "2026-06-01",
         description:
           'When creating a professional profile, blog or website, an "about me" statement can quickly show employers, clients or customers who you are and what you offer.',
       },
@@ -54,8 +54,8 @@ async function getCV(cvId) {
         title: "IT Support Intern",
         company: "Endava",
         location: "Chișinău",
-        startDate: "March 2025",
-        endDate: "June 2026",
+        startDate: "2025-03-01",
+        endDate: "2026-06-01",
         description:
           'When creating a professional profile, blog or website, an "about me" statement can quickly show employers, clients or customers who you are and what you offer.',
       },
@@ -64,8 +64,8 @@ async function getCV(cvId) {
         title: "IT Support Intern",
         company: "Endava",
         location: "Chișinău",
-        startDate: "March 2025",
-        endDate: "June 2026",
+        startDate: "2025-03-01",
+        endDate: "2026-06-01",
         description:
           'When creating a professional profile, blog or website, an "about me" statement can quickly show employers, clients or customers who you are and what you offer.',
       },
