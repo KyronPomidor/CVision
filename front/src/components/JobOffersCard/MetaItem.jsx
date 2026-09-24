@@ -1,5 +1,5 @@
 import styles from "./MetaItem.module.css";
-import typography from "../../../../Typography.module.css";
+import typography from "../../Typography.module.css";
 
 function MetaItem({ icon, children }) {
   return (

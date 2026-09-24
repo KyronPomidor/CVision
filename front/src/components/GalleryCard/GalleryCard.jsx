@@ -1,12 +1,12 @@
 import { useState } from "react";
 import styles from "./GalleryCard.module.css";
-import typography from "../../../../Typography.module.css";
+import typography from "../../Typography.module.css";
 import caretLeft from "./assets/caret_circle_left.svg";
 import caretRight from "./assets/caret_circle_right.svg";
 
 const VISIBLE = 4;
 
-function GalleryCard({ gallery }) {
+function GalleryCard({ className = "", gallery }) {
   const [start, setStart] = useState(0);
 
   const total = gallery.length;
@@ -20,7 +20,7 @@ function GalleryCard({ gallery }) {
     : gallery;
 
   return (
-    <div className={`${styles.card} ${styles.galleryCard}`}>
+    <div className={`${className} ${styles.card} ${styles.galleryCard}`}>
       <div className={styles.header}>
         <h2 className={typography.heading2}>Company Gallery</h2>
         <div className={styles.arrows}>
