@@ -23,7 +23,6 @@ public class JobPostingMapperImpl implements JobPostingMapper {
 
     @Override
     public JobPosting toEntity(JobPostingRequest request) {
-
         JobPostingDetails details = JobPostingDetails.builder()
                 .jobType(request.getDetails().getJobType())
                 .workSetting(request.getDetails().getWorkSetting())
@@ -49,18 +48,25 @@ public class JobPostingMapperImpl implements JobPostingMapper {
             JobPosting posting,
             List<SkillResponse> skills
     ) {
+        return toResponse(posting, skills, null);
+    }
 
-        JobPostingDetailsResponse details =
-                JobPostingDetailsResponse.builder()
-                        .jobType(posting.getDetails().getJobType())
-                        .workSetting(posting.getDetails().getWorkSetting())
-                        .location(posting.getDetails().getLocation())
-                        .salary(posting.getDetails().getSalary())
-                        .schedule(posting.getDetails().getSchedule())
-                        .experience(posting.getDetails().getExperience())
-                        .education(posting.getDetails().getEducation())
-                        .contactEmail(posting.getDetails().getContactEmail())
-                        .build();
+    @Override
+    public JobPostingResponse toResponse(
+            JobPosting posting,
+            List<SkillResponse> skills,
+            Double matchScore
+    ) {
+        JobPostingDetailsResponse details = JobPostingDetailsResponse.builder()
+                .jobType(posting.getDetails().getJobType())
+                .workSetting(posting.getDetails().getWorkSetting())
+                .location(posting.getDetails().getLocation())
+                .salary(posting.getDetails().getSalary())
+                .schedule(posting.getDetails().getSchedule())
+                .experience(posting.getDetails().getExperience())
+                .education(posting.getDetails().getEducation())
+                .contactEmail(posting.getDetails().getContactEmail())
+                .build();
 
         return JobPostingResponse.builder()
                 .id(posting.getId())
@@ -71,6 +77,7 @@ public class JobPostingMapperImpl implements JobPostingMapper {
                 .createdAt(posting.getCreatedAt())
                 .status(posting.getStatus())
                 .skills(skills)
+                .matchScore(matchScore)
                 .build();
     }
 }
