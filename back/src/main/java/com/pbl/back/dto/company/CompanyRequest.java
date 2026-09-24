@@ -4,6 +4,8 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 public class CompanyRequest {
@@ -11,6 +13,8 @@ public class CompanyRequest {
     @NotBlank
     private String name;
     private String description;
-    private String website;
     private String location;
+    private String logo;
+    private List<String> photos;
+    private CompanyDetailsRequest details;
 }

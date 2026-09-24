@@ -3,6 +3,8 @@ package com.pbl.back.dto.company;
 import lombok.Builder;
 import lombok.Getter;
 
+import java.util.List;
+
 @Getter
 @Builder
 public class CompanyResponse {
@@ -11,6 +13,8 @@ public class CompanyResponse {
     private Long userId;
     private String name;
     private String description;
-    private String website;
     private String location;
+    private String logo;
+    private List<String> photos;
+    private CompanyDetailsResponse details;
 }

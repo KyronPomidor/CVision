@@ -1,0 +1,48 @@
+.languages {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+
+  border: var(--border-weight-light) solid var(--color-border);
+  border-radius: 8px;
+}
+
+.languagesList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.languageRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.languageName {
+  min-width: 90px;
+}
+
+.levelsList {
+  display: flex;
+  gap: 20px;
+}
+
+.levelPill {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 30px;
+  padding: 8px 10px;
+
+  background-color: var(--color-background-header);
+  border-radius: 100px;
+}
+
+.levelPillActive {
+  background-color: var(--color-primary);
+  color: var(--color-background);
+}

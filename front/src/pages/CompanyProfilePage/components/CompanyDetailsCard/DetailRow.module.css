@@ -1,0 +1,17 @@
+.row {
+  display: grid;
+  grid-template-columns: 3fr 12fr minmax(0, 28fr);
+  align-items: center;
+}
+
+.icon {
+  width: 30px;
+  height: 30px;
+  color: var(--color-text-body);
+}
+
+.value {
+  font-weight: 700;
+  color: var(--color-primary);
+  overflow-wrap: anywhere;
+}

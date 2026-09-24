@@ -1,0 +1,21 @@
+.contactInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: start;
+  width: fit-content;
+}
+
+.contactInfo > div {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.emailLogo path,
+.telephoneLogo path,
+.locationLogo path {
+  width: 23px;
+  height: 23px;
+  stroke: var(--color-text-body);
+}

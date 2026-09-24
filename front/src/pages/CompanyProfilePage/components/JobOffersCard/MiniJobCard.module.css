@@ -1,0 +1,45 @@
+.jobCard {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  gap: 15px;
+  border: var(--border-weight-light) solid var(--color-border);
+  border-radius: 5px;
+}
+
+.logo {
+  align-self: flex-start;
+  width: 40px;
+  height: 40px;
+  border: var(--border-weight-light) solid var(--color-border);
+  border-radius: 5px;
+}
+
+.title {
+  color: var(--color-text-heading);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 10px;
+}
+
+.meta {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.apply {
+  align-self: flex-end;
+  background-color: var(--color-primary);
+  color: var(--color-background-accent);
+  border: none;
+  border-radius: 999px;
+  padding: 8px 16px;
+  white-space: nowrap;
+  cursor: pointer;
+}

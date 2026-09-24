@@ -58,8 +58,19 @@ public class CompanyServiceImpl implements CompanyService {
 
         company.setName(request.getName());
         company.setDescription(request.getDescription());
-        company.setWebsite(request.getWebsite());
         company.setLocation(request.getLocation());
+        company.setLogo(request.getLogo());
+        company.setPhotos(request.getPhotos());
+
+        company.getDetails().setWebsite(request.getDetails().getWebsite());
+        company.getDetails().setEmail(request.getDetails().getEmail());
+        company.getDetails().setAddress(request.getDetails().getAddress());
+        company.getDetails().setSize(request.getDetails().getSize());
+        company.getDetails().setFounded(request.getDetails().getFounded());
+        company.getDetails().setLinkedin(request.getDetails().getLinkedin());
+        company.getDetails().setInstagram(request.getDetails().getInstagram());
+        company.getDetails().setTwitter(request.getDetails().getTwitter());
+        company.getDetails().setFacebook(request.getDetails().getFacebook());
 
         return mapper.toResponse(repository.save(company));
     }

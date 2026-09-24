@@ -1,58 +1,65 @@
-import { Link } from "react-router-dom"
-import styles from "./Header.module.css"
-import mainLogo from "../../assets/main-logo.svg";
-import searсhLogo from "../../assets/search-icon.svg";
-import settingsLogo from "../../assets/settings-icon.svg";
-import notificationLogo from "../../assets/notification-icon.svg";
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import styles from "./Header.module.css";
+import Notifications from "../Notification/Notifications";
+import mainLogo from "../../../../Logo.svg";
+import SearchLogo from "../../assets/search-icon.svg?react";
+import SettingsLogo from "./assets/settings-icon.svg?react";
+import NotificationLogo from "./assets/notification-icon.svg?react";
 import profileLogo from "../../assets/profile-photo.png";
 
 function Header() {
+  const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
 
-    return (
-        <header className={styles.header} >
-              
-            <div className={styles.logoBox}> 
-                <Link to="/">
-                    <img src={mainLogo} alt="mainLogo" />
-                </Link>
-            </div>
-            
-            <div className={styles.searchBox}> 
-                <form className={styles.searchBar} /* TODO: Back implementation*/>
-                    <input 
-                        type="text" 
-                        className={styles.searchInput}
-                        placeholder="Job title, Salary, or Companies...."
-                        aria-label="Search jobs"
-                        
-                        //TODO: Back implementation
-                    
-                    />
+  return (
+    <header className={styles.header}>
+      <div className={styles.logoBox}>
+        <Link to="/">
+          <img src={mainLogo} alt="mainLogo" className={styles.mainLogo} />
+        </Link>
+      </div>
 
-                    <button type="submit" className={styles.searchButton} aria-label="Search button">
-                        <img src={searсhLogo} alt="searсhLogo" className={styles.searсhLogo}/>
-                    </button>
-                </form>
-                
+      <div className={styles.searchBox}>
+        <form className={styles.searchBar} /* TODO: Back implementation*/>
+          <input
+            type="text"
+            className={styles.searchInput}
+            placeholder="Job title, Salary, or Companies...."
+            aria-label="Search jobs"
 
-            </div>
-            <div className={styles.toolsBox}>  
-                <form action="" className={styles.toolsChoose}>
-                    <button className={styles.setingsButton} aria-label="Settings button">
-                        <img src={settingsLogo} alt="settingsLogo" className={styles.settingsLogo} />
-                    </button>
-                    <button className={styles.notificationButton} aria-label="Notification button">
-                        <img src={notificationLogo} alt="notificationLogo" className={styles.notificationLogo} />
-                    </button>
-                    <Link to="/profile" className={styles.profileButton} aria-label="Profile button">
-                        <img src={profileLogo} alt="profileLogo" className={styles.profileLogo} />
-                    </Link>
-                </form>
-            </div>
-            
-        </header>
-        
-    )
+            //TODO: Back implementation
+          />
+
+          <button type="submit" className={styles.searchButton} aria-label="Search button">
+            <SearchLogo className={styles.searchLogo} />
+          </button>
+        </form>
+      </div>
+      <div className={styles.toolsBox}>
+        <div className={styles.toolsChoose}>
+          <button type="button" className={styles.setingsButton} aria-label="Settings button">
+            <SettingsLogo className={styles.settingsLogo} />
+          </button>
+
+          <button
+            type="button"
+            className={styles.notificationButton}
+            aria-label="Notification button"
+            aria-expanded={isNotificationsOpen}
+            onClick={() => setIsNotificationsOpen((prev) => !prev)}
+          >
+            <NotificationLogo className={styles.notificationLogo} />
+          </button>
+
+          <Link to="/profile" className={styles.profileButton} aria-label="Profile button">
+            <img src={profileLogo} alt="profileLogo" className={styles.profileLogo} />
+          </Link>
+        </div>
+      </div>
+
+      {isNotificationsOpen && <Notifications />}
+    </header>
+  );
 }
 
-export default Header
+export default Header;
