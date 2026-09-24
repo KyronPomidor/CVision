@@ -1,50 +1,50 @@
 .field {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    height: 52px;
-    padding: 0 18px;
-    border: var(--border-weight-light) solid var(--color-text-body);
-    border-radius: 10px;
-    background: var(--color-background);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 52px;
+  padding: 0 18px;
+  border: var(--border-weight-light) solid var(--color-text-body);
+  border-radius: 10px;
+  background: var(--color-background);
 }
 
 .field:focus-within {
-    border-color: var(--color-primary);
+  border-color: var(--color-primary);
 }
 
 .icon {
-    width: 18px;
-    height: 18px;
-    flex-shrink: 0;
-    color: var(--color-text-body);
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  color: var(--color-text-body);
 }
 
 .field input {
-    flex: 1;
-    border: none;
-    outline: none;
-    background: transparent;
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
 }
 
 .field input::placeholder {
-    color: var(--color-text-muted);
+  color: var(--color-text-muted);
 }
 
 .field select {
-    flex: 1;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    padding-right: 22px;    
+  flex: 1;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding-right: 22px;
 }
 
 .field select:invalid,
 .field select option[value=""] {
-    color: var(--color-text-muted);
+  color: var(--color-text-muted);
 }
 
 .field select option {
-    color: var(--color-text-body);
-    font-weight: 600;
+  color: var(--color-text-body);
+  font-weight: 600;
 }

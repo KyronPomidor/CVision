@@ -4,14 +4,14 @@ import Header from "./components/Header/Header";
 import HomePage from "./pages/HomePage/HomePage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import CompanyProfilePage from "./pages/CompanyProfilePage/CompanyProfilePage";
-import LoginPage from './pages/LoginPage/LoginPage'
-import SignUpPage from './pages/SignUpPage/SignUpPage'
+import LoginPage from "./pages/LoginPage/LoginPage";
+import SignUpPage from "./pages/SignUpPage/SignUpPage";
 
 function MainLayout() {
   return (
     <>
       <Header />
-      <Outlet />  
+      <Outlet />
     </>
   );
 }
