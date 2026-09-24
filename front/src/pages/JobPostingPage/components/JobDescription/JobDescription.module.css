@@ -52,6 +52,18 @@
     border: var(--border-weight-light) solid var(--color-primary);
     border-radius: 999px;
     padding: 10px 20px;
+
+    box-shadow: 0 7px var(--color-text-muted);
+}
+
+.favorite:active,
+.favorite[aria-pressed="true"] {
+    transform: translateY(4px);
+    box-shadow: 0 3px var(--color-text-muted);
+ }
+
+.favorite[aria-pressed="true"] .starLogo {
+    fill: var(--color-primary);
 }
 
 .starLogo {
