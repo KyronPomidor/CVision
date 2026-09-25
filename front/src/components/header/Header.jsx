@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "./Header.module.css";
 import Notifications from "../Notification/Notifications";
+import SettingsMenu from "../Settings/SettingsMenu";
 import mainLogo from "../../../../Logo.svg";
 import SearchLogo from "../../assets/search-icon.svg?react";
 import SettingsLogo from "./assets/settings-icon.svg?react";
@@ -10,6 +11,7 @@ import profileLogo from "../../assets/profile-photo.png";
 
 function Header() {
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
   return (
     <header className={styles.header}>
@@ -37,7 +39,13 @@ function Header() {
       </div>
       <div className={styles.toolsBox}>
         <div className={styles.toolsChoose}>
-          <button type="button" className={styles.setingsButton} aria-label="Settings button">
+          <button
+            type="button"
+            className={styles.setingsButton}
+            aria-label="Settings button"
+            aria-expanded={isSettingsOpen}
+            onClick={() => setIsSettingsOpen((prev) => !prev)}
+          >
             <SettingsLogo className={styles.settingsLogo} />
           </button>
 
@@ -58,6 +66,7 @@ function Header() {
       </div>
 
       {isNotificationsOpen && <Notifications />}
+      {isSettingsOpen && <SettingsMenu />}
     </header>
   );
 }

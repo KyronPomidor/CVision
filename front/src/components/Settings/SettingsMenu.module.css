@@ -1,0 +1,33 @@
+.SettingsMenu {
+  z-index: 1000;
+  position: fixed;
+  top: 120px;
+  right: 120px;
+  width: clamp(160px, 25vw, 220px);
+  padding: 10px;
+
+  display: flex;
+  flex-direction: column;
+
+  background-color: var(--color-background);
+  border: var(--border-weight-light) solid var(--color-border);
+  border-radius: 8px;
+  box-shadow: 0 0px 20px var(--color-text-muted);
+}
+
+.signOutButton {
+  padding: 8px 4px;
+
+  border: none;
+  background: none;
+  color: red;
+  font-size: var(--font-size-body);
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.signOutButton:hover {
+  color: var(--color-text-body);
+}
