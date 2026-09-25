@@ -6,6 +6,7 @@ import Star from "../../../../assets/star-logo.svg?react";
 
 function JobDescription({ className = "", skills, description, ...props }) {
   const [isFavorite, setIsFavorite] = useState(false);
+  const [isApplied, setIsApplied] = useState(false);
 
   return (
     <div className={`${className} ${styles.container}`} {...props}>
@@ -24,7 +25,14 @@ function JobDescription({ className = "", skills, description, ...props }) {
         </div>
       </div>
       <div className={styles.buttonRow}>
-        <button className={`${typography.heading2} ${styles.apply}`}>Apply</button>
+        <button
+          type="button"
+          className={`${typography.heading2} ${styles.apply}`}
+          onClick={() => setIsApplied(true)}
+          disabled={isApplied}
+        >
+          {isApplied ? "Applied" : "Apply"}
+        </button>
         <button
           type="button"
           className={`${styles.favorite} ${isFavorite ? styles.favoriteActive : ""}`}

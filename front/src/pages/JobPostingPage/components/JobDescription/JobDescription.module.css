@@ -70,3 +70,18 @@
 .starLogo {
   color: var(--color-primary);
 }
+
+.apply:hover {
+  background-color: var(--color-secondary);
+  cursor: pointer;
+}
+
+.apply:disabled {
+  background-color: var(--color-text-muted);
+  color: var(--color-background);
+  cursor: not-allowed;
+}
+
+.apply:disabled:hover {
+  background-color: var(--color-text-muted);
+}
