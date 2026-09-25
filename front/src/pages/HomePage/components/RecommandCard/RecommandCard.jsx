@@ -3,7 +3,7 @@ import typography from "../../../../Typography.module.css";
 import BookLogo from "./assets/book-logo.svg?react";
 import JobCard from "./JobCard";
 
-function RecommandCard({ jobs = [] }) {
+function RecommandCard({ jobs = [], savedJobs = [], appliedJobs = [], onToggleStar, onApply }) {
   return (
     <div className={styles.RecommandCard}>
       <div className={styles.header}>
@@ -25,9 +25,10 @@ function RecommandCard({ jobs = [] }) {
             salary={job.salary}
             experience={job.experience}
             matchPercent={job.matchPercent}
-            isStarred={job.isStarred}
-            onToggleStar={() => job.onToggleStar?.(job.id)}
-            onApply={() => job.onApply?.(job.id)}
+            isStarred={savedJobs.includes(job.id)}
+            isApplied={appliedJobs.includes(job.id)}
+            onToggleStar={() => onToggleStar?.(job.id)}
+            onApply={() => onApply?.(job.id)}
           />
         ))}
       </div>

@@ -22,8 +22,8 @@ async function getProfileByUser(userId) {
     aboutMe: `A junior IT professional passionate about technology and problem-solving. 
 I am eager to grow my skills, learn from experienced teams, and contribute to meaningful projects.`,
     // arrays of ids rather than plain counts:
-    appliedJobs: [1, 2, 3],
-    savedJobs: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
+    appliedJobs: [],
+    savedJobs: [],
     cvViews: [1],
     reachouts: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
   };
@@ -114,11 +114,12 @@ async function getRecommendations(userId) {
 }
 
 function HomePage() {
-  // TODO: pull the real userId from auth/session context once it exists
   const userId = 1;
 
   const [profile, setProfile] = useState(null);
   const [jobs, setJobs] = useState([]);
+  const [savedJobs, setSavedJobs] = useState([]);
+  const [appliedJobs, setAppliedJobs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -130,10 +131,24 @@ function HomePage() {
       .then(([profileData, jobsData]) => {
         setProfile(profileData);
         setJobs(jobsData);
+        setSavedJobs(profileData.savedJobs);
+        setAppliedJobs(profileData.appliedJobs);
       })
       .catch((err) => setError(err))
       .finally(() => setLoading(false));
   }, [userId]);
+
+  function handleToggleStar(jobId) {
+    setSavedJobs((prev) =>
+      prev.includes(jobId) ? prev.filter((id) => id !== jobId) : [...prev, jobId]
+    );
+    // TODO: persist via API, e.g. toggleSavedJob(userId, jobId)
+  }
+
+  function handleApply(jobId) {
+    setAppliedJobs((prev) => (prev.includes(jobId) ? prev : [...prev, jobId]));
+    // TODO: persist via API, e.g. applyToJob(userId, jobId)
+  }
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Something went wrong.</p>;
@@ -149,15 +164,21 @@ function HomePage() {
           phone={profile.phone}
           location={profile.location}
           aboutMe={profile.aboutMe}
-          appliedJobs={profile.appliedJobs}
-          savedJobs={profile.savedJobs}
+          appliedJobs={appliedJobs}
+          savedJobs={savedJobs}
           cvViews={profile.cvViews}
           reachouts={profile.reachouts}
           onEditProfile={() => console.log("edit clicked")}
         />
       </div>
 
-      <RecommandCard jobs={jobs} />
+      <RecommandCard
+        jobs={jobs}
+        savedJobs={savedJobs}
+        appliedJobs={appliedJobs}
+        onToggleStar={handleToggleStar}
+        onApply={handleApply}
+      />
 
       <FilterCard />
     </div>

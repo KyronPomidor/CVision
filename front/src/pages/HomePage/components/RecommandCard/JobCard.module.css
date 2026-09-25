@@ -174,3 +174,9 @@
 .applyButton:hover {
   opacity: 0.85;
 }
+
+.applyButton:disabled {
+  background-color: var(--color-text-muted);
+  color: var(--color-background);
+  cursor: not-allowed;
+}

@@ -1,9 +1,10 @@
+import { Link } from "react-router-dom";
 import styles from "./AboutMe.module.css";
 import typography from "../../Typography.module.css";
 
 import pencilLogo from "../../assets/pencil-logo.svg";
 
-function AboutMe({ aboutMe, onEditProfile, showEditButton = true }) {
+function AboutMe({ aboutMe, showEditButton = true }) {
   return (
     <div className={styles.aboutMeBox}>
       <div className={styles.aboutMeSection}>
@@ -13,16 +14,10 @@ function AboutMe({ aboutMe, onEditProfile, showEditButton = true }) {
 
       {showEditButton && (
         <div className={styles.editButtonWrapper}>
-          {/*
-            TODO: once routing is set up, replace onEditProfile with real
-            navigation, e.g.:
-              const navigate = useNavigate();
-              <button onClick={() => navigate("/profile/edit")}>
-          */}
-          <button type="button" className={styles.editButton} onClick={onEditProfile}>
+          <Link to="/profile" className={styles.editButton} aria-label="Edit profile">
             <img src={pencilLogo} alt="pencilLogo" className={styles.pencilLogo} />
             <p className={styles.editText}>Edit Profile</p>
-          </button>
+          </Link>
         </div>
       )}
     </div>

@@ -55,9 +55,11 @@ function JobCard({
   experience,
   matchPercent,
   isStarred,
+  isApplied,
   onToggleStar,
   onApply,
 }) {
+
   const matchLevel = getMatchLevel(matchPercent);
   const postedText = getPostedTime(postedAt);
 
@@ -121,12 +123,18 @@ function JobCard({
       </div>
 
       <div className={styles.bottomRow}>
-        <button type="button" className={styles.applyButton} onClick={onApply}>
-          Apply
+        <button
+          type="button"
+          className={styles.applyButton}
+          onClick={onApply}
+          disabled={isApplied}
+        >
+          {isApplied ? "Applied" : "Apply"}
         </button>
       </div>
     </div>
   );
+
 }
 
 export default JobCard;
