@@ -37,6 +37,7 @@ async function getRecommendations(userId) {
   const mockJobs = [
     {
       id: 1,
+      companyId: 1,
       logo: endavaLogo,
       title: "Java Junior Developer",
       company: "Endava",
@@ -49,6 +50,7 @@ async function getRecommendations(userId) {
     },
     {
       id: 2,
+      companyId: 2,
       logo: pentalogLogo,
       title: "C# Junior Developer",
       company: "Pentalog",
@@ -61,6 +63,7 @@ async function getRecommendations(userId) {
     },
     {
       id: 3,
+      companyId: 3,
       logo: roslinLogo,
       title: "Middle Golang Engineer",
       company: "Roslin Solutions",
@@ -73,6 +76,7 @@ async function getRecommendations(userId) {
     },
     {
       id: 4,
+      companyId: 3,
       logo: roslinLogo,
       title: "Middle Golang Engineer",
       company: "Roslin Solutions",
@@ -85,6 +89,7 @@ async function getRecommendations(userId) {
     },
     {
       id: 5,
+      companyId: 3,
       logo: roslinLogo,
       title: "Middle Golang Engineer",
       company: "Roslin Solutions",
@@ -97,6 +102,7 @@ async function getRecommendations(userId) {
     },
     {
       id: 6,
+      companyId: 3,
       logo: roslinLogo,
       title: "Middle Golang Engineer",
       company: "Roslin Solutions",

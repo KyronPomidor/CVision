@@ -17,6 +17,8 @@ function RecommandCard({ jobs = [], savedJobs = [], appliedJobs = [], onToggleSt
         {jobs.map((job) => (
           <JobCard
             key={job.id}
+            jobId={job.id}
+            companyId={job.companyId}
             logo={job.logo}
             title={job.title}
             company={job.company}

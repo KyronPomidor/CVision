@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styles from "./JobCard.module.css";
 import typography from "../../../../Typography.module.css";
 import ClockLogo from "../../../../assets/clock-logo.svg?react";
@@ -46,6 +47,8 @@ function getMatchLevel(matchPercent) {
 }
 
 function JobCard({
+  jobId,
+  companyId,
   logo,
   title,
   company,
@@ -59,7 +62,6 @@ function JobCard({
   onToggleStar,
   onApply,
 }) {
-
   const matchLevel = getMatchLevel(matchPercent);
   const postedText = getPostedTime(postedAt);
 
@@ -67,13 +69,20 @@ function JobCard({
     <div className={styles.jobCard}>
       <div className={styles.topRow}>
         <div className={styles.companyInfo}>
-          <img src={logo} alt={`${company} logo`} className={styles.companyLogo} />
+          <Link to={`/companies/${companyId}`}> 
+            <img src={logo} alt={`${company} logo`} className={styles.companyLogo} />
+          </Link>
 
           <div className={styles.titleBlock}>
-            <h3 className={typography.heading2}>{title}</h3>
-            <p className={styles.companyName}>{company}</p>
+            <Link to={`/jobs/${jobId}`}>
+              <h3 className={`${typography.heading2} ${styles.jobTitle}`}>{title}</h3>
+            </Link>
+            <Link to={`/companies/${companyId}`} className={styles.companyName}>
+              {company}
+            </Link>
           </div>
         </div>
+
 
         <div className={styles.metaRight}>
           <p className={`${typography.mainText} ${styles.postedText}`}>{postedText}</p>
