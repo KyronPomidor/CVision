@@ -24,7 +24,7 @@ apiClient.interceptors.response.use(
   },
 );
 
-function logout() {
+export function logout() {
   localStorage.removeItem("token");
   if (window.location.pathname !== "/login") {
     window.location.href = "/login";
