@@ -20,18 +20,18 @@ function LoginPage() {
     e.preventDefault();
     setError("");
 
-    try{
+    try {
       await login(email, password);
       const redirectTo = location.state?.from?.pathname || "/";
       navigate(redirectTo, { replace: true });
-    } catch(err){
+    } catch (err) {
       if (err.response?.status === 401) {
         setError("Invalid email or password.");
       } else {
         setError("Something went wrong. Please try again.");
       }
+    }
   }
-}
 
   return (
     <AuthLayout>

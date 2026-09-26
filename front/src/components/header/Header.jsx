@@ -9,11 +9,10 @@ import SettingsLogo from "./assets/settings-icon.svg?react";
 import NotificationLogo from "./assets/notification-icon.svg?react";
 import profileLogo from "../../assets/profile-photo.png";
 
-
 function Header() {
   const [openMenu, setOpenMenu] = useState(null);
 
-  function toggleMenu(menu){
+  function toggleMenu(menu) {
     setOpenMenu((prev) => (prev === menu ? null : menu));
   }
 
@@ -44,10 +43,11 @@ function Header() {
       <div className={styles.toolsBox}>
         <div className={styles.toolsChoose}>
           <div className={styles.settingsRelative}>
-            <button type="button"
-            className={styles.settingsButton}
-            aria-label="Settings button"
-            onClick={() => toggleMenu("settings")}
+            <button
+              type="button"
+              className={styles.settingsButton}
+              aria-label="Settings button"
+              onClick={() => toggleMenu("settings")}
             >
               <SettingsLogo className={styles.settingsLogo} />
             </button>

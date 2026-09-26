@@ -8,8 +8,8 @@ export async function login(email, password) {
   return response.data;
 }
 
-export async function signup({ accountName, email, password, role }){
-  await createUser({ accountName, email, password, role});
+export async function signup({ accountName, email, password, role }) {
+  await createUser({ accountName, email, password, role });
   return login(email, password);
 }
 
