@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import { login } from "../../api/auth";
 import AuthLayout from "../../components/AuthLayout/AuthLayout";
 import AuthInput from "../../components/AuthLayout/AuthInput";
 import MailLogo from "../../assets/mail-icon.svg?react";
@@ -11,10 +12,26 @@ function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  function handleSubmit(e) {
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  async function handleSubmit(e) {
     e.preventDefault();
-    // TODO: call login API
+    setError("");
+
+    try{
+      await login(email, password);
+      const redirectTo = location.state?.from?.pathname || "/";
+      navigate(redirectTo, { replace: true });
+    } catch(err){
+      if (err.response?.status === 401) {
+        setError("Invalid email or password.");
+      } else {
+        setError("Something went wrong. Please try again.");
+      }
   }
+}
 
   return (
     <AuthLayout>
