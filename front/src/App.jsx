@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
 import Header from "./components/Header/Header";
+import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import HomePage from "./pages/HomePage/HomePage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import CompanyProfilePage from "./pages/CompanyProfilePage/CompanyProfilePage";
@@ -22,10 +23,12 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route element={<MainLayout />}>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/companies/:companyId" element={<CompanyProfilePage />} />
-          <Route path="/jobs/:jobId" element={<JobPostingPage />} />
+          <Route element={<ProtectedRoute />}>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/profile" element={<ProfilePage />} />
+            <Route path="/companies/:companyId" element={<CompanyProfilePage />} />
+            <Route path="/jobs/:jobId" element={<JobPostingPage />} />
+          </Route>
         </Route>
 
         {/* Pages without Header - add outside of MainLayout */}
