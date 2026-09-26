@@ -58,7 +58,7 @@ public class RateLimitFilter implements Filter {
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
             try {
                 return "user:" + jwtService.extractUserId(authHeader.substring(7));
-            } catch (JwtException | NumberFormatException ignored) {
+            } catch (JwtException | IllegalArgumentException ignored) {
                 // The JWT filter will reject invalid tokens; rate-limit this attempt by IP.
             }
         }

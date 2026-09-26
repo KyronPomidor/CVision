@@ -14,9 +14,16 @@ import java.util.Date;
 public class JWTService {
 
     private final SecretKey secretKey;
+    private final long preAuthExpiryMillis;
 
-    public JWTService(@Value("${app.jwt.secret}") String jwtSecret) {
+    public JWTService(
+            @Value("${app.jwt.secret}") String jwtSecret,
+            @Value("${app.otp.expiry-minutes:5}") long otpExpiryMinutes) {
+        if (otpExpiryMinutes < 1) {
+            throw new IllegalArgumentException("app.otp.expiry-minutes must be greater than zero");
+        }
         this.secretKey = Keys.hmacShaKeyFor(jwtSecret.getBytes(StandardCharsets.UTF_8));
+        this.preAuthExpiryMillis = otpExpiryMinutes * 60_000;
     }
 
     public String generateToken(User user) {
@@ -31,13 +38,40 @@ public class JWTService {
     }
 
     public Long extractUserId(String token) {
-        return Long.valueOf(
-        Jwts.parser()
+        var claims = Jwts.parser()
                 .verifyWith(secretKey)
                 .build()
                 .parseSignedClaims(token)
-                .getPayload()
-                .getSubject()
-        );
+                .getPayload();
+        if (claims.containsKey("preAuth")) {
+            throw new IllegalArgumentException("Pre-authentication tokens are not access tokens");
+        }
+        return Long.valueOf(claims.getSubject());
+    }
+
+    public String generatePreAuthToken(User user) {
+        return Jwts.builder()
+                .subject(user.getId().toString())
+                .claim("role", user.getRole().name())
+                .claim("preAuth", true)
+                .issuedAt(new Date())
+                .expiration(new Date(System.currentTimeMillis() + preAuthExpiryMillis))
+                .signWith(secretKey)
+                .compact();
+    }
+
+    public Long parsePreAuthToken(String token) {
+        if (token == null || token.isBlank()) {
+            throw new IllegalArgumentException("Pre-authentication token is required");
+        }
+        var claims = Jwts.parser()
+                .verifyWith(secretKey)
+                .build()
+                .parseSignedClaims(token)
+                .getPayload();
+        if (!Boolean.TRUE.equals(claims.get("preAuth", Boolean.class))) {
+            throw new IllegalArgumentException("Not a pre-authentication token");
+        }
+        return Long.valueOf(claims.getSubject());
     }
 }

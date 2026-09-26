@@ -35,4 +35,14 @@ public class User {
 
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
+
+    @Builder.Default
+    @Column(name = "two_factor_enabled", nullable = false, columnDefinition = "boolean default false")
+    private boolean twoFactorEnabled = false;
+
+    @Column(name = "otp_code_hash")
+    private String otpCodeHash;
+
+    @Column(name = "otp_expires_at")
+    private LocalDateTime otpExpiresAt;
 }
