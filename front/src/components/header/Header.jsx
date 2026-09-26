@@ -2,14 +2,20 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "./Header.module.css";
 import Notifications from "../Notification/Notifications";
+import SettingsMenu from "../SettingsMenu/SettingsMenu";
 import mainLogo from "../../../../Logo.svg";
 import SearchLogo from "../../assets/search-icon.svg?react";
 import SettingsLogo from "./assets/settings-icon.svg?react";
 import NotificationLogo from "./assets/notification-icon.svg?react";
 import profileLogo from "../../assets/profile-photo.png";
 
+
 function Header() {
-  const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
+  const [openMenu, setOpenMenu] = useState(null);
+
+  function toggleMenu(menu){
+    setOpenMenu((prev) => (prev === menu ? null : menu));
+  }
 
   return (
     <header className={styles.header}>
@@ -37,16 +43,23 @@ function Header() {
       </div>
       <div className={styles.toolsBox}>
         <div className={styles.toolsChoose}>
-          <button type="button" className={styles.setingsButton} aria-label="Settings button">
-            <SettingsLogo className={styles.settingsLogo} />
-          </button>
+          <div className={styles.settingsRelative}>
+            <button type="button"
+            className={styles.settingsButton}
+            aria-label="Settings button"
+            onClick={() => toggleMenu("settings")}
+            >
+              <SettingsLogo className={styles.settingsLogo} />
+            </button>
+
+            {openMenu === "settings" && <SettingsMenu />}
+          </div>
 
           <button
             type="button"
             className={styles.notificationButton}
             aria-label="Notification button"
-            aria-expanded={isNotificationsOpen}
-            onClick={() => setIsNotificationsOpen((prev) => !prev)}
+            onClick={() => toggleMenu("notifications")}
           >
             <NotificationLogo className={styles.notificationLogo} />
           </button>
@@ -57,7 +70,7 @@ function Header() {
         </div>
       </div>
 
-      {isNotificationsOpen && <Notifications />}
+      {openMenu === "notifications" && <Notifications />}
     </header>
   );
 }
