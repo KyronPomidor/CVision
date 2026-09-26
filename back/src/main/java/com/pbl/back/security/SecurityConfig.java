@@ -3,6 +3,7 @@ package com.pbl.back.security;
 import com.pbl.back.service.UserDetailsService;
 import com.pbl.back.service.impl.JWTService;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -27,7 +28,9 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(
-            HttpSecurity http, JWTAuthFilter jwtAuthenticationFilter) throws Exception {
+            HttpSecurity http,
+            JWTAuthFilter jwtAuthenticationFilter,
+            RateLimitFilter rateLimitFilter) throws Exception {
 
         http
                 .csrf(csrf -> csrf.disable())
@@ -73,7 +76,8 @@ public class SecurityConfig {
                 .addFilterBefore(
                         jwtAuthenticationFilter,
                         UsernamePasswordAuthenticationFilter.class
-                );
+                )
+                .addFilterBefore(rateLimitFilter, JWTAuthFilter.class);
 
         return http.build();
     }
@@ -112,5 +116,14 @@ public class SecurityConfig {
             JWTService jwtService, UserDetailsService userDetailsService) {
 
         return new JWTAuthFilter(jwtService, userDetailsService);
+    }
+
+    @Bean
+    public FilterRegistrationBean<RateLimitFilter> rateLimitFilterRegistration(
+            RateLimitFilter rateLimitFilter) {
+        FilterRegistrationBean<RateLimitFilter> registration =
+                new FilterRegistrationBean<>(rateLimitFilter);
+        registration.setEnabled(false);
+        return registration;
     }
 }
