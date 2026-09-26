@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { signup } from "../../api/auth";
 import AuthLayout from "../../components/AuthLayout/AuthLayout";
 import AuthInput from "../../components/AuthLayout/AuthInput";
 import UserLogo from "../../assets/user-icon.svg?react";
@@ -23,14 +25,39 @@ function SignUpPage() {
     password: "",
     confirmPassword: "",
   });
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   function updateField(field) {
     return (e) => setForm((prev) => ({ ...prev, [field]: e.target.value }));
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-    // TODO: call sign up API
+    setError("");
+
+    if (form.password !== form.confirmPassword) {
+      setError("Passwords do not match.");
+      return;
+    }
+
+    try {
+      await signup({
+        accountName: form.fullName,
+        email: form.email,
+        password: form.password,
+        role: form.role,
+      });
+      navigate("/");
+    } catch (err) {
+      if (err.response?.status === 409) {
+        setError("An account with this email already exists.");
+      } else if (err.response?.status === 400) {
+        setError(err.response.data || "Please check your details and try again.");
+      } else {
+        setError("Something went wrong. Please try again.");
+      }
+    }
   }
 
   return (
