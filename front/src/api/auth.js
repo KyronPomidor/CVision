@@ -3,8 +3,7 @@ import { createUser } from "./users";
 
 export async function login(email, password) {
   const response = await apiClient.post("/auth/login", { email, password });
-  const { token } = response.data;
-  localStorage.setItem("token", token);
+  localStorage.setItem("isLoggedIn", "true");
   return response.data;
 }
 
