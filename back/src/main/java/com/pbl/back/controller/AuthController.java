@@ -1,7 +1,6 @@
 package com.pbl.back.controller;
 
 import com.pbl.back.domain.entity.User;
-import com.pbl.back.dto.LoginResponse;
 import com.pbl.back.dto.login.LoginRequest;
 import com.pbl.back.dto.login.PreAuthTokenRequest;
 import com.pbl.back.dto.login.TwoFactorRequiredResponse;
@@ -12,7 +11,10 @@ import com.pbl.back.service.CurrentUserService;
 import com.pbl.back.service.EmailOtpService;
 import com.pbl.back.service.impl.JWTService;
 import io.jsonwebtoken.JwtException;
+import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -20,6 +22,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.time.Duration;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -42,7 +46,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody LoginRequest request) {
+    public ResponseEntity<?> login(@RequestBody LoginRequest request, HttpServletResponse response) {
 
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
@@ -62,12 +66,14 @@ public class AuthController {
         }
 
         String token = jwtService.generateToken(user);
-
-        return ResponseEntity.ok(new LoginResponse(token));
+        addJwtCookie(response, token);
+        return ResponseEntity.ok().build();
     }
 
     @PostMapping("/2fa/verify")
-    public ResponseEntity<?> verifyTwoFactor(@RequestBody TwoFactorVerifyRequest request) {
+    public ResponseEntity<?> verifyTwoFactor(
+            @RequestBody TwoFactorVerifyRequest request,
+            HttpServletResponse response) {
         Long userId;
         try {
             userId = jwtService.parsePreAuthToken(request.getPreAuthToken());
@@ -89,7 +95,21 @@ public class AuthController {
             return ResponseEntity.badRequest().body("Invalid or expired code");
         }
 
-        return ResponseEntity.ok(new LoginResponse(jwtService.generateToken(user)));
+        addJwtCookie(response, jwtService.generateToken(user));
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/logout")
+    public ResponseEntity<Void> logout(HttpServletResponse response) {
+        ResponseCookie cookie = ResponseCookie.from("jwt", "")
+                .httpOnly(true)
+                .secure(false)
+                .sameSite("Lax")
+                .path("/")
+                .maxAge(0)
+                .build();
+        response.addHeader(HttpHeaders.SET_COOKIE, cookie.toString());
+        return ResponseEntity.ok().build();
     }
 
     @PostMapping("/2fa/resend")
@@ -132,5 +152,16 @@ public class AuthController {
         } catch (JwtException | IllegalArgumentException exception) {
             return null;
         }
+    }
+
+    private void addJwtCookie(HttpServletResponse response, String token) {
+        ResponseCookie cookie = ResponseCookie.from("jwt", token)
+                .httpOnly(true)
+                .secure(false)
+                .sameSite("Lax")
+                .path("/")
+                .maxAge(Duration.ofMinutes(30))
+                .build();
+        response.addHeader(HttpHeaders.SET_COOKIE, cookie.toString());
     }
 }
