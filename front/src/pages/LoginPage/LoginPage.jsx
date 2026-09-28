@@ -35,7 +35,7 @@ function LoginPage() {
 
   return (
     <AuthLayout>
-      <form className={styles.card} onSubmit={handleSubmit}>
+      <form className={`${styles.mainWindow} ${styles.card}`} onSubmit={handleSubmit}>
         <h1 className={`${typography.heading1} ${styles.title}`}>Welcome to CVision</h1>
 
         <AuthInput
@@ -67,6 +67,11 @@ function LoginPage() {
           </Link>
         </p>
       </form>
+      {error && (
+        <div className={`${typography.mainTextImportant} ${styles.errorWindow} ${styles.card}`}>
+          {error}
+        </div>
+      )}
     </AuthLayout>
   );
 }
