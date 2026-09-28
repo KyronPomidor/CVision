@@ -3,29 +3,23 @@ import axios from "axios";
 
 const apiClient = axios.create({
   baseURL: "http://localhost:8080/api",
-});
-
-apiClient.interceptors.request.use((config) => {
-  const isAuthRoute = config.url?.startsWith("/auth") || config.url === "/users";
-  const token = localStorage.getItem("token");
-  if (token && !isAuthRoute) {
-    config.headers.Authorization = `Bearer ${token}`;
-  }
-  return config;
+  withCredentials: true,
 });
 
 apiClient.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error.response?.status === 401) {
+    const isAuthRoute = error.config?.url?.startsWith("/auth");
+    if (error.response?.status === 401 && !isAuthRoute) {
       logout();
     }
     return Promise.reject(error);
   },
 );
 
-function logout() {
-  localStorage.removeItem("token");
+export function logout() {
+  apiClient.post("/auth/logout").catch(() => {});
+  localStorage.removeItem("isLoggedIn");
   if (window.location.pathname !== "/login") {
     window.location.href = "/login";
   }

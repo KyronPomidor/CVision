@@ -1,0 +1,28 @@
+.menu {
+  z-index: 1000;
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+
+  background-color: var(--color-background);
+  border: var(--border-weight-light) solid var(--color-border);
+  border-radius: 5px;
+  box-shadow: 0 0px 20px var(--color-text-muted);
+}
+
+.menuItem {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+.menuItem:hover {
+  background-color: var(--color-background-header);
+}
+
+.menuItem span {
+  color: #e0483e;
+}
