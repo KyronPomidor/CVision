@@ -21,8 +21,17 @@ function LoginPage() {
     setError("");
 
     try {
-      await login(email, password);
+      const data = await login(email, password);
       const redirectTo = location.state?.from?.pathname || "/";
+
+      if (data.twoFactorRequired) {
+        navigate("/twofactor", {
+          replace: true,
+          state: { preAuthToken: data.preAuthToken, from: redirectTo }
+        });
+        return;
+      }
+
       navigate(redirectTo, { replace: true });
     } catch (err) {
       if (err.response?.status === 401) {
