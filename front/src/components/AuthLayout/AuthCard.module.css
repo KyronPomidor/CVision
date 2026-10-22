@@ -54,3 +54,15 @@
   padding: 15px;
   color: #ff0404;
 }
+
+.hintText {
+  text-align: center;
+}
+
+.resendButton {
+  background: var(--color-text-body)
+}
+
+.resendButton:hover {
+  background: var(--color-text-muted)
+}
