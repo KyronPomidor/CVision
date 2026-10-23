@@ -8,6 +8,7 @@ import CompanyProfilePage from "./pages/CompanyProfilePage/CompanyProfilePage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import SignUpPage from "./pages/SignUpPage/SignUpPage";
 import JobPostingPage from "./pages/JobPostingPage/JobPostingPage";
+import TwoFactorPage from "./pages/TwoFactorPage/TwoFactorPage";
 
 function MainLayout() {
   return (
@@ -34,6 +35,7 @@ function App() {
         {/* Pages without Header - add outside of MainLayout */}
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpPage />} />
+        <Route path="/twofactor" element={<TwoFactorPage />} />
       </Routes>
     </BrowserRouter>
   );
