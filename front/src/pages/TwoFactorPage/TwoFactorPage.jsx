@@ -1,19 +1,15 @@
 import { useState } from "react";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
-import { verifyTwoFactor } from "../../api/auth";
+import { verifyTwoFactor, resendCode } from "../../api/auth";
 import LockLogo from "../../assets/lock-icon.svg?react";
 import styles from "../../components/AuthLayout/AuthCard.module.css";
 import AuthInput from "../../components/AuthLayout/AuthInput";
 import AuthLayout from "../../components/AuthLayout/AuthLayout";
 import typography from "../../Typography.module.css";
 
-function handleResend() {
-
-}
-
 function TwoFactorPage() {
-  const [code, setCode] = useState("");
   const [error, setError] = useState("");
+  const [code, setCode] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
@@ -43,6 +39,23 @@ function TwoFactorPage() {
         setError("Something went wrong. Please try again.");
       }
       setSubmitting(false);
+    }
+  }
+
+  async function handleResend() {
+    setError("");
+    try {
+      await resendCode(preAuthToken);
+
+    } catch (err) {
+      const status = err.response?.status;
+      if (status === 429) {
+        setError("Please wait before requesting another code.");
+      } else if (status === 401) {
+        setError("Session expired. Please log in again.");
+      } else {
+        setError("Could not resend the code. Please try again.");
+      }
     }
   }
 

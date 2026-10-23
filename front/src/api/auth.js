@@ -27,6 +27,11 @@ export async function disableTwoFactor() {
   return response.data;
 }
 
+export async function resendCode(preAuthToken) {
+  const response = await apiClient.post("/auth/2fa/resend", { preAuthToken });
+  return response.data;
+}
+
 export async function signup({ accountName, email, password, role }) {
   await createUser({ accountName, email, password, role });
   return login(email, password);
