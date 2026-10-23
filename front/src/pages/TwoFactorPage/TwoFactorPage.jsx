@@ -76,7 +76,9 @@ function TwoFactorPage() {
     <AuthLayout>
       <form className={`${styles.mainWindow} ${styles.card}`} onSubmit={handleSubmit}>
         <h2 className={`${typography.heading2} ${styles.hintText}`}>Check your inbox</h2>
-        <p className={`${typography.mainTextImportant} ${styles.hintText}`}>Enter the verification code we just sent to your email.</p>
+        <p className={`${typography.mainTextImportant} ${styles.hintText}`}>
+          Enter the verification code we just sent to your email.
+        </p>
         <AuthInput
           icon={LockLogo}
           type="text"
@@ -85,10 +87,19 @@ function TwoFactorPage() {
           onChange={(e) => setCode(e.target.value)}
           required
         />
-        <button type="submit" disabled={submitting} className={`${typography.mainTextImportant} ${styles.submitButton}`}>
+        <button
+          type="submit"
+          disabled={submitting}
+          className={`${typography.mainTextImportant} ${styles.submitButton}`}
+        >
           Verify
         </button>
-        <button type="button" disabled={cooldown > 0} className={`${typography.mainTextImportant} ${styles.submitButton} ${styles.resendButton}`} onClick={handleResend}>
+        <button
+          type="button"
+          disabled={cooldown > 0}
+          className={`${typography.mainTextImportant} ${styles.submitButton} ${styles.resendButton}`}
+          onClick={handleResend}
+        >
           {cooldown > 0 ? `Resend code (${cooldown}s)` : "Resend code"}
         </button>
       </form>
@@ -97,8 +108,8 @@ function TwoFactorPage() {
           {error || info}
         </div>
       )}
-    </AuthLayout >
-  )
+    </AuthLayout>
+  );
 }
 
 export default TwoFactorPage;

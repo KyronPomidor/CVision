@@ -27,7 +27,7 @@ function LoginPage() {
       if (data.twoFactorRequired) {
         navigate("/twofactor", {
           replace: true,
-          state: { preAuthToken: data.preAuthToken, from: redirectTo }
+          state: { preAuthToken: data.preAuthToken, from: redirectTo },
         });
         return;
       }
