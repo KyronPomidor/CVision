@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import { verifyTwoFactor, resendCode } from "../../api/auth";
 import LockLogo from "../../assets/lock-icon.svg?react";
@@ -7,15 +7,25 @@ import AuthInput from "../../components/AuthLayout/AuthInput";
 import AuthLayout from "../../components/AuthLayout/AuthLayout";
 import typography from "../../Typography.module.css";
 
+const RESEND_COOLDOWN = 30; //seconds
+
 function TwoFactorPage() {
   const [error, setError] = useState("");
+  const [info, setInfo] = useState("");
   const [code, setCode] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const [cooldown, setCooldown] = useState(RESEND_COOLDOWN);
   const navigate = useNavigate();
   const location = useLocation();
 
   const preAuthToken = location.state?.preAuthToken;
   const redirectTo = location.state?.from || "/";
+
+  useEffect(() => {
+    if (cooldown <= 0) return;
+    const id = setTimeout(() => setCooldown((c) => c - 1), 1000);
+    return () => clearTimeout(id);
+  }, [cooldown]);
 
   if (!preAuthToken) {
     return <Navigate to="/login" replace />;
@@ -44,10 +54,13 @@ function TwoFactorPage() {
 
   async function handleResend() {
     setError("");
+    setInfo("");
+    setCooldown(RESEND_COOLDOWN);
     try {
       await resendCode(preAuthToken);
-
+      setInfo("A new code has been sent.");
     } catch (err) {
+      setCooldown(0);
       const status = err.response?.status;
       if (status === 429) {
         setError("Please wait before requesting another code.");
@@ -75,13 +88,13 @@ function TwoFactorPage() {
         <button type="submit" disabled={submitting} className={`${typography.mainTextImportant} ${styles.submitButton}`}>
           Verify
         </button>
-        <button type="button" className={`${typography.mainTextImportant} ${styles.submitButton} ${styles.resendButton}`} onClick={handleResend}>
-          Resend code
+        <button type="button" disabled={cooldown > 0} className={`${typography.mainTextImportant} ${styles.submitButton} ${styles.resendButton}`} onClick={handleResend}>
+          {cooldown > 0 ? `Resend code (${cooldown}s)` : "Resend code"}
         </button>
       </form>
-      {error && (
+      {(error || info) && (
         <div className={`${typography.mainTextImportant} ${styles.errorWindow} ${styles.card}`}>
-          {error}
+          {error || info}
         </div>
       )}
     </AuthLayout >

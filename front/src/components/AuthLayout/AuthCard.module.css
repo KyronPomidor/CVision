@@ -31,8 +31,13 @@
   cursor: pointer;
 }
 
-.submitButton:hover {
+.submitButton:hover:not(:disabled) {
   background: var(--color-secondary);
+}
+
+.submitButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .switchText {
@@ -63,6 +68,11 @@
   background: var(--color-text-body)
 }
 
-.resendButton:hover {
+.resendButton:hover:not(:disabled) {
   background: var(--color-text-muted)
+}
+
+.resendButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
