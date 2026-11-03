@@ -4,9 +4,9 @@ import com.pbl.back.dto.application.ApplicationRequest;
 import com.pbl.back.dto.application.ApplicationResponse;
 
 public interface ApplicationService {
-    ApplicationResponse create(Long userId, ApplicationRequest request);
+    ApplicationResponse create(ApplicationRequest request);
 
-    ApplicationResponse getByUserId(Long id);
+    ApplicationResponse getMine();
 
     ApplicationResponse getById(Long id);
 

@@ -16,16 +16,15 @@ public class ApplicationController {
         this.service = service;
     }
 
-    @PostMapping("/user/{userId}")
+    @PostMapping("/me")
     @ResponseStatus(HttpStatus.CREATED)
-    public ApplicationResponse create(@PathVariable Long userId,
-                                      @Valid @RequestBody ApplicationRequest request) {
-        return service.create(userId, request);
+    public ApplicationResponse create(@Valid @RequestBody ApplicationRequest request) {
+        return service.create(request);
     }
 
-    @GetMapping("/user/{userId}")
-    public ApplicationResponse getByUserId(@PathVariable Long userId) {
-        return service.getByUserId(userId);
+    @GetMapping("/me")
+    public ApplicationResponse getMine() {
+        return service.getMine();
     }
 
     @PutMapping("/{id}")

@@ -120,16 +120,12 @@ public class CVServiceImpl implements CVService {
 
     @Override
     public CVResponse getById(Long id) {
-        CV cv = repository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("CV with id '" + id + "' not found."));
-
-        return mapper.toResponse(cv);
+        return mapper.toResponse(getOwnedCv(id));
     }
 
     @Override
     public CVResponse update(Long id, CVRequest request) {
-        CV cv = repository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("CV with id '" + id + "' not found."));
+        CV cv = getOwnedCv(id);
 
         cv.setFileName(request.getFileName());
         cv.setFilePath(request.getFilePath());
@@ -141,10 +137,7 @@ public class CVServiceImpl implements CVService {
 
     @Override
     public void delete(Long id) {
-        CV cv = repository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("CV with id '" + id + "' not found."));
-
-        repository.delete(cv);
+        repository.delete(getOwnedCv(id));
     }
 
     private CV getOwnedCv(Long id) {
