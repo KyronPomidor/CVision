@@ -2,6 +2,7 @@ package com.pbl.back.security;
 
 import com.pbl.back.service.UserDetailsService;
 import com.pbl.back.service.impl.JWTService;
+import io.jsonwebtoken.JwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;
@@ -10,6 +11,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
@@ -60,13 +62,15 @@ public class JWTAuthFilter extends OncePerRequestFilter {
 
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
-            filterChain.doFilter(request, response);
-        } catch (Exception exception) {
-            exception.printStackTrace();
+        } catch (JwtException | IllegalArgumentException | UsernameNotFoundException exception) {
+            SecurityContextHolder.clearContext();
             response.sendError(
                     HttpServletResponse.SC_UNAUTHORIZED,
                     "Invalid authentication token"
             );
+            return;
         }
+
+        filterChain.doFilter(request, response);
     }
 }

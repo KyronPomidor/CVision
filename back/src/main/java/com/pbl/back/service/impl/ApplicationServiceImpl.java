@@ -11,9 +11,10 @@ import com.pbl.back.mapper.ApplicationMapper;
 import com.pbl.back.repository.ApplicationRepository;
 import com.pbl.back.repository.CVRepository;
 import com.pbl.back.repository.JobPostingRepository;
-import com.pbl.back.repository.UserRepository;
 import com.pbl.back.service.ApplicationService;
+import com.pbl.back.service.CurrentUserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -24,14 +25,13 @@ public class ApplicationServiceImpl implements ApplicationService {
 
     private final ApplicationMapper mapper;
     private final ApplicationRepository repository;
-    private final UserRepository userRepository;
     private final CVRepository cvRepository;
     private final JobPostingRepository jobPostingRepository;
+    private final CurrentUserService currentUserService;
 
     @Override
-    public ApplicationResponse create(Long userId, ApplicationRequest request) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new ResourceNotFoundException("User with id '" + userId + "' not found."));
+    public ApplicationResponse create(ApplicationRequest request) {
+        User user = currentUserService.get();
 
         JobPosting jobPosting = jobPostingRepository.findById(request.getJobPostingId())
                 .orElseThrow(() -> new ResourceNotFoundException(
@@ -40,6 +40,9 @@ public class ApplicationServiceImpl implements ApplicationService {
         CV cv = cvRepository.findById(request.getCvId())
                 .orElseThrow(() -> new ResourceNotFoundException(
                         "CV with id '" + request.getCvId() + "' not found."));
+        if (!cv.getUser().getId().equals(user.getId())) {
+            throw new AccessDeniedException("You can only apply with your own CV.");
+        }
 
         Application application = mapper.toEntity(request);
 
@@ -54,24 +57,21 @@ public class ApplicationServiceImpl implements ApplicationService {
     }
 
     @Override
-    public ApplicationResponse getByUserId(Long userId) {
-        Application application = repository.findByUserId(userId)
+    public ApplicationResponse getMine() {
+        Application application = repository.findByUserId(currentUserService.getId())
                 .orElseThrow(() -> new ResourceNotFoundException(
-                        "Application for user with id '" + userId + "' not found."));
+                        "Application for the authenticated user was not found."));
         return mapper.toResponse(application);
     }
 
     @Override
     public ApplicationResponse getById(Long id) {
-        Application application = repository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Application with id '" + id + "' not found."));
-        return mapper.toResponse(application);
+        return mapper.toResponse(getOwnedApplication(id));
     }
 
     @Override
     public ApplicationResponse update(Long id, ApplicationRequest request) {
-        Application application = repository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Application with id '" + id + "' not found."));
+        Application application = getOwnedApplication(id);
 
         application.setStatus(request.getStatus());
 
@@ -80,8 +80,15 @@ public class ApplicationServiceImpl implements ApplicationService {
 
     @Override
     public void delete(Long id) {
-        repository.delete(repository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Application with id '" + id + "' not found."))
-        );
+        repository.delete(getOwnedApplication(id));
+    }
+
+    private Application getOwnedApplication(Long id) {
+        Application application = repository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Application with id '" + id + "' not found."));
+        if (!application.getUser().getId().equals(currentUserService.getId())) {
+            throw new AccessDeniedException("You do not own this application.");
+        }
+        return application;
     }
 }

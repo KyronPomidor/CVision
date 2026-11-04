@@ -12,7 +12,9 @@ import com.pbl.back.mapper.JobPostingMapper;
 import com.pbl.back.mapper.JobPostingSkillMapper;
 import com.pbl.back.repository.*;
 import com.pbl.back.service.JobPostingService;
+import com.pbl.back.service.CurrentUserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,6 +33,7 @@ public class JobPostingServiceImpl implements JobPostingService {
     private final JobPostingSkillMapper jobPostingSkillMapper;
     private final CandidateProfileRepository candidateProfileRepository;
     private final ProfileSkillRepository profileSkillRepository;
+    private final CurrentUserService currentUserService;
 
 
     @Override
@@ -38,6 +41,7 @@ public class JobPostingServiceImpl implements JobPostingService {
     public JobPostingResponse create(Long companyId, JobPostingRequest request) {
         Company company = companyRepository.findById(companyId)
                 .orElseThrow(() -> new ResourceNotFoundException("Company with id '" + companyId + "' not found."));
+        assertCompanyOwner(company);
 
         JobPosting jobPosting = mapper.toEntity(request);
 
@@ -115,8 +119,7 @@ public class JobPostingServiceImpl implements JobPostingService {
 
     @Override
     public JobPostingResponse getById(Long id) {
-        JobPosting posting = repository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("JobPosting with id '" + id + "' not found."));
+        JobPosting posting = getOwnedPosting(id);
 
         List<SkillResponse> skills = jobPostingSkillMapper.toSkillResponse(
                 jobPostingSkillRepository.findByJobPostingId(id)
@@ -128,8 +131,7 @@ public class JobPostingServiceImpl implements JobPostingService {
     @Override
     @Transactional
     public JobPostingResponse update(Long id, JobPostingRequest request) {
-        JobPosting posting = repository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("JobPosting with id '" + id + "' not found."));
+        JobPosting posting = getOwnedPosting(id);
 
         posting.setTitle(request.getTitle());
         posting.setDescription(request.getDescription());
@@ -174,5 +176,19 @@ public class JobPostingServiceImpl implements JobPostingService {
         jobPostingSkillRepository.deleteAll(jobPostingSkillRepository.findByJobPostingId(id));
 
         repository.delete(posting);
+    }
+
+    private JobPosting getOwnedPosting(Long id) {
+        JobPosting posting = repository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("JobPosting with id '" + id + "' not found."));
+        assertCompanyOwner(posting.getCompany());
+        return posting;
+    }
+
+    private void assertCompanyOwner(Company company) {
+        if (company.getUser() == null
+                || !company.getUser().getId().equals(currentUserService.getId())) {
+            throw new AccessDeniedException("You do not own this company.");
+        }
     }
 }
