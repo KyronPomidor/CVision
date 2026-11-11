@@ -1,5 +1,10 @@
 import apiClient from "./client";
 
+export async function getCurrentCV() {
+  const response = await apiClient.get("/cv/me");
+  return response.data;
+}
+
 export async function getCV(id) {
   const response = await apiClient.get(`/cv/${id}`);
   return response.data;

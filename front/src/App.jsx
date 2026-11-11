@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
 import Header from "./components/Header/Header";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
@@ -10,11 +10,28 @@ import SignUpPage from "./pages/SignUpPage/SignUpPage";
 import JobPostingPage from "./pages/JobPostingPage/JobPostingPage";
 import TwoFactorPage from "./pages/TwoFactorPage/TwoFactorPage";
 
+import { getCurrentProfile } from "./api/profiles";
+
 function MainLayout() {
+  const [profile, setProfile] = useState(null);
+  const [profileError, setProfileError] = useState(null);
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    getCurrentProfile(controller.signal)
+      .then(setProfile)
+      .catch((err) => {
+        if (!controller.signal.aborted) setProfileError(err);
+      });
+
+    return () => controller.abort();
+  }, []);
+
   return (
     <>
-      <Header />
-      <Outlet />
+      <Header name={profile?.name} />
+      <Outlet context={{ profile, profileError }} />
     </>
   );
 }
@@ -23,8 +40,8 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route element={<MainLayout />}>
-          <Route element={<ProtectedRoute />}>
+        <Route element={<ProtectedRoute />}>
+          <Route element={<MainLayout />}>
             <Route path="/" element={<HomePage />} />
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/companies/:companyId" element={<CompanyProfilePage />} />

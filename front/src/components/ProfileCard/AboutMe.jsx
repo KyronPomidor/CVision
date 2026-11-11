@@ -8,7 +8,9 @@ function AboutMe({ aboutMe, onEditProfile, showEditButton = true }) {
     <div className={styles.aboutMeBox}>
       <div className={styles.aboutMeSection}>
         <h2 className={styles.aboutMeHeading}>About Me</h2>
-        <p className={`${styles.aboutMeInfo} ${typography.mainText}`}>{aboutMe}</p>
+        <p className={`${styles.aboutMeInfo} ${typography.mainText}`}>
+          {aboutMe?.trim() || "Not specified yet"}
+        </p>
       </div>
 
       {showEditButton && (

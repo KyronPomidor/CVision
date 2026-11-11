@@ -1,5 +1,10 @@
 import apiClient from "./client";
 
+export async function getCurrentProfile(signal) {
+  const response = await apiClient.get("/profiles/me", { signal });
+  return response.data;
+}
+
 export async function getProfile(id) {
   const response = await apiClient.get(`/profiles/${id}`);
   return response.data;

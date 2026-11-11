@@ -1,6 +1,7 @@
 import styles from "./ProfileCard.module.css";
 import typography from "../../Typography.module.css";
 
+import ProfileAvatar from "../ProfileAvatar/ProfileAvatar";
 import ContactInfo from "./ContactInfo";
 import AboutMe from "./AboutMe";
 import Achievements from "./Achievements";
@@ -10,7 +11,6 @@ import PencilLogo from "../../assets/pencil-logo.svg?react";
 function ProfileCard({
   variant = "home",
   name,
-  photo,
   email,
   phone,
   location,
@@ -27,7 +27,7 @@ function ProfileCard({
   return (
     <div className={`${styles.profileCard} ${isProfileVariant ? styles.profileVariant : ""}`}>
       <div className={styles.photoBox}>
-        <img src={photo} alt={`${name} profile`} className={styles.profileLogo} />
+        <ProfileAvatar name={name} className={styles.profileLogo} />
         <h2 className={`${styles.profileName} ${typography.heading2}`}>{name}</h2>
       </div>
 

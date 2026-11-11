@@ -14,12 +14,12 @@ function ContactInfo({ email, phone, location }) {
 
       <div className={styles.telephoneBox}>
         <TelephoneLogo className={styles.telephoneLogo} />
-        <p className={typography.mainTextImportant}>{phone}</p>
+        <p className={typography.mainTextImportant}>{phone?.trim() || "Not specified yet"}</p>
       </div>
 
       <div className={styles.locationBox}>
         <LocationLogo className={styles.locationLogo} />
-        <p className={typography.mainTextImportant}>{location}</p>
+        <p className={typography.mainTextImportant}>{location?.trim() || "Not specified yet"}</p>
       </div>
     </div>
   );

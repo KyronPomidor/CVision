@@ -8,16 +8,25 @@ import Experience from "./Experience";
 import AdditionalInfo from "./AdditionalInfo";
 
 function CVInformationCard({ technicalSkills, languages, objective, experience, additionalInfo }) {
+  const hasTechnicalSkills = technicalSkills?.length > 0;
+  const hasLanguages = languages?.length > 0;
+  const hasObjective = Boolean(objective?.trim());
+  const hasExperience = experience?.length > 0;
+  const hasAdditionalInfo = Boolean(additionalInfo?.trim());
+  const hasInformation =
+    hasTechnicalSkills || hasLanguages || hasObjective || hasExperience || hasAdditionalInfo;
+
   return (
     <div className={styles.cvInformationCard}>
       <h1 className={typography.heading1}>CV Information</h1>
 
       <div className={styles.mainContent}>
-        <TechnicalSkills skills={technicalSkills} />
-        <Languages languages={languages} />
-        <Objective text={objective} />
-        <Experience items={experience} />
-        <AdditionalInfo text={additionalInfo} />
+        {hasTechnicalSkills && <TechnicalSkills skills={technicalSkills} />}
+        {hasLanguages && <Languages languages={languages} />}
+        {hasObjective && <Objective text={objective} />}
+        {hasExperience && <Experience items={experience} />}
+        {hasAdditionalInfo && <AdditionalInfo text={additionalInfo} />}
+        {!hasInformation && <p className={typography.mainText}>No CV information yet.</p>}
       </div>
     </div>
   );

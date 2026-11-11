@@ -1,0 +1,8 @@
+.avatar {
+  display: inline-grid;
+  place-items: center;
+  aspect-ratio: 1;
+  background-color: var(--color-primary);
+  color: white;
+  font-weight: 700;
+}

@@ -7,9 +7,9 @@ import mainLogo from "../../../../Logo.svg";
 import SearchLogo from "../../assets/search-icon.svg?react";
 import SettingsLogo from "./assets/settings-icon.svg?react";
 import NotificationLogo from "./assets/notification-icon.svg?react";
-import profileLogo from "../../assets/profile-photo.png";
+import ProfileAvatar from "../ProfileAvatar/ProfileAvatar";
 
-function Header() {
+function Header({ name }) {
   const [openMenu, setOpenMenu] = useState(null);
 
   function toggleMenu(menu) {
@@ -65,7 +65,7 @@ function Header() {
           </button>
 
           <Link to="/profile" className={styles.profileButton} aria-label="Profile button">
-            <img src={profileLogo} alt="profileLogo" className={styles.profileLogo} />
+            <ProfileAvatar name={name} className={styles.profileLogo} />
           </Link>
         </div>
       </div>
