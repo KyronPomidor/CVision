@@ -61,6 +61,8 @@ public class SecurityConfig {
 
                         .requestMatchers(HttpMethod.GET, "/api/postings/*/images/*").authenticated()
 
+                        .requestMatchers(HttpMethod.GET, "/api/companies/*/picture").authenticated()
+
                         .requestMatchers("/api/companies/**", "/api/postings/**")
                         .hasRole("EMPLOYER")
 

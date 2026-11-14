@@ -9,8 +9,19 @@ import com.pbl.back.mapper.CompanyMapper;
 import com.pbl.back.repository.CompanyRepository;
 import com.pbl.back.repository.UserRepository;
 import com.pbl.back.service.CompanyService;
+import com.pbl.back.service.CurrentUserService;
+import com.pbl.back.service.ImageStorageService;
+import com.pbl.back.service.ImageStorageService.StoredImage;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.io.Resource;
+import org.springframework.http.CacheControl;
+import org.springframework.http.ContentDisposition;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 @RequiredArgsConstructor
@@ -19,6 +30,8 @@ public class CompanyServiceImpl implements CompanyService {
     private final CompanyRepository repository;
     private final CompanyMapper mapper;
     private final UserRepository userRepository;
+    private final CurrentUserService currentUserService;
+    private final ImageStorageService imageStorageService;
 
     @Override
     public CompanyResponse create(Long userId, CompanyRequest request) {
@@ -81,5 +94,60 @@ public class CompanyServiceImpl implements CompanyService {
                 .orElseThrow(() -> new ResourceNotFoundException("Company with id '" + id + "' not found."));
 
         repository.delete(company);
+        imageStorageService.deleteDirectoryQuietly("companies/" + id);
+    }
+
+    @Override
+    public CompanyResponse uploadPicture(MultipartFile file) {
+        Long userId = currentUserService.getId();
+        Company company = repository.findByUserId(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("Create your company profile first."));
+        String oldPicturePath = company.getPicturePath();
+        StoredImage newImage = imageStorageService.store(file, "companies/" + company.getId());
+
+        company.setPicturePath(newImage.relativePath());
+        company.setPictureContentType(newImage.contentType());
+        try {
+            repository.save(company);
+        } catch (RuntimeException ex) {
+            imageStorageService.deleteQuietly(newImage.relativePath());
+            throw ex;
+        }
+
+        if (oldPicturePath != null) {
+            imageStorageService.deleteQuietly(oldPicturePath);
+        }
+        return mapper.toResponse(company);
+    }
+
+    @Override
+    public ResponseEntity<Resource> getPicture(Long id) {
+        Company company = repository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Company with id '" + id + "' not found."));
+        if (company.getPicturePath() == null) {
+            throw new ResourceNotFoundException("Company picture not found.");
+        }
+        return inlineImage(company.getPicturePath(), company.getPictureContentType());
+    }
+
+    @Override
+    public void deletePicture() {
+        Company company = repository.findByUserId(currentUserService.getId())
+                .orElseThrow(() -> new ResourceNotFoundException("Create your company profile first."));
+        String oldPicturePath = company.getPicturePath();
+        company.setPicturePath(null);
+        company.setPictureContentType(null);
+        repository.save(company);
+        if (oldPicturePath != null) {
+            imageStorageService.deleteQuietly(oldPicturePath);
+        }
+    }
+
+    private ResponseEntity<Resource> inlineImage(String filePath, String contentType) {
+        return ResponseEntity.ok()
+                .contentType(MediaType.parseMediaType(contentType))
+                .header(HttpHeaders.CONTENT_DISPOSITION, ContentDisposition.inline().build().toString())
+                .cacheControl(CacheControl.noCache().cachePrivate())
+                .body(imageStorageService.load(filePath));
     }
 }
