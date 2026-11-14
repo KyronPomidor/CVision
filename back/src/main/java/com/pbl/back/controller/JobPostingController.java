@@ -5,7 +5,10 @@ import com.pbl.back.dto.jobposting.JobPostingResponse;
 import com.pbl.back.service.CurrentUserService;
 import com.pbl.back.service.JobPostingService;
 import jakarta.validation.Valid;
+import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -53,5 +56,22 @@ public class JobPostingController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable Long id) {
         service.delete(id);
+    }
+
+    @PostMapping("/{postingId}/images")
+    public JobPostingResponse uploadImages(@PathVariable Long postingId,
+                                           @RequestParam("files") List<MultipartFile> files) {
+        return service.uploadImages(postingId, files);
+    }
+
+    @GetMapping("/{postingId}/images/{imageId}")
+    public ResponseEntity<Resource> getImage(@PathVariable Long postingId, @PathVariable Long imageId) {
+        return service.getImage(postingId, imageId);
+    }
+
+    @DeleteMapping("/{postingId}/images/{imageId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteImage(@PathVariable Long postingId, @PathVariable Long imageId) {
+        service.deleteImage(postingId, imageId);
     }
 }

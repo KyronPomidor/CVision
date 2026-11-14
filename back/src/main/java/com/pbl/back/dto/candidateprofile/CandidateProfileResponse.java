@@ -17,5 +17,6 @@ public class CandidateProfileResponse {
     private String education;
     private String experience;
     private String description;
+    private String pictureUrl;
     private List<ProfileSkillResponse> skills;
 }

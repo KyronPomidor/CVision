@@ -8,4 +8,6 @@ import java.util.List;
 public interface ProfileSkillRepository extends JpaRepository<ProfileSkill, Long> {
 
     List<ProfileSkill> findByProfileId(Long profileId);
+
+    boolean existsByProfileIdAndSkillId(Long profileId, Long skillId);
 }

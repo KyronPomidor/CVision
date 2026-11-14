@@ -4,6 +4,7 @@ package com.pbl.back.service.impl;
 
 import com.pbl.back.domain.entity.*;
 import com.pbl.back.domain.enums.JobStatus;
+import com.pbl.back.exception.FileStorageException;
 import com.pbl.back.dto.jobposting.JobPostingRequest;
 import com.pbl.back.dto.jobposting.JobPostingResponse;
 import com.pbl.back.dto.skill.SkillResponse;
@@ -13,10 +14,21 @@ import com.pbl.back.mapper.JobPostingSkillMapper;
 import com.pbl.back.repository.*;
 import com.pbl.back.service.JobPostingService;
 import com.pbl.back.service.CurrentUserService;
+import com.pbl.back.service.ImageStorageService;
+import com.pbl.back.service.ImageStorageService.StoredImage;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.io.Resource;
+import org.springframework.http.CacheControl;
+import org.springframework.http.ContentDisposition;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.TransactionSynchronization;
+import org.springframework.transaction.support.TransactionSynchronizationManager;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -34,6 +46,11 @@ public class JobPostingServiceImpl implements JobPostingService {
     private final CandidateProfileRepository candidateProfileRepository;
     private final ProfileSkillRepository profileSkillRepository;
     private final CurrentUserService currentUserService;
+    private final JobPostingImageRepository jobPostingImageRepository;
+    private final ImageStorageService imageStorageService;
+    private final JobPostingImagePersistenceService imagePersistenceService;
+
+    private static final int MAX_IMAGES_PER_POSTING = 10;
 
 
     @Override
@@ -78,7 +95,8 @@ public class JobPostingServiceImpl implements JobPostingService {
             List<SkillResponse> skills = jobPostingSkillMapper.toSkillResponse(
                     jobPostingSkillRepository.findByJobPostingId(posting.getId()));
 
-            postingResponses.add(mapper.toResponse(posting, skills));
+            postingResponses.add(mapper.toResponse(posting, skills,
+                    jobPostingImageRepository.findByJobPostingIdOrderBySortOrderAsc(posting.getId())));
         });
         return postingResponses;
     }
@@ -114,6 +132,7 @@ public class JobPostingServiceImpl implements JobPostingService {
 
         return mapper.toResponse(posting,
                 jobPostingSkillMapper.toSkillResponse(requiredSkills),
+                jobPostingImageRepository.findByJobPostingIdOrderBySortOrderAsc(posting.getId()),
                 matchScore);
     }
 
@@ -125,7 +144,8 @@ public class JobPostingServiceImpl implements JobPostingService {
                 jobPostingSkillRepository.findByJobPostingId(id)
         );
 
-        return mapper.toResponse(posting, skills);
+        return mapper.toResponse(posting, skills,
+                jobPostingImageRepository.findByJobPostingIdOrderBySortOrderAsc(posting.getId()));
     }
 
     @Override
@@ -170,12 +190,58 @@ public class JobPostingServiceImpl implements JobPostingService {
     @Override
     @Transactional
     public void delete(Long id) {
-        JobPosting posting = repository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("JobPosting with id '" + id + "' not found."));
+        JobPosting posting = getOwnedPosting(id);
 
         jobPostingSkillRepository.deleteAll(jobPostingSkillRepository.findByJobPostingId(id));
+        jobPostingImageRepository.deleteAll(
+                jobPostingImageRepository.findByJobPostingIdOrderBySortOrderAsc(id));
 
         repository.delete(posting);
+        afterCommit(() -> imageStorageService.deleteDirectoryQuietly("postings/" + id));
+    }
+
+    @Override
+    public JobPostingResponse uploadImages(Long postingId, List<MultipartFile> files) {
+        getOwnedPosting(postingId);
+        if (files == null || files.isEmpty()) {
+            throw new FileStorageException("At least one image file is required.");
+        }
+
+        long existingCount = jobPostingImageRepository.countByJobPostingId(postingId);
+        if (existingCount + files.size() > MAX_IMAGES_PER_POSTING) {
+            throw new FileStorageException("A posting may have no more than 10 images.");
+        }
+
+        List<StoredImage> storedImages = new ArrayList<>();
+        try {
+            for (MultipartFile file : files) {
+                storedImages.add(imageStorageService.store(file, "postings/" + postingId));
+            }
+            imagePersistenceService.saveImages(postingId, storedImages);
+        } catch (RuntimeException ex) {
+            storedImages.forEach(image -> imageStorageService.deleteQuietly(image.relativePath()));
+            throw ex;
+        }
+        return getById(postingId);
+    }
+
+    @Override
+    public ResponseEntity<Resource> getImage(Long postingId, Long imageId) {
+        JobPostingImage image = jobPostingImageRepository.findByIdAndJobPostingId(imageId, postingId)
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        "Image with id '" + imageId + "' not found for posting '" + postingId + "'."));
+        return inlineImage(image.getFilePath(), image.getContentType());
+    }
+
+    @Override
+    @Transactional
+    public void deleteImage(Long postingId, Long imageId) {
+        getOwnedPosting(postingId);
+        JobPostingImage image = jobPostingImageRepository.findByIdAndJobPostingId(imageId, postingId)
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        "Image with id '" + imageId + "' not found for posting '" + postingId + "'."));
+        jobPostingImageRepository.delete(image);
+        afterCommit(() -> imageStorageService.deleteQuietly(image.getFilePath()));
     }
 
     private JobPosting getOwnedPosting(Long id) {
@@ -190,5 +256,22 @@ public class JobPostingServiceImpl implements JobPostingService {
                 || !company.getUser().getId().equals(currentUserService.getId())) {
             throw new AccessDeniedException("You do not own this company.");
         }
+    }
+
+    private ResponseEntity<Resource> inlineImage(String filePath, String contentType) {
+        return ResponseEntity.ok()
+                .contentType(MediaType.parseMediaType(contentType))
+                .header(HttpHeaders.CONTENT_DISPOSITION, ContentDisposition.inline().build().toString())
+                .cacheControl(CacheControl.noCache().cachePrivate())
+                .body(imageStorageService.load(filePath));
+    }
+
+    private void afterCommit(Runnable action) {
+        TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronization() {
+            @Override
+            public void afterCommit() {
+                action.run();
+            }
+        });
     }
 }

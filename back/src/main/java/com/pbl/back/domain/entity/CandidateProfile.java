@@ -32,4 +32,10 @@ public class CandidateProfile {
 
     @Column(columnDefinition = "TEXT")
     private String description;
+
+    @Column(name = "picture_path")
+    private String picturePath;
+
+    @Column(name = "picture_content_type")
+    private String pictureContentType;
 }

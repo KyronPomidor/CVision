@@ -4,7 +4,10 @@ import com.pbl.back.dto.candidateprofile.CandidateProfileRequest;
 import com.pbl.back.dto.candidateprofile.CandidateProfileResponse;
 import com.pbl.back.service.CandidateProfileService;
 import jakarta.validation.Valid;
+import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -37,6 +40,22 @@ public class CandidateProfileController {
     @GetMapping("/{id}")
     public CandidateProfileResponse getById(@PathVariable Long id) {
         return service.getById(id);
+    }
+
+    @PostMapping("/me/picture")
+    public CandidateProfileResponse uploadPicture(@RequestParam("file") MultipartFile file) {
+        return service.uploadPicture(file);
+    }
+
+    @GetMapping("/{id}/picture")
+    public ResponseEntity<Resource> getPicture(@PathVariable Long id) {
+        return service.getPicture(id);
+    }
+
+    @DeleteMapping("/me/picture")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deletePicture() {
+        service.deletePicture();
     }
 
     @DeleteMapping("/{id}")
