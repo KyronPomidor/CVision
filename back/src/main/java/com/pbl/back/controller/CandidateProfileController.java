@@ -6,6 +6,7 @@ import com.pbl.back.service.CandidateProfileService;
 import jakarta.validation.Valid;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.bind.annotation.*;
@@ -42,8 +43,8 @@ public class CandidateProfileController {
         return service.getById(id);
     }
 
-    @PostMapping("/me/picture")
-    public CandidateProfileResponse uploadPicture(@RequestParam("file") MultipartFile file) {
+    @PostMapping(value = "/me/picture", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public CandidateProfileResponse uploadPicture(@RequestPart("file") MultipartFile file) {
         return service.uploadPicture(file);
     }
 

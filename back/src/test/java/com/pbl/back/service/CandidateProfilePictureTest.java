@@ -2,7 +2,6 @@ package com.pbl.back.service;
 
 import com.pbl.back.domain.entity.CandidateProfile;
 import com.pbl.back.domain.entity.User;
-import com.pbl.back.domain.enums.Role;
 import com.pbl.back.mapper.CandidateProfileMapper;
 import com.pbl.back.mapper.ProfileSkillMapper;
 import com.pbl.back.repository.CandidateProfileRepository;
@@ -15,7 +14,6 @@ import org.springframework.mock.web.MockMultipartFile;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
