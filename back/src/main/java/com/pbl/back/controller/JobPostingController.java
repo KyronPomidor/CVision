@@ -7,6 +7,7 @@ import com.pbl.back.service.JobPostingService;
 import jakarta.validation.Valid;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.bind.annotation.*;
@@ -58,9 +59,9 @@ public class JobPostingController {
         service.delete(id);
     }
 
-    @PostMapping("/{postingId}/images")
+    @PostMapping(value = "/{postingId}/images", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public JobPostingResponse uploadImages(@PathVariable Long postingId,
-                                           @RequestParam("files") List<MultipartFile> files) {
+                                           @RequestPart("files") List<MultipartFile> files) {
         return service.uploadImages(postingId, files);
     }
 
