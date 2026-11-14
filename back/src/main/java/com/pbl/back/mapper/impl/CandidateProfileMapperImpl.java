@@ -33,6 +33,9 @@ public class CandidateProfileMapperImpl implements CandidateProfileMapper {
                 .education(profile.getEducation())
                 .experience(profile.getExperience())
                 .description(profile.getDescription())
+                .pictureUrl(profile.getPicturePath() == null
+                        ? null
+                        : "/api/profiles/" + profile.getId() + "/picture")
                 .skills(skills)
                 .build();
     }

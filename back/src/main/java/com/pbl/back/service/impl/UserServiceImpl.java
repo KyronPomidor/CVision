@@ -48,6 +48,16 @@ public class UserServiceImpl implements UserService {
     public UserResponse update(Long id, UserRequest request) {
         User user = getCurrentUser(id);
 
+        if (!user.getEmail().equals(request.getEmail())) {
+            repository.findByEmail(request.getEmail())
+                    .filter(existing -> !existing.getId().equals(user.getId()))
+                    .ifPresent(existing -> {
+                        throw new ConflictException(
+                                "A user with email '" + request.getEmail() + "' already exists."
+                        );
+                    });
+        }
+
         user.setEmail(request.getEmail());
         user.setAccountName(request.getAccountName());
         user.setPassword(passwordEncoder.encode(request.getPassword()));

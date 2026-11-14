@@ -8,12 +8,12 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ApplicationRequest {
-    @NotNull
+    @NotNull(message = "is required")
     private Long jobPostingId;
 
-    @NotNull
+    @NotNull(message = "is required")
     private Long cvId;
 
-    @NotNull
+    @NotNull(message = "is required")
     private ApplicationStatus status;
 }

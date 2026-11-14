@@ -2,7 +2,9 @@ package com.pbl.back.mapper.impl;
 
 import com.pbl.back.domain.entity.JobPosting;
 import com.pbl.back.domain.entity.JobPostingDetails;
+import com.pbl.back.domain.entity.JobPostingImage;
 import com.pbl.back.domain.enums.JobStatus;
+import com.pbl.back.dto.image.ImageResponse;
 import com.pbl.back.dto.jobposting.JobPostingDetailsResponse;
 import com.pbl.back.dto.jobposting.JobPostingRequest;
 import com.pbl.back.dto.jobposting.JobPostingResponse;
@@ -46,15 +48,17 @@ public class JobPostingMapperImpl implements JobPostingMapper {
     @Override
     public JobPostingResponse toResponse(
             JobPosting posting,
-            List<SkillResponse> skills
+            List<SkillResponse> skills,
+            List<JobPostingImage> images
     ) {
-        return toResponse(posting, skills, null);
+        return toResponse(posting, skills, images, null);
     }
 
     @Override
     public JobPostingResponse toResponse(
             JobPosting posting,
             List<SkillResponse> skills,
+            List<JobPostingImage> images,
             Double matchScore
     ) {
         JobPostingDetailsResponse details = JobPostingDetailsResponse.builder()
@@ -77,6 +81,13 @@ public class JobPostingMapperImpl implements JobPostingMapper {
                 .createdAt(posting.getCreatedAt())
                 .status(posting.getStatus())
                 .skills(skills)
+                .images(images.stream()
+                        .map(image -> ImageResponse.builder()
+                                .id(image.getId())
+                                .url("/api/postings/" + posting.getId() + "/images/" + image.getId())
+                                .sortOrder(image.getSortOrder())
+                                .build())
+                        .toList())
                 .matchScore(matchScore)
                 .build();
     }
