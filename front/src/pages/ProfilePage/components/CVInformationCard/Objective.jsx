@@ -12,7 +12,7 @@ function Objective({ text, isEditing, value, onChange, saving }) {
           value={value}
           onChange={(event) => onChange(event.target.value)}
           maxLength={5000}
-          rows={4}
+          rows={1}
           disabled={saving}
         />
       ) : (

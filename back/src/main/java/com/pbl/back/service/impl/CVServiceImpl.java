@@ -150,6 +150,14 @@ public class CVServiceImpl implements CVService {
             }
         }
 
+        if (request.getLanguages() != null) {
+            try {
+                cv.setLanguages(objectMapper.writeValueAsString(request.getLanguages()));
+            } catch (JsonProcessingException ex) {
+                throw new IllegalStateException("Could not serialize CV languages", ex);
+            }
+        }
+
         cv.setObjective(request.getObjective() == null ? null : request.getObjective().trim());
         cv.setAdditionalInfo(request.getAdditionalInfo() == null ? null : request.getAdditionalInfo().trim());
 

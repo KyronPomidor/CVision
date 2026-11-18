@@ -32,6 +32,10 @@
 }
 
 .levelPill {
+  box-sizing: content-box;
+  border: none;
+  font-family: inherit;
+  line-height: inherit;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -45,4 +49,60 @@
 .levelPillActive {
   background-color: var(--color-primary);
   color: var(--color-background);
+}
+
+.nameButton {
+  min-width: 90px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  font-family: inherit;
+  line-height: inherit;
+  cursor: pointer;
+}
+
+.nameInput {
+  box-sizing: border-box;
+  width: 150px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: inherit;
+  font-family: inherit;
+  line-height: inherit;
+  outline: 1px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.levelsList {
+  flex-wrap: wrap;
+}
+
+button.levelPill {
+  border: none;
+  font-family: inherit;
+  line-height: inherit;
+  cursor: pointer;
+}
+
+button.levelPillActive {
+  color: var(--color-background);
+}
+
+.addButton {
+  align-self: flex-start;
+  padding: 8px 24px;
+  border: none;
+  border-radius: 20px;
+  background: var(--color-primary);
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.languages button:disabled {
+  opacity: 0.6;
+  cursor: wait;
 }

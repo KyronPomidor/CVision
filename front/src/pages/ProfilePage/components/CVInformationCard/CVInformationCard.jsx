@@ -11,6 +11,7 @@ function CVInformationCard({
   technicalSkills,
   onSkillsChange,
   languages,
+  onLanguagesChange,
   objective,
   experience,
   additionalInfo,
@@ -36,14 +37,22 @@ function CVInformationCard({
       <div className={styles.mainContent}>
         {(hasTechnicalSkills || isEditing) && (
           <TechnicalSkills
-            key={String(isEditing)}
+            key={`skills-${isEditing}`}
             skills={technicalSkills}
             isEditing={isEditing}
             onChange={onSkillsChange}
             saving={saving}
           />
         )}
-        {hasLanguages && <Languages languages={languages} />}
+        {(hasLanguages || isEditing) && (
+          <Languages
+            key={`languages-${isEditing}`}
+            languages={languages}
+            isEditing={isEditing}
+            onChange={onLanguagesChange}
+            saving={saving}
+          />
+        )}
         {(hasObjective || isEditing) && (
           <Objective
             text={objective}

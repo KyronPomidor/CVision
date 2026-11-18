@@ -15,12 +15,14 @@ function ProfilePage() {
   const [objective, setObjective] = useState(null);
   const [additionalInfo, setAdditionalInfo] = useState(null);
   const [skills, setSkills] = useState(null);
+  const [languages, setLanguages] = useState(null);
   const [saving, setSaving] = useState(false);
   const [saveError, setSaveError] = useState(null);
 
   function editProfile() {
     setDescription(profile.description ?? "");
     setSkills(cv?.skills ?? []);
+    setLanguages(cv?.languages ?? []);
     setObjective(cv?.objective ?? "");
     setAdditionalInfo(cv?.additionalInfo ?? "");
     setSaveError(null);
@@ -30,6 +32,7 @@ function ProfilePage() {
   function cancelEdit() {
     setDescription(null);
     setSkills(null);
+    setLanguages(null);
     setObjective(null);
     setAdditionalInfo(null);
     setSaveError(null);
@@ -45,6 +48,7 @@ function ProfilePage() {
       if (cv) {
         const updatedCv = await updateCVInformation(cv.id, {
           skills: skills ?? cv.skills ?? [],
+          languages: languages ?? cv.languages ?? [],
           objective: objective ?? cv.objective ?? "",
           additionalInfo: additionalInfo ?? cv.additionalInfo ?? "",
         });
@@ -98,7 +102,8 @@ function ProfilePage() {
       <CVInformationCard
         technicalSkills={isEditing ? (skills ?? cv?.skills) : cv?.skills}
         onSkillsChange={setSkills}
-        languages={cv?.languages}
+        languages={isEditing ? (languages ?? cv?.languages) : cv?.languages}
+        onLanguagesChange={setLanguages}
         objective={cv?.objective}
         experience={cv?.experience}
         additionalInfo={cv?.additionalInfo}

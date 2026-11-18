@@ -23,7 +23,7 @@ function AboutMe({
             value={description}
             onChange={(event) => onDescriptionChange(event.target.value)}
             maxLength={5000}
-            rows={6}
+            rows={1}
             disabled={saving}
             autoFocus
           />
