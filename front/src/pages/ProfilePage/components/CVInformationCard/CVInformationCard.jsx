@@ -14,6 +14,7 @@ function CVInformationCard({
   onLanguagesChange,
   objective,
   experience,
+  onExperienceChange,
   additionalInfo,
   isEditing = false,
   objectiveDraft,
@@ -62,7 +63,15 @@ function CVInformationCard({
             saving={saving}
           />
         )}
-        {hasExperience && <Experience items={experience} />}
+        {(hasExperience || isEditing) && (
+          <Experience
+            key={`experience-${isEditing}`}
+            items={experience}
+            isEditing={isEditing}
+            onChange={onExperienceChange}
+            saving={saving}
+          />
+        )}
         {(hasAdditionalInfo || isEditing) && (
           <AdditionalInfo
             text={additionalInfo}

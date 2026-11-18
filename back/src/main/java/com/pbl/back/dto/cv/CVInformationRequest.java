@@ -17,6 +17,8 @@ public class CVInformationRequest {
 
     private List<CVResponse.Language> languages;
 
+    private List<CVResponse.Experience> experience;
+
     @Size(max = 5000, message = "must be at most 5000 characters")
     private String additionalInfo;
 }

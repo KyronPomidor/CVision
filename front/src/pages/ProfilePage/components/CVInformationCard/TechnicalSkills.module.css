@@ -64,6 +64,9 @@
 }
 
 .menu button {
+  box-sizing: border-box;
+  border: none;
+  cursor: pointer;
   display: block;
   width: 100%;
   padding: 4px 8px;

@@ -16,6 +16,7 @@ function ProfilePage() {
   const [additionalInfo, setAdditionalInfo] = useState(null);
   const [skills, setSkills] = useState(null);
   const [languages, setLanguages] = useState(null);
+  const [experience, setExperience] = useState(null);
   const [saving, setSaving] = useState(false);
   const [saveError, setSaveError] = useState(null);
 
@@ -23,6 +24,7 @@ function ProfilePage() {
     setDescription(profile.description ?? "");
     setSkills(cv?.skills ?? []);
     setLanguages(cv?.languages ?? []);
+    setExperience(cv?.experience ?? []);
     setObjective(cv?.objective ?? "");
     setAdditionalInfo(cv?.additionalInfo ?? "");
     setSaveError(null);
@@ -33,6 +35,7 @@ function ProfilePage() {
     setDescription(null);
     setSkills(null);
     setLanguages(null);
+    setExperience(null);
     setObjective(null);
     setAdditionalInfo(null);
     setSaveError(null);
@@ -49,6 +52,7 @@ function ProfilePage() {
         const updatedCv = await updateCVInformation(cv.id, {
           skills: skills ?? cv.skills ?? [],
           languages: languages ?? cv.languages ?? [],
+          experience: experience ?? cv.experience ?? [],
           objective: objective ?? cv.objective ?? "",
           additionalInfo: additionalInfo ?? cv.additionalInfo ?? "",
         });
@@ -105,7 +109,8 @@ function ProfilePage() {
         languages={isEditing ? (languages ?? cv?.languages) : cv?.languages}
         onLanguagesChange={setLanguages}
         objective={cv?.objective}
-        experience={cv?.experience}
+        experience={isEditing ? (experience ?? cv?.experience) : cv?.experience}
+        onExperienceChange={setExperience}
         additionalInfo={cv?.additionalInfo}
         isEditing={isEditing && Boolean(cv)}
         objectiveDraft={objective ?? cv?.objective ?? ""}

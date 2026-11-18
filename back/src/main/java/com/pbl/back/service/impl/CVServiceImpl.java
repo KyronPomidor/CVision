@@ -158,6 +158,14 @@ public class CVServiceImpl implements CVService {
             }
         }
 
+        if (request.getExperience() != null) {
+            try {
+                cv.setExperience(objectMapper.writeValueAsString(request.getExperience()));
+            } catch (JsonProcessingException ex) {
+                throw new IllegalStateException("Could not serialize CV experience", ex);
+            }
+        }
+
         cv.setObjective(request.getObjective() == null ? null : request.getObjective().trim());
         cv.setAdditionalInfo(request.getAdditionalInfo() == null ? null : request.getAdditionalInfo().trim());
 
