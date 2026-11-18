@@ -56,6 +56,21 @@ public class CandidateProfileServiceImpl implements CandidateProfileService {
     }
     private final ImageStorageService imageStorageService;
 
+    @Override
+    public CurrentCandidateProfileResponse updateAboutMe(String description) {
+        User user = currentUserService.get();
+        CandidateProfile profile = repository.findByUserId(user.getId())
+                .orElseGet(() -> CandidateProfile.builder()
+                        .user(user)
+                        .name(user.getAccountName())
+                        .build());
+
+        profile.setDescription(description == null ? null : description.trim());
+        repository.save(profile);
+
+        return getCurrentProfile();
+    }
+
     // TODO: get user without client id
     public CandidateProfileResponse create(Long userId, CandidateProfileRequest request) {
         User user = userRepository.findById(userId)

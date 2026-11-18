@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useOutletContext } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 
 import styles from "./HomePage.module.css";
 import ProfileCard from "../../components/ProfileCard/ProfileCard";
@@ -91,6 +91,7 @@ async function getRecommendations() {
 }
 
 function HomePage() {
+  const navigate = useNavigate();
   const { profile, profileError } = useOutletContext();
   const [jobs, setJobs] = useState(null);
   const [error, setError] = useState(null);
@@ -112,7 +113,7 @@ function HomePage() {
           phone={profile.phone}
           location={profile.location}
           aboutMe={profile.description}
-          onEditProfile={() => console.log("edit clicked")}
+          onEditProfile={() => navigate("/profile?edit=true")}
         />
       </div>
 

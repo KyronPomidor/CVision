@@ -21,6 +21,13 @@ function ProfileCard({
   reachouts,
   onEditProfile,
   onUploadCV,
+  isEditing = false,
+  description,
+  onDescriptionChange,
+  onSaveProfile,
+  onCancelEdit,
+  saving = false,
+  saveError,
 }) {
   const isProfileVariant = variant === "profile";
 
@@ -33,18 +40,46 @@ function ProfileCard({
 
       <ContactInfo email={email} phone={phone} location={location} />
 
-      <AboutMe aboutMe={aboutMe} onEditProfile={onEditProfile} showEditButton={!isProfileVariant} />
+      <AboutMe
+        aboutMe={aboutMe}
+        onEditProfile={onEditProfile}
+        showEditButton={!isProfileVariant}
+        isEditing={isEditing}
+        description={description}
+        onDescriptionChange={onDescriptionChange}
+        saving={saving}
+      />
 
       {isProfileVariant ? (
         <div className={styles.profileActions}>
-          <button type="button" className={styles.uploadCvButton} onClick={onUploadCV}>
-            <UploadIcon className={styles.uploadIcon} />
-            <p className={`${styles.uploadContent} ${typography.heading2}`}>Upload CV</p>
+          {!isEditing && (
+            <button type="button" className={styles.uploadCvButton} onClick={onUploadCV}>
+              <UploadIcon className={styles.uploadIcon} />
+              <p className={`${styles.uploadContent} ${typography.heading2}`}>Upload CV</p>
+            </button>
+          )}
+          <button
+            type="button"
+            className={styles.editButtonBottom}
+            onClick={isEditing ? onSaveProfile : onEditProfile}
+            disabled={saving}
+          >
+            {!isEditing && <PencilLogo className={styles.pencilLogo} />}
+            <p className={`${styles.editContent} ${typography.heading2}`}>
+              {isEditing ? (saving ? "Saving..." : "Save") : "Edit"}
+            </p>
           </button>
-          <button type="button" className={styles.editButtonBottom} onClick={onEditProfile}>
-            <PencilLogo className={styles.pencilLogo} />
-            <p className={`${styles.editContent} ${typography.heading2}`}>Edit</p>
-          </button>
+          {isEditing && (
+            <button
+              type="button"
+              className={styles.cancelButton}
+              onClick={onCancelEdit}
+              disabled={saving}
+            >
+              Cancel
+            </button>
+          )}
+          {saveError && <p role="alert">{saveError}</p>}
         </div>
       ) : (
         <Achievements

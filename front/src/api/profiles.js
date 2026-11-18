@@ -5,6 +5,11 @@ export async function getCurrentProfile(signal) {
   return response.data;
 }
 
+export async function updateAboutMe(description) {
+  const response = await apiClient.put("/profiles/me/about-me", { description });
+  return response.data;
+}
+
 export async function getProfile(id) {
   const response = await apiClient.get(`/profiles/${id}`);
   return response.data;

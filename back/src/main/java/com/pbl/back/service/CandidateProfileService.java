@@ -12,6 +12,8 @@ public interface CandidateProfileService {
 
     public CurrentCandidateProfileResponse getCurrentProfile();
 
+    CurrentCandidateProfileResponse updateAboutMe(String description);
+
     public CandidateProfileResponse getByUserId(Long userId);
 
     public CandidateProfileResponse getById(Long id);

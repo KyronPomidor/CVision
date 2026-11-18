@@ -1,5 +1,6 @@
 package com.pbl.back.controller;
 
+import com.pbl.back.dto.candidateprofile.AboutMeRequest;
 import com.pbl.back.dto.candidateprofile.CandidateProfileRequest;
 import com.pbl.back.dto.candidateprofile.CandidateProfileResponse;
 import com.pbl.back.dto.candidateprofile.CurrentCandidateProfileResponse;
@@ -32,6 +33,11 @@ public class CandidateProfileController {
     @GetMapping("/me")
     public CurrentCandidateProfileResponse getCurrentProfile() {
         return service.getCurrentProfile();
+    }
+
+    @PutMapping("/me/about-me")
+    public CurrentCandidateProfileResponse updateAboutMe(@Valid @RequestBody AboutMeRequest request) {
+        return service.updateAboutMe(request.getDescription());
     }
 
     @GetMapping("/user/{userId}")

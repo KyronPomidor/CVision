@@ -97,3 +97,23 @@
   width: 30px;
   height: 30px;
 }
+
+.cancelButton {
+  padding: 12px;
+  border: 2px solid var(--color-primary);
+  border-radius: 10px;
+  background-color: white;
+  color: var(--color-primary);
+  font: inherit;
+  cursor: pointer;
+}
+
+.cancelButton:hover {
+  background-color: var(--color-background-accent);
+}
+
+.editButtonBottom:disabled,
+.cancelButton:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}

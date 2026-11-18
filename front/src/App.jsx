@@ -31,7 +31,7 @@ function MainLayout() {
   return (
     <>
       <Header name={profile?.name} />
-      <Outlet context={{ profile, profileError }} />
+      <Outlet context={{ profile, profileError, setProfile }} />
     </>
   );
 }
