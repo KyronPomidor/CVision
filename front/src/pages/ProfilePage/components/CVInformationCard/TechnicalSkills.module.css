@@ -21,3 +21,65 @@
   color: var(--color-primary);
   border-radius: 20px;
 }
+
+.skillWrapper {
+  position: relative;
+}
+
+.skillWrapper button,
+.addButton {
+  border: none;
+  cursor: pointer;
+}
+
+.skillWrapper button:hover,
+.addButton:hover {
+  opacity: 0.8;
+}
+
+.skillInput {
+  box-sizing: border-box;
+  width: 180px;
+  border: 1px solid var(--color-primary);
+  font-family: inherit;
+}
+
+.menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  z-index: 2;
+  min-width: 100px;
+  background: white;
+  border: 1px solid var(--color-border);
+  box-shadow: 0 2px 8px #00000015;
+}
+
+.menu button {
+  display: block;
+  width: 100%;
+  padding: 4px 8px;
+  background: white;
+  color: var(--color-primary);
+  text-align: left;
+  font: inherit;
+}
+
+.menu button:first-child {
+  text-align: right;
+}
+
+.menu button:hover {
+  background: var(--color-background-accent);
+}
+
+.addButton {
+  background: var(--color-primary);
+  color: white;
+}
+
+.skillWrapper button:disabled,
+.addButton:disabled {
+  cursor: wait;
+  opacity: 0.6;
+}

@@ -9,6 +9,7 @@ import AdditionalInfo from "./AdditionalInfo";
 
 function CVInformationCard({
   technicalSkills,
+  onSkillsChange,
   languages,
   objective,
   experience,
@@ -33,7 +34,15 @@ function CVInformationCard({
       <h1 className={typography.heading1}>CV Information</h1>
 
       <div className={styles.mainContent}>
-        {hasTechnicalSkills && <TechnicalSkills skills={technicalSkills} />}
+        {(hasTechnicalSkills || isEditing) && (
+          <TechnicalSkills
+            key={String(isEditing)}
+            skills={technicalSkills}
+            isEditing={isEditing}
+            onChange={onSkillsChange}
+            saving={saving}
+          />
+        )}
         {hasLanguages && <Languages languages={languages} />}
         {(hasObjective || isEditing) && (
           <Objective

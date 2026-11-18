@@ -142,6 +142,14 @@ public class CVServiceImpl implements CVService {
     public CVResponse updateInformation(Long id, CVInformationRequest request) {
         CV cv = getOwnedCv(id);
 
+        if (request.getSkills() != null) {
+            try {
+                cv.setSkills(objectMapper.writeValueAsString(request.getSkills()));
+            } catch (JsonProcessingException ex) {
+                throw new IllegalStateException("Could not serialize CV skills", ex);
+            }
+        }
+
         cv.setObjective(request.getObjective() == null ? null : request.getObjective().trim());
         cv.setAdditionalInfo(request.getAdditionalInfo() == null ? null : request.getAdditionalInfo().trim());
 
