@@ -48,14 +48,22 @@ function ProfilePage() {
     try {
       const updatedProfile = await updateAboutMe(description ?? profile.description ?? "");
       setProfile(updatedProfile);
-      if (cv) {
-        const updatedCv = await updateCVInformation(cv.id, {
-          skills: skills ?? cv.skills ?? [],
-          languages: languages ?? cv.languages ?? [],
-          experience: experience ?? cv.experience ?? [],
-          objective: objective ?? cv.objective ?? "",
-          additionalInfo: additionalInfo ?? cv.additionalInfo ?? "",
-        });
+      const information = {
+        skills: skills ?? cv?.skills ?? [],
+        languages: languages ?? cv?.languages ?? [],
+        experience: experience ?? cv?.experience ?? [],
+        objective: objective ?? cv?.objective ?? "",
+        additionalInfo: additionalInfo ?? cv?.additionalInfo ?? "",
+      };
+      if (
+        cv ||
+        information.skills.length ||
+        information.languages.length ||
+        information.experience.length ||
+        information.objective.trim() ||
+        information.additionalInfo.trim()
+      ) {
+        const updatedCv = await updateCVInformation(cv?.id ?? "me", information);
         setCv(updatedCv);
       }
       cancelEdit();
@@ -112,7 +120,7 @@ function ProfilePage() {
         experience={isEditing ? (experience ?? cv?.experience) : cv?.experience}
         onExperienceChange={setExperience}
         additionalInfo={cv?.additionalInfo}
-        isEditing={isEditing && Boolean(cv)}
+        isEditing={isEditing}
         objectiveDraft={objective ?? cv?.objective ?? ""}
         additionalInfoDraft={additionalInfo ?? cv?.additionalInfo ?? ""}
         onObjectiveChange={setObjective}

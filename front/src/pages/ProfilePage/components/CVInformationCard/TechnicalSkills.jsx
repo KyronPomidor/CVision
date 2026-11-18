@@ -51,6 +51,7 @@ function TechnicalSkills({ skills = [], isEditing = false, onChange, saving }) {
             <input
               className={`${styles.skillPill} ${styles.skillInput} ${typography.mainTextImportant}`}
               aria-label="Skill name"
+              placeholder="Enter a skill"
               value={value}
               onChange={(event) => setValue(event.target.value)}
               maxLength={100}

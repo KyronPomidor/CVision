@@ -139,8 +139,25 @@ public class CVServiceImpl implements CVService {
     }
 
     @Override
+    public CVResponse updateMyInformation(CVInformationRequest request) {
+        User user = currentUserService.get();
+        CV cv = repository.findFirstByUserIdOrderByUploadedAtDescIdDesc(user.getId())
+                .orElseGet(() -> CV.builder()
+                        .user(user)
+                        .fileName("")
+                        .filePath("")
+                        .uploadedAt(LocalDateTime.now())
+                        .build());
+
+        return saveInformation(cv, request);
+    }
+
+    @Override
     public CVResponse updateInformation(Long id, CVInformationRequest request) {
-        CV cv = getOwnedCv(id);
+        return saveInformation(getOwnedCv(id), request);
+    }
+
+    private CVResponse saveInformation(CV cv, CVInformationRequest request) {
 
         if (request.getSkills() != null) {
             try {

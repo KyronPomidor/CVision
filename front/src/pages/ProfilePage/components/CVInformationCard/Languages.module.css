@@ -106,3 +106,7 @@ button.levelPillActive {
   opacity: 0.6;
   cursor: wait;
 }
+
+.nameButton:hover {
+  color: var(--color-primary);
+}

@@ -9,6 +9,7 @@ function Objective({ text, isEditing, value, onChange, saving }) {
         <textarea
           className={`${styles.input} ${typography.mainText}`}
           aria-label="Objective"
+          placeholder="Describe your career objective"
           value={value}
           onChange={(event) => onChange(event.target.value)}
           maxLength={5000}

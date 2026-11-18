@@ -39,6 +39,11 @@ public class CVController {
         return service.getByUserId(currentUserService.getId());
     }
 
+    @PutMapping("/me/information")
+    public CVResponse updateMyInformation(@Valid @RequestBody CVInformationRequest request) {
+        return service.updateMyInformation(request);
+    }
+
     @PutMapping("/{id}/information")
     public CVResponse updateInformation(@PathVariable Long id,
                                         @Valid @RequestBody CVInformationRequest request) {

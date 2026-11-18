@@ -20,6 +20,7 @@ function AboutMe({
           <textarea
             className={`${styles.aboutMeInput} ${typography.mainText}`}
             aria-label="About Me"
+            placeholder="Tell us about yourself"
             value={description}
             onChange={(event) => onDescriptionChange(event.target.value)}
             maxLength={5000}

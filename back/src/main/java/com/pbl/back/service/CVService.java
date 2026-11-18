@@ -18,5 +18,7 @@ public interface CVService {
 
     CVResponse updateInformation(Long id, CVInformationRequest request);
 
+    CVResponse updateMyInformation(CVInformationRequest request);
+
     void delete(Long id);
 }

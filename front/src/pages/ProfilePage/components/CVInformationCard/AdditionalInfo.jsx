@@ -9,6 +9,7 @@ function AdditionalInfo({ text, isEditing, value, onChange, saving }) {
         <textarea
           className={`${styles.input} ${typography.mainText}`}
           aria-label="Additional Information"
+          placeholder="Add any additional information"
           value={value}
           onChange={(event) => onChange(event.target.value)}
           maxLength={5000}

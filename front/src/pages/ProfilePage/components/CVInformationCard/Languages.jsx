@@ -62,6 +62,7 @@ function Languages({ languages = [], isEditing = false, onChange, saving }) {
                 <input
                   className={`${styles.nameInput} ${typography.mainTextImportant}`}
                   aria-label="Language name"
+                  placeholder="Enter a language"
                   value={name}
                   onChange={(event) => setName(event.target.value)}
                   maxLength={100}
