@@ -32,6 +32,12 @@ public class Company {
 
     private String logo;
 
+    @Column(name = "picture_path")
+    private String picturePath;
+
+    @Column(name = "picture_content_type")
+    private String pictureContentType;
+
     @ElementCollection
     private List<String> photos;
 

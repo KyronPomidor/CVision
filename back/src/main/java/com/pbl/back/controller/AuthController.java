@@ -11,6 +11,7 @@ import com.pbl.back.service.CurrentUserService;
 import com.pbl.back.service.EmailOtpService;
 import com.pbl.back.service.impl.JWTService;
 import io.jsonwebtoken.JwtException;
+import jakarta.validation.Valid;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -46,7 +47,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody LoginRequest request, HttpServletResponse response) {
+    public ResponseEntity<?> login(@Valid @RequestBody LoginRequest request, HttpServletResponse response) {
 
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
@@ -72,7 +73,7 @@ public class AuthController {
 
     @PostMapping("/2fa/verify")
     public ResponseEntity<?> verifyTwoFactor(
-            @RequestBody TwoFactorVerifyRequest request,
+            @Valid @RequestBody TwoFactorVerifyRequest request,
             HttpServletResponse response) {
         Long userId;
         try {
@@ -113,7 +114,7 @@ public class AuthController {
     }
 
     @PostMapping("/2fa/resend")
-    public ResponseEntity<?> resendTwoFactorCode(@RequestBody PreAuthTokenRequest request) {
+    public ResponseEntity<?> resendTwoFactorCode(@Valid @RequestBody PreAuthTokenRequest request) {
         User user = findUserForPreAuthToken(request.getPreAuthToken());
         if (user == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED)

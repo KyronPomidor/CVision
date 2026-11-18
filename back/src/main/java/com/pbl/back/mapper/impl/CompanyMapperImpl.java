@@ -58,6 +58,9 @@ public class CompanyMapperImpl implements CompanyMapper {
                 .description(company.getDescription())
                 .location(company.getLocation())
                 .logo(company.getLogo())
+                .pictureUrl(company.getPicturePath() == null
+                        ? null
+                        : "/api/companies/" + company.getId() + "/picture")
                 .photos(company.getPhotos())
                 .details(details)
                 .build();

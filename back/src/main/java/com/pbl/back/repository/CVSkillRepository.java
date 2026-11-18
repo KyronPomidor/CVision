@@ -10,4 +10,6 @@ public interface CVSkillRepository extends JpaRepository<CVSkill, Long> {
     List<CVSkill> findByCvId(Long cvId);
 
     List<CVSkill> findBySkillId(Long skillId);
+
+    boolean existsByCvIdAndSkillId(Long cvId, Long skillId);
 }
