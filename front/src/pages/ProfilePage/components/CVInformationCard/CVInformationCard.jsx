@@ -7,7 +7,19 @@ import Objective from "./Objective";
 import Experience from "./Experience";
 import AdditionalInfo from "./AdditionalInfo";
 
-function CVInformationCard({ technicalSkills, languages, objective, experience, additionalInfo }) {
+function CVInformationCard({
+  technicalSkills,
+  languages,
+  objective,
+  experience,
+  additionalInfo,
+  isEditing = false,
+  objectiveDraft,
+  additionalInfoDraft,
+  onObjectiveChange,
+  onAdditionalInfoChange,
+  saving,
+}) {
   const hasTechnicalSkills = technicalSkills?.length > 0;
   const hasLanguages = languages?.length > 0;
   const hasObjective = Boolean(objective?.trim());
@@ -23,10 +35,28 @@ function CVInformationCard({ technicalSkills, languages, objective, experience, 
       <div className={styles.mainContent}>
         {hasTechnicalSkills && <TechnicalSkills skills={technicalSkills} />}
         {hasLanguages && <Languages languages={languages} />}
-        {hasObjective && <Objective text={objective} />}
+        {(hasObjective || isEditing) && (
+          <Objective
+            text={objective}
+            isEditing={isEditing}
+            value={objectiveDraft}
+            onChange={onObjectiveChange}
+            saving={saving}
+          />
+        )}
         {hasExperience && <Experience items={experience} />}
-        {hasAdditionalInfo && <AdditionalInfo text={additionalInfo} />}
-        {!hasInformation && <p className={typography.mainText}>No CV information yet.</p>}
+        {(hasAdditionalInfo || isEditing) && (
+          <AdditionalInfo
+            text={additionalInfo}
+            isEditing={isEditing}
+            value={additionalInfoDraft}
+            onChange={onAdditionalInfoChange}
+            saving={saving}
+          />
+        )}
+        {!hasInformation && !isEditing && (
+          <p className={typography.mainText}>No CV information yet.</p>
+        )}
       </div>
     </div>
   );

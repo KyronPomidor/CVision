@@ -3,6 +3,7 @@ package com.pbl.back.service.impl;
 import org.springframework.security.access.AccessDeniedException;
 import com.pbl.back.domain.entity.CV;
 import com.pbl.back.domain.entity.User;
+import com.pbl.back.dto.cv.CVInformationRequest;
 import com.pbl.back.dto.cv.CVRequest;
 import com.pbl.back.dto.cv.CVResponse;
 import com.pbl.back.exception.FileStorageException;
@@ -133,6 +134,16 @@ public class CVServiceImpl implements CVService {
         cv.setFileName(request.getFileName());
         cv.setFilePath(request.getFilePath());
         cv.setExtractedText(request.getExtractedText());
+
+        return mapper.toResponse(repository.save(cv));
+    }
+
+    @Override
+    public CVResponse updateInformation(Long id, CVInformationRequest request) {
+        CV cv = getOwnedCv(id);
+
+        cv.setObjective(request.getObjective() == null ? null : request.getObjective().trim());
+        cv.setAdditionalInfo(request.getAdditionalInfo() == null ? null : request.getAdditionalInfo().trim());
 
         return mapper.toResponse(repository.save(cv));
     }

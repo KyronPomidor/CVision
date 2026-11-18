@@ -25,6 +25,11 @@ export async function updateCV(id, data) {
   return response.data;
 }
 
+export async function updateCVInformation(id, data) {
+  const response = await apiClient.put(`/cv/${id}/information`, data);
+  return response.data;
+}
+
 export async function deleteCV(id) {
   await apiClient.delete(`/cv/${id}`);
 }

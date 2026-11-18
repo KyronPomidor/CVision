@@ -4,7 +4,7 @@ import { useOutletContext, useSearchParams } from "react-router-dom";
 import styles from "./ProfilePage.module.css";
 import ProfileCard from "../../components/ProfileCard/ProfileCard";
 import CVInformationCard from "./components/CVInformationCard/CVInformationCard";
-import { getCurrentCV } from "../../api/cv";
+import { getCurrentCV, updateCVInformation } from "../../api/cv";
 import { updateAboutMe } from "../../api/profiles";
 
 function ProfilePage() {
@@ -12,17 +12,23 @@ function ProfilePage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const isEditing = searchParams.get("edit") === "true";
   const [description, setDescription] = useState(null);
+  const [objective, setObjective] = useState(null);
+  const [additionalInfo, setAdditionalInfo] = useState(null);
   const [saving, setSaving] = useState(false);
   const [saveError, setSaveError] = useState(null);
 
   function editProfile() {
     setDescription(profile.description ?? "");
+    setObjective(cv?.objective ?? "");
+    setAdditionalInfo(cv?.additionalInfo ?? "");
     setSaveError(null);
     setSearchParams({ edit: "true" }, { replace: true });
   }
 
   function cancelEdit() {
     setDescription(null);
+    setObjective(null);
+    setAdditionalInfo(null);
     setSaveError(null);
     setSearchParams({}, { replace: true });
   }
@@ -33,6 +39,13 @@ function ProfilePage() {
     try {
       const updatedProfile = await updateAboutMe(description ?? profile.description ?? "");
       setProfile(updatedProfile);
+      if (cv) {
+        const updatedCv = await updateCVInformation(cv.id, {
+          objective: objective ?? cv.objective ?? "",
+          additionalInfo: additionalInfo ?? cv.additionalInfo ?? "",
+        });
+        setCv(updatedCv);
+      }
       cancelEdit();
     } catch {
       setSaveError("Could not save your changes. Please try again.");
@@ -84,6 +97,12 @@ function ProfilePage() {
         objective={cv?.objective}
         experience={cv?.experience}
         additionalInfo={cv?.additionalInfo}
+        isEditing={isEditing && Boolean(cv)}
+        objectiveDraft={objective ?? cv?.objective ?? ""}
+        additionalInfoDraft={additionalInfo ?? cv?.additionalInfo ?? ""}
+        onObjectiveChange={setObjective}
+        onAdditionalInfoChange={setAdditionalInfo}
+        saving={saving}
       />
     </div>
   );
