@@ -112,7 +112,7 @@ public class CVServiceImpl implements CVService {
 
     @Override
     public CVResponse getByUserId(Long userId) {
-        CV cv = repository.findByUserId(userId)
+        CV cv = repository.findFirstByUserIdOrderByUploadedAtDescIdDesc(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("CV for user with id '" + userId + "' not found."));
 
         return mapper.toResponse(cv);
@@ -130,7 +130,6 @@ public class CVServiceImpl implements CVService {
         cv.setFileName(request.getFileName());
         cv.setFilePath(request.getFilePath());
         cv.setExtractedText(request.getExtractedText());
-        cv.setUploadedAt(LocalDateTime.now());
 
         return mapper.toResponse(repository.save(cv));
     }

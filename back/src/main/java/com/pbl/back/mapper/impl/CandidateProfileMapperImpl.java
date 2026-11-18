@@ -16,6 +16,7 @@ public class CandidateProfileMapperImpl implements CandidateProfileMapper {
 
         return CandidateProfile.builder()
                 .name(request.getName())
+                .phone(request.getPhone())
                 .location(request.getLocation())
                 .education(request.getEducation())
                 .experience(request.getExperience())
@@ -29,6 +30,7 @@ public class CandidateProfileMapperImpl implements CandidateProfileMapper {
                 .id(profile.getId())
                 .userId(profile.getUser().getId())
                 .name(profile.getName())
+                .phone(profile.getPhone())
                 .location(profile.getLocation())
                 .education(profile.getEducation())
                 .experience(profile.getExperience())

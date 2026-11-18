@@ -4,6 +4,7 @@ import com.pbl.back.domain.entity.CandidateProfile;
 import com.pbl.back.domain.entity.User;
 import com.pbl.back.dto.candidateprofile.CandidateProfileRequest;
 import com.pbl.back.dto.candidateprofile.CandidateProfileResponse;
+import com.pbl.back.dto.candidateprofile.CurrentCandidateProfileResponse;
 import com.pbl.back.dto.profileskill.ProfileSkillResponse;
 import com.pbl.back.exception.ResourceNotFoundException;
 import com.pbl.back.mapper.CandidateProfileMapper;
@@ -12,6 +13,7 @@ import com.pbl.back.repository.CandidateProfileRepository;
 import com.pbl.back.repository.ProfileSkillRepository;
 import com.pbl.back.repository.UserRepository;
 import com.pbl.back.service.CandidateProfileService;
+import com.pbl.back.service.CurrentUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +28,22 @@ public class CandidateProfileServiceImpl implements CandidateProfileService {
     private final UserRepository userRepository;
     private final ProfileSkillRepository profileSkillRepository;
     private final ProfileSkillMapper profileSkillMapper;
+    private final CurrentUserService currentUserService;
+
+    @Override
+    public CurrentCandidateProfileResponse getCurrentProfile() {
+        User user = currentUserService.get();
+
+        var profile = repository.findByUserId(user.getId());
+
+        return CurrentCandidateProfileResponse.builder()
+                .name(profile.map(CandidateProfile::getName).orElse(user.getAccountName()))
+                .email(user.getEmail())
+                .phone(profile.map(CandidateProfile::getPhone).orElse(null))
+                .location(profile.map(CandidateProfile::getLocation).orElse(null))
+                .description(profile.map(CandidateProfile::getDescription).orElse(null))
+                .build();
+    }
 
     // TODO: get user without client id
     public CandidateProfileResponse create(Long userId, CandidateProfileRequest request) {
@@ -79,6 +97,7 @@ public class CandidateProfileServiceImpl implements CandidateProfileService {
                         "CandidateProfile with id '" + id + "' not found."));
 
         profile.setName(request.getName());
+        profile.setPhone(request.getPhone());
         profile.setLocation(request.getLocation());
         profile.setEducation(request.getEducation());
         profile.setExperience(request.getExperience());

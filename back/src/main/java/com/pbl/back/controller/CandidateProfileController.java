@@ -2,6 +2,7 @@ package com.pbl.back.controller;
 
 import com.pbl.back.dto.candidateprofile.CandidateProfileRequest;
 import com.pbl.back.dto.candidateprofile.CandidateProfileResponse;
+import com.pbl.back.dto.candidateprofile.CurrentCandidateProfileResponse;
 import com.pbl.back.service.CandidateProfileService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -22,6 +23,11 @@ public class CandidateProfileController {
     public CandidateProfileResponse create(@PathVariable Long userId,
                                            @Valid @RequestBody CandidateProfileRequest request) {
         return service.create(userId, request);
+    }
+
+    @GetMapping("/me")
+    public CurrentCandidateProfileResponse getCurrentProfile() {
+        return service.getCurrentProfile();
     }
 
     @GetMapping("/user/{userId}")

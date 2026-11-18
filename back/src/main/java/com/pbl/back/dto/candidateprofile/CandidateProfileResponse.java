@@ -13,6 +13,7 @@ public class CandidateProfileResponse {
     private Long id;
     private Long userId;
     private String name;
+    private String phone;
     private String location;
     private String education;
     private String experience;
