@@ -38,7 +38,7 @@ class UserServiceEmailUpdateTest {
         request.setRole(Role.EMPLOYEE);
         UserServiceImpl service = new UserServiceImpl(repository, mapper, passwordEncoder, currentUserService);
 
-        assertThrows(ConflictException.class, () -> service.update(1L, request));
+        assertThrows(ConflictException.class, () -> service.updateMe(request));
 
         verify(repository, never()).save(currentUser);
     }

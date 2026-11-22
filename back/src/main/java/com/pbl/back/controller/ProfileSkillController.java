@@ -19,30 +19,28 @@ public class ProfileSkillController {
         this.service = service;
     }
 
-    @PostMapping("/{profileId}/skills")
+    @PostMapping("/me/skills")
     @ResponseStatus(HttpStatus.CREATED)
-    public ProfileSkillResponse addSkill(
-            @PathVariable Long profileId,
-            @Valid @RequestBody ProfileSkillRequest request) {
-        return service.addSkill(profileId, request);
+    public ProfileSkillResponse addSkill(@Valid @RequestBody ProfileSkillRequest request) {
+        return service.addSkill(request);
     }
 
-    @GetMapping("/{profileId}/skills")
-    public List<ProfileSkillResponse> getSkills(@PathVariable Long profileId) {
-        return service.getSkills(profileId);
+    @GetMapping("/me/skills")
+    public List<ProfileSkillResponse> getSkills() {
+        return service.getSkills();
     }
 
-    @GetMapping("/skills/{id}")
+    @GetMapping("/me/skills/{id}")
     public ProfileSkillResponse getById(@PathVariable Long id) {
         return service.getById(id);
     }
 
-    @PutMapping("/skills/{id}")
+    @PutMapping("/me/skills/{id}")
     public ProfileSkillResponse update(@PathVariable Long id, @Valid @RequestBody ProfileSkillRequest request) {
         return service.update(id, request);
     }
 
-    @DeleteMapping("/skills/{id}")
+    @DeleteMapping("/me/skills/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable Long id) {
         service.delete(id);

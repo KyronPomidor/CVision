@@ -23,19 +23,19 @@ public class UserController {
         return service.create(request);
     }
 
-    @GetMapping("/{id}")
-    public UserResponse getById(@PathVariable Long id) {
-        return service.getById(id);
+    @GetMapping("/me")
+    public UserResponse getMe() {
+        return service.getMe();
     }
 
-    @PutMapping("/{id}")
-    public UserResponse update(@PathVariable Long id, @Valid @RequestBody UserRequest request) {
-        return service.update(id, request);
+    @PutMapping("/me")
+    public UserResponse updateMe(@Valid @RequestBody UserRequest request) {
+        return service.updateMe(request);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/me")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteById(@PathVariable Long id) {
-        service.delete(id);
+    public void deleteMe() {
+        service.deleteMe();
     }
 }

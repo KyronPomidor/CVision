@@ -6,9 +6,9 @@ import com.pbl.back.dto.user.UserResponse;
 public interface UserService {
     UserResponse create(UserRequest request);
 
-    UserResponse getById(Long id);
+    UserResponse getMe();
 
-    UserResponse update(Long id, UserRequest request);
+    UserResponse updateMe(UserRequest request);
 
-    void delete(Long id);
+    void deleteMe();
 }

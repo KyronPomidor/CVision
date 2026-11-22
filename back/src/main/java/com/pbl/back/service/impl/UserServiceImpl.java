@@ -10,7 +10,6 @@ import com.pbl.back.repository.UserRepository;
 import com.pbl.back.service.CurrentUserService;
 import com.pbl.back.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -40,13 +39,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserResponse getById(Long id) {
-        return mapper.toResponse(getCurrentUser(id));
+    public UserResponse getMe() {
+        return mapper.toResponse(getCurrentUser());
     }
 
     @Override
-    public UserResponse update(Long id, UserRequest request) {
-        User user = getCurrentUser(id);
+    public UserResponse updateMe(UserRequest request) {
+        User user = getCurrentUser();
 
         if (!user.getEmail().equals(request.getEmail())) {
             repository.findByEmail(request.getEmail())
@@ -66,15 +65,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void delete(Long id) {
-        repository.delete(getCurrentUser(id));
+    public void deleteMe() {
+        repository.delete(getCurrentUser());
     }
 
-    private User getCurrentUser(Long id) {
-        if (!currentUserService.getId().equals(id)) {
-            throw new AccessDeniedException("You can only access your own account.");
-        }
-
+    private User getCurrentUser() {
+        Long id = currentUserService.getId();
         return repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("User with id '" + id + "' not found."));
     }

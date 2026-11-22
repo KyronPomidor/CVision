@@ -7,15 +7,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
 
 public interface CandidateProfileService {
-    public CandidateProfileResponse create(Long userId, CandidateProfileRequest request);
+    CandidateProfileResponse create(CandidateProfileRequest request);
 
-    public CandidateProfileResponse getByUserId(Long userId);
+    CandidateProfileResponse getMe();
 
     public CandidateProfileResponse getById(Long id);
 
-    public CandidateProfileResponse update(Long id, CandidateProfileRequest request);
+    CandidateProfileResponse updateMe(CandidateProfileRequest request);
 
-    public void delete(Long id);
+    void deleteMe();
 
     CandidateProfileResponse uploadPicture(MultipartFile file);
 

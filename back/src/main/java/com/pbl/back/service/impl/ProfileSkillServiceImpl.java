@@ -11,6 +11,7 @@ import com.pbl.back.repository.CandidateProfileRepository;
 import com.pbl.back.repository.ProfileSkillRepository;
 import com.pbl.back.repository.SkillRepository;
 import com.pbl.back.service.ProfileSkillService;
+import com.pbl.back.service.CurrentUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -21,14 +22,14 @@ import java.util.List;
 public class ProfileSkillServiceImpl implements ProfileSkillService {
 
     private final ProfileSkillRepository repository;
-    private final CandidateProfileRepository profileRepository;
     private final SkillRepository skillRepository;
     private final ProfileSkillMapper mapper;
+    private final CandidateProfileRepository profileRepository;
+    private final CurrentUserService currentUserService;
 
     @Override
-    public ProfileSkillResponse addSkill(Long profileId, ProfileSkillRequest request) {
-        CandidateProfile profile = profileRepository.findById(profileId)
-                .orElseThrow(() -> new ResourceNotFoundException("Profile with id '" + profileId + "' not found."));
+    public ProfileSkillResponse addSkill(ProfileSkillRequest request) {
+        CandidateProfile profile = getCurrentProfile();
 
         Skill skill = skillRepository.findById(request.getSkillId())
                 .orElseThrow(() -> new ResourceNotFoundException(
@@ -45,8 +46,8 @@ public class ProfileSkillServiceImpl implements ProfileSkillService {
     }
 
     @Override
-    public List<ProfileSkillResponse> getSkills(Long profileId) {
-        return repository.findByProfileId(profileId)
+    public List<ProfileSkillResponse> getSkills() {
+        return repository.findByProfileId(getCurrentProfile().getId())
                 .stream()
                 .map(p -> mapper.toResponse(p))
                 .toList();
@@ -54,16 +55,14 @@ public class ProfileSkillServiceImpl implements ProfileSkillService {
 
     @Override
     public ProfileSkillResponse getById(Long id) {
-        ProfileSkill profileSkill = repository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("ProfileSkill with id '" + id + "' not found."));
+        ProfileSkill profileSkill = getOwnedSkill(id);
 
         return mapper.toResponse(profileSkill);
     }
 
     @Override
     public ProfileSkillResponse update(Long id, ProfileSkillRequest request) {
-        ProfileSkill profileSkill = repository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("ProfileSkill with id '" + id + "' not found."));
+        ProfileSkill profileSkill = getOwnedSkill(id);
 
         Skill skill = skillRepository.findById(request.getSkillId())
                 .orElseThrow(() -> new ResourceNotFoundException(
@@ -78,9 +77,22 @@ public class ProfileSkillServiceImpl implements ProfileSkillService {
 
     @Override
     public void delete(Long id) {
-        ProfileSkill profileSkill = repository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("ProfileSkill with id '" + id + "' not found."));
+        ProfileSkill profileSkill = getOwnedSkill(id);
 
         repository.delete(profileSkill);
+    }
+
+    private CandidateProfile getCurrentProfile() {
+        return profileRepository.findByUserId(currentUserService.getId())
+                .orElseThrow(() -> new ResourceNotFoundException("Create your profile first."));
+    }
+
+    private ProfileSkill getOwnedSkill(Long id) {
+        ProfileSkill skill = repository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("ProfileSkill with id '" + id + "' not found."));
+        if (!skill.getProfile().getUser().getId().equals(currentUserService.getId())) {
+            throw new ResourceNotFoundException("ProfileSkill with id '" + id + "' not found.");
+        }
+        return skill;
     }
 }

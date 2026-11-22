@@ -1,6 +1,5 @@
 package com.pbl.back.service.impl;
 
-import org.springframework.security.access.AccessDeniedException;
 import com.pbl.back.domain.entity.CV;
 import com.pbl.back.domain.entity.User;
 import com.pbl.back.dto.cv.CVRequest;
@@ -148,7 +147,7 @@ public class CVServiceImpl implements CVService {
                 .orElseThrow(() -> new ResourceNotFoundException("CV not found"));
 
         if (!cv.getUser().getId().equals(currentUserService.getId())) {
-            throw new AccessDeniedException("You do not own this CV");
+            throw new ResourceNotFoundException("CV not found");
         }
 
         return cv;

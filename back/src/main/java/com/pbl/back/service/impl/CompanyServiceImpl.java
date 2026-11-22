@@ -1,13 +1,11 @@
 package com.pbl.back.service.impl;
 
 import com.pbl.back.domain.entity.Company;
-import com.pbl.back.domain.entity.User;
 import com.pbl.back.dto.company.CompanyRequest;
 import com.pbl.back.dto.company.CompanyResponse;
 import com.pbl.back.exception.ResourceNotFoundException;
 import com.pbl.back.mapper.CompanyMapper;
 import com.pbl.back.repository.CompanyRepository;
-import com.pbl.back.repository.UserRepository;
 import com.pbl.back.service.CompanyService;
 import com.pbl.back.service.CurrentUserService;
 import com.pbl.back.service.ImageStorageService;
@@ -19,7 +17,6 @@ import org.springframework.http.ContentDisposition;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -29,18 +26,13 @@ public class CompanyServiceImpl implements CompanyService {
 
     private final CompanyRepository repository;
     private final CompanyMapper mapper;
-    private final UserRepository userRepository;
     private final CurrentUserService currentUserService;
     private final ImageStorageService imageStorageService;
 
     @Override
-    public CompanyResponse create(Long userId, CompanyRequest request) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new ResourceNotFoundException("User with id '" + userId + "' not found."));
-
+    public CompanyResponse create(CompanyRequest request) {
         Company company = mapper.toEntity(request);
-
-        company.setUser(user);
+        company.setUser(currentUserService.get());
 
         Company savedCompany = repository.save(company);
 
@@ -48,11 +40,8 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
-    public CompanyResponse getByUserId(Long userId) {
-        Company company = repository.findByUserId(userId)
-                .orElseThrow(() -> new ResourceNotFoundException(
-                        "Company for user with id '" + userId + "' not found."));
-
+    public CompanyResponse getMe() {
+        Company company = getCurrentCompany();
         return mapper.toResponse(company);
     }
 
@@ -65,9 +54,8 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
-    public CompanyResponse update(Long id, CompanyRequest request) {
-        Company company = repository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Company with id '" + id + "' not found."));
+    public CompanyResponse updateMe(CompanyRequest request) {
+        Company company = getCurrentCompany();
 
         company.setName(request.getName());
         company.setDescription(request.getDescription());
@@ -89,10 +77,9 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
-    public void delete(Long id) {
-        Company company = repository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Company with id '" + id + "' not found."));
-
+    public void deleteMe() {
+        Company company = getCurrentCompany();
+        Long id = company.getId();
         repository.delete(company);
         imageStorageService.deleteDirectoryQuietly("companies/" + id);
     }
@@ -149,5 +136,10 @@ public class CompanyServiceImpl implements CompanyService {
                 .header(HttpHeaders.CONTENT_DISPOSITION, ContentDisposition.inline().build().toString())
                 .cacheControl(CacheControl.noCache().cachePrivate())
                 .body(imageStorageService.load(filePath));
+    }
+
+    private Company getCurrentCompany() {
+        return repository.findByUserId(currentUserService.getId())
+                .orElseThrow(() -> new ResourceNotFoundException("Create your company profile first."));
     }
 }

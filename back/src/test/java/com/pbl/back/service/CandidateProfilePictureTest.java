@@ -5,6 +5,7 @@ import com.pbl.back.domain.entity.User;
 import com.pbl.back.mapper.CandidateProfileMapper;
 import com.pbl.back.mapper.ProfileSkillMapper;
 import com.pbl.back.repository.CandidateProfileRepository;
+import com.pbl.back.repository.ApplicationRepository;
 import com.pbl.back.repository.ProfileSkillRepository;
 import com.pbl.back.repository.UserRepository;
 import com.pbl.back.service.impl.CandidateProfileServiceImpl;
@@ -56,7 +57,7 @@ class CandidateProfilePictureTest {
         CandidateProfileServiceImpl service = new CandidateProfileServiceImpl(
                 profiles,
                 mapper,
-                mock(UserRepository.class),
+                mock(ApplicationRepository.class),
                 profileSkills,
                 profileSkillMapper,
                 currentUserService,

@@ -6,11 +6,11 @@ import com.pbl.back.dto.jobrecommendation.JobRecommendationResponse;
 import java.util.List;
 
 public interface JobRecommendationService {
-    JobRecommendationResponse create(Long userId, JobRecommendationRequest request);
+    JobRecommendationResponse create(JobRecommendationRequest request);
 
     JobRecommendationResponse getById(Long id);
 
-    List<JobRecommendationResponse> getByUserId(Long userId);
+    List<JobRecommendationResponse> getMine();
 
     List<JobRecommendationResponse> getByJobPostingId(Long jobPostingId);
 

@@ -19,11 +19,10 @@ public class JobRecommendationController {
         this.service = service;
     }
 
-    @PostMapping("/user/{userId}")
+    @PostMapping("/me")
     @ResponseStatus(HttpStatus.CREATED)
-    public JobRecommendationResponse create(@PathVariable Long userId,
-            @Valid @RequestBody JobRecommendationRequest request) {
-        return service.create(userId, request);
+    public JobRecommendationResponse create(@Valid @RequestBody JobRecommendationRequest request) {
+        return service.create(request);
     }
 
     @GetMapping("/{id}")
@@ -31,9 +30,9 @@ public class JobRecommendationController {
         return service.getById(id);
     }
 
-    @GetMapping("/user/{userId}")
-    public List<JobRecommendationResponse> getByUserId(@PathVariable Long userId) {
-        return service.getByUserId(userId);
+    @GetMapping("/me")
+    public List<JobRecommendationResponse> getMine() {
+        return service.getMine();
     }
 
     @GetMapping("/job/{jobPostingId}")

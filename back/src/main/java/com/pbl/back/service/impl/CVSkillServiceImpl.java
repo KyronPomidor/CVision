@@ -11,6 +11,7 @@ import com.pbl.back.repository.CVRepository;
 import com.pbl.back.repository.CVSkillRepository;
 import com.pbl.back.repository.SkillRepository;
 import com.pbl.back.service.CVSkillService;
+import com.pbl.back.service.CurrentUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -24,11 +25,11 @@ public class CVSkillServiceImpl implements CVSkillService {
     private final CVRepository cvRepository;
     private final SkillRepository skillRepository;
     private final CVSkillMapper mapper;
+    private final CurrentUserService currentUserService;
 
     @Override
-    public CVSkillResponse create(Long cvId, CVSkillRequest request) {
-        CV cv = cvRepository.findById(cvId)
-                .orElseThrow(() -> new ResourceNotFoundException("CV with id '" + cvId + "' not found."));
+    public CVSkillResponse create(CVSkillRequest request) {
+        CV cv = getCurrentCv();
 
         Skill skill = skillRepository.findById(request.getSkillId())
                 .orElseThrow(() -> new ResourceNotFoundException(
@@ -44,23 +45,15 @@ public class CVSkillServiceImpl implements CVSkillService {
 
     @Override
     public CVSkillResponse getById(Long id) {
-        CVSkill cvSkill = repository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("CVSkill with id '" + id + "' not found."));
+        CVSkill cvSkill = getOwnedCvSkill(id);
 
         return mapper.toResponse(cvSkill);
     }
 
     @Override
-    public List<CVSkillResponse> getByCvId(Long cvId) {
-        return repository.findByCvId(cvId)
-                .stream()
-                .map(mapper::toResponse)
-                .toList();
-    }
-
-    @Override
-    public List<CVSkillResponse> getBySkillId(Long skillId) {
-        return repository.findBySkillId(skillId)
+    public List<CVSkillResponse> getMine() {
+        CV cv = getCurrentCv();
+        return repository.findByCvId(cv.getId())
                 .stream()
                 .map(mapper::toResponse)
                 .toList();
@@ -68,8 +61,7 @@ public class CVSkillServiceImpl implements CVSkillService {
 
     @Override
     public CVSkillResponse update(Long id, CVSkillRequest request) {
-        CVSkill cvSkill = repository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("CVSkill with id '" + id + "' not found."));
+        CVSkill cvSkill = getOwnedCvSkill(id);
 
         cvSkill.setConfidenceScore(request.getConfidenceScore());
         cvSkill.setYearsOfExperience(request.getYearsOfExperience());
@@ -80,9 +72,22 @@ public class CVSkillServiceImpl implements CVSkillService {
     @Override
     public void delete(Long id) {
 
-        CVSkill cvSkill = repository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("CVSkill with id '" + id + "' not found."));
+        CVSkill cvSkill = getOwnedCvSkill(id);
 
         repository.delete(cvSkill);
+    }
+
+    private CV getCurrentCv() {
+        return cvRepository.findByUserId(currentUserService.getId())
+                .orElseThrow(() -> new ResourceNotFoundException("CV not found"));
+    }
+
+    private CVSkill getOwnedCvSkill(Long id) {
+        CVSkill cvSkill = repository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("CVSkill with id '" + id + "' not found."));
+        if (!cvSkill.getCv().getUser().getId().equals(currentUserService.getId())) {
+            throw new ResourceNotFoundException("CVSkill with id '" + id + "' not found.");
+        }
+        return cvSkill;
     }
 }

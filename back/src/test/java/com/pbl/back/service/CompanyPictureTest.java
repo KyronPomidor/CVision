@@ -5,7 +5,6 @@ import com.pbl.back.domain.entity.User;
 import com.pbl.back.dto.company.CompanyResponse;
 import com.pbl.back.mapper.CompanyMapper;
 import com.pbl.back.repository.CompanyRepository;
-import com.pbl.back.repository.UserRepository;
 import com.pbl.back.service.impl.CompanyServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
@@ -54,7 +53,6 @@ class CompanyPictureTest {
         CompanyServiceImpl service = new CompanyServiceImpl(
                 companies,
                 mapper,
-                mock(UserRepository.class),
                 currentUserService,
                 new ImageStorageService(baseDirectory.toString()));
 
