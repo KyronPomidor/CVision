@@ -9,9 +9,10 @@ import com.pbl.back.exception.ResourceNotFoundException;
 import com.pbl.back.mapper.JobRecommendationMapper;
 import com.pbl.back.repository.JobPostingRepository;
 import com.pbl.back.repository.JobRecommendationRepository;
-import com.pbl.back.repository.UserRepository;
 import com.pbl.back.service.JobRecommendationService;
+import com.pbl.back.service.CurrentUserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -22,14 +23,13 @@ import java.util.List;
 public class JobRecommendationServiceImpl implements JobRecommendationService {
 
     private final JobRecommendationRepository repository;
-    private final UserRepository userRepository;
     private final JobPostingRepository jobPostingRepository;
     private final JobRecommendationMapper mapper;
+    private final CurrentUserService currentUserService;
 
     @Override
-    public JobRecommendationResponse create(Long userId, JobRecommendationRequest request) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new ResourceNotFoundException("User with id '" + userId + "' not found."));
+    public JobRecommendationResponse create(JobRecommendationRequest request) {
+        User user = currentUserService.get();
 
         JobPosting jobPosting = jobPostingRepository.findById(request.getJobPostingId())
                 .orElseThrow(() -> new ResourceNotFoundException(
@@ -46,16 +46,14 @@ public class JobRecommendationServiceImpl implements JobRecommendationService {
 
     @Override
     public JobRecommendationResponse getById(Long id) {
-        JobRecommendation recommendation = repository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException(
-                        "JobRecommendation with id '" + id + "' not found."));
+        JobRecommendation recommendation = getOwnedRecommendation(id);
 
         return mapper.toResponse(recommendation);
     }
 
     @Override
-    public List<JobRecommendationResponse> getByUserId(Long userId) {
-        return repository.findByUserId(userId)
+    public List<JobRecommendationResponse> getMine() {
+        return repository.findByUserId(currentUserService.getId())
                 .stream()
                 .map(mapper::toResponse)
                 .toList();
@@ -63,6 +61,12 @@ public class JobRecommendationServiceImpl implements JobRecommendationService {
 
     @Override
     public List<JobRecommendationResponse> getByJobPostingId(Long jobPostingId) {
+        JobPosting posting = jobPostingRepository.findById(jobPostingId)
+                .orElseThrow(() -> new ResourceNotFoundException("JobPosting with id '" + jobPostingId + "' not found."));
+        if (posting.getCompany().getUser() == null
+                || !posting.getCompany().getUser().getId().equals(currentUserService.getId())) {
+            throw new AccessDeniedException("You do not own this company.");
+        }
         return repository.findByJobPostingId(jobPostingId)
                 .stream()
                 .map(mapper::toResponse)
@@ -71,9 +75,7 @@ public class JobRecommendationServiceImpl implements JobRecommendationService {
 
     @Override
     public JobRecommendationResponse update(Long id, JobRecommendationRequest request) {
-        JobRecommendation recommendation = repository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException(
-                        "JobRecommendation with id '" + id + "' not found."));
+        JobRecommendation recommendation = getOwnedRecommendation(id);
 
         recommendation.setMatchScore(request.getMatchScore());
         recommendation.setExplanation(request.getExplanation());
@@ -83,10 +85,18 @@ public class JobRecommendationServiceImpl implements JobRecommendationService {
 
     @Override
     public void delete(Long id) {
+        JobRecommendation recommendation = getOwnedRecommendation(id);
+
+        repository.delete(recommendation);
+    }
+
+    private JobRecommendation getOwnedRecommendation(Long id) {
         JobRecommendation recommendation = repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(
                         "JobRecommendation with id '" + id + "' not found."));
-
-        repository.delete(recommendation);
+        if (!recommendation.getUser().getId().equals(currentUserService.getId())) {
+            throw new ResourceNotFoundException("JobRecommendation with id '" + id + "' not found.");
+        }
+        return recommendation;
     }
 }

@@ -7,15 +7,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
 
 public interface CompanyService {
-    CompanyResponse create(Long userId, CompanyRequest request);
+    CompanyResponse create(CompanyRequest request);
 
-    CompanyResponse getByUserId(Long userId);
+    CompanyResponse getMe();
 
     CompanyResponse getById(Long id);
 
-    CompanyResponse update(Long id, CompanyRequest request);
+    CompanyResponse updateMe(CompanyRequest request);
 
-    void delete(Long id);
+    void deleteMe();
 
     CompanyResponse uploadPicture(MultipartFile file);
 

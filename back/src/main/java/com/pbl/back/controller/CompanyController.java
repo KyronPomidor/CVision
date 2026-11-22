@@ -21,21 +21,20 @@ public class CompanyController {
         this.service = service;
     }
 
-    @PostMapping("/user/{userId}")
+    @PostMapping("/me")
     @ResponseStatus(HttpStatus.CREATED)
-    public CompanyResponse create(@PathVariable Long userId,
-                                  @Valid @RequestBody CompanyRequest request) {
-        return service.create(userId, request);
+    public CompanyResponse create(@Valid @RequestBody CompanyRequest request) {
+        return service.create(request);
     }
 
-    @GetMapping("/user/{userId}")
-    public CompanyResponse getByUserId(@PathVariable Long userId) {
-        return service.getByUserId(userId);
+    @GetMapping("/me")
+    public CompanyResponse getMe() {
+        return service.getMe();
     }
 
-    @PutMapping("/{id}")
-    public CompanyResponse update(@PathVariable Long id, @Valid @RequestBody CompanyRequest request) {
-        return service.update(id, request);
+    @PutMapping("/me")
+    public CompanyResponse updateMe(@Valid @RequestBody CompanyRequest request) {
+        return service.updateMe(request);
     }
 
     @GetMapping("/{id}")
@@ -59,9 +58,9 @@ public class CompanyController {
         service.deletePicture();
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/me")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable Long id) {
-        service.delete(id);
+    public void deleteMe() {
+        service.deleteMe();
     }
 }

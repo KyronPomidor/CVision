@@ -55,9 +55,9 @@ public class JobPostingServiceImpl implements JobPostingService {
 
     @Override
     @Transactional
-    public JobPostingResponse create(Long companyId, JobPostingRequest request) {
-        Company company = companyRepository.findById(companyId)
-                .orElseThrow(() -> new ResourceNotFoundException("Company with id '" + companyId + "' not found."));
+    public JobPostingResponse createForCurrentCompany(JobPostingRequest request) {
+        Company company = companyRepository.findByUserId(currentUserService.getId())
+                .orElseThrow(() -> new ResourceNotFoundException("Create your company profile first."));
         assertCompanyOwner(company);
 
         JobPosting jobPosting = mapper.toEntity(request);
@@ -86,8 +86,10 @@ public class JobPostingServiceImpl implements JobPostingService {
     }
 
     @Override
-    public List<JobPostingResponse> getByCompanyId(Long companyId) {
-        List<JobPosting> postings = repository.findByCompanyId(companyId);
+    public List<JobPostingResponse> getForCurrentCompany() {
+        Company company = companyRepository.findByUserId(currentUserService.getId())
+                .orElseThrow(() -> new ResourceNotFoundException("Create your company profile first."));
+        List<JobPosting> postings = repository.findByCompanyId(company.getId());
 
         List<JobPostingResponse> postingResponses = new ArrayList<>();
         postings.forEach(posting -> {
@@ -138,7 +140,8 @@ public class JobPostingServiceImpl implements JobPostingService {
 
     @Override
     public JobPostingResponse getById(Long id) {
-        JobPosting posting = getOwnedPosting(id);
+        JobPosting posting = repository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("JobPosting with id '" + id + "' not found."));
 
         List<SkillResponse> skills = jobPostingSkillMapper.toSkillResponse(
                 jobPostingSkillRepository.findByJobPostingId(id)

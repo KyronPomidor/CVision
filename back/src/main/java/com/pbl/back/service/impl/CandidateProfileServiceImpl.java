@@ -1,7 +1,6 @@
 package com.pbl.back.service.impl;
 
 import com.pbl.back.domain.entity.CandidateProfile;
-import com.pbl.back.domain.entity.User;
 import com.pbl.back.dto.candidateprofile.CandidateProfileRequest;
 import com.pbl.back.dto.candidateprofile.CandidateProfileResponse;
 import com.pbl.back.dto.profileskill.ProfileSkillResponse;
@@ -9,8 +8,8 @@ import com.pbl.back.exception.ResourceNotFoundException;
 import com.pbl.back.mapper.CandidateProfileMapper;
 import com.pbl.back.mapper.ProfileSkillMapper;
 import com.pbl.back.repository.CandidateProfileRepository;
+import com.pbl.back.repository.ApplicationRepository;
 import com.pbl.back.repository.ProfileSkillRepository;
-import com.pbl.back.repository.UserRepository;
 import com.pbl.back.service.CandidateProfileService;
 import com.pbl.back.service.CurrentUserService;
 import com.pbl.back.service.ImageStorageService;
@@ -34,20 +33,15 @@ public class CandidateProfileServiceImpl implements CandidateProfileService {
 
     private final CandidateProfileRepository repository;
     private final CandidateProfileMapper mapper;
-    private final UserRepository userRepository;
+    private final ApplicationRepository applicationRepository;
     private final ProfileSkillRepository profileSkillRepository;
     private final ProfileSkillMapper profileSkillMapper;
     private final CurrentUserService currentUserService;
     private final ImageStorageService imageStorageService;
 
-    // TODO: get user without client id
-    public CandidateProfileResponse create(Long userId, CandidateProfileRequest request) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new ResourceNotFoundException("User with id '" + userId + "' not found."));
-
+    public CandidateProfileResponse create(CandidateProfileRequest request) {
         CandidateProfile profile = mapper.toEntity(request);
-
-        profile.setUser(user);
+        profile.setUser(currentUserService.get());
 
         CandidateProfile savedProfile = repository.save(profile);
 
@@ -55,8 +49,8 @@ public class CandidateProfileServiceImpl implements CandidateProfileService {
     }
 
     @Override
-    public CandidateProfileResponse getByUserId(Long userId) {
-
+    public CandidateProfileResponse getMe() {
+        Long userId = currentUserService.getId();
         CandidateProfile profile = repository.findByUserId(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("" +
                         "CandidateProfile for user with id '" + userId + "' not found."));
@@ -75,6 +69,21 @@ public class CandidateProfileServiceImpl implements CandidateProfileService {
         CandidateProfile profile = repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(
                         "CandidateProfile with id '" + id + "' not found."));
+        Long currentUserId = currentUserService.getId();
+        Long candidateUserId = profile.getUser() == null ? null : profile.getUser().getId();
+        if (!currentUserId.equals(candidateUserId)) {
+            boolean employer = org.springframework.security.core.context.SecurityContextHolder
+                    .getContext().getAuthentication().getAuthorities().stream()
+                    .anyMatch(authority -> authority.getAuthority().equals("ROLE_EMPLOYER"));
+            if (!employer || candidateUserId == null
+                    || !applicationRepository.existsByUserIdAndJobPostingCompanyUserId(
+                    candidateUserId, currentUserId)) {
+                if (!employer) {
+                    throw new ResourceNotFoundException("CandidateProfile with id '" + id + "' not found.");
+                }
+                throw new AccessDeniedException("You are not authorized to review this candidate.");
+            }
+        }
 
         List<ProfileSkillResponse> skills =
                 profileSkillRepository.findByProfileId(profile.getId())
@@ -86,10 +95,9 @@ public class CandidateProfileServiceImpl implements CandidateProfileService {
     }
 
     @Override
-    public CandidateProfileResponse update(Long id, CandidateProfileRequest request) {
-        CandidateProfile profile = repository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException(
-                        "CandidateProfile with id '" + id + "' not found."));
+    public CandidateProfileResponse updateMe(CandidateProfileRequest request) {
+        CandidateProfile profile = repository.findByUserId(currentUserService.getId())
+                .orElseThrow(() -> new ResourceNotFoundException("Create your profile first."));
 
         profile.setName(request.getName());
         profile.setLocation(request.getLocation());
@@ -107,13 +115,12 @@ public class CandidateProfileServiceImpl implements CandidateProfileService {
     }
 
     @Override
-    public void delete(Long id) {
-        CandidateProfile profile = repository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException(
-                        "CandidateProfile with id '" + id + "' not found."));
+    public void deleteMe() {
+        CandidateProfile profile = repository.findByUserId(currentUserService.getId())
+                .orElseThrow(() -> new ResourceNotFoundException("Create your profile first."));
 
         repository.delete(profile);
-        imageStorageService.deleteDirectoryQuietly("profiles/" + id);
+        imageStorageService.deleteDirectoryQuietly("profiles/" + profile.getId());
     }
 
     @Override
@@ -136,7 +143,7 @@ public class CandidateProfileServiceImpl implements CandidateProfileService {
         if (oldPicturePath != null) {
             imageStorageService.deleteQuietly(oldPicturePath);
         }
-        return getByUserId(userId);
+        return getMe();
     }
 
     @Override
@@ -146,7 +153,7 @@ public class CandidateProfileServiceImpl implements CandidateProfileService {
                         "CandidateProfile with id '" + id + "' not found."));
         if (profile.getUser() == null
                 || !profile.getUser().getId().equals(currentUserService.getId())) {
-            throw new AccessDeniedException("You do not own this candidate profile.");
+            throw new ResourceNotFoundException("CandidateProfile with id '" + id + "' not found.");
         }
         if (profile.getPicturePath() == null) {
             throw new ResourceNotFoundException("Profile picture not found.");

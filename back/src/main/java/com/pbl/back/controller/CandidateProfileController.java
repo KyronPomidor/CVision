@@ -21,21 +21,20 @@ public class CandidateProfileController {
         this.service = service;
     }
 
-    @PostMapping("/user/{userId}")
+    @PostMapping("/me")
     @ResponseStatus(HttpStatus.CREATED)
-    public CandidateProfileResponse create(@PathVariable Long userId,
-                                           @Valid @RequestBody CandidateProfileRequest request) {
-        return service.create(userId, request);
+    public CandidateProfileResponse create(@Valid @RequestBody CandidateProfileRequest request) {
+        return service.create(request);
     }
 
-    @GetMapping("/user/{userId}")
-    public CandidateProfileResponse getByUserId(@PathVariable Long userId) {
-        return service.getByUserId(userId);
+    @GetMapping("/me")
+    public CandidateProfileResponse getMe() {
+        return service.getMe();
     }
 
-    @PutMapping("/{id}")
-    public CandidateProfileResponse update(@PathVariable Long id, @Valid @RequestBody CandidateProfileRequest request) {
-        return service.update(id, request);
+    @PutMapping("/me")
+    public CandidateProfileResponse updateMe(@Valid @RequestBody CandidateProfileRequest request) {
+        return service.updateMe(request);
     }
 
     @GetMapping("/{id}")
@@ -59,9 +58,9 @@ public class CandidateProfileController {
         service.deletePicture();
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/me")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable Long id) {
-        service.delete(id);
+    public void deleteMe() {
+        service.deleteMe();
     }
 }

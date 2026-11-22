@@ -153,7 +153,7 @@ public class CVServiceImpl implements CVService {
                 .orElseThrow(() -> new ResourceNotFoundException("CV not found"));
 
         if (!cv.getUser().getId().equals(currentUserService.getId())) {
-            throw new AccessDeniedException("You do not own this CV");
+            throw new ResourceNotFoundException("CV not found");
         }
 
         return cv;

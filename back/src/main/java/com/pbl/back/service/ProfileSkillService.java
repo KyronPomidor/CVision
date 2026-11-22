@@ -7,9 +7,9 @@ import java.util.List;
 
 public interface ProfileSkillService {
 
-    ProfileSkillResponse addSkill(Long profileId, ProfileSkillRequest request);
+    ProfileSkillResponse addSkill(ProfileSkillRequest request);
 
-    List<ProfileSkillResponse> getSkills(Long profileId);
+    List<ProfileSkillResponse> getSkills();
 
     ProfileSkillResponse getById(Long id);
 

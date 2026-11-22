@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/cv-skills")
+@RequestMapping("/api/cv/me/skills")
 public class CVSkillController {
 
     private final CVSkillService service;
@@ -19,25 +19,20 @@ public class CVSkillController {
         this.service = service;
     }
 
-    @PostMapping("cv/{cvId}")
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public CVSkillResponse create(@PathVariable Long cvId, @Valid @RequestBody CVSkillRequest request) {
-        return service.create(cvId, request);
+    public CVSkillResponse create(@Valid @RequestBody CVSkillRequest request) {
+        return service.create(request);
+    }
+
+    @GetMapping
+    public List<CVSkillResponse> getMine() {
+        return service.getMine();
     }
 
     @GetMapping("/{id}")
     public CVSkillResponse getById(@PathVariable Long id) {
         return service.getById(id);
-    }
-
-    @GetMapping("/cv/{cvId}")
-    public List<CVSkillResponse> getByCvId(@PathVariable Long cvId) {
-        return service.getByCvId(cvId);
-    }
-
-    @GetMapping("/skill/{skillId}")
-    public List<CVSkillResponse> getBySkillId(@PathVariable Long skillId) {
-        return service.getBySkillId(skillId);
     }
 
     @PutMapping("/{id}")

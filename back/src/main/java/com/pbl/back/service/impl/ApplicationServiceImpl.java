@@ -15,6 +15,7 @@ import com.pbl.back.service.ApplicationService;
 import com.pbl.back.service.CurrentUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -41,7 +42,7 @@ public class ApplicationServiceImpl implements ApplicationService {
                 .orElseThrow(() -> new ResourceNotFoundException(
                         "CV with id '" + request.getCvId() + "' not found."));
         if (!cv.getUser().getId().equals(user.getId())) {
-            throw new AccessDeniedException("You can only apply with your own CV.");
+            throw new ResourceNotFoundException("CV not found");
         }
 
         Application application = mapper.toEntity(request);
@@ -66,7 +67,12 @@ public class ApplicationServiceImpl implements ApplicationService {
 
     @Override
     public ApplicationResponse getById(Long id) {
-        return mapper.toResponse(getOwnedApplication(id));
+        boolean employer = SecurityContextHolder.getContext().getAuthentication().getAuthorities().stream()
+                .anyMatch(authority -> authority.getAuthority().equals("ROLE_EMPLOYER"));
+        Application application = employer
+                ? getApplicationForEmployer(id)
+                : getOwnedApplication(id);
+        return mapper.toResponse(application);
     }
 
     @Override
@@ -87,7 +93,30 @@ public class ApplicationServiceImpl implements ApplicationService {
         Application application = repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Application with id '" + id + "' not found."));
         if (!application.getUser().getId().equals(currentUserService.getId())) {
-            throw new AccessDeniedException("You do not own this application.");
+            throw new ResourceNotFoundException("Application with id '" + id + "' not found.");
+        }
+        return application;
+    }
+
+    @Override
+    public java.util.List<ApplicationResponse> getApplicantsForPosting(Long postingId) {
+        JobPosting posting = jobPostingRepository.findById(postingId)
+                .orElseThrow(() -> new ResourceNotFoundException("JobPosting with id '" + postingId + "' not found."));
+        if (posting.getCompany().getUser() == null
+                || !posting.getCompany().getUser().getId().equals(currentUserService.getId())) {
+            throw new AccessDeniedException("You do not own this company.");
+        }
+        return repository.findByJobPostingId(postingId).stream()
+                .map(mapper::toResponse)
+                .toList();
+    }
+
+    private Application getApplicationForEmployer(Long id) {
+        Application application = repository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Application with id '" + id + "' not found."));
+        if (application.getJobPosting().getCompany().getUser() == null
+                || !application.getJobPosting().getCompany().getUser().getId().equals(currentUserService.getId())) {
+            throw new AccessDeniedException("You are not authorized to view this application.");
         }
         return application;
     }

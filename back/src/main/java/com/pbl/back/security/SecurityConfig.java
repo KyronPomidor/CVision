@@ -52,21 +52,34 @@ public class SecurityConfig {
                         // Public registration only
                         .requestMatchers(HttpMethod.POST, "/api/users").permitAll()
 
-                        .requestMatchers("/api/cv/**", "/api/profiles/**",
-                                "/api/applications/**", "/api/recommendations/**")
-                        .hasRole("EMPLOYEE")
-
                         .requestMatchers(HttpMethod.GET, "/api/postings/matches/me")
                         .hasRole("EMPLOYEE")
 
-                        .requestMatchers(HttpMethod.GET, "/api/postings/*/images/*").authenticated()
+                        .requestMatchers("/api/cv/**").hasRole("EMPLOYEE")
 
-                        .requestMatchers(HttpMethod.GET, "/api/companies/*/picture").authenticated()
+                        .requestMatchers("/api/applications/me").hasRole("EMPLOYEE")
+                        .requestMatchers(HttpMethod.GET, "/api/applications/*").authenticated()
+                        .requestMatchers("/api/applications/**").hasRole("EMPLOYEE")
 
-                        .requestMatchers("/api/companies/**", "/api/postings/**")
-                        .hasRole("EMPLOYER")
+                        .requestMatchers("/api/profiles/me", "/api/profiles/me/**").hasRole("EMPLOYEE")
+                        .requestMatchers(HttpMethod.GET, "/api/profiles/*").hasAnyRole("EMPLOYEE", "EMPLOYER")
+                        .requestMatchers(HttpMethod.GET, "/api/profiles/*/picture").hasRole("EMPLOYEE")
+                        .requestMatchers("/api/profiles/**").hasRole("EMPLOYEE")
+
+                        .requestMatchers("/api/companies/me", "/api/companies/me/**").hasRole("EMPLOYER")
+                        .requestMatchers(HttpMethod.GET, "/api/companies/*", "/api/companies/*/picture")
+                        .authenticated()
+                        .requestMatchers("/api/companies/**").hasRole("EMPLOYER")
+
+                        .requestMatchers(HttpMethod.GET, "/api/postings/*", "/api/postings/*/images/*")
+                        .authenticated()
+                        .requestMatchers(HttpMethod.GET, "/api/postings/*/applicants").hasRole("EMPLOYER")
+                        .requestMatchers("/api/companies/me/postings/**").hasRole("EMPLOYER")
+                        .requestMatchers("/api/postings/**").hasRole("EMPLOYER")
 
                         .requestMatchers("/api/skills/**").authenticated()
+
+                        .requestMatchers("/api/users/me").authenticated()
 
                         .anyRequest().authenticated()
                 ).exceptionHandling(exception -> exception
@@ -75,6 +88,8 @@ public class SecurityConfig {
                         })
                         .accessDeniedHandler((request, response, accessDeniedException) -> {
                             response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+                            response.setContentType("application/json");
+                            response.getWriter().write("{\"error\":\"Access denied\"}");
                         })
                 )
                 .headers(headers -> headers
