@@ -1,5 +1,6 @@
 package com.pbl.back.service.impl;
 
+import com.pbl.back.service.*;
 import org.springframework.security.access.AccessDeniedException;
 import com.pbl.back.domain.entity.CV;
 import com.pbl.back.domain.entity.User;
@@ -10,10 +11,6 @@ import com.pbl.back.exception.ResourceNotFoundException;
 import com.pbl.back.mapper.CVMapper;
 import com.pbl.back.repository.CVRepository;
 import com.pbl.back.repository.UserRepository;
-import com.pbl.back.service.CVService;
-import com.pbl.back.service.CurrentUserService;
-import com.pbl.back.service.CvSkillSyncService;
-import com.pbl.back.service.PerplexityService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -36,6 +33,7 @@ import java.util.UUID;
 public class CVServiceImpl implements CVService {
 
     private final CVRepository repository;
+    private final TextExtractor textExtractor;
     private final CVMapper mapper;
     private final UserRepository userRepository;
     private final CurrentUserService currentUserService;
@@ -88,14 +86,21 @@ public class CVServiceImpl implements CVService {
             throw new FileStorageException("Could not save the CV file.", ex);
         }
 
+
         try {
+            String cvText = textExtractor.extract(file).trim();
+
             String skillsJson = perplexityService.extractSkills(file);
-            List<String> skillNames = objectMapper.readValue(skillsJson, new TypeReference<List<String>>() {});
+            List<String> skillNames = objectMapper.readValue(
+                    skillsJson,
+                    new TypeReference<List<String>>() {}
+            );
 
             CV cv = CV.builder()
                     .user(user)
                     .fileName(originalFileName)
                     .filePath(target.toString())
+                    .extractedText(cvText)
                     .skills(skillsJson)
                     .uploadedAt(LocalDateTime.now())
                     .build();
