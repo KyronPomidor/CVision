@@ -218,7 +218,7 @@ td {
 	</h2>
 
 	<h3>
-		Generated on Sun, 22 Nov 2026 14:17:33
+		Generated on Sun, 22 Nov 2026 18:04:23
 	</h3>
 
 	<h3>
@@ -243,7 +243,7 @@ td {
 					<div>High</div>
 				</td>
 				<td align="center">
-					<div>0</div>
+					<div>1</div>
 				</td>
 			</tr>
 			<tr>
@@ -259,7 +259,7 @@ td {
 					<div>Low</div>
 				</td>
 				<td align="center">
-					<div>2</div>
+					<div>5</div>
 				</td>
 			</tr>
 			<tr>
@@ -267,7 +267,7 @@ td {
 					<div>Informational</div>
 				</td>
 				<td align="center">
-					<div>3</div>
+					<div>4</div>
 				</td>
 			</tr>
 			<tr>
@@ -308,7 +308,25 @@ td {
 					<div>Percentage of responses with status code 4xx</div>
 				</td>
 				<td align="center">
-					<div>99 %</div>
+					<div>98 %</div>
+				</td>
+				</tr>
+			
+				<tr>
+				<td class="risk-0">
+					<div>Info</div>
+				</td>
+				<td>
+					<div>Informational</div>
+				</td>
+				<td>
+					<div>http://host.docker.internal:8080</div>
+				</td>
+				<td>
+					<div>Percentage of responses with status code 2xx</div>
+				</td>
+				<td align="center">
+					<div>25 %</div>
 				</td>
 				</tr>
 			
@@ -344,7 +362,7 @@ td {
 					<div>Percentage of endpoints with content type application/json</div>
 				</td>
 				<td align="center">
-					<div>99 %</div>
+					<div>7 %</div>
 				</td>
 				</tr>
 			
@@ -456,6 +474,24 @@ td {
 				</td>
 				</tr>
 			
+				<tr>
+				<td class="risk-0">
+					<div>Info</div>
+				</td>
+				<td>
+					<div>Informational</div>
+				</td>
+				<td>
+					<div>http://host.docker.internal:8080</div>
+				</td>
+				<td>
+					<div>Percentage of slow responses</div>
+				</td>
+				<td align="center">
+					<div>25 %</div>
+				</td>
+				</tr>
+			
 		</table>
 		<div class="spacer-lg"></div>
 	
@@ -484,11 +520,35 @@ td {
 					align="center">Number of Instances</th>
 			</tr>
 			<tr>
+				<td><a href="#40018">SQL Injection</a></td>
+				<td align="center" class="risk-3">High</td>
+				
+				
+				<td align="center">1</td>
+				
+			</tr>
+			<tr>
 				<td><a href="#100000">A Server Error response code was returned by the server</a></td>
 				<td align="center" class="risk-1">Low</td>
 				
 				
-				<td align="center">3</td>
+				<td align="center">1</td>
+				
+			</tr>
+			<tr>
+				<td><a href="#90022">Application Error Disclosure</a></td>
+				<td align="center" class="risk-1">Low</td>
+				
+				
+				<td align="center">1</td>
+				
+			</tr>
+			<tr>
+				<td><a href="#10054">Cookie without SameSite Attribute</a></td>
+				<td align="center" class="risk-1">Low</td>
+				
+				<td align="center">Systemic</td>
+				
 				
 			</tr>
 			<tr>
@@ -496,7 +556,15 @@ td {
 				<td align="center" class="risk-1">Low</td>
 				
 				
-				<td align="center">3</td>
+				<td align="center">2</td>
+				
+			</tr>
+			<tr>
+				<td><a href="#10023">Information Disclosure - Debug Error Messages</a></td>
+				<td align="center" class="risk-1">Low</td>
+				
+				
+				<td align="center">1</td>
 				
 			</tr>
 			<tr>
@@ -504,7 +572,7 @@ td {
 				<td align="center" class="risk-0">Informational</td>
 				
 				
-				<td align="center">250</td>
+				<td align="center">210</td>
 				
 			</tr>
 			<tr>
@@ -523,12 +591,157 @@ td {
 				
 				
 			</tr>
+			<tr>
+				<td><a href="#10112">Session Management Response Identified</a></td>
+				<td align="center" class="risk-0">Informational</td>
+				
+				
+				<td align="center">12</td>
+				
+			</tr>
 		</table>
 		<div class="spacer-lg"></div>
 	
 
 	
 		<h3>Alert Detail</h3>
+		
+			<table class="results">
+				<tr height="24">
+					<th width="20%" class="risk-3"><a
+						id="40018"></a>
+						<div>High</div></th>
+					<th class="risk-3">SQL Injection</th>
+				</tr>
+				<tr>
+					<td width="20%">Description</td>
+					<td width="80%">
+							<div>SQL injection may be possible.</div>
+							
+						</td>
+				</tr>
+				<TR vAlign="top">
+					<TD colspan="2"></TD>
+				</TR>
+				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
+						<td width="80%"><a href="http://host.docker.internal:8080/api/users">http://host.docker.internal:8080/api/users</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Node Name</td>
+						<td width="80%">http://host.docker.internal:8080/api/users ()({accountName,email,password,role})</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Method</td>
+						<td width="80%">POST</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%">email</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Attack</td>
+						<td width="80%">zaproxy@example.com OR 1=1 -- </td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Other Info</td>
+						<td width="80%">
+							<div>The page results were successfully manipulated using the boolean conditions [zaproxy@example.com AND 1=1 -- ] and [zaproxy@example.com OR 1=1 -- ]</div>
+							<br />
+						
+							<div>The parameter value being modified was stripped from the HTML output for the purposes of the comparison.</div>
+							<br />
+						
+							<div>Data was NOT returned for the original parameter.</div>
+							<br />
+						
+							<div>The vulnerability was detected by successfully retrieving more data than originally returned, by manipulating the parameter.</div>
+							
+						</td>
+					</tr>
+				
+				<tr>
+					<td width="20%">Instances</td>
+					
+					
+					<td width="80%">1</td>
+					
+				</tr>
+				<tr>
+					<td width="20%">Solution</td>
+					<td width="80%">
+							<div>Do not trust client side input, even if there is client side validation in place.</div>
+							<br />
+						
+							<div>In general, type check all data on the server side.</div>
+							<br />
+						
+							<div>If the application uses JDBC, use PreparedStatement or CallableStatement, with parameters passed by &#39;?&#39;</div>
+							<br />
+						
+							<div>If the application uses ASP, use ADO Command Objects with strong type checking and parameterized queries.</div>
+							<br />
+						
+							<div>If database Stored Procedures can be used, use them.</div>
+							<br />
+						
+							<div>Do *not* concatenate strings into queries in the stored procedure, or use &#39;exec&#39;, &#39;exec immediate&#39;, or equivalent functionality!</div>
+							<br />
+						
+							<div>Do not create dynamic SQL queries using simple string concatenation.</div>
+							<br />
+						
+							<div>Escape all data received from the client.</div>
+							<br />
+						
+							<div>Apply an &#39;allow list&#39; of allowed characters, or a &#39;deny list&#39; of disallowed characters in user input.</div>
+							<br />
+						
+							<div>Apply the principle of least privilege by using the least privileged database user possible.</div>
+							<br />
+						
+							<div>In particular, avoid using the &#39;sa&#39; or &#39;db-owner&#39; database users. This does not eliminate SQL injection, but minimizes its impact.</div>
+							<br />
+						
+							<div>Grant the minimum database access that is necessary for the application.</div>
+							
+						</td>
+				</tr>
+				<tr>
+					<td width="20%">Reference</td>
+					<td width="80%">
+							<a href="https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html">https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html</a>
+							
+						</td>
+				</tr>
+				<tr>
+					<td width="20%">CWE Id</td>
+					<td width="80%"><a
+						href="https://cwe.mitre.org/data/definitions/89.html">89</a></td>
+				</tr>
+				<tr>
+					<td width="20%">WASC Id</td>
+					<td width="80%">19</td>
+				</tr>
+				<tr>
+					<td width="20%">Plugin Id</td>
+					<td width="80%"><a
+						href="https://www.zaproxy.org/docs/alerts/40018/">40018</a></td>
+				</tr>
+			</table>
+			<div class="spacer"></div>
 		
 			<table class="results">
 				<tr height="24">
@@ -557,84 +770,12 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="http://host.docker.internal:8080/api/companies/me/picture">http://host.docker.internal:8080/api/companies/me/picture</a></td>
+						<td width="80%"><a href="http://host.docker.internal:8080/api/auth/login">http://host.docker.internal:8080/api/auth/login</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
 							class="indent2">Node Name</td>
-						<td width="80%">http://host.docker.internal:8080/api/companies/me/picture ()(multipart:file)</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Method</td>
-						<td width="80%">POST</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Attack</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%">500</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Other Info</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://host.docker.internal:8080/api/postings/10/images">http://host.docker.internal:8080/api/postings/10/images</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Node Name</td>
-						<td width="80%">http://host.docker.internal:8080/api/postings/10/images ()(multipart:files)</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Method</td>
-						<td width="80%">POST</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Attack</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%">500</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Other Info</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://host.docker.internal:8080/api/profiles/me/picture">http://host.docker.internal:8080/api/profiles/me/picture</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Node Name</td>
-						<td width="80%">http://host.docker.internal:8080/api/profiles/me/picture ()(multipart:file)</td>
+						<td width="80%">http://host.docker.internal:8080/api/auth/login ()({email,password})</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -666,7 +807,7 @@ td {
 					<td width="20%">Instances</td>
 					
 					
-					<td width="80%">3</td>
+					<td width="80%">1</td>
 					
 				</tr>
 				<tr>
@@ -697,14 +838,103 @@ td {
 			<table class="results">
 				<tr height="24">
 					<th width="20%" class="risk-1"><a
-						id="90004"></a>
+						id="90022"></a>
 						<div>Low</div></th>
-					<th class="risk-1">Cross-Origin-Resource-Policy Header Missing or Invalid</th>
+					<th class="risk-1">Application Error Disclosure</th>
 				</tr>
 				<tr>
 					<td width="20%">Description</td>
 					<td width="80%">
-							<div>Cross-Origin-Resource-Policy header is an opt-in header designed to counter side-channels attacks like Spectre. Resource should be specifically set as shareable amongst different origins.</div>
+							<div>This page contains an error/warning message that may disclose sensitive information like the location of the file that produced the unhandled exception. This information can be used to launch further attacks against the web application. The alert could be a false positive if the error message is found inside a documentation page.</div>
+							
+						</td>
+				</tr>
+				<TR vAlign="top">
+					<TD colspan="2"></TD>
+				</TR>
+				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
+						<td width="80%"><a href="http://host.docker.internal:8080/api/auth/login">http://host.docker.internal:8080/api/auth/login</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Node Name</td>
+						<td width="80%">http://host.docker.internal:8080/api/auth/login ()({email,password})</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Method</td>
+						<td width="80%">POST</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Attack</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%">HTTP/1.1 500</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Other Info</td>
+						<td width="80%"></td>
+					</tr>
+				
+				<tr>
+					<td width="20%">Instances</td>
+					
+					
+					<td width="80%">1</td>
+					
+				</tr>
+				<tr>
+					<td width="20%">Solution</td>
+					<td width="80%">
+							<div>Review the source code of this page. Implement custom error pages. Consider implementing a mechanism to provide a unique error reference/identifier to the client (browser) while logging the details on the server side and not exposing them to the user.</div>
+							
+						</td>
+				</tr>
+				<tr>
+					<td width="20%">Reference</td>
+					<td width="80%"></td>
+				</tr>
+				<tr>
+					<td width="20%">CWE Id</td>
+					<td width="80%"><a
+						href="https://cwe.mitre.org/data/definitions/550.html">550</a></td>
+				</tr>
+				<tr>
+					<td width="20%">WASC Id</td>
+					<td width="80%">13</td>
+				</tr>
+				<tr>
+					<td width="20%">Plugin Id</td>
+					<td width="80%"><a
+						href="https://www.zaproxy.org/docs/alerts/90022/">90022</a></td>
+				</tr>
+			</table>
+			<div class="spacer"></div>
+		
+			<table class="results">
+				<tr height="24">
+					<th width="20%" class="risk-1"><a
+						id="10054"></a>
+						<div>Low</div></th>
+					<th class="risk-1">Cookie without SameSite Attribute</th>
+				</tr>
+				<tr>
+					<td width="20%">Description</td>
+					<td width="80%">
+							<div>A cookie has been set without the SameSite attribute, which means that the cookie can be sent as a result of a &#39;cross-site&#39; request. The SameSite attribute is an effective counter measure to cross-site request forgery, cross-site script inclusion, and timing attacks.</div>
 							
 						</td>
 				</tr>
@@ -730,7 +960,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Parameter</td>
-						<td width="80%">Cross-Origin-Resource-Policy</td>
+						<td width="80%">JSESSIONID</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -740,7 +970,43 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
+						<td width="80%">Set-Cookie: JSESSIONID</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Other Info</td>
 						<td width="80%"></td>
+					</tr>
+				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
+						<td width="80%"><a href="http://host.docker.internal:8080/api/skills/10">http://host.docker.internal:8080/api/skills/10</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Node Name</td>
+						<td width="80%">http://host.docker.internal:8080/api/skills/10</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Method</td>
+						<td width="80%">GET</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%">JSESSIONID</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Attack</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%">Set-Cookie: JSESSIONID</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -766,7 +1032,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Parameter</td>
-						<td width="80%">Cross-Origin-Resource-Policy</td>
+						<td width="80%">JSESSIONID</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -776,13 +1042,141 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%"></td>
+						<td width="80%">Set-Cookie: JSESSIONID</td>
 					</tr>
 					<tr>
 						<td width="20%"
 							class="indent2">Other Info</td>
 						<td width="80%"></td>
 					</tr>
+				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
+						<td width="80%"><a href="http://host.docker.internal:8080/api/skills/10">http://host.docker.internal:8080/api/skills/10</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Node Name</td>
+						<td width="80%">http://host.docker.internal:8080/api/skills/10 ()({name})</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Method</td>
+						<td width="80%">PUT</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%">JSESSIONID</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Attack</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%">Set-Cookie: JSESSIONID</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Other Info</td>
+						<td width="80%"></td>
+					</tr>
+				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
+						<td width="80%"><a href="http://host.docker.internal:8080/api/users/me">http://host.docker.internal:8080/api/users/me</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Node Name</td>
+						<td width="80%">http://host.docker.internal:8080/api/users/me ()({accountName,email,password,role})</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Method</td>
+						<td width="80%">PUT</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%">JSESSIONID</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Attack</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%">Set-Cookie: JSESSIONID</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Other Info</td>
+						<td width="80%"></td>
+					</tr>
+				
+				<tr>
+					<td width="20%">Instances</td>
+					
+					<td width="80%">Systemic</td>
+					
+					
+				</tr>
+				<tr>
+					<td width="20%">Solution</td>
+					<td width="80%">
+							<div>Ensure that the SameSite attribute is set to either &#39;lax&#39; or ideally &#39;strict&#39; for all cookies.</div>
+							
+						</td>
+				</tr>
+				<tr>
+					<td width="20%">Reference</td>
+					<td width="80%">
+							<a href="https://datatracker.ietf.org/doc/html/draft-ietf-httpbis-cookie-same-site">https://datatracker.ietf.org/doc/html/draft-ietf-httpbis-cookie-same-site</a>
+							
+						</td>
+				</tr>
+				<tr>
+					<td width="20%">CWE Id</td>
+					<td width="80%"><a
+						href="https://cwe.mitre.org/data/definitions/1275.html">1275</a></td>
+				</tr>
+				<tr>
+					<td width="20%">WASC Id</td>
+					<td width="80%">13</td>
+				</tr>
+				<tr>
+					<td width="20%">Plugin Id</td>
+					<td width="80%"><a
+						href="https://www.zaproxy.org/docs/alerts/10054/">10054</a></td>
+				</tr>
+			</table>
+			<div class="spacer"></div>
+		
+			<table class="results">
+				<tr height="24">
+					<th width="20%" class="risk-1"><a
+						id="90004"></a>
+						<div>Low</div></th>
+					<th class="risk-1">Cross-Origin-Resource-Policy Header Missing or Invalid</th>
+				</tr>
+				<tr>
+					<td width="20%">Description</td>
+					<td width="80%">
+							<div>Cross-Origin-Resource-Policy header is an opt-in header designed to counter side-channels attacks like Spectre. Resource should be specifically set as shareable amongst different origins.</div>
+							
+						</td>
+				</tr>
+				<TR vAlign="top">
+					<TD colspan="2"></TD>
+				</TR>
 				
 					<tr>
 						<td width="20%"
@@ -820,11 +1214,47 @@ td {
 						<td width="80%"></td>
 					</tr>
 				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
+						<td width="80%"><a href="http://host.docker.internal:8080/api/auth/logout">http://host.docker.internal:8080/api/auth/logout</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Node Name</td>
+						<td width="80%">http://host.docker.internal:8080/api/auth/logout</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Method</td>
+						<td width="80%">POST</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%">Cross-Origin-Resource-Policy</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Attack</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Other Info</td>
+						<td width="80%"></td>
+					</tr>
+				
 				<tr>
 					<td width="20%">Instances</td>
 					
 					
-					<td width="80%">3</td>
+					<td width="80%">2</td>
 					
 				</tr>
 				<tr>
@@ -869,6 +1299,95 @@ td {
 		
 			<table class="results">
 				<tr height="24">
+					<th width="20%" class="risk-1"><a
+						id="10023"></a>
+						<div>Low</div></th>
+					<th class="risk-1">Information Disclosure - Debug Error Messages</th>
+				</tr>
+				<tr>
+					<td width="20%">Description</td>
+					<td width="80%">
+							<div>The response appeared to contain common error messages returned by platforms such as ASP.NET, and Web-servers such as IIS and Apache. You can configure the list of common debug messages.</div>
+							
+						</td>
+				</tr>
+				<TR vAlign="top">
+					<TD colspan="2"></TD>
+				</TR>
+				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
+						<td width="80%"><a href="http://host.docker.internal:8080/api/auth/login">http://host.docker.internal:8080/api/auth/login</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Node Name</td>
+						<td width="80%">http://host.docker.internal:8080/api/auth/login ()({email,password})</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Method</td>
+						<td width="80%">POST</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Attack</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%">Internal server error</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Other Info</td>
+						<td width="80%"></td>
+					</tr>
+				
+				<tr>
+					<td width="20%">Instances</td>
+					
+					
+					<td width="80%">1</td>
+					
+				</tr>
+				<tr>
+					<td width="20%">Solution</td>
+					<td width="80%">
+							<div>Disable debugging messages before pushing to production.</div>
+							
+						</td>
+				</tr>
+				<tr>
+					<td width="20%">Reference</td>
+					<td width="80%"></td>
+				</tr>
+				<tr>
+					<td width="20%">CWE Id</td>
+					<td width="80%"><a
+						href="https://cwe.mitre.org/data/definitions/1295.html">1295</a></td>
+				</tr>
+				<tr>
+					<td width="20%">WASC Id</td>
+					<td width="80%">13</td>
+				</tr>
+				<tr>
+					<td width="20%">Plugin Id</td>
+					<td width="80%"><a
+						href="https://www.zaproxy.org/docs/alerts/10023/">10023</a></td>
+				</tr>
+			</table>
+			<div class="spacer"></div>
+		
+			<table class="results">
+				<tr height="24">
 					<th width="20%" class="risk-0"><a
 						id="100000"></a>
 						<div>Informational</div></th>
@@ -877,7 +1396,7 @@ td {
 				<tr>
 					<td width="20%">Description</td>
 					<td width="80%">
-							<div>A response code of 400 was returned by the server.</div>
+							<div>A response code of 401 was returned by the server.</div>
 							<br />
 						
 							<div>This may indicate that the application is failing to handle unexpected input correctly.</div>
@@ -955,7 +1474,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">401</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -1027,7 +1546,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">401</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -1099,7 +1618,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">401</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -1171,7 +1690,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">401</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -1243,7 +1762,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">401</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -1315,7 +1834,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">401</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -1387,7 +1906,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">401</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -1459,7 +1978,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">401</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -1531,7 +2050,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">401</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -1603,7 +2122,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">401</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -1675,7 +2194,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">401</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -1747,7 +2266,43 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">401</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Other Info</td>
+						<td width="80%"></td>
+					</tr>
+				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
+						<td width="80%"><a href="http://host.docker.internal:8080/api/users/me">http://host.docker.internal:8080/api/users/me</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Node Name</td>
+						<td width="80%">http://host.docker.internal:8080/api/users/me</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Method</td>
+						<td width="80%">DELETE</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Attack</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%">401</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -1783,7 +2338,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">401</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -1819,7 +2374,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">401</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -1855,7 +2410,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">401</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -1891,7 +2446,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">401</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -1927,7 +2482,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">401</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -1963,7 +2518,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">401</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -1999,7 +2554,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">401</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -2021,42 +2576,6 @@ td {
 						<td width="20%"
 							class="indent2">Method</td>
 						<td width="80%">DELETE</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Attack</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%">429</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Other Info</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://host.docker.internal:8080">http://host.docker.internal:8080</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Node Name</td>
-						<td width="80%">http://host.docker.internal:8080</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Method</td>
-						<td width="80%">GET</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -2107,7 +2626,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">401</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -2154,12 +2673,12 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="http://host.docker.internal:8080/4487743017514703945">http://host.docker.internal:8080/4487743017514703945</a></td>
+						<td width="80%"><a href="http://host.docker.internal:8080/2299426355333044122">http://host.docker.internal:8080/2299426355333044122</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
 							class="indent2">Node Name</td>
-						<td width="80%">http://host.docker.internal:8080/4487743017514703945</td>
+						<td width="80%">http://host.docker.internal:8080/2299426355333044122</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -2216,42 +2735,6 @@ td {
 						<td width="20%"
 							class="indent2">Evidence</td>
 						<td width="80%">401</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Other Info</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://host.docker.internal:8080/api">http://host.docker.internal:8080/api</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Node Name</td>
-						<td width="80%">http://host.docker.internal:8080/api</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Method</td>
-						<td width="80%">GET</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Attack</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%">429</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -2287,7 +2770,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">401</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -2298,12 +2781,12 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="http://host.docker.internal:8080/api/6642069470436618354">http://host.docker.internal:8080/api/6642069470436618354</a></td>
+						<td width="80%"><a href="http://host.docker.internal:8080/api/2570906081504797826">http://host.docker.internal:8080/api/2570906081504797826</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
 							class="indent2">Node Name</td>
-						<td width="80%">http://host.docker.internal:8080/api/6642069470436618354</td>
+						<td width="80%">http://host.docker.internal:8080/api/2570906081504797826</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -2360,42 +2843,6 @@ td {
 						<td width="20%"
 							class="indent2">Evidence</td>
 						<td width="80%">401</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Other Info</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://host.docker.internal:8080/api/applications">http://host.docker.internal:8080/api/applications</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Node Name</td>
-						<td width="80%">http://host.docker.internal:8080/api/applications</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Method</td>
-						<td width="80%">GET</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Attack</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%">429</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -2431,7 +2878,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">401</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -2503,7 +2950,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">401</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -2514,12 +2961,12 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="http://host.docker.internal:8080/api/applications/4782070329946452574">http://host.docker.internal:8080/api/applications/4782070329946452574</a></td>
+						<td width="80%"><a href="http://host.docker.internal:8080/api/applications/6852000228578741228">http://host.docker.internal:8080/api/applications/6852000228578741228</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
 							class="indent2">Node Name</td>
-						<td width="80%">http://host.docker.internal:8080/api/applications/4782070329946452574</td>
+						<td width="80%">http://host.docker.internal:8080/api/applications/6852000228578741228</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -2575,7 +3022,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">401</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -2647,42 +3094,6 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Other Info</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://host.docker.internal:8080/api/auth">http://host.docker.internal:8080/api/auth</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Node Name</td>
-						<td width="80%">http://host.docker.internal:8080/api/auth</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Method</td>
-						<td width="80%">GET</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Attack</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
 						<td width="80%">401</td>
 					</tr>
 					<tr>
@@ -2719,7 +3130,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">404</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -2755,7 +3166,43 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">404</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Other Info</td>
+						<td width="80%"></td>
+					</tr>
+				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
+						<td width="80%"><a href="http://host.docker.internal:8080/api/auth/1330226947256771640">http://host.docker.internal:8080/api/auth/1330226947256771640</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Node Name</td>
+						<td width="80%">http://host.docker.internal:8080/api/auth/1330226947256771640</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Method</td>
+						<td width="80%">GET</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Attack</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%">404</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -2791,43 +3238,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">401</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Other Info</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://host.docker.internal:8080/api/auth/2fa">http://host.docker.internal:8080/api/auth/2fa</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Node Name</td>
-						<td width="80%">http://host.docker.internal:8080/api/auth/2fa</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Method</td>
-						<td width="80%">GET</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Attack</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">404</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -2863,7 +3274,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">404</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -2874,12 +3285,12 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="http://host.docker.internal:8080/api/auth/2fa/6108177969829745690">http://host.docker.internal:8080/api/auth/2fa/6108177969829745690</a></td>
+						<td width="80%"><a href="http://host.docker.internal:8080/api/auth/2fa/5856989895319106535">http://host.docker.internal:8080/api/auth/2fa/5856989895319106535</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
 							class="indent2">Node Name</td>
-						<td width="80%">http://host.docker.internal:8080/api/auth/2fa/6108177969829745690</td>
+						<td width="80%">http://host.docker.internal:8080/api/auth/2fa/5856989895319106535</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -2899,43 +3310,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">401</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Other Info</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://host.docker.internal:8080/api/auth/5847319394322554553">http://host.docker.internal:8080/api/auth/5847319394322554553</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Node Name</td>
-						<td width="80%">http://host.docker.internal:8080/api/auth/5847319394322554553</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Method</td>
-						<td width="80%">GET</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Attack</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%">401</td>
+						<td width="80%">404</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -2972,42 +3347,6 @@ td {
 						<td width="20%"
 							class="indent2">Evidence</td>
 						<td width="80%">401</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Other Info</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://host.docker.internal:8080/api/companies">http://host.docker.internal:8080/api/companies</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Node Name</td>
-						<td width="80%">http://host.docker.internal:8080/api/companies</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Method</td>
-						<td width="80%">GET</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Attack</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%">429</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -3043,7 +3382,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">401</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -3115,7 +3454,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">401</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -3126,12 +3465,12 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="http://host.docker.internal:8080/api/companies/10/1076250773232331268">http://host.docker.internal:8080/api/companies/10/1076250773232331268</a></td>
+						<td width="80%"><a href="http://host.docker.internal:8080/api/companies/10/2055105669775007085">http://host.docker.internal:8080/api/companies/10/2055105669775007085</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
 							class="indent2">Node Name</td>
-						<td width="80%">http://host.docker.internal:8080/api/companies/10/1076250773232331268</td>
+						<td width="80%">http://host.docker.internal:8080/api/companies/10/2055105669775007085</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -3223,7 +3562,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">401</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -3234,12 +3573,12 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="http://host.docker.internal:8080/api/companies/6800436530425461686">http://host.docker.internal:8080/api/companies/6800436530425461686</a></td>
+						<td width="80%"><a href="http://host.docker.internal:8080/api/companies/1948535709023215152">http://host.docker.internal:8080/api/companies/1948535709023215152</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
 							class="indent2">Node Name</td>
-						<td width="80%">http://host.docker.internal:8080/api/companies/6800436530425461686</td>
+						<td width="80%">http://host.docker.internal:8080/api/companies/1948535709023215152</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -3331,7 +3670,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">401</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -3342,12 +3681,12 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="http://host.docker.internal:8080/api/companies/me/8358337357184179332">http://host.docker.internal:8080/api/companies/me/8358337357184179332</a></td>
+						<td width="80%"><a href="http://host.docker.internal:8080/api/companies/me/8945505063127042251">http://host.docker.internal:8080/api/companies/me/8945505063127042251</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
 							class="indent2">Node Name</td>
-						<td width="80%">http://host.docker.internal:8080/api/companies/me/8358337357184179332</td>
+						<td width="80%">http://host.docker.internal:8080/api/companies/me/8945505063127042251</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -3439,7 +3778,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">401</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -3486,42 +3825,6 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="http://host.docker.internal:8080/api/cv">http://host.docker.internal:8080/api/cv</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Node Name</td>
-						<td width="80%">http://host.docker.internal:8080/api/cv</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Method</td>
-						<td width="80%">GET</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Attack</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%">429</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Other Info</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
 						<td width="80%"><a href="http://host.docker.internal:8080/api/cv/">http://host.docker.internal:8080/api/cv/</a></td>
 					</tr>
 					<tr>
@@ -3547,7 +3850,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">401</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -3619,7 +3922,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">401</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -3630,12 +3933,12 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="http://host.docker.internal:8080/api/cv/8026811190421735220">http://host.docker.internal:8080/api/cv/8026811190421735220</a></td>
+						<td width="80%"><a href="http://host.docker.internal:8080/api/cv/8448582316977387325">http://host.docker.internal:8080/api/cv/8448582316977387325</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
 							class="indent2">Node Name</td>
-						<td width="80%">http://host.docker.internal:8080/api/cv/8026811190421735220</td>
+						<td width="80%">http://host.docker.internal:8080/api/cv/8448582316977387325</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -3727,7 +4030,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">401</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -3738,12 +4041,12 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="http://host.docker.internal:8080/api/cv/me/629628920280171925">http://host.docker.internal:8080/api/cv/me/629628920280171925</a></td>
+						<td width="80%"><a href="http://host.docker.internal:8080/api/cv/me/1705481793332329228">http://host.docker.internal:8080/api/cv/me/1705481793332329228</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
 							class="indent2">Node Name</td>
-						<td width="80%">http://host.docker.internal:8080/api/cv/me/629628920280171925</td>
+						<td width="80%">http://host.docker.internal:8080/api/cv/me/1705481793332329228</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -3835,7 +4138,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">401</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -3907,7 +4210,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">401</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -3918,12 +4221,12 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="http://host.docker.internal:8080/api/cv/me/skills/9181948668199676528">http://host.docker.internal:8080/api/cv/me/skills/9181948668199676528</a></td>
+						<td width="80%"><a href="http://host.docker.internal:8080/api/cv/me/skills/4590336444693985270">http://host.docker.internal:8080/api/cv/me/skills/4590336444693985270</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
 							class="indent2">Node Name</td>
-						<td width="80%">http://host.docker.internal:8080/api/cv/me/skills/9181948668199676528</td>
+						<td width="80%">http://host.docker.internal:8080/api/cv/me/skills/4590336444693985270</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -3980,42 +4283,6 @@ td {
 						<td width="20%"
 							class="indent2">Evidence</td>
 						<td width="80%">401</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Other Info</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://host.docker.internal:8080/api/perplexity">http://host.docker.internal:8080/api/perplexity</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Node Name</td>
-						<td width="80%">http://host.docker.internal:8080/api/perplexity</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Method</td>
-						<td width="80%">GET</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Attack</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%">429</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -4051,7 +4318,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">401</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -4062,12 +4329,12 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="http://host.docker.internal:8080/api/perplexity/5448637832353658310">http://host.docker.internal:8080/api/perplexity/5448637832353658310</a></td>
+						<td width="80%"><a href="http://host.docker.internal:8080/api/perplexity/2174257464083264207">http://host.docker.internal:8080/api/perplexity/2174257464083264207</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
 							class="indent2">Node Name</td>
-						<td width="80%">http://host.docker.internal:8080/api/perplexity/5448637832353658310</td>
+						<td width="80%">http://host.docker.internal:8080/api/perplexity/2174257464083264207</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -4124,42 +4391,6 @@ td {
 						<td width="20%"
 							class="indent2">Evidence</td>
 						<td width="80%">401</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Other Info</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://host.docker.internal:8080/api/postings">http://host.docker.internal:8080/api/postings</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Node Name</td>
-						<td width="80%">http://host.docker.internal:8080/api/postings</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Method</td>
-						<td width="80%">GET</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Attack</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%">429</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -4195,7 +4426,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">401</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -4267,7 +4498,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">401</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -4278,12 +4509,12 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="http://host.docker.internal:8080/api/postings/10/3200725289549366042">http://host.docker.internal:8080/api/postings/10/3200725289549366042</a></td>
+						<td width="80%"><a href="http://host.docker.internal:8080/api/postings/10/6120928537494069264">http://host.docker.internal:8080/api/postings/10/6120928537494069264</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
 							class="indent2">Node Name</td>
-						<td width="80%">http://host.docker.internal:8080/api/postings/10/3200725289549366042</td>
+						<td width="80%">http://host.docker.internal:8080/api/postings/10/6120928537494069264</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -4375,7 +4606,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">401</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -4422,42 +4653,6 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="http://host.docker.internal:8080/api/postings/10/images">http://host.docker.internal:8080/api/postings/10/images</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Node Name</td>
-						<td width="80%">http://host.docker.internal:8080/api/postings/10/images</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Method</td>
-						<td width="80%">GET</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Attack</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%">429</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Other Info</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
 						<td width="80%"><a href="http://host.docker.internal:8080/api/postings/10/images/">http://host.docker.internal:8080/api/postings/10/images/</a></td>
 					</tr>
 					<tr>
@@ -4483,7 +4678,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">401</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -4555,7 +4750,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">401</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -4566,12 +4761,12 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="http://host.docker.internal:8080/api/postings/10/images/343260659529383030">http://host.docker.internal:8080/api/postings/10/images/343260659529383030</a></td>
+						<td width="80%"><a href="http://host.docker.internal:8080/api/postings/10/images/5032196763516297606">http://host.docker.internal:8080/api/postings/10/images/5032196763516297606</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
 							class="indent2">Node Name</td>
-						<td width="80%">http://host.docker.internal:8080/api/postings/10/images/343260659529383030</td>
+						<td width="80%">http://host.docker.internal:8080/api/postings/10/images/5032196763516297606</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -4602,48 +4797,12 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="http://host.docker.internal:8080/api/postings/1386107251120517653">http://host.docker.internal:8080/api/postings/1386107251120517653</a></td>
+						<td width="80%"><a href="http://host.docker.internal:8080/api/postings/2475128284996895280">http://host.docker.internal:8080/api/postings/2475128284996895280</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
 							class="indent2">Node Name</td>
-						<td width="80%">http://host.docker.internal:8080/api/postings/1386107251120517653</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Method</td>
-						<td width="80%">GET</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Attack</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%">401</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Other Info</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://host.docker.internal:8080/api/postings/matches">http://host.docker.internal:8080/api/postings/matches</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Node Name</td>
-						<td width="80%">http://host.docker.internal:8080/api/postings/matches</td>
+						<td width="80%">http://host.docker.internal:8080/api/postings/2475128284996895280</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -4699,7 +4858,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">401</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -4735,7 +4894,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">401</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -4746,12 +4905,12 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="http://host.docker.internal:8080/api/postings/matches/8748726798764889309">http://host.docker.internal:8080/api/postings/matches/8748726798764889309</a></td>
+						<td width="80%"><a href="http://host.docker.internal:8080/api/postings/matches/5068294454405761695">http://host.docker.internal:8080/api/postings/matches/5068294454405761695</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
 							class="indent2">Node Name</td>
-						<td width="80%">http://host.docker.internal:8080/api/postings/matches/8748726798764889309</td>
+						<td width="80%">http://host.docker.internal:8080/api/postings/matches/5068294454405761695</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -4843,7 +5002,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">401</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -4890,42 +5049,6 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="http://host.docker.internal:8080/api/profiles">http://host.docker.internal:8080/api/profiles</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Node Name</td>
-						<td width="80%">http://host.docker.internal:8080/api/profiles</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Method</td>
-						<td width="80%">GET</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Attack</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%">429</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Other Info</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
 						<td width="80%"><a href="http://host.docker.internal:8080/api/profiles/">http://host.docker.internal:8080/api/profiles/</a></td>
 					</tr>
 					<tr>
@@ -4951,7 +5074,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">401</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -5023,7 +5146,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">401</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -5034,12 +5157,12 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="http://host.docker.internal:8080/api/profiles/10/6541120406770840989">http://host.docker.internal:8080/api/profiles/10/6541120406770840989</a></td>
+						<td width="80%"><a href="http://host.docker.internal:8080/api/profiles/10/6270565586115632344">http://host.docker.internal:8080/api/profiles/10/6270565586115632344</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
 							class="indent2">Node Name</td>
-						<td width="80%">http://host.docker.internal:8080/api/profiles/10/6541120406770840989</td>
+						<td width="80%">http://host.docker.internal:8080/api/profiles/10/6270565586115632344</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -5131,7 +5254,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">401</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -5142,12 +5265,12 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="http://host.docker.internal:8080/api/profiles/7374972638916353859">http://host.docker.internal:8080/api/profiles/7374972638916353859</a></td>
+						<td width="80%"><a href="http://host.docker.internal:8080/api/profiles/5580827824903007712">http://host.docker.internal:8080/api/profiles/5580827824903007712</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
 							class="indent2">Node Name</td>
-						<td width="80%">http://host.docker.internal:8080/api/profiles/7374972638916353859</td>
+						<td width="80%">http://host.docker.internal:8080/api/profiles/5580827824903007712</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -5239,7 +5362,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">401</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -5250,12 +5373,12 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="http://host.docker.internal:8080/api/profiles/me/7358070193708829121">http://host.docker.internal:8080/api/profiles/me/7358070193708829121</a></td>
+						<td width="80%"><a href="http://host.docker.internal:8080/api/profiles/me/7523191408513743164">http://host.docker.internal:8080/api/profiles/me/7523191408513743164</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
 							class="indent2">Node Name</td>
-						<td width="80%">http://host.docker.internal:8080/api/profiles/me/7358070193708829121</td>
+						<td width="80%">http://host.docker.internal:8080/api/profiles/me/7523191408513743164</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -5347,7 +5470,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">401</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -5419,7 +5542,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">401</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -5430,12 +5553,12 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="http://host.docker.internal:8080/api/profiles/me/skills/1238896373541543181">http://host.docker.internal:8080/api/profiles/me/skills/1238896373541543181</a></td>
+						<td width="80%"><a href="http://host.docker.internal:8080/api/profiles/me/skills/1922231788493820392">http://host.docker.internal:8080/api/profiles/me/skills/1922231788493820392</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
 							class="indent2">Node Name</td>
-						<td width="80%">http://host.docker.internal:8080/api/profiles/me/skills/1238896373541543181</td>
+						<td width="80%">http://host.docker.internal:8080/api/profiles/me/skills/1922231788493820392</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -5492,42 +5615,6 @@ td {
 						<td width="20%"
 							class="indent2">Evidence</td>
 						<td width="80%">401</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Other Info</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://host.docker.internal:8080/api/recommendations">http://host.docker.internal:8080/api/recommendations</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Node Name</td>
-						<td width="80%">http://host.docker.internal:8080/api/recommendations</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Method</td>
-						<td width="80%">GET</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Attack</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%">429</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -5563,7 +5650,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">401</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -5635,7 +5722,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">401</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -5646,12 +5733,12 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="http://host.docker.internal:8080/api/recommendations/3716146702629382453">http://host.docker.internal:8080/api/recommendations/3716146702629382453</a></td>
+						<td width="80%"><a href="http://host.docker.internal:8080/api/recommendations/519502093183478081">http://host.docker.internal:8080/api/recommendations/519502093183478081</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
 							class="indent2">Node Name</td>
-						<td width="80%">http://host.docker.internal:8080/api/recommendations/3716146702629382453</td>
+						<td width="80%">http://host.docker.internal:8080/api/recommendations/519502093183478081</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -5708,42 +5795,6 @@ td {
 						<td width="20%"
 							class="indent2">Evidence</td>
 						<td width="80%">401</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Other Info</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://host.docker.internal:8080/api/recommendations/job">http://host.docker.internal:8080/api/recommendations/job</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Node Name</td>
-						<td width="80%">http://host.docker.internal:8080/api/recommendations/job</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Method</td>
-						<td width="80%">GET</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Attack</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%">429</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -5779,7 +5830,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">401</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -5851,7 +5902,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">401</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -5862,12 +5913,12 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="http://host.docker.internal:8080/api/recommendations/job/2999720657559784295">http://host.docker.internal:8080/api/recommendations/job/2999720657559784295</a></td>
+						<td width="80%"><a href="http://host.docker.internal:8080/api/recommendations/job/1681307780481470071">http://host.docker.internal:8080/api/recommendations/job/1681307780481470071</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
 							class="indent2">Node Name</td>
-						<td width="80%">http://host.docker.internal:8080/api/recommendations/job/2999720657559784295</td>
+						<td width="80%">http://host.docker.internal:8080/api/recommendations/job/1681307780481470071</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -5959,7 +6010,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">401</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -6031,7 +6082,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">401</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -6103,7 +6154,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">401</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -6114,12 +6165,12 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="http://host.docker.internal:8080/api/skills/5347822949063564588">http://host.docker.internal:8080/api/skills/5347822949063564588</a></td>
+						<td width="80%"><a href="http://host.docker.internal:8080/api/skills/7616389768140485448">http://host.docker.internal:8080/api/skills/7616389768140485448</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
 							class="indent2">Node Name</td>
-						<td width="80%">http://host.docker.internal:8080/api/skills/5347822949063564588</td>
+						<td width="80%">http://host.docker.internal:8080/api/skills/7616389768140485448</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -6176,42 +6227,6 @@ td {
 						<td width="20%"
 							class="indent2">Evidence</td>
 						<td width="80%">401</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Other Info</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://host.docker.internal:8080/api/users">http://host.docker.internal:8080/api/users</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Node Name</td>
-						<td width="80%">http://host.docker.internal:8080/api/users</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Method</td>
-						<td width="80%">GET</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Attack</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%">429</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -6247,7 +6262,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">401</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -6258,12 +6273,48 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="http://host.docker.internal:8080/api/users/8876121039848608535">http://host.docker.internal:8080/api/users/8876121039848608535</a></td>
+						<td width="80%"><a href="http://host.docker.internal:8080/api/users/3709320075122110203">http://host.docker.internal:8080/api/users/3709320075122110203</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
 							class="indent2">Node Name</td>
-						<td width="80%">http://host.docker.internal:8080/api/users/8876121039848608535</td>
+						<td width="80%">http://host.docker.internal:8080/api/users/3709320075122110203</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Method</td>
+						<td width="80%">GET</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Attack</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%">401</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Other Info</td>
+						<td width="80%"></td>
+					</tr>
+				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
+						<td width="80%"><a href="http://host.docker.internal:8080/api/users/me">http://host.docker.internal:8080/api/users/me</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Node Name</td>
+						<td width="80%">http://host.docker.internal:8080/api/users/me</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -6319,7 +6370,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">401</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -6366,42 +6417,6 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="http://host.docker.internal:8080/v3">http://host.docker.internal:8080/v3</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Node Name</td>
-						<td width="80%">http://host.docker.internal:8080/v3</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Method</td>
-						<td width="80%">GET</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Attack</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%">429</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Other Info</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
 						<td width="80%"><a href="http://host.docker.internal:8080/v3/">http://host.docker.internal:8080/v3/</a></td>
 					</tr>
 					<tr>
@@ -6427,7 +6442,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">401</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -6438,12 +6453,12 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="http://host.docker.internal:8080/v3/6621621889889158361">http://host.docker.internal:8080/v3/6621621889889158361</a></td>
+						<td width="80%"><a href="http://host.docker.internal:8080/v3/3700559444097533657">http://host.docker.internal:8080/v3/3700559444097533657</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
 							class="indent2">Node Name</td>
-						<td width="80%">http://host.docker.internal:8080/v3/6621621889889158361</td>
+						<td width="80%">http://host.docker.internal:8080/v3/3700559444097533657</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -6499,7 +6514,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">404</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -6546,42 +6561,6 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="http://host.docker.internal:8080/api/applications/me">http://host.docker.internal:8080/api/applications/me</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Node Name</td>
-						<td width="80%">http://host.docker.internal:8080/api/applications/me ()({jobPostingId,cvId,status})</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Method</td>
-						<td width="80%">POST</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Attack</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%">429</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Other Info</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
 						<td width="80%"><a href="http://host.docker.internal:8080/api/applications/me/">http://host.docker.internal:8080/api/applications/me/</a></td>
 					</tr>
 					<tr>
@@ -6607,7 +6586,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">401</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -6679,7 +6658,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">404</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -6751,7 +6730,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">404</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -6788,42 +6767,6 @@ td {
 						<td width="20%"
 							class="indent2">Evidence</td>
 						<td width="80%">401</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Other Info</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://host.docker.internal:8080/api/auth/2fa/resend">http://host.docker.internal:8080/api/auth/2fa/resend</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Node Name</td>
-						<td width="80%">http://host.docker.internal:8080/api/auth/2fa/resend ()({preAuthToken})</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Method</td>
-						<td width="80%">POST</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Attack</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%">429</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -6859,7 +6802,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">404</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -6895,43 +6838,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">401</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Other Info</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://host.docker.internal:8080/api/auth/2fa/verify">http://host.docker.internal:8080/api/auth/2fa/verify</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Node Name</td>
-						<td width="80%">http://host.docker.internal:8080/api/auth/2fa/verify ()({preAuthToken,code})</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Method</td>
-						<td width="80%">POST</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Attack</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">400</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -6967,79 +6874,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Other Info</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://host.docker.internal:8080/api/auth/login">http://host.docker.internal:8080/api/auth/login</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Node Name</td>
-						<td width="80%">http://host.docker.internal:8080/api/auth/login ()({email,password})</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Method</td>
-						<td width="80%">POST</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Attack</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%">401</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Other Info</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://host.docker.internal:8080/api/auth/login">http://host.docker.internal:8080/api/auth/login</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Node Name</td>
-						<td width="80%">http://host.docker.internal:8080/api/auth/login ()({email,password})</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Method</td>
-						<td width="80%">POST</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Attack</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">404</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -7075,43 +6910,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Other Info</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://host.docker.internal:8080/api/auth/logout">http://host.docker.internal:8080/api/auth/logout</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Node Name</td>
-						<td width="80%">http://host.docker.internal:8080/api/auth/logout</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Method</td>
-						<td width="80%">POST</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Attack</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%">401</td>
+						<td width="80%">404</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -7147,7 +6946,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">404</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -7184,42 +6983,6 @@ td {
 						<td width="20%"
 							class="indent2">Evidence</td>
 						<td width="80%">401</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Other Info</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://host.docker.internal:8080/api/companies/me">http://host.docker.internal:8080/api/companies/me</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Node Name</td>
-						<td width="80%">http://host.docker.internal:8080/api/companies/me ()({name,description,location,logo,photos:[],details:{website,email,address,size,founded,linkedin,instagram,twitter,facebook}})</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Method</td>
-						<td width="80%">POST</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Attack</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%">429</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -7255,7 +7018,43 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">401</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Other Info</td>
+						<td width="80%"></td>
+					</tr>
+				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
+						<td width="80%"><a href="http://host.docker.internal:8080/api/companies/me/picture">http://host.docker.internal:8080/api/companies/me/picture</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Node Name</td>
+						<td width="80%">http://host.docker.internal:8080/api/companies/me/picture ()(multipart:file)</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Method</td>
+						<td width="80%">POST</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Attack</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%">400</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -7327,7 +7126,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">413</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -7363,7 +7162,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">401</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -7399,42 +7198,6 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Other Info</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://host.docker.internal:8080/api/companies/me/postings">http://host.docker.internal:8080/api/companies/me/postings</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Node Name</td>
-						<td width="80%">http://host.docker.internal:8080/api/companies/me/postings ()({title,description,details:{jobType,workSetting,location,salary,schedule,experience,education,contactEmail},skillIds:[]})</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Method</td>
-						<td width="80%">POST</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Attack</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
 						<td width="80%">401</td>
 					</tr>
 					<tr>
@@ -7452,42 +7215,6 @@ td {
 						<td width="20%"
 							class="indent2">Node Name</td>
 						<td width="80%">http://host.docker.internal:8080/api/companies/me/postings ()({title,description,details:{jobType,workSetting,location,salary,schedule,experience,education,contactEmail},skillIds:[]})</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Method</td>
-						<td width="80%">POST</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Attack</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%">429</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Other Info</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://host.docker.internal:8080/api/companies/me/postings">http://host.docker.internal:8080/api/companies/me/postings</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Node Name</td>
-						<td width="80%">http://host.docker.internal:8080/api/companies/me/postings ()({title,description,details:{jobType,workSetting,location,salary,schedule,experience,education,contactEmail},skillIds:[{}]})</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -7543,7 +7270,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">401</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -7579,42 +7306,6 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Other Info</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://host.docker.internal:8080/api/cv/me">http://host.docker.internal:8080/api/cv/me</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Node Name</td>
-						<td width="80%">http://host.docker.internal:8080/api/cv/me ()({fileName,filePath,extractedText})</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Method</td>
-						<td width="80%">POST</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Attack</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
 						<td width="80%">401</td>
 					</tr>
 					<tr>
@@ -7651,7 +7342,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">401</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -7687,42 +7378,6 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Other Info</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://host.docker.internal:8080/api/cv/me/skills">http://host.docker.internal:8080/api/cv/me/skills</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Node Name</td>
-						<td width="80%">http://host.docker.internal:8080/api/cv/me/skills ()({skillId,confidenceScore,yearsOfExperience})</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Method</td>
-						<td width="80%">POST</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Attack</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
 						<td width="80%">401</td>
 					</tr>
 					<tr>
@@ -7759,7 +7414,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">401</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -7795,42 +7450,6 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Other Info</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://host.docker.internal:8080/api/perplexity/ask">http://host.docker.internal:8080/api/perplexity/ask</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Node Name</td>
-						<td width="80%">http://host.docker.internal:8080/api/perplexity/ask ()({question})</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Method</td>
-						<td width="80%">POST</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Attack</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
 						<td width="80%">401</td>
 					</tr>
 					<tr>
@@ -7867,7 +7486,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">401</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -7903,42 +7522,6 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Other Info</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://host.docker.internal:8080/api/postings/10/images">http://host.docker.internal:8080/api/postings/10/images</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Node Name</td>
-						<td width="80%">http://host.docker.internal:8080/api/postings/10/images ()(multipart:files)</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Method</td>
-						<td width="80%">POST</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Attack</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
 						<td width="80%">401</td>
 					</tr>
 					<tr>
@@ -7975,7 +7558,43 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">400</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Other Info</td>
+						<td width="80%"></td>
+					</tr>
+				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
+						<td width="80%"><a href="http://host.docker.internal:8080/api/postings/10/images">http://host.docker.internal:8080/api/postings/10/images</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Node Name</td>
+						<td width="80%">http://host.docker.internal:8080/api/postings/10/images ()(multipart:files)</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Method</td>
+						<td width="80%">POST</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Attack</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%">401</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -8011,42 +7630,6 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Other Info</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://host.docker.internal:8080/api/profiles/me">http://host.docker.internal:8080/api/profiles/me</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Node Name</td>
-						<td width="80%">http://host.docker.internal:8080/api/profiles/me ()({name,location,education,experience,description})</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Method</td>
-						<td width="80%">POST</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Attack</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
 						<td width="80%">401</td>
 					</tr>
 					<tr>
@@ -8083,7 +7666,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">401</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -8119,7 +7702,43 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">401</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Other Info</td>
+						<td width="80%"></td>
+					</tr>
+				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
+						<td width="80%"><a href="http://host.docker.internal:8080/api/profiles/me/picture">http://host.docker.internal:8080/api/profiles/me/picture</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Node Name</td>
+						<td width="80%">http://host.docker.internal:8080/api/profiles/me/picture ()(multipart:file)</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Method</td>
+						<td width="80%">POST</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Attack</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%">400</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -8191,7 +7810,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">413</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -8227,7 +7846,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">401</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -8263,42 +7882,6 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Other Info</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://host.docker.internal:8080/api/profiles/me/skills">http://host.docker.internal:8080/api/profiles/me/skills</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Node Name</td>
-						<td width="80%">http://host.docker.internal:8080/api/profiles/me/skills ()({skillId,level,yearsOfExperience})</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Method</td>
-						<td width="80%">POST</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Attack</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
 						<td width="80%">401</td>
 					</tr>
 					<tr>
@@ -8335,7 +7918,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">401</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -8371,42 +7954,6 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Other Info</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://host.docker.internal:8080/api/recommendations/me">http://host.docker.internal:8080/api/recommendations/me</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Node Name</td>
-						<td width="80%">http://host.docker.internal:8080/api/recommendations/me ()({jobPostingId,matchScore,explanation})</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Method</td>
-						<td width="80%">POST</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Attack</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
 						<td width="80%">401</td>
 					</tr>
 					<tr>
@@ -8443,7 +7990,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">401</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -8479,42 +8026,6 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Other Info</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://host.docker.internal:8080/api/skills">http://host.docker.internal:8080/api/skills</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Node Name</td>
-						<td width="80%">http://host.docker.internal:8080/api/skills ()({name})</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Method</td>
-						<td width="80%">POST</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Attack</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
 						<td width="80%">401</td>
 					</tr>
 					<tr>
@@ -8551,7 +8062,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">401</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -8587,42 +8098,6 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Other Info</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://host.docker.internal:8080/api/users">http://host.docker.internal:8080/api/users</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Node Name</td>
-						<td width="80%">http://host.docker.internal:8080/api/users ()({accountName,email,password,role})</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Method</td>
-						<td width="80%">POST</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Attack</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
 						<td width="80%">401</td>
 					</tr>
 					<tr>
@@ -8659,7 +8134,43 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">400</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Other Info</td>
+						<td width="80%"></td>
+					</tr>
+				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
+						<td width="80%"><a href="http://host.docker.internal:8080/api/users">http://host.docker.internal:8080/api/users</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Node Name</td>
+						<td width="80%">http://host.docker.internal:8080/api/users ()({accountName,email,password,role})</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Method</td>
+						<td width="80%">POST</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Attack</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%">409</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -8695,42 +8206,6 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Other Info</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://host.docker.internal:8080/api/applications/10">http://host.docker.internal:8080/api/applications/10</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Node Name</td>
-						<td width="80%">http://host.docker.internal:8080/api/applications/10 ()({jobPostingId,cvId,status})</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Method</td>
-						<td width="80%">PUT</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Attack</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
 						<td width="80%">401</td>
 					</tr>
 					<tr>
@@ -8767,7 +8242,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">401</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -8803,42 +8278,6 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Other Info</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://host.docker.internal:8080/api/companies/me">http://host.docker.internal:8080/api/companies/me</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Node Name</td>
-						<td width="80%">http://host.docker.internal:8080/api/companies/me ()({name,description,location,logo,photos:[],details:{website,email,address,size,founded,linkedin,instagram,twitter,facebook}})</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Method</td>
-						<td width="80%">PUT</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Attack</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
 						<td width="80%">401</td>
 					</tr>
 					<tr>
@@ -8875,7 +8314,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">401</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -8911,42 +8350,6 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Other Info</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://host.docker.internal:8080/api/cv/10">http://host.docker.internal:8080/api/cv/10</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Node Name</td>
-						<td width="80%">http://host.docker.internal:8080/api/cv/10 ()({fileName,filePath,extractedText})</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Method</td>
-						<td width="80%">PUT</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Attack</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
 						<td width="80%">401</td>
 					</tr>
 					<tr>
@@ -8983,7 +8386,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">401</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -9019,42 +8422,6 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Other Info</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://host.docker.internal:8080/api/cv/me/skills/10">http://host.docker.internal:8080/api/cv/me/skills/10</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Node Name</td>
-						<td width="80%">http://host.docker.internal:8080/api/cv/me/skills/10 ()({skillId,confidenceScore,yearsOfExperience})</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Method</td>
-						<td width="80%">PUT</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Attack</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
 						<td width="80%">401</td>
 					</tr>
 					<tr>
@@ -9091,7 +8458,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">401</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -9127,42 +8494,6 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Other Info</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://host.docker.internal:8080/api/postings/10">http://host.docker.internal:8080/api/postings/10</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Node Name</td>
-						<td width="80%">http://host.docker.internal:8080/api/postings/10 ()({title,description,details:{jobType,workSetting,location,salary,schedule,experience,education,contactEmail},skillIds:[]})</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Method</td>
-						<td width="80%">PUT</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Attack</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
 						<td width="80%">401</td>
 					</tr>
 					<tr>
@@ -9180,42 +8511,6 @@ td {
 						<td width="20%"
 							class="indent2">Node Name</td>
 						<td width="80%">http://host.docker.internal:8080/api/postings/10 ()({title,description,details:{jobType,workSetting,location,salary,schedule,experience,education,contactEmail},skillIds:[]})</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Method</td>
-						<td width="80%">PUT</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Attack</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%">429</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Other Info</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://host.docker.internal:8080/api/postings/10">http://host.docker.internal:8080/api/postings/10</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Node Name</td>
-						<td width="80%">http://host.docker.internal:8080/api/postings/10 ()({title,description,details:{jobType,workSetting,location,salary,schedule,experience,education,contactEmail},skillIds:[{}]})</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -9271,7 +8566,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">401</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -9307,42 +8602,6 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Other Info</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://host.docker.internal:8080/api/profiles/me">http://host.docker.internal:8080/api/profiles/me</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Node Name</td>
-						<td width="80%">http://host.docker.internal:8080/api/profiles/me ()({name,location,education,experience,description})</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Method</td>
-						<td width="80%">PUT</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Attack</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
 						<td width="80%">401</td>
 					</tr>
 					<tr>
@@ -9379,7 +8638,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">401</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -9415,42 +8674,6 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Other Info</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://host.docker.internal:8080/api/profiles/me/skills/10">http://host.docker.internal:8080/api/profiles/me/skills/10</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Node Name</td>
-						<td width="80%">http://host.docker.internal:8080/api/profiles/me/skills/10 ()({skillId,level,yearsOfExperience})</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Method</td>
-						<td width="80%">PUT</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Attack</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
 						<td width="80%">401</td>
 					</tr>
 					<tr>
@@ -9487,7 +8710,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">401</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -9523,42 +8746,6 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Other Info</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://host.docker.internal:8080/api/recommendations/10">http://host.docker.internal:8080/api/recommendations/10</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Node Name</td>
-						<td width="80%">http://host.docker.internal:8080/api/recommendations/10 ()({jobPostingId,matchScore,explanation})</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Method</td>
-						<td width="80%">PUT</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Attack</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
 						<td width="80%">401</td>
 					</tr>
 					<tr>
@@ -9595,7 +8782,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">401</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -9631,42 +8818,6 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Other Info</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://host.docker.internal:8080/api/skills/10">http://host.docker.internal:8080/api/skills/10</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Node Name</td>
-						<td width="80%">http://host.docker.internal:8080/api/skills/10 ()({name})</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Method</td>
-						<td width="80%">PUT</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Attack</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
 						<td width="80%">401</td>
 					</tr>
 					<tr>
@@ -9703,7 +8854,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">401</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -9739,43 +8890,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Other Info</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://host.docker.internal:8080/api/users/me">http://host.docker.internal:8080/api/users/me</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Node Name</td>
-						<td width="80%">http://host.docker.internal:8080/api/users/me ()({accountName,email,password,role})</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Method</td>
-						<td width="80%">PUT</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Attack</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%">400</td>
+						<td width="80%">401</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -9822,42 +8937,6 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="http://host.docker.internal:8080/api/users/me">http://host.docker.internal:8080/api/users/me</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Node Name</td>
-						<td width="80%">http://host.docker.internal:8080/api/users/me ()({accountName,email,password,role})</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Method</td>
-						<td width="80%">PUT</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Attack</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%">429</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Other Info</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
 						<td width="80%"><a href="http://host.docker.internal:8080/api/users/me/">http://host.docker.internal:8080/api/users/me/</a></td>
 					</tr>
 					<tr>
@@ -9883,7 +8962,7 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent2">Evidence</td>
-						<td width="80%">429</td>
+						<td width="80%">401</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -9895,7 +8974,7 @@ td {
 					<td width="20%">Instances</td>
 					
 					
-					<td width="80%">250</td>
+					<td width="80%">210</td>
 					
 				</tr>
 				<tr>
@@ -10089,12 +9168,12 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="http://host.docker.internal:8080/api/profiles/me">http://host.docker.internal:8080/api/profiles/me</a></td>
+						<td width="80%"><a href="http://host.docker.internal:8080/api/users/me">http://host.docker.internal:8080/api/users/me</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
 							class="indent2">Node Name</td>
-						<td width="80%">http://host.docker.internal:8080/api/profiles/me</td>
+						<td width="80%">http://host.docker.internal:8080/api/users/me</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -10115,78 +9194,6 @@ td {
 						<td width="20%"
 							class="indent2">Evidence</td>
 						<td width="80%">DELETE </td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Other Info</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://host.docker.internal:8080/api/skills/10">http://host.docker.internal:8080/api/skills/10</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Node Name</td>
-						<td width="80%">http://host.docker.internal:8080/api/skills/10</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Method</td>
-						<td width="80%">DELETE</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Attack</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%">DELETE </td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Other Info</td>
-						<td width="80%"></td>
-					</tr>
-				
-					<tr>
-						<td width="20%"
-							class="indent1">URL</td>
-						<td width="80%"><a href="http://host.docker.internal:8080/api/profiles/me">http://host.docker.internal:8080/api/profiles/me</a></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Node Name</td>
-						<td width="80%">http://host.docker.internal:8080/api/profiles/me</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Method</td>
-						<td width="80%">GET</td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Parameter</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Attack</td>
-						<td width="80%"></td>
-					</tr>
-					<tr>
-						<td width="20%"
-							class="indent2">Evidence</td>
-						<td width="80%">no-store</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -10233,12 +9240,84 @@ td {
 					<tr>
 						<td width="20%"
 							class="indent1">URL</td>
-						<td width="80%"><a href="http://host.docker.internal:8080/api/skills/10">http://host.docker.internal:8080/api/skills/10</a></td>
+						<td width="80%"><a href="http://host.docker.internal:8080/api/users/me">http://host.docker.internal:8080/api/users/me</a></td>
 					</tr>
 					<tr>
 						<td width="20%"
 							class="indent2">Node Name</td>
-						<td width="80%">http://host.docker.internal:8080/api/skills/10 ()({name})</td>
+						<td width="80%">http://host.docker.internal:8080/api/users/me</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Method</td>
+						<td width="80%">GET</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Attack</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%">no-store</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Other Info</td>
+						<td width="80%"></td>
+					</tr>
+				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
+						<td width="80%"><a href="http://host.docker.internal:8080/v3/api-docs">http://host.docker.internal:8080/v3/api-docs</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Node Name</td>
+						<td width="80%">http://host.docker.internal:8080/v3/api-docs</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Method</td>
+						<td width="80%">GET</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Attack</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%">no-store</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Other Info</td>
+						<td width="80%"></td>
+					</tr>
+				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
+						<td width="80%"><a href="http://host.docker.internal:8080/api/users/me">http://host.docker.internal:8080/api/users/me</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Node Name</td>
+						<td width="80%">http://host.docker.internal:8080/api/users/me ()({accountName,email,password,role})</td>
 					</tr>
 					<tr>
 						<td width="20%"
@@ -10339,6 +9418,529 @@ td {
 					<td width="20%">Plugin Id</td>
 					<td width="80%"><a
 						href="https://www.zaproxy.org/docs/alerts/10049/">10049</a></td>
+				</tr>
+			</table>
+			<div class="spacer"></div>
+		
+			<table class="results">
+				<tr height="24">
+					<th width="20%" class="risk-0"><a
+						id="10112"></a>
+						<div>Informational</div></th>
+					<th class="risk-0">Session Management Response Identified</th>
+				</tr>
+				<tr>
+					<td width="20%">Description</td>
+					<td width="80%">
+							<div>The given response has been identified as containing a session management token. The &#39;Other Info&#39; field contains a set of header tokens that can be used in the Header Based Session Management Method. If the request is in a context which has a Session Management Method set to &quot;Auto-Detect&quot; then this rule will change the session management to use the tokens identified.</div>
+							
+						</td>
+				</tr>
+				<TR vAlign="top">
+					<TD colspan="2"></TD>
+				</TR>
+				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
+						<td width="80%"><a href="http://host.docker.internal:8080/api/profiles/me">http://host.docker.internal:8080/api/profiles/me</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Node Name</td>
+						<td width="80%">http://host.docker.internal:8080/api/profiles/me</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Method</td>
+						<td width="80%">DELETE</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%">JSESSIONID</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Attack</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%">JSESSIONID</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Other Info</td>
+						<td width="80%">
+							<div>cookie:JSESSIONID</div>
+							
+						</td>
+					</tr>
+				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
+						<td width="80%"><a href="http://host.docker.internal:8080/api/recommendations/10">http://host.docker.internal:8080/api/recommendations/10</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Node Name</td>
+						<td width="80%">http://host.docker.internal:8080/api/recommendations/10</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Method</td>
+						<td width="80%">DELETE</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%">JSESSIONID</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Attack</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%">JSESSIONID</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Other Info</td>
+						<td width="80%">
+							<div>cookie:JSESSIONID</div>
+							
+						</td>
+					</tr>
+				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
+						<td width="80%"><a href="http://host.docker.internal:8080/api/skills/10">http://host.docker.internal:8080/api/skills/10</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Node Name</td>
+						<td width="80%">http://host.docker.internal:8080/api/skills/10</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Method</td>
+						<td width="80%">DELETE</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%">JSESSIONID</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Attack</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%">JSESSIONID</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Other Info</td>
+						<td width="80%">
+							<div>cookie:JSESSIONID</div>
+							
+						</td>
+					</tr>
+				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
+						<td width="80%"><a href="http://host.docker.internal:8080/api/users/me">http://host.docker.internal:8080/api/users/me</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Node Name</td>
+						<td width="80%">http://host.docker.internal:8080/api/users/me</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Method</td>
+						<td width="80%">DELETE</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%">JSESSIONID</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Attack</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%">JSESSIONID</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Other Info</td>
+						<td width="80%">
+							<div>cookie:JSESSIONID</div>
+							
+						</td>
+					</tr>
+				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
+						<td width="80%"><a href="http://host.docker.internal:8080/api/profiles/me/skills/10">http://host.docker.internal:8080/api/profiles/me/skills/10</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Node Name</td>
+						<td width="80%">http://host.docker.internal:8080/api/profiles/me/skills/10</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Method</td>
+						<td width="80%">GET</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%">JSESSIONID</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Attack</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%">JSESSIONID</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Other Info</td>
+						<td width="80%">
+							<div>cookie:JSESSIONID</div>
+							
+						</td>
+					</tr>
+				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
+						<td width="80%"><a href="http://host.docker.internal:8080/api/recommendations/10">http://host.docker.internal:8080/api/recommendations/10</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Node Name</td>
+						<td width="80%">http://host.docker.internal:8080/api/recommendations/10</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Method</td>
+						<td width="80%">GET</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%">JSESSIONID</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Attack</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%">JSESSIONID</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Other Info</td>
+						<td width="80%">
+							<div>cookie:JSESSIONID</div>
+							
+						</td>
+					</tr>
+				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
+						<td width="80%"><a href="http://host.docker.internal:8080/api/skills/10">http://host.docker.internal:8080/api/skills/10</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Node Name</td>
+						<td width="80%">http://host.docker.internal:8080/api/skills/10</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Method</td>
+						<td width="80%">GET</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%">JSESSIONID</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Attack</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%">JSESSIONID</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Other Info</td>
+						<td width="80%">
+							<div>cookie:JSESSIONID</div>
+							
+						</td>
+					</tr>
+				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
+						<td width="80%"><a href="http://host.docker.internal:8080/api/users/me">http://host.docker.internal:8080/api/users/me</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Node Name</td>
+						<td width="80%">http://host.docker.internal:8080/api/users/me</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Method</td>
+						<td width="80%">GET</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%">JSESSIONID</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Attack</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%">JSESSIONID</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Other Info</td>
+						<td width="80%">
+							<div>cookie:JSESSIONID</div>
+							
+						</td>
+					</tr>
+				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
+						<td width="80%"><a href="http://host.docker.internal:8080/api/profiles/me">http://host.docker.internal:8080/api/profiles/me</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Node Name</td>
+						<td width="80%">http://host.docker.internal:8080/api/profiles/me ()({name,location,education,experience,description})</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Method</td>
+						<td width="80%">POST</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%">JSESSIONID</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Attack</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%">JSESSIONID</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Other Info</td>
+						<td width="80%">
+							<div>cookie:JSESSIONID</div>
+							
+						</td>
+					</tr>
+				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
+						<td width="80%"><a href="http://host.docker.internal:8080/api/recommendations/10">http://host.docker.internal:8080/api/recommendations/10</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Node Name</td>
+						<td width="80%">http://host.docker.internal:8080/api/recommendations/10 ()({jobPostingId,matchScore,explanation})</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Method</td>
+						<td width="80%">PUT</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%">JSESSIONID</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Attack</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%">JSESSIONID</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Other Info</td>
+						<td width="80%">
+							<div>cookie:JSESSIONID</div>
+							
+						</td>
+					</tr>
+				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
+						<td width="80%"><a href="http://host.docker.internal:8080/api/skills/10">http://host.docker.internal:8080/api/skills/10</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Node Name</td>
+						<td width="80%">http://host.docker.internal:8080/api/skills/10 ()({name})</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Method</td>
+						<td width="80%">PUT</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%">JSESSIONID</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Attack</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%">JSESSIONID</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Other Info</td>
+						<td width="80%">
+							<div>cookie:JSESSIONID</div>
+							
+						</td>
+					</tr>
+				
+					<tr>
+						<td width="20%"
+							class="indent1">URL</td>
+						<td width="80%"><a href="http://host.docker.internal:8080/api/users/me">http://host.docker.internal:8080/api/users/me</a></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Node Name</td>
+						<td width="80%">http://host.docker.internal:8080/api/users/me ()({accountName,email,password,role})</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Method</td>
+						<td width="80%">PUT</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Parameter</td>
+						<td width="80%">JSESSIONID</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Attack</td>
+						<td width="80%"></td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Evidence</td>
+						<td width="80%">JSESSIONID</td>
+					</tr>
+					<tr>
+						<td width="20%"
+							class="indent2">Other Info</td>
+						<td width="80%">
+							<div>cookie:JSESSIONID</div>
+							
+						</td>
+					</tr>
+				
+				<tr>
+					<td width="20%">Instances</td>
+					
+					
+					<td width="80%">12</td>
+					
+				</tr>
+				<tr>
+					<td width="20%">Solution</td>
+					<td width="80%">
+							<div>This is an informational alert rather than a vulnerability and so there is nothing to fix.</div>
+							
+						</td>
+				</tr>
+				<tr>
+					<td width="20%">Reference</td>
+					<td width="80%">
+							<a href="https://www.zaproxy.org/docs/desktop/addons/authentication-helper/session-mgmt-id/">https://www.zaproxy.org/docs/desktop/addons/authentication-helper/session-mgmt-id/</a>
+							
+						</td>
+				</tr>
+				<tr>
+					<td width="20%">CWE Id</td>
+					<td width="80%"></td>
+				</tr>
+				<tr>
+					<td width="20%">WASC Id</td>
+					<td width="80%"></td>
+				</tr>
+				<tr>
+					<td width="20%">Plugin Id</td>
+					<td width="80%"><a
+						href="https://www.zaproxy.org/docs/alerts/10112/">10112</a></td>
 				</tr>
 			</table>
 			<div class="spacer"></div>

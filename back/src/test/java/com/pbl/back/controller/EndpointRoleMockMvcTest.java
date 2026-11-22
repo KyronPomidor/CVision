@@ -110,9 +110,9 @@ class EndpointRoleMockMvcTest {
 
     @Test
     @WithMockUser(roles = "EMPLOYEE")
-    void employeeCannotReadEmployerRecommendationsByPosting() throws Exception {
+    void recommendationRoutesAreTemporarilyUnavailable() throws Exception {
         mockMvc.perform(get("/api/recommendations/job/41"))
-                .andExpect(status().isForbidden());
+                .andExpect(status().isNotFound());
     }
 
     @Test
