@@ -22,6 +22,7 @@ function ProfileCard({
   reachouts,
   onEditProfile,
   onUploadCV,
+  onUploadPhoto,
   editing,
   saving,
   onSave,
@@ -34,7 +35,24 @@ function ProfileCard({
   return (
     <div className={`${styles.profileCard} ${isProfileVariant ? styles.profileVariant : ""}`}>
       <div className={styles.photoBox}>
-        <img src={photo || defaultPhoto} alt={`${name} profile`} className={styles.profileLogo} />
+        {editing ? (
+          <button
+            type="button"
+            className={styles.photoButton}
+            aria-label="Upload profile photo"
+            title="Upload profile photo"
+            onClick={onUploadPhoto}
+            disabled={saving}
+          >
+            <img
+              src={photo || defaultPhoto}
+              alt={`${name} profile`}
+              className={styles.profileLogo}
+            />
+          </button>
+        ) : (
+          <img src={photo || defaultPhoto} alt={`${name} profile`} className={styles.profileLogo} />
+        )}
         <h2 className={`${styles.profileName} ${typography.heading2}`}>{name}</h2>
       </div>
 

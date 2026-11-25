@@ -5,7 +5,7 @@ import ProfileCard from "../../components/ProfileCard/ProfileCard";
 import CVInformationCard from "./components/CVInformationCard/CVInformationCard";
 import { getCurrentCV, uploadCV, updateCVInformation } from "../../api/cv";
 import { getCurrentApplication } from "../../api/applications";
-import { createProfile, updateProfile } from "../../api/profiles";
+import { createProfile, updateProfile, uploadProfilePicture } from "../../api/profiles";
 import { errorMessage, optionalResource } from "../../api/client";
 import { mapProfile, mapCVInformation } from "../../api/mappers";
 import { getCurrentCompany } from "../../api/companies";
@@ -17,6 +17,7 @@ function ProfilePage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [uploading, setUploading] = useState(false);
+  const [uploadingPhoto, setUploadingPhoto] = useState(false);
   const [actionError, setActionError] = useState(null);
   const [searchParams, setSearchParams] = useSearchParams();
   const editing = searchParams.get("edit") === "true";
@@ -24,6 +25,7 @@ function ProfilePage() {
   const [saving, setSaving] = useState(false);
   const [company, setCompany] = useState(null);
   const fileInput = useRef(null);
+  const photoInput = useRef(null);
 
   useEffect(() => {
     let active = true;
@@ -64,6 +66,33 @@ function ProfilePage() {
       setActionError(errorMessage(err));
     } finally {
       setUploading(false);
+      event.target.value = "";
+    }
+  }
+
+  async function uploadPhoto(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    setUploadingPhoto(true);
+    setActionError(null);
+    try {
+      if (!profile.id) {
+        const created = await createProfile({
+          name: profile.name,
+          location: profile.location,
+          education: profile.education,
+          experience: profile.experience,
+          description: profile.aboutMe || "",
+        });
+        setAccount((previous) => ({ ...previous, profile: mapProfile(created, user) }));
+      }
+      const updated = mapProfile(await uploadProfilePicture(file), user);
+      updated.photo += `?v=${Date.now()}`;
+      setAccount((previous) => ({ ...previous, profile: updated }));
+    } catch (err) {
+      setActionError(errorMessage(err));
+    } finally {
+      setUploadingPhoto(false);
       event.target.value = "";
     }
   }
@@ -133,6 +162,14 @@ function ProfilePage() {
   return (
     <div className={styles.ProfilePage}>
       <input ref={fileInput} type="file" hidden accept=".pdf,.docx,.txt" onChange={upload} />
+      <input
+        ref={photoInput}
+        type="file"
+        hidden
+        accept="image/jpeg,image/png,image/webp"
+        onChange={uploadPhoto}
+      />
+      {uploadingPhoto && <p role="status">Uploading photo...</p>}
       {uploading && <p>Uploading CV and extracting skills...</p>}
       {actionError && <p role="alert">{actionError}</p>}
       {application && (
@@ -157,9 +194,10 @@ function ProfilePage() {
         description={currentDraft.description}
         onDescriptionChange={changeDescription}
         editing={editing}
-        saving={saving}
+        saving={saving || uploadingPhoto}
         onSave={save}
         onCancel={cancelEdit}
+        onUploadPhoto={() => photoInput.current.click()}
         onUploadCV={uploading ? undefined : () => fileInput.current.click()}
       />
 
@@ -168,7 +206,7 @@ function ProfilePage() {
         experienceSummary={profile.experience}
         information={editing ? currentDraft.information : information}
         editing={editing}
-        saving={saving}
+        saving={saving || uploadingPhoto}
         onChange={changeInformation}
       />
     </div>
