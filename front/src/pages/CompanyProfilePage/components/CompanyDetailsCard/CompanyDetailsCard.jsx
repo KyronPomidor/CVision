@@ -37,7 +37,12 @@ function CompanyDetailsCard({ details }) {
       <h2 className={typography.heading2}>Company Details</h2>
       <div className={styles.details}>
         {DETAIL_ROWS.map(({ key, label, icon }) => (
-          <DetailRow key={key} icon={icon} label={label} value={details[key]} />
+          <DetailRow
+            key={key}
+            icon={icon}
+            label={label}
+            value={details[key] ?? "Not specified yet"}
+          />
         ))}
       </div>
       {availableSocials.length > 0 && (

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./Header.module.css";
 import Notifications from "../Notification/Notifications";
 import SettingsMenu from "../SettingsMenu/SettingsMenu";
@@ -7,9 +7,11 @@ import mainLogo from "../../../../Logo.svg";
 import SearchLogo from "../../assets/search-icon.svg?react";
 import SettingsLogo from "./assets/settings-icon.svg?react";
 import NotificationLogo from "./assets/notification-icon.svg?react";
-import profileLogo from "../../assets/profile-photo.png";
+import profileLogo from "../../assets/user-icon.svg";
+import { mediaUrl } from "../../api/client";
 
-function Header() {
+function Header({ profile, company }) {
+  const navigate = useNavigate();
   const [openMenu, setOpenMenu] = useState(null);
 
   function toggleMenu(menu) {
@@ -25,14 +27,21 @@ function Header() {
       </div>
 
       <div className={styles.searchBox}>
-        <form className={styles.searchBar} /* TODO: Back implementation*/>
+        <form
+          className={styles.searchBar}
+          onSubmit={(event) => {
+            event.preventDefault();
+            const query = new FormData(event.currentTarget).get("q");
+            navigate(`/?q=${encodeURIComponent(query)}`);
+          }}
+        >
           <input
             type="text"
             className={styles.searchInput}
             placeholder="Job title, Salary, or Companies...."
             aria-label="Search jobs"
 
-            //TODO: Back implementation
+            name="q"
           />
 
           <button type="submit" className={styles.searchButton} aria-label="Search button">
@@ -65,7 +74,11 @@ function Header() {
           </button>
 
           <Link to="/profile" className={styles.profileButton} aria-label="Profile button">
-            <img src={profileLogo} alt="profileLogo" className={styles.profileLogo} />
+            <img
+              src={profile?.photo || mediaUrl(company?.pictureUrl || company?.logo) || profileLogo}
+              alt="profileLogo"
+              className={styles.profileLogo}
+            />
           </Link>
         </div>
       </div>

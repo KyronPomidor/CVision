@@ -1,115 +1,149 @@
-import { useEffect, useState } from "react";
-
+import { useEffect, useRef, useState } from "react";
+import { useOutletContext, useSearchParams } from "react-router-dom";
 import styles from "./ProfilePage.module.css";
 import ProfileCard from "../../components/ProfileCard/ProfileCard";
 import CVInformationCard from "./components/CVInformationCard/CVInformationCard";
-import profilePhoto from "../../assets/profile-photo.png";
-
-// TODO: replace with getProfileByUser(userId) from "../../api/profiles"
-async function getProfileByUser(userId) {
-  const mockProfile = {
-    cvId: 1,
-    firstName: "Nicholas",
-    lastName: "Carnegie",
-    photo: profilePhoto,
-    email: "nick.carn@gmail.com",
-    phone: "+373 62 123 456",
-    location: "Chișinău, Moldova",
-    aboutMe: `A junior IT professional passionate about technology and problem-solving. 
-I am eager to grow my skills, learn from experienced teams, and contribute to meaningful projects.`,
-    // arrays of ids rather than plain counts:
-    appliedJobs: [1, 2, 3],
-    savedJobs: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
-    cvViews: [1],
-    reachouts: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
-  };
-
-  await new Promise((resolve) => setTimeout(resolve, 600));
-  return mockProfile;
-}
-
-// TODO: replace with getCV(cvId) from "../../api/cv" — likely aggregates
-async function getCV(cvId) {
-  const mockCv = {
-    technicalSkills: ["Microsoft Office", "Java", "Git", "Python", "C#", "php", "Golang"],
-    languages: [
-      { name: "English", level: "B2" },
-      { name: "Romanian", level: "Native" },
-      { name: "Russian", level: "C1" },
-    ],
-    objective:
-      "Looking for a junior developer role where I can apply my problem-solving skills and grow within a collaborative engineering team, with a long-term interest in moving into full-stack development.",
-    experience: [
-      {
-        id: 1,
-        title: "IT Support Intern",
-        company: "Endava",
-        location: "Chișinău",
-        startDate: "2026-09-24T14:18:05.055Z",
-        endDate: "2026-09-24T14:18:05.055Z",
-        description:
-          'When creating a professional profile, blog or website, an "about me" statement can quickly show employers, clients or customers who you are and what you offer.',
-      },
-      {
-        id: 2,
-        title: "IT Support Intern",
-        company: "Endava",
-        location: "Chișinău",
-        startDate: "2026-09-24T14:18:05.055Z",
-        endDate: "2026-09-24T14:18:05.055Z",
-        description:
-          'When creating a professional profile, blog or website, an "about me" statement can quickly show employers, clients or customers who you are and what you offer.',
-      },
-      {
-        id: 3,
-        title: "IT Support Intern",
-        company: "Endava",
-        location: "Chișinău",
-        startDate: "2026-09-24T14:18:05.055Z",
-        endDate: "2026-09-24T14:18:05.055Z",
-        description:
-          'When creating a professional profile, blog or website, an "about me" statement can quickly show employers, clients or customers who you are and what you offer.',
-      },
-    ],
-    additionalInfo:
-      "When creating a professional profile, blog or website, an \u201cabout me\u201d statement can quickly show employers, clients or customers who you are and what you offer. ",
-  };
-
-  await new Promise((resolve) => setTimeout(resolve, 800));
-  return mockCv;
-}
+import { getCurrentCV, uploadCV, updateCVInformation } from "../../api/cv";
+import { getCurrentApplication } from "../../api/applications";
+import { createProfile, updateProfile } from "../../api/profiles";
+import { errorMessage, optionalResource } from "../../api/client";
+import { mapProfile, mapCVInformation } from "../../api/mappers";
+import { getCurrentCompany } from "../../api/companies";
 
 function ProfilePage() {
-  // TODO: pull the real userId from auth/session context once it exists
-  const userId = 1;
-
-  const [profile, setProfile] = useState(null);
+  const { user, profile, setAccount } = useOutletContext();
   const [cv, setCv] = useState(null);
+  const [application, setApplication] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [uploading, setUploading] = useState(false);
+  const [actionError, setActionError] = useState(null);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const editing = searchParams.get("edit") === "true";
+  const [draft, setDraft] = useState(null);
+  const [saving, setSaving] = useState(false);
+  const [company, setCompany] = useState(null);
+  const fileInput = useRef(null);
 
   useEffect(() => {
-    setLoading(true);
-    setError(null);
-
-    getProfileByUser(userId)
-      .then((profileData) => {
-        setProfile(profileData);
-        return getCV(profileData.cvId);
+    let active = true;
+    const request =
+      user.role === "EMPLOYER"
+        ? optionalResource(getCurrentCompany()).then((data) => {
+            if (active) setCompany(data);
+          })
+        : Promise.all([
+            optionalResource(getCurrentCV()),
+            optionalResource(getCurrentApplication()),
+          ]).then(([data, mine]) => {
+            if (active) {
+              setCv(data);
+              setApplication(mine);
+            }
+          });
+    request
+      .catch((err) => {
+        if (active) setError(err);
       })
-      .then((cvData) => setCv(cvData))
-      .catch((err) => setError(err))
-      .finally(() => setLoading(false));
-  }, [userId]);
+      .finally(() => {
+        if (active) setLoading(false);
+      });
+    return () => {
+      active = false;
+    };
+  }, [user.role]);
+
+  async function upload(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    setUploading(true);
+    setActionError(null);
+    try {
+      setCv(await uploadCV(file));
+    } catch (err) {
+      setActionError(errorMessage(err));
+    } finally {
+      setUploading(false);
+      event.target.value = "";
+    }
+  }
+
+  const information = mapCVInformation(cv, profile);
+  const savedDraft = { description: profile?.aboutMe || "", information };
+  const currentDraft = draft ?? savedDraft;
+
+  function editProfile() {
+    setDraft(savedDraft);
+    setActionError(null);
+    setSearchParams({ edit: "true" }, { replace: true });
+  }
+
+  function cancelEdit() {
+    setDraft(null);
+    setActionError(null);
+    setSearchParams({}, { replace: true });
+  }
+
+  function changeDescription(value) {
+    setDraft((previous) => ({ ...(previous ?? savedDraft), description: value }));
+  }
+
+  function changeInformation(field, value) {
+    setDraft((previous) => ({
+      ...(previous ?? savedDraft),
+      information: { ...(previous ?? savedDraft).information, [field]: value },
+    }));
+  }
+
+  async function save() {
+    setSaving(true);
+    setActionError(null);
+    const data = {
+      name: profile.name,
+      location: profile.location,
+      education: profile.education,
+      experience: profile.experience,
+      description: currentDraft.description.trim(),
+    };
+    try {
+      if (!profile.id || data.description !== (profile.aboutMe || "")) {
+        const updated = await (profile.id ? updateProfile(data) : createProfile(data));
+        setAccount((previous) => ({ ...previous, profile: mapProfile(updated, user) }));
+      }
+      if (JSON.stringify(currentDraft.information) !== JSON.stringify(information)) {
+        setCv(await updateCVInformation(currentDraft.information));
+      }
+      cancelEdit();
+    } catch (err) {
+      setActionError(errorMessage(err));
+    } finally {
+      setSaving(false);
+    }
+  }
 
   if (loading) return <p>Loading...</p>;
-  if (error) return <p>Something went wrong.</p>;
+  if (error) return <p role="alert">{errorMessage(error)}</p>;
+  if (user.role === "EMPLOYER")
+    return company ? (
+      <a href={`/companies/${company.id}`}>View {company.name}</a>
+    ) : (
+      <p>No company profile has been created.</p>
+    );
 
   return (
     <div className={styles.ProfilePage}>
+      <input ref={fileInput} type="file" hidden accept=".pdf,.docx,.txt" onChange={upload} />
+      {uploading && <p>Uploading CV and extracting skills...</p>}
+      {actionError && <p role="alert">{actionError}</p>}
+      {application && (
+        <p>
+          Application #{application.id}: {application.status}
+        </p>
+      )}
+
       <ProfileCard
         variant="profile"
-        name={`${profile.firstName} ${profile.lastName}`}
+        name={profile.name}
         photo={profile.photo}
         email={profile.email}
         phone={profile.phone}
@@ -119,16 +153,23 @@ function ProfilePage() {
         savedJobs={profile.savedJobs}
         cvViews={profile.cvViews}
         reachouts={profile.reachouts}
-        onEditProfile={() => console.log("edit clicked")}
-        onUploadCV={() => console.log("upload cv clicked")}
+        onEditProfile={editProfile}
+        description={currentDraft.description}
+        onDescriptionChange={changeDescription}
+        editing={editing}
+        saving={saving}
+        onSave={save}
+        onCancel={cancelEdit}
+        onUploadCV={uploading ? undefined : () => fileInput.current.click()}
       />
 
       <CVInformationCard
-        technicalSkills={cv.technicalSkills}
-        languages={cv.languages}
-        objective={cv.objective}
-        experience={cv.experience}
-        additionalInfo={cv.additionalInfo}
+        education={profile.education}
+        experienceSummary={profile.experience}
+        information={editing ? currentDraft.information : information}
+        editing={editing}
+        saving={saving}
+        onChange={changeInformation}
       />
     </div>
   );

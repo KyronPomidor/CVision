@@ -1,165 +1,103 @@
 import { useEffect, useState } from "react";
-
+import { useNavigate, useOutletContext, useSearchParams } from "react-router-dom";
 import styles from "./HomePage.module.css";
 import ProfileCard from "../../components/ProfileCard/ProfileCard";
 import RecommandCard from "./components/RecommandCard/RecommandCard";
 import FilterCard from "./components/FilterCard/FilterCard";
-import endavaLogo from "../../assets/endava-logo.png";
-import pentalogLogo from "../../assets/pentalog-logo.png";
-import roslinLogo from "../../assets/roslin-logo.png";
-import profilePhoto from "../../assets/profile-photo.png";
-
-// TODO: replace with getProfileByUser(userId) from "../../api/profiles"
-async function getProfileByUser(userId) {
-  const mockProfile = {
-    cvId: 1,
-    firstName: "Nicholas",
-    lastName: "Carnegie",
-    photo: profilePhoto,
-    email: "nick.carn@gmail.com",
-    phone: "+373 62 123 456",
-    location: "Chișinău, Moldova",
-    aboutMe: `A junior IT professional passionate about technology and problem-solving. 
-I am eager to grow my skills, learn from experienced teams, and contribute to meaningful projects.`,
-    // arrays of ids rather than plain counts:
-    appliedJobs: [1, 2, 3],
-    savedJobs: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
-    cvViews: [1],
-    reachouts: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
-  };
-
-  await new Promise((resolve) => setTimeout(resolve, 600));
-  return mockProfile;
-}
-
-// TODO: replace with getRecommendations(userId) from "../../api/recommendations"
-async function getRecommendations(userId) {
-  const mockJobs = [
-    {
-      id: 1,
-      logo: endavaLogo,
-      title: "Java Junior Developer",
-      company: "Endava",
-      postedAt: "2026-09-24T14:18:05.055Z",
-      employmentType: "Full-time",
-      salary: "5,200 per year",
-      experience: "6-7 years of experience",
-      matchPercent: 95,
-      isStarred: false,
-    },
-    {
-      id: 2,
-      logo: pentalogLogo,
-      title: "C# Junior Developer",
-      company: "Pentalog",
-      postedAt: "2026-09-24T14:18:05.055Z",
-      employmentType: "Full-time",
-      salary: "5,200 per year",
-      experience: "6-7 years of experience",
-      matchPercent: 60,
-      isStarred: true,
-    },
-    {
-      id: 3,
-      logo: roslinLogo,
-      title: "Middle Golang Engineer",
-      company: "Roslin Solutions",
-      postedAt: "2026-09-24T14:18:05.055Z",
-      employmentType: "Full-time",
-      salary: "5,200 per year",
-      experience: "6-7 years of experience",
-      matchPercent: 15,
-      isStarred: true,
-    },
-    {
-      id: 4,
-      logo: roslinLogo,
-      title: "Middle Golang Engineer",
-      company: "Roslin Solutions",
-      postedAt: "2026-09-24T14:18:05.055Z",
-      employmentType: "Full-time",
-      salary: "5,200 per year",
-      experience: "6-7 years of experience",
-      matchPercent: 15,
-      isStarred: false,
-    },
-    {
-      id: 5,
-      logo: roslinLogo,
-      title: "Middle Golang Engineer",
-      company: "Roslin Solutions",
-      postedAt: "2026-09-24T14:18:05.055Z",
-      employmentType: "Full-time",
-      salary: "5,200 per year",
-      experience: "6-7 years of experience",
-      matchPercent: 15,
-      isStarred: false,
-    },
-    {
-      id: 6,
-      logo: roslinLogo,
-      title: "Middle Golang Engineer",
-      company: "Roslin Solutions",
-      postedAt: "2026-09-24T14:18:05.055Z",
-      employmentType: "Full-time",
-      salary: "5,200 per year",
-      experience: "6-7 years of experience",
-      matchPercent: 15,
-      isStarred: false,
-    },
-  ];
-
-  await new Promise((resolve) => setTimeout(resolve, 1000));
-  return mockJobs;
-}
+import { getMatchedPostings, getCurrentCompanyPostings } from "../../api/postings";
+import { mapPosting } from "../../api/mappers";
+import { errorMessage } from "../../api/client";
 
 function HomePage() {
-  // TODO: pull the real userId from auth/session context once it exists
-  const userId = 1;
-
-  const [profile, setProfile] = useState(null);
-  const [jobs, setJobs] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const { user, profile } = useOutletContext();
+  const navigate = useNavigate();
+  const [params] = useSearchParams();
+  const [jobs, setJobs] = useState(null);
   const [error, setError] = useState(null);
+  const [sort, setSort] = useState("Compatibility");
+  const [filters, setFilters] = useState({});
 
   useEffect(() => {
-    setLoading(true);
-    setError(null);
-
-    Promise.all([getProfileByUser(userId), getRecommendations(userId)])
-      .then(([profileData, jobsData]) => {
-        setProfile(profileData);
-        setJobs(jobsData);
+    let active = true;
+    const request = user.role === "EMPLOYEE" ? getMatchedPostings() : getCurrentCompanyPostings();
+    request
+      .then((data) => {
+        if (active) setJobs(data.map(mapPosting));
       })
-      .catch((err) => setError(err))
-      .finally(() => setLoading(false));
-  }, [userId]);
+      .catch((err) => {
+        if (active) setError(err);
+      });
+    return () => {
+      active = false;
+    };
+  }, [user.role]);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Something went wrong.</p>;
+  function changeFilter(group, value, checked) {
+    setFilters((previous) => ({
+      ...previous,
+      [group]: checked
+        ? [...(previous[group] || []), value]
+        : (previous[group] || []).filter((item) => item !== value),
+    }));
+  }
+
+  if (error) return <p role="alert">{errorMessage(error)}</p>;
+  if (!jobs) return <p>Loading...</p>;
+
+  const query = (params.get("q") || "").toLowerCase();
+  const visibleJobs = jobs
+    .filter(
+      (job) =>
+        `${job.title} ${job.company?.name} ${job.details.location}`.toLowerCase().includes(query) &&
+        Object.entries(filters).every(
+          ([group, values]) =>
+            !values.length ||
+            values.includes(
+              job.details[
+                { "Job Type": "jobType", Schedule: "schedule", "Work Location": "workSetting" }[
+                  group
+                ]
+              ],
+            ),
+        ),
+    )
+    .sort((a, b) => {
+      if (sort === "Salary") return (b.details.salary ?? -1) - (a.details.salary ?? -1);
+      if (sort === "Recency") return new Date(b.createdAt) - new Date(a.createdAt);
+      return (b.matchPercent ?? -1) - (a.matchPercent ?? -1);
+    })
+    .map((job) => ({ ...job, onApply: () => navigate(`/jobs/${job.id}`) }));
 
   return (
     <div className={styles.HomePage}>
       <div>
-        <ProfileCard
-          variant="home"
-          name={`${profile.firstName} ${profile.lastName}`}
-          photo={profile.photo}
-          email={profile.email}
-          phone={profile.phone}
-          location={profile.location}
-          aboutMe={profile.aboutMe}
-          appliedJobs={profile.appliedJobs}
-          savedJobs={profile.savedJobs}
-          cvViews={profile.cvViews}
-          reachouts={profile.reachouts}
-          onEditProfile={() => console.log("edit clicked")}
-        />
+        {profile && (
+          <ProfileCard
+            variant="home"
+            name={profile.name}
+            photo={profile.photo}
+            email={profile.email}
+            phone={profile.phone}
+            location={profile.location}
+            aboutMe={profile.aboutMe}
+            appliedJobs={profile.appliedJobs}
+            savedJobs={profile.savedJobs}
+            cvViews={profile.cvViews}
+            reachouts={profile.reachouts}
+            onEditProfile={() => navigate("/profile?edit=true")}
+          />
+        )}
+        {user.role === "EMPLOYER" && <p>Your company postings</p>}
       </div>
 
-      <RecommandCard jobs={jobs} />
+      <RecommandCard
+        jobs={visibleJobs}
+        title={user.role === "EMPLOYER" ? "Your company postings" : "Recommended Opportunities"}
+        actionLabel="View job"
+      />
+      {!visibleJobs.length && <p>No matching opportunities.</p>}
 
-      <FilterCard />
+      <FilterCard onSortChange={setSort} onFilterChange={changeFilter} />
     </div>
   );
 }

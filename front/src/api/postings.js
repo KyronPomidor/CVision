@@ -5,13 +5,18 @@ export async function getJobPosting(id) {
   return response.data;
 }
 
-export async function getJobPostingsByCompany(companyId) {
-  const response = await apiClient.get(`/postings/company/${companyId}`);
+export async function getCurrentCompanyPostings() {
+  const response = await apiClient.get(`/companies/me/postings`);
   return response.data;
 }
 
-export async function createJobPosting(companyId, data) {
-  const response = await apiClient.post(`/postings/company/${companyId}`, data);
+export async function getMatchedPostings() {
+  const response = await apiClient.get(`/postings/matches/me`);
+  return response.data;
+}
+
+export async function createJobPosting(data) {
+  const response = await apiClient.post(`/companies/me/postings`, data);
   return response.data;
 }
 
@@ -21,5 +26,22 @@ export async function updateJobPosting(id, data) {
 }
 
 export async function deleteJobPosting(id) {
-  await apiClient.delete(`/postings/${id}`);
+  const response = await apiClient.delete(`/postings/${id}`);
+  return response.data;
+}
+
+export async function getPostingApplicants(id) {
+  const response = await apiClient.get(`/postings/${id}/applicants`);
+  return response.data;
+}
+
+export async function uploadPostingImages(id, files) {
+  const data = new FormData();
+  files.forEach((file) => data.append("files", file));
+  const response = await apiClient.post(`/postings/${id}/images`, data);
+  return response.data;
+}
+
+export async function deletePostingImage(id, imageId) {
+  await apiClient.delete(`/postings/${id}/images/${imageId}`);
 }

@@ -46,3 +46,51 @@
   background-color: var(--color-primary);
   color: var(--color-background);
 }
+
+.addButton {
+  align-self: flex-start;
+  padding: 8px 24px;
+  border: none;
+  border-radius: 20px;
+  background: var(--color-primary);
+  color: var(--color-background);
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.nameWrapper {
+  position: relative;
+}
+.nameButton,
+.nameInput {
+  min-width: 90px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  font-family: inherit;
+  line-height: inherit;
+  text-align: left;
+}
+.nameButton {
+  cursor: pointer;
+}
+.nameButton:hover {
+  background: var(--color-background-accent);
+}
+.nameInput {
+  width: 150px;
+  outline: 1px solid var(--color-primary);
+  outline-offset: 2px;
+}
+.levelPill {
+  box-sizing: content-box;
+  border: none;
+  font-family: inherit;
+  line-height: inherit;
+}
+button.levelPill {
+  cursor: pointer;
+}
+.levelsList {
+  flex-wrap: wrap;
+}

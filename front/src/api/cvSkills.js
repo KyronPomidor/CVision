@@ -1,25 +1,26 @@
 import apiClient from "./client";
 
-export async function getCVSkillsByCv(cvId) {
-  const response = await apiClient.get(`/cv-skills/cv/${cvId}`);
+export async function getCurrentCVSkills() {
+  const response = await apiClient.get(`/cv/me/skills`);
   return response.data;
 }
 
-export async function getCVSkillsBySkill(skillId) {
-  const response = await apiClient.get(`/cv-skills/skill/${skillId}`);
+export async function getCVSkill(id) {
+  const response = await apiClient.get(`/cv/me/skills/${id}`);
   return response.data;
 }
 
-export async function createCVSkill(cvId, data) {
-  const response = await apiClient.post(`/cv-skills/cv/${cvId}`, data);
+export async function createCVSkill(data) {
+  const response = await apiClient.post(`/cv/me/skills`, data);
   return response.data;
 }
 
 export async function updateCVSkill(id, data) {
-  const response = await apiClient.put(`/cv-skills/${id}`, data);
+  const response = await apiClient.put(`/cv/me/skills/${id}`, data);
   return response.data;
 }
 
 export async function deleteCVSkill(id) {
-  await apiClient.delete(`/cv-skills/${id}`);
+  const response = await apiClient.delete(`/cv/me/skills/${id}`);
+  return response.data;
 }

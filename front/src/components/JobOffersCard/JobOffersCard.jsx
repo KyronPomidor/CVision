@@ -11,9 +11,6 @@ function JobOffersCard({ className = "", name, logo, jobs }) {
           <MiniJobCard key={job.id} logo={logo} {...job} />
         ))}
       </ul>
-      <a className={styles.link} href="#">
-        View all job offers from this company{" "}
-      </a>
     </div>
   );
 }

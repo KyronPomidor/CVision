@@ -7,7 +7,7 @@ function AboutCard({ name, description, perks }) {
     <div className={styles.card}>
       <h2 className={typography.heading2}>About {name}</h2>
       <div className={`${typography.mainText} ${styles.text}`}>
-        {description
+        {(description || "")
           .split("\n")
           .filter(Boolean)
           .map((paragraph, i) => (
