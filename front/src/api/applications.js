@@ -1,17 +1,17 @@
 import apiClient from "./client";
 
+export async function getCurrentApplication() {
+  const response = await apiClient.get(`/applications/me`);
+  return response.data;
+}
+
 export async function getApplication(id) {
   const response = await apiClient.get(`/applications/${id}`);
   return response.data;
 }
 
-export async function getApplicationsByUser(userId) {
-  const response = await apiClient.get(`/applications/user/${userId}`);
-  return response.data;
-}
-
-export async function createApplication(userId, data) {
-  const response = await apiClient.post(`/applications/user/${userId}`, data);
+export async function createApplication(data) {
+  const response = await apiClient.post(`/applications/me`, data);
   return response.data;
 }
 
@@ -21,5 +21,6 @@ export async function updateApplication(id, data) {
 }
 
 export async function deleteApplication(id) {
-  await apiClient.delete(`/applications/${id}`);
+  const response = await apiClient.delete(`/applications/${id}`);
+  return response.data;
 }

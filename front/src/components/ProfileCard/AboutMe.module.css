@@ -39,3 +39,26 @@
 .editButton:hover {
   opacity: 0.8;
 }
+
+.aboutMeSection {
+  width: 100%;
+  min-width: 0;
+}
+.aboutMeInput {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: none;
+  background: transparent;
+  font-family: inherit;
+  line-height: inherit;
+  field-sizing: content;
+  min-height: 1lh;
+  resize: vertical;
+  margin-bottom: 14px;
+}
+.aboutMeInput:focus-visible {
+  outline: 1px solid var(--color-primary);
+  outline-offset: 2px;
+}

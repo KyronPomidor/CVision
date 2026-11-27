@@ -62,7 +62,8 @@ class CvSkillSyncServiceImplTest {
                 skillRepository,
                 cvSkillRepository,
                 candidateProfileRepository,
-                profileSkillRepository);
+                profileSkillRepository,
+                new com.fasterxml.jackson.databind.ObjectMapper());
         cv = CV.builder()
                 .id(1L)
                 .user(User.builder().id(7L).build())

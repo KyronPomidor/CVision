@@ -46,6 +46,7 @@ function getMatchLevel(matchPercent) {
 }
 
 function JobCard({
+  actionLabel = "Apply",
   logo,
   title,
   company,
@@ -65,7 +66,7 @@ function JobCard({
     <div className={styles.jobCard}>
       <div className={styles.topRow}>
         <div className={styles.companyInfo}>
-          <img src={logo} alt={`${company} logo`} className={styles.companyLogo} />
+          {logo && <img src={logo} alt={`${company} logo`} className={styles.companyLogo} />}
 
           <div className={styles.titleBlock}>
             <h3 className={typography.heading2}>{title}</h3>
@@ -80,6 +81,8 @@ function JobCard({
             type="button"
             className={styles.starButton}
             onClick={onToggleStar}
+            disabled={!onToggleStar}
+            title="Saved jobs are not supported yet"
             aria-pressed={isStarred}
           >
             <StarOutlineLogo className={isStarred ? styles.starActive : styles.starIcon} />
@@ -104,25 +107,27 @@ function JobCard({
         </div>
       </div>
 
-      <div className={styles.matchSection}>
-        <p className={typography.mainTextImportant}>
-          <span className={`${styles.matchPercent} ${styles[matchLevel]}`}>
-            {matchPercent}% Match
-          </span>{" "}
-          based on your CV
-        </p>
+      {matchPercent != null && (
+        <div className={styles.matchSection}>
+          <p className={typography.mainTextImportant}>
+            <span className={`${styles.matchPercent} ${styles[matchLevel]}`}>
+              {matchPercent}% Match
+            </span>{" "}
+            based on your CV
+          </p>
 
-        <div className={styles.progressTrack}>
-          <div
-            className={`${styles.progressFill} ${styles[matchLevel]}`}
-            style={{ width: `${matchPercent}%` }}
-          />
+          <div className={styles.progressTrack}>
+            <div
+              className={`${styles.progressFill} ${styles[matchLevel]}`}
+              style={{ width: `${matchPercent}%` }}
+            />
+          </div>
         </div>
-      </div>
+      )}
 
       <div className={styles.bottomRow}>
         <button type="button" className={styles.applyButton} onClick={onApply}>
-          Apply
+          {actionLabel}
         </button>
       </div>
     </div>

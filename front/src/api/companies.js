@@ -1,25 +1,38 @@
 import apiClient from "./client";
 
+export async function getCurrentCompany() {
+  const response = await apiClient.get(`/companies/me`);
+  return response.data;
+}
+
 export async function getCompany(id) {
   const response = await apiClient.get(`/companies/${id}`);
   return response.data;
 }
 
-export async function getCompanyByUser(userId) {
-  const response = await apiClient.get(`/companies/user/${userId}`);
+export async function createCompany(data) {
+  const response = await apiClient.post(`/companies/me`, data);
   return response.data;
 }
 
-export async function createCompany(userId, data) {
-  const response = await apiClient.post(`/companies/user/${userId}`, data);
+export async function updateCompany(data) {
+  const response = await apiClient.put(`/companies/me`, data);
   return response.data;
 }
 
-export async function updateCompany(id, data) {
-  const response = await apiClient.put(`/companies/${id}`, data);
+export async function deleteCompany() {
+  const response = await apiClient.delete(`/companies/me`);
   return response.data;
 }
 
-export async function deleteCompany(id) {
-  await apiClient.delete(`/companies/${id}`);
+export async function uploadCompanyPicture(file) {
+  const data = new FormData();
+  data.append("file", file);
+  const response = await apiClient.post(`/companies/me/picture`, data);
+  return response.data;
+}
+
+export async function deleteCompanyPicture() {
+  const response = await apiClient.delete(`/companies/me/picture`);
+  return response.data;
 }

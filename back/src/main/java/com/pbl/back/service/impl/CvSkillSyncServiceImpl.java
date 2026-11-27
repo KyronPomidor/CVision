@@ -1,6 +1,8 @@
 package com.pbl.back.service.impl;
 
 import com.pbl.back.domain.entity.CV;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pbl.back.domain.entity.CVSkill;
 import com.pbl.back.domain.entity.CandidateProfile;
 import com.pbl.back.domain.entity.ProfileSkill;
@@ -37,6 +39,7 @@ public class CvSkillSyncServiceImpl implements CvSkillSyncService {
     private final CVSkillRepository cvSkillRepository;
     private final CandidateProfileRepository candidateProfileRepository;
     private final ProfileSkillRepository profileSkillRepository;
+    private final ObjectMapper objectMapper;
 
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -79,6 +82,38 @@ public class CvSkillSyncServiceImpl implements CvSkillSyncService {
         }
 
         return savedCv;
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public CV replaceCvWithSkills(CV cv, List<String> skillNames) {
+        List<String> names = normalizeSkillNames(skillNames);
+        Set<String> desiredNames = new HashSet<>();
+        names.forEach(name -> desiredNames.add(name.toLowerCase(Locale.ROOT)));
+
+        List<CVSkill> previousSkills = cv.getId() == null
+                ? List.of() : cvSkillRepository.findByCvId(cv.getId());
+        List<CVSkill> removedSkills = previousSkills.stream()
+                .filter(link -> !desiredNames.contains(link.getSkill().getName().toLowerCase(Locale.ROOT)))
+                .toList();
+        Set<Long> removedIds = new HashSet<>();
+        removedSkills.forEach(link -> removedIds.add(link.getSkill().getId()));
+        cvSkillRepository.deleteAll(removedSkills);
+
+        candidateProfileRepository.findByUserId(cv.getUser().getId()).ifPresent(profile -> {
+            List<ProfileSkill> removedProfileSkills = profileSkillRepository.findByProfileId(profile.getId())
+                    .stream()
+                    .filter(link -> removedIds.contains(link.getSkill().getId()))
+                    .toList();
+            profileSkillRepository.deleteAll(removedProfileSkills);
+        });
+
+        try {
+            cv.setSkills(objectMapper.writeValueAsString(names));
+        } catch (JsonProcessingException ex) {
+            throw new IllegalStateException("Could not serialize CV skills", ex);
+        }
+        return saveCvWithSkills(cv, names);
     }
 
     private List<String> normalizeSkillNames(List<String> skillNames) {

@@ -36,3 +36,65 @@
 .itemCompany {
   color: var(--color-primary);
 }
+
+.input {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: none;
+  background: transparent;
+  font-family: inherit;
+  line-height: inherit;
+  field-sizing: content;
+  min-height: 1lh;
+  resize: vertical;
+}
+
+.input:focus-visible {
+  outline: 1px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.item {
+  position: relative;
+}
+.clickable {
+  cursor: pointer;
+}
+.clickable:hover {
+  background: var(--color-background-accent);
+}
+.item .itemCompany {
+  color: var(--color-primary);
+}
+.itemForm {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.dates {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.titleButton {
+  padding: 0;
+  border: none;
+  background: transparent;
+  font-family: inherit;
+  line-height: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.addButton {
+  align-self: flex-start;
+  padding: 8px 24px;
+  border: none;
+  border-radius: 20px;
+  background: var(--color-primary);
+  color: var(--color-background);
+  font-size: 24px;
+  cursor: pointer;
+}

@@ -1,25 +1,26 @@
 import apiClient from "./client";
 
-export async function getProfileSkills(profileId) {
-  const response = await apiClient.get(`/profiles/${profileId}/skills`);
-  return response.data;
-}
-
-export async function addProfileSkill(profileId, data) {
-  const response = await apiClient.post(`/profiles/${profileId}/skills`, data);
+export async function getProfileSkills() {
+  const response = await apiClient.get(`/profiles/me/skills`);
   return response.data;
 }
 
 export async function getProfileSkill(id) {
-  const response = await apiClient.get(`/profiles/skills/${id}`);
+  const response = await apiClient.get(`/profiles/me/skills/${id}`);
+  return response.data;
+}
+
+export async function addProfileSkill(data) {
+  const response = await apiClient.post(`/profiles/me/skills`, data);
   return response.data;
 }
 
 export async function updateProfileSkill(id, data) {
-  const response = await apiClient.put(`/profiles/skills/${id}`, data);
+  const response = await apiClient.put(`/profiles/me/skills/${id}`, data);
   return response.data;
 }
 
 export async function deleteProfileSkill(id) {
-  await apiClient.delete(`/profiles/skills/${id}`);
+  const response = await apiClient.delete(`/profiles/me/skills/${id}`);
+  return response.data;
 }

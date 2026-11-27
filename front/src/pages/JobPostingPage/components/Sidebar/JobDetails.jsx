@@ -18,7 +18,7 @@ const JOB_DETAILS_CONFIG = [
     key: "salary",
     icon: CoinIcon,
     label: "Salary",
-    format: (value) => `$${value.toLocaleString()} per month`,
+    format: (value) => value.toLocaleString(),
   },
   { key: "schedule", icon: ClockIcon, label: "Schedule" },
   {
@@ -38,7 +38,8 @@ function JobDetails({ data }) {
       <div className={styles.grid}>
         {JOB_DETAILS_CONFIG.map(({ key, icon: Icon, label, format }) => {
           const rawValue = data[key];
-          const displayValue = format ? format(rawValue) : rawValue;
+          const displayValue =
+            rawValue == null ? "Not specified yet" : format ? format(rawValue) : rawValue;
 
           return (
             <div key={key} className={styles.row}>

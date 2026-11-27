@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface CvSkillSyncService {
     CV saveCvWithSkills(CV cv, List<String> skillNames);
+
+    CV replaceCvWithSkills(CV cv, List<String> skillNames);
 }

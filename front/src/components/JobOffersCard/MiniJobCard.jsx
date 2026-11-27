@@ -6,7 +6,7 @@ import clockLogo from "../../assets/clock-logo.svg";
 import dollarLogo from "../../assets/dollar-logo.svg";
 import briefcaseLogo from "../../assets/briefcase-logo.svg";
 
-function MiniJobCard({ logo, title, schedule, salary, experience }) {
+function MiniJobCard({ id, logo, title, schedule, salary, experience }) {
   return (
     <li className={styles.jobCard}>
       <img className={styles.logo} src={logo} alt="" />
@@ -18,7 +18,9 @@ function MiniJobCard({ logo, title, schedule, salary, experience }) {
           <MetaItem icon={briefcaseLogo}>{experience}</MetaItem>
         </div>
       </div>
-      <button className={styles.apply}>Apply</button>
+      <a className={styles.apply} href={`/jobs/${id}`}>
+        View job
+      </a>
     </li>
   );
 }

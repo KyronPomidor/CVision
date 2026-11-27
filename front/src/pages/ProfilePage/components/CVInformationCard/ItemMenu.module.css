@@ -1,0 +1,31 @@
+.menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  z-index: 3;
+  min-width: 100px;
+  background: var(--color-background);
+  border: 1px solid var(--color-border);
+  box-shadow: 0 2px 8px #00000015;
+}
+
+.menu button {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 4px 8px;
+  border: none;
+  background: transparent;
+  color: var(--color-primary);
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+}
+
+.menu button:first-child {
+  text-align: right;
+}
+
+.menu button:hover {
+  background: var(--color-background-accent);
+}

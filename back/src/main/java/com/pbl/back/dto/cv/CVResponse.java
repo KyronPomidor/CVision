@@ -16,5 +16,9 @@ public class CVResponse {
     private String filePath;
     private String extractedText;
     private List<String> skills;
+    private List<CVLanguage> languages;
+    private String objective;
+    private List<CVExperience> experience;
+    private String additionalInfo;
     private LocalDateTime uploadedAt;
 }

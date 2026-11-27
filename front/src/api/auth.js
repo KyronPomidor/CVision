@@ -3,7 +3,7 @@ import { createUser } from "./users";
 
 export async function login(email, password) {
   const response = await apiClient.post("/auth/login", { email, password });
-  const data = response.data;
+  const data = response.data || {};
 
   if (!data?.twoFactorRequired) {
     localStorage.setItem("isLoggedIn", "true");

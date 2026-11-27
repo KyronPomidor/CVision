@@ -2,7 +2,7 @@
 import axios from "axios";
 
 const apiClient = axios.create({
-  baseURL: "http://localhost:8080/api",
+  baseURL: import.meta.env.VITE_API_BASE_URL || "http://localhost:8080/api",
   withCredentials: true,
 });
 
@@ -26,3 +26,30 @@ export function logout() {
 }
 
 export default apiClient;
+
+// A missing optional resource is expected for newly registered accounts.
+export async function optionalResource(request) {
+  try {
+    return await request;
+  } catch (error) {
+    if (error.response?.status === 404) return null;
+    throw error;
+  }
+}
+
+export function mediaUrl(path) {
+  if (!path) return undefined;
+  if (/^https?:\/\//i.test(path)) return path;
+  const base = new URL(apiClient.defaults.baseURL, window.location.origin);
+  return new URL(path, base.origin).href;
+}
+
+export function errorMessage(error) {
+  if (error.response?.status === 403) return "You do not have permission to view this resource.";
+  if (error.response?.status === 404) return "This resource was not found.";
+  if (error.response?.status === 429) return "Too many requests. Please try again shortly.";
+  const message = error.response?.data?.error || error.response?.data;
+  return typeof message === "string" && message.length < 300
+    ? message
+    : "Could not complete the request. Please try again.";
+}

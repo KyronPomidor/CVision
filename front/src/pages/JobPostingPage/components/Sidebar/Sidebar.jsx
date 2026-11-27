@@ -7,7 +7,7 @@ function Sidebar({ className = "", data, perks, ...props }) {
     <div className={`${className} ${styles.sidebar}`} {...props}>
       <div className={styles.sticky}>
         <JobDetails data={data} />
-        <CompanyBenefits perks={perks} />
+        {perks?.length > 0 && <CompanyBenefits perks={perks} />}
       </div>
     </div>
   );

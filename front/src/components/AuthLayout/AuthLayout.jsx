@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import MainLogo from "../../../../Logo.svg?react";
+import mainLogo from "../../../../Logo.svg";
 import worldMap from "../../assets/world-map.png";
 import styles from "./AuthLayout.module.css";
 
@@ -7,7 +7,7 @@ function AuthLayout({ children, mapOffset = -220 }) {
   return (
     <div className={styles.page}>
       <Link to="/" className={styles.logoBox} aria-label="CVision">
-        <MainLogo className={styles.logo} />
+        <img src={mainLogo} alt="" className={styles.logo} />
       </Link>
 
       <div className={styles.stack}>

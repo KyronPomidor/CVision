@@ -3,30 +3,29 @@ import typography from "../../../../Typography.module.css";
 import BookLogo from "./assets/book-logo.svg?react";
 import JobCard from "./JobCard";
 
-function RecommandCard({ jobs = [] }) {
+function RecommandCard({ jobs = [], title = "Recommended Opportunities", actionLabel = "Apply" }) {
   return (
     <div className={styles.RecommandCard}>
       <div className={styles.header}>
         <BookLogo className={styles.headerIcon} />
-        <h2 className={`${typography.heading1} ${styles.headerTitle}`}>
-          Recommended Opportunities
-        </h2>
+        <h2 className={`${typography.heading1} ${styles.headerTitle}`}>{title}</h2>
       </div>
 
       <div className={styles.jobsList}>
         {jobs.map((job) => (
           <JobCard
             key={job.id}
+            actionLabel={actionLabel}
             logo={job.logo}
             title={job.title}
-            company={job.company}
+            company={job.company?.name}
             postedAt={job.postedAt}
             employmentType={job.employmentType}
             salary={job.salary}
             experience={job.experience}
             matchPercent={job.matchPercent}
             isStarred={job.isStarred}
-            onToggleStar={() => job.onToggleStar?.(job.id)}
+            onToggleStar={job.onToggleStar}
             onApply={() => job.onApply?.(job.id)}
           />
         ))}

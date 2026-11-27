@@ -1,12 +1,16 @@
-import { useState } from "react";
-
 import styles from "./JobDescription.module.css";
 import typography from "../../../../Typography.module.css";
 import Star from "../../../../assets/star-logo.svg?react";
 
-function JobDescription({ className = "", skills, description, ...props }) {
-  const [isFavorite, setIsFavorite] = useState(false);
-
+function JobDescription({
+  className = "",
+  skills,
+  description,
+  onApply,
+  applying,
+  applied,
+  ...props
+}) {
   return (
     <div className={`${className} ${styles.container}`} {...props}>
       <h2 className={typography.heading2}>Job Description</h2>
@@ -24,13 +28,22 @@ function JobDescription({ className = "", skills, description, ...props }) {
         </div>
       </div>
       <div className={styles.buttonRow}>
-        <button className={`${typography.heading2} ${styles.apply}`}>Apply</button>
+        {onApply && (
+          <button
+            className={`${typography.heading2} ${styles.apply}`}
+            onClick={onApply}
+            disabled={applying || applied}
+          >
+            {applying ? "Applying..." : applied ? "Unavailable" : "Apply"}
+          </button>
+        )}
         <button
           type="button"
-          className={`${styles.favorite} ${isFavorite ? styles.favoriteActive : ""}`}
-          onClick={() => setIsFavorite((prev) => !prev)}
-          aria-pressed={isFavorite}
-          aria-label={isFavorite ? "Remove from favorites" : "Add to favorites"}
+          className={styles.favorite}
+          disabled
+          title="Saved jobs are not supported yet"
+          aria-pressed={false}
+          aria-label="Saved jobs are not supported yet"
         >
           <Star className={styles.starLogo} />
         </button>

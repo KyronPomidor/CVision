@@ -7,7 +7,7 @@ import PaperLogo from "./assets/paper-logo.svg?react";
 import EnvelopeLogo from "./assets/envelope-logo.svg?react";
 
 // appliedJobs / savedJobs: arrays of job posting ids
-function Achievements({ appliedJobs = [], savedJobs = [], cvViews = [], reachouts = [] }) {
+function Achievements({ appliedJobs = [], savedJobs, cvViews, reachouts }) {
   return (
     <div className={styles.achievements}>
       <div className={styles.jobSection}>
@@ -30,7 +30,9 @@ function Achievements({ appliedJobs = [], savedJobs = [], cvViews = [], reachout
               <div className={styles.appliedJobs_imageBox}>
                 <StarLogo className={styles.starLogo} />
               </div>
-              <h2 className={typography.heading2}>{savedJobs.length}</h2>
+              <h2 className={typography.heading2}>
+                {savedJobs ? savedJobs.length : "Not supported"}
+              </h2>
             </div>
 
             <p className={typography.mainTextImportant}>Saved Jobs</p>
@@ -45,7 +47,7 @@ function Achievements({ appliedJobs = [], savedJobs = [], cvViews = [], reachout
               <div className={styles.appliedJobs_imageBox}>
                 <PaperLogo className={styles.paperLogo} />
               </div>
-              <h2 className={typography.heading2}>{cvViews.length}</h2>
+              <h2 className={typography.heading2}>{cvViews ? cvViews.length : "Not supported"}</h2>
             </div>
 
             <p className={typography.mainTextImportant}>CV Views</p>
@@ -58,7 +60,9 @@ function Achievements({ appliedJobs = [], savedJobs = [], cvViews = [], reachout
               <div className={styles.appliedJobs_imageBox}>
                 <EnvelopeLogo className={styles.envelopeLogo} />
               </div>
-              <h2 className={typography.heading2}>{reachouts.length}</h2>
+              <h2 className={typography.heading2}>
+                {reachouts ? reachouts.length : "Not supported"}
+              </h2>
             </div>
 
             <p className={typography.mainTextImportant}>Reachouts</p>
