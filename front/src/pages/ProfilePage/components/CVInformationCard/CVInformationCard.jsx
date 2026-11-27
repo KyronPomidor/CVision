@@ -8,13 +8,14 @@ import AdditionalInfo from "./AdditionalInfo";
 
 function CVInformationCard({
   information,
+  editorRef,
   editing,
   onChange,
   saving,
   education,
   experienceSummary,
 }) {
-  const { skills, languages, objective, experience, additionalInfo } = information;
+  const { skillExperience: skills, languages, objective, experience, additionalInfo } = information;
   const hasInformation =
     skills.length ||
     languages.length ||
@@ -39,9 +40,10 @@ function CVInformationCard({
           <TechnicalSkills
             key={`skills-${editing}`}
             skills={skills}
+            editorRef={editorRef}
             editing={editing}
             saving={saving}
-            onChange={(value) => onChange("skills", value)}
+            onChange={(value) => onChange("skillExperience", value)}
           />
         )}
         {(editing || languages.length > 0) && (

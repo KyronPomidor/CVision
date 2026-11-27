@@ -132,7 +132,7 @@ class CVInformationServiceTest {
     @Test
     void uploadUpdatesTheManualCvAndReplacesTheFileOnRepeatedUpload() {
         CVResponse manual = service.updateInformation(user.getId(), information());
-        when(extraction.extractSkills(any())).thenReturn("[\"Python\"]");
+        when(extraction.extractSkills(any())).thenReturn("[{\"name\":\"Python\",\"yearsOfExperience\":3}]");
 
         CVResponse uploaded = service.upload(user.getId(), file("-first"));
         assertEquals(manual.getId(), uploaded.getId());
@@ -141,10 +141,18 @@ class CVInformationServiceTest {
         assertEquals(manual.getExperience(), uploaded.getExperience());
         assertEquals(manual.getAdditionalInfo(), uploaded.getAdditionalInfo());
         assertEquals(List.of("Python"), uploaded.getSkills());
+        assertEquals(3, uploaded.getSkillExperience().getFirst().yearsOfExperience());
+        assertEquals(3, cvSkillRepository.findByCvId(uploaded.getId()).getFirst().getYearsOfExperience());
         assertEquals("Java developer", uploaded.getExtractedText());
         assertTrue(Files.exists(Path.of(uploaded.getFilePath())));
 
+        when(extraction.extractSkills(any())).thenReturn("[{\"name\":\"Python\",\"yearsOfExperience\":null}]");
         CVResponse replaced = service.upload(user.getId(), file("-second"));
+        assertNull(service.getByUserId(user.getId()).getSkillExperience().getFirst().yearsOfExperience());
+        assertNull(profileSkillRepository.findByProfileId(profile.getId()).getFirst().getYearsOfExperience());
+        CVInformationRequest edited = information();
+        edited.setSkillExperience(List.of(new com.pbl.back.dto.skill.ExtractedSkill("Python", 0)));
+        assertEquals(0, service.updateInformation(user.getId(), edited).getSkillExperience().getFirst().yearsOfExperience());
         assertEquals(manual.getId(), replaced.getId());
         assertFalse(Files.exists(Path.of(uploaded.getFilePath())));
         assertTrue(Files.exists(Path.of(replaced.getFilePath())));
@@ -154,7 +162,7 @@ class CVInformationServiceTest {
 
     @Test
     void extractionFailurePreservesThePreviousRowAndFile() throws Exception {
-        when(extraction.extractSkills(any())).thenReturn("[\"Java\"]");
+        when(extraction.extractSkills(any())).thenReturn("[{\"name\":\"Java\",\"yearsOfExperience\":3}]");
         CVResponse original = service.upload(user.getId(), file("-original"));
         when(extraction.extractSkills(any())).thenThrow(new IllegalStateException("Extraction unavailable"));
 

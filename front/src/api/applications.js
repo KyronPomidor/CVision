@@ -1,12 +1,12 @@
-import apiClient from "./client";
+import apiClient, { getShared } from "./client";
 
 export async function getCurrentApplication() {
-  const response = await apiClient.get(`/applications/me`);
+  const response = await getShared(`/applications/me`);
   return response.data;
 }
 
 export async function getApplication(id) {
-  const response = await apiClient.get(`/applications/${id}`);
+  const response = await getShared(`/applications/${id}`);
   return response.data;
 }
 

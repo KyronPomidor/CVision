@@ -55,3 +55,26 @@ button.skillPill:hover {
   outline: 1px solid var(--color-primary);
   outline-offset: -1px;
 }
+
+.editor, .yearsField {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.yearsField {
+  padding: 6px 12px;
+  border-radius: 20px;
+  background: var(--color-background-accent);
+  color: var(--color-primary);
+}
+
+.yearsField input {
+  width: 4ch;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid currentColor;
+}

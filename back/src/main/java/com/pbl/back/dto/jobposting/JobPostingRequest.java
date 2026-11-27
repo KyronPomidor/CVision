@@ -11,6 +11,9 @@ import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Max;
 
 @Getter
 @Setter
@@ -31,6 +34,9 @@ public class JobPostingRequest {
     @Setter(AccessLevel.NONE)
     private List<@NotNull(message = "must not be null") @Positive(message = "must be greater than 0") Long>
             skillIds = new ArrayList<>();
+
+    @Size(max = 50)
+    private Map<@Positive Long, @NotNull @Min(0) @Max(60) Integer> requiredYearsBySkill;
 
     public void setSkillIds(List<Long> skillIds) {
         this.skillIds = skillIds == null ? new ArrayList<>() : skillIds;

@@ -1,12 +1,12 @@
-import apiClient from "./client";
+import apiClient, { getShared } from "./client";
 
 export async function getCurrentCompany() {
-  const response = await apiClient.get(`/companies/me`);
+  const response = await getShared(`/companies/me`);
   return response.data;
 }
 
 export async function getCompany(id) {
-  const response = await apiClient.get(`/companies/${id}`);
+  const response = await getShared(`/companies/${id}`);
   return response.data;
 }
 

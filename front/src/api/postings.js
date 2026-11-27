@@ -1,17 +1,17 @@
-import apiClient from "./client";
+import apiClient, { getShared } from "./client";
 
 export async function getJobPosting(id) {
-  const response = await apiClient.get(`/postings/${id}`);
+  const response = await getShared(`/postings/${id}`);
   return response.data;
 }
 
 export async function getCurrentCompanyPostings() {
-  const response = await apiClient.get(`/companies/me/postings`);
+  const response = await getShared(`/companies/me/postings`);
   return response.data;
 }
 
-export async function getMatchedPostings() {
-  const response = await apiClient.get(`/postings/matches/me`);
+export async function getMatchedPostings(query = "") {
+  const response = await getShared(`/postings/matches/me?${query}`);
   return response.data;
 }
 
@@ -31,7 +31,7 @@ export async function deleteJobPosting(id) {
 }
 
 export async function getPostingApplicants(id) {
-  const response = await apiClient.get(`/postings/${id}/applicants`);
+  const response = await getShared(`/postings/${id}/applicants`);
   return response.data;
 }
 
@@ -44,4 +44,21 @@ export async function uploadPostingImages(id, files) {
 
 export async function deletePostingImage(id, imageId) {
   await apiClient.delete(`/postings/${id}/images/${imageId}`);
+}
+
+export async function getCompanyMatches(companyId) {
+  const items = [];
+  let page = 0;
+  let result;
+  do {
+    result = await getMatchedPostings(new URLSearchParams({ companyId, page }));
+    items.push(...result.items);
+    page++;
+  } while (page < result.totalPages);
+  return items;
+}
+
+export async function updateRequiredYears(postingId, skillId, years) {
+  const response = await apiClient.put(`/postings/${postingId}/skills/${skillId}/experience`, { years });
+  return response.data;
 }

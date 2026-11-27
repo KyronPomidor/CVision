@@ -1,7 +1,7 @@
-import apiClient from "./client";
+import apiClient, { getShared } from "./client";
 
 export async function getCurrentUser() {
-  const response = await apiClient.get(`/users/me`);
+  const response = await getShared(`/users/me`);
   return response.data;
 }
 

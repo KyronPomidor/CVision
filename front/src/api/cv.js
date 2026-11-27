@@ -1,12 +1,12 @@
-import apiClient from "./client";
+import apiClient, { getShared } from "./client";
 
 export async function getCurrentCV() {
-  const response = await apiClient.get(`/cv/me`);
+  const response = await getShared(`/cv/me`);
   return response.data;
 }
 
 export async function getCV(id) {
-  const response = await apiClient.get(`/cv/${id}`);
+  const response = await getShared(`/cv/${id}`);
   return response.data;
 }
 
@@ -33,6 +33,9 @@ export async function deleteCV(id) {
 }
 
 export async function updateCVInformation(data) {
-  const response = await apiClient.put("/cv/me/information", data);
+  const response = await apiClient.put("/cv/me/information", {
+    ...data,
+    skills: data.skillExperience?.map((skill) => skill.name) ?? data.skills,
+  });
   return response.data;
 }

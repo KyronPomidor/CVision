@@ -1,7 +1,7 @@
 package com.pbl.back.dto.profileskill;
 
-import com.pbl.back.domain.enums.SkillLevel;
 import jakarta.validation.constraints.NotNull;
+import com.pbl.back.domain.enums.SkillLevel;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.PositiveOrZero;
 import lombok.Getter;

@@ -13,6 +13,7 @@ public class SkillMapperImpl implements SkillMapper {
     public Skill toEntity(SkillRequest request) {
         return Skill.builder()
                 .name(request.getName())
+                .yearsOfExperience(request.getYearsOfExperience())
                 .build();
     }
 
@@ -21,6 +22,7 @@ public class SkillMapperImpl implements SkillMapper {
         return SkillResponse.builder()
                 .id(skill.getId())
                 .name(skill.getName())
+                .yearsOfExperience(skill.getYearsOfExperience())
                 .build();
     }
 }

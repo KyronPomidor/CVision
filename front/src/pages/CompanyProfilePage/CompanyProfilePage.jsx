@@ -7,7 +7,7 @@ import CompanyDetailsCard from "./components/CompanyDetailsCard/CompanyDetailsCa
 import JobOffersCard from "../../components/JobOffersCard/JobOffersCard";
 import GalleryCard from "../../components/GalleryCard/GalleryCard";
 import { getCompany } from "../../api/companies";
-import { getMatchedPostings, getCurrentCompanyPostings } from "../../api/postings";
+import { getCompanyMatches, getCurrentCompanyPostings } from "../../api/postings";
 import { mapCompany, mapPosting } from "../../api/mappers";
 import { errorMessage } from "../../api/client";
 
@@ -23,7 +23,7 @@ function CompanyProfilePage() {
     async function load() {
       const data = mapCompany(await getCompany(companyId));
       let postings = [];
-      if (user.role === "EMPLOYEE") postings = await getMatchedPostings();
+      if (user.role === "EMPLOYEE") postings = await getCompanyMatches(companyId);
       else if (data.userId === user.id) postings = await getCurrentCompanyPostings();
       if (active)
         setCompany({

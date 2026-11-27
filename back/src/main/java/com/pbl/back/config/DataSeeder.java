@@ -22,7 +22,6 @@ import java.util.*;
  * All seeded accounts use the password: Password123!
  */
 @Component
-@Profile("seed")
 @RequiredArgsConstructor
 public class DataSeeder implements CommandLineRunner {
 
@@ -55,7 +54,7 @@ public class DataSeeder implements CommandLineRunner {
         for (String n : List.of("Java", "Spring Boot", "React", "JavaScript", "TypeScript", "SQL",
                 "Python", "Docker", "AWS", "Git", "Node.js", "Figma", "Kubernetes", "Machine Learning")) {
             Skill s = skillRepository.findAll().stream().filter(x -> x.getName().equalsIgnoreCase(n)).findFirst()
-                    .orElseGet(() -> skillRepository.save(Skill.builder().name(n).build()));
+                    .orElseGet(() -> skillRepository.save(Skill.builder().name(n).yearsOfExperience(0).build()));
             skills.put(n, s);
         }
 
@@ -169,7 +168,7 @@ public class DataSeeder implements CommandLineRunner {
                 .createdAt(LocalDateTime.now()).status(JobStatus.OPEN).build());
         for (String n : skillNames) {
             Skill s = skillRepository.findAll().stream().filter(x -> x.getName().equals(n)).findFirst().orElseThrow();
-            jobPostingSkillRepository.save(JobPostingSkill.builder().jobPosting(jp).skill(s).build());
+            jobPostingSkillRepository.save(JobPostingSkill.builder().jobPosting(jp).skill(s).requiredYears(exp).build());
         }
         return jp;
     }
@@ -178,9 +177,13 @@ public class DataSeeder implements CommandLineRunner {
         CV cv = cvRepository.save(CV.builder().user(u).fileName(file).filePath("uploads/cvs/" + file)
                 .extractedText("Dummy CV text for " + u.getAccountName()).skills(objectMapper.valueToTree(List.of(names)).toString())
                 .uploadedAt(LocalDateTime.now()).build());
+        var profile = profileRepository.findByUserId(u.getId()).orElseThrow();
+        var profileSkills = profileSkillRepository.findByProfileId(profile.getId());
         for (String n : names) {
             cvSkillRepository.save(CVSkill.builder().cv(cv).skill(skills.get(n))
-                    .confidenceScore(0.9).yearsOfExperience(2).build());
+                    .confidenceScore(0.9).yearsOfExperience(profileSkills.stream()
+                            .filter(link -> link.getSkill().getId().equals(skills.get(n).getId()))
+                            .map(ProfileSkill::getYearsOfExperience).findFirst().orElse(0)).build());
         }
         return cv;
     }

@@ -28,4 +28,7 @@ public class JobPostingSkill {
     @ManyToOne
     @JoinColumn(name = "skill_id", nullable = false)
     private Skill skill;
+
+    @Column(name = "required_years")
+    private Integer requiredYears;
 }

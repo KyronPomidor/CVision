@@ -28,7 +28,8 @@ public class PerplexityServiceImpl implements PerplexityService {
             Do not infer skills from experience or other context.
 
             Return JSON only, matching this exact shape:
-            {"skills":["skill one","skill two"]}
+            {"skills":[{"name":"skill one","yearsOfExperience":2}]}
+            For each listed skill, report completed years supported by the CV. Use null if unknown. Use 0 only for an explicitly supported zero.
 
             If no skills are found, return {"skills":[]}.
             """;
@@ -123,7 +124,15 @@ public class PerplexityServiceImpl implements PerplexityService {
         ObjectNode properties = schema.putObject("properties");
         ObjectNode skills = properties.putObject("skills");
         skills.put("type", "array");
-        skills.putObject("items").put("type", "string");
+        ObjectNode item = skills.putObject("items");
+        item.put("type", "object");
+        ObjectNode fields = item.putObject("properties");
+        fields.putObject("name").put("type", "string");
+        ObjectNode years = fields.putObject("yearsOfExperience");
+        years.putArray("type").add("integer").add("null");
+        years.put("minimum", 0).put("maximum", 60);
+        item.putArray("required").add("name").add("yearsOfExperience");
+        item.put("additionalProperties", false);
 
         schema.putArray("required").add("skills");
         schema.put("additionalProperties", false);

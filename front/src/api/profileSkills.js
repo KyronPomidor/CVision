@@ -1,12 +1,12 @@
-import apiClient from "./client";
+import apiClient, { getShared } from "./client";
 
 export async function getProfileSkills() {
-  const response = await apiClient.get(`/profiles/me/skills`);
+  const response = await getShared(`/profiles/me/skills`);
   return response.data;
 }
 
 export async function getProfileSkill(id) {
-  const response = await apiClient.get(`/profiles/me/skills/${id}`);
+  const response = await getShared(`/profiles/me/skills/${id}`);
   return response.data;
 }
 

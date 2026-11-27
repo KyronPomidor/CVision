@@ -17,12 +17,25 @@ function HomePage() {
   const [sort, setSort] = useState("Compatibility");
   const [filters, setFilters] = useState({});
 
+  const [requested, setRequested] = useState({ key: "", page: 0 });
+  const [pagination, setPagination] = useState({ page: 0, totalPages: 0 });
+  const queryParams = new URLSearchParams({ q: params.get("q") || "", sort });
+  for (const [label, key] of [["Job Type", "jobType"], ["Schedule", "schedule"], ["Work Location", "workSetting"]]) {
+    for (const value of filters[label] || []) queryParams.append(key, value);
+  }
+  const key = queryParams.toString();
+  const page = requested.key === key ? requested.page : 0;
+  const employee = user.role === "EMPLOYEE";
+  const matchQuery = employee ? key + "&page=" + page : "";
+
   useEffect(() => {
     let active = true;
-    const request = user.role === "EMPLOYEE" ? getMatchedPostings() : getCurrentCompanyPostings();
+    const request = employee ? getMatchedPostings(matchQuery) : getCurrentCompanyPostings();
     request
       .then((data) => {
-        if (active) setJobs(data.map(mapPosting));
+        if (!active) return;
+        if (employee) setPagination({ page: data.page, totalPages: data.totalPages });
+        setJobs((employee ? data.items : data).map(mapPosting));
       })
       .catch((err) => {
         if (active) setError(err);
@@ -30,7 +43,7 @@ function HomePage() {
     return () => {
       active = false;
     };
-  }, [user.role]);
+  }, [employee, matchQuery]);
 
   function changeFilter(group, value, checked) {
     setFilters((previous) => ({
@@ -94,7 +107,15 @@ function HomePage() {
         jobs={visibleJobs}
         title={user.role === "EMPLOYER" ? "Your company postings" : "Recommended Opportunities"}
         actionLabel="View job"
-      />
+      >
+        {employee && (
+          <nav aria-label="Postings pages" className={styles.pagination}>
+            <button disabled={pagination.page === 0} onClick={() => setRequested({ key, page: pagination.page - 1 })}>Previous</button>
+            <span>{pagination.totalPages ? `Page ${pagination.page + 1} of ${pagination.totalPages}` : "No pages"}</span>
+            <button disabled={pagination.page + 1 >= pagination.totalPages} onClick={() => setRequested({ key, page: pagination.page + 1 })}>Next</button>
+          </nav>
+        )}
+      </RecommandCard>
       {!visibleJobs.length && <p>No matching opportunities.</p>}
 
       <FilterCard onSortChange={setSort} onFilterChange={changeFilter} />

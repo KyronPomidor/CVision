@@ -14,6 +14,7 @@ public interface JobPostingService {
     List<JobPostingResponse> getMatchesForUser(Long userId);
     JobPostingResponse getById(Long id);
     JobPostingResponse update(Long id, JobPostingRequest request);
+    JobPostingResponse updateRequiredYears(Long postingId, Long skillId, int years);
     void delete(Long id);
     JobPostingResponse uploadImages(Long postingId, List<MultipartFile> files);
     ResponseEntity<Resource> getImage(Long postingId, Long imageId);

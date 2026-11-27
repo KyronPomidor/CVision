@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
-export default function useItemMenu() {
+export default function useItemMenu(keepDraftOpen = false) {
   const [selected, setSelected] = useState(null);
   const [draft, setDraft] = useState(null);
   const ref = useRef(null);
@@ -8,7 +8,7 @@ export default function useItemMenu() {
   useEffect(() => {
     if (selected === null) return;
     function onPointerDown(event) {
-      if (!ref.current?.contains(event.target)) setSelected(null);
+      if (!(keepDraftOpen && draft !== null) && !ref.current?.contains(event.target)) setSelected(null);
     }
     function onKeyDown(event) {
       if (event.key === "Escape") setSelected(null);
@@ -19,7 +19,7 @@ export default function useItemMenu() {
       document.removeEventListener("pointerdown", onPointerDown);
       document.removeEventListener("keydown", onKeyDown);
     };
-  }, [selected]);
+  }, [selected, keepDraftOpen, draft]);
 
   function open(index) {
     setSelected(index);

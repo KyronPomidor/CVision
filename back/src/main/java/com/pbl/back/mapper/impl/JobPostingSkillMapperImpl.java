@@ -16,6 +16,7 @@ public class JobPostingSkillMapperImpl implements JobPostingSkillMapper {
                 .map(mapping -> SkillResponse.builder()
                         .id(mapping.getSkill().getId())
                         .name(mapping.getSkill().getName())
+                        .yearsOfExperience(mapping.getRequiredYears())
                         .build())
                 .toList();
     }

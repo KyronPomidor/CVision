@@ -6,6 +6,13 @@ const apiClient = axios.create({
   withCredentials: true,
 });
 
+const pendingGets = new Map();
+
+apiClient.interceptors.request.use((config) => {
+  if (config.url?.startsWith("/auth/")) pendingGets.clear();
+  return config;
+});
+
 apiClient.interceptors.response.use(
   (response) => response,
   (error) => {
@@ -26,6 +33,17 @@ export function logout() {
 }
 
 export default apiClient;
+
+export function getShared(url) {
+  const pending = pendingGets.get(url);
+  if (pending) return pending;
+
+  const request = apiClient.get(url).finally(() => {
+    if (pendingGets.get(url) === request) pendingGets.delete(url);
+  });
+  pendingGets.set(url, request);
+  return request;
+}
 
 // A missing optional resource is expected for newly registered accounts.
 export async function optionalResource(request) {

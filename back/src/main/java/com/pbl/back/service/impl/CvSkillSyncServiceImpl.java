@@ -1,5 +1,8 @@
 package com.pbl.back.service.impl;
 
+import java.util.TreeMap;
+import java.util.Objects;
+import com.pbl.back.dto.skill.ExtractedSkill;
 import com.pbl.back.domain.entity.CV;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -18,7 +21,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -66,7 +68,6 @@ public class CvSkillSyncServiceImpl implements CvSkillSyncService {
                         .cv(savedCv)
                         .skill(skill)
                         .confidenceScore(null)
-                        .yearsOfExperience(null)
                         .build());
             }
 
@@ -76,7 +77,6 @@ public class CvSkillSyncServiceImpl implements CvSkillSyncService {
                         .profile(profile)
                         .skill(skill)
                         .level(DEFAULT_AI_SKILL_LEVEL)
-                        .yearsOfExperience(null)
                         .build());
             }
         }
@@ -114,6 +114,33 @@ public class CvSkillSyncServiceImpl implements CvSkillSyncService {
             throw new IllegalStateException("Could not serialize CV skills", ex);
         }
         return saveCvWithSkills(cv, names);
+    }
+
+    @Override
+    @Transactional
+    public CV replaceExtractedSkills(CV cv, List<ExtractedSkill> skills) {
+        var years = new TreeMap<String, Integer>(String.CASE_INSENSITIVE_ORDER);
+        for (ExtractedSkill skill : skills) {
+            if (skill != null && skill.name() != null) {
+                String name = skill.name().trim().replaceAll("(?U)\\s+", " ").trim();
+                years.putIfAbsent(name, null);
+                if (skill.yearsOfExperience() != null) {
+                    years.merge(name, skill.yearsOfExperience(), Math::max);
+                }
+            }
+        }
+        CV saved = replaceCvWithSkills(cv, skills.stream().filter(Objects::nonNull)
+                .map(ExtractedSkill::name).toList());
+        for (CVSkill link : cvSkillRepository.findByCvId(saved.getId())) {
+            link.setYearsOfExperience(years.get(link.getSkill().getName()));
+        }
+        candidateProfileRepository.findByUserId(saved.getUser().getId()).ifPresent(profile -> {
+            for (ProfileSkill link : profileSkillRepository.findByProfileId(profile.getId())) {
+                Integer value = years.get(link.getSkill().getName());
+                if (years.containsKey(link.getSkill().getName())) link.setYearsOfExperience(value);
+            }
+        });
+        return saved;
     }
 
     private List<String> normalizeSkillNames(List<String> skillNames) {

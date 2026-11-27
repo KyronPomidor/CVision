@@ -1,5 +1,6 @@
 package com.pbl.back.dto.jobposting;
 
+import jakarta.validation.constraints.NotNull;
 import com.pbl.back.domain.enums.JobType;
 import com.pbl.back.domain.enums.Schedule;
 import com.pbl.back.domain.enums.WorkSetting;
@@ -10,7 +11,6 @@ import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
-
 import java.math.BigDecimal;
 
 @Getter
@@ -32,7 +32,8 @@ public class JobPostingDetailsRequest {
 
     @PositiveOrZero(message = "must be greater than or equal to 0")
     @Max(value = 60, message = "must be at most 60")
-    private Integer experience;
+    @NotNull
+    private Integer experience = 0;
 
     @Size(max = 255, message = "must be at most 255 characters")
     private String education;

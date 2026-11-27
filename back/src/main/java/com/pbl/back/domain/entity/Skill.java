@@ -18,4 +18,7 @@ public class Skill {
 
     @Column(nullable = false, unique = true)
     private String name;
+
+    @Column(nullable = false, columnDefinition = "integer default 0")
+    private int yearsOfExperience;
 }

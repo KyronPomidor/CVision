@@ -1,5 +1,7 @@
 package com.pbl.back.mapper.impl;
 
+import com.pbl.back.dto.skill.ExtractedSkill;
+import com.pbl.back.repository.CVSkillRepository;
 import com.pbl.back.domain.entity.CV;
 import com.pbl.back.dto.cv.CVRequest;
 import com.pbl.back.dto.cv.CVResponse;
@@ -8,7 +10,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Component;
-
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -16,7 +17,10 @@ import java.util.List;
 public class CVMapperImpl implements CVMapper {
     private final ObjectMapper objectMapper;
 
-    public CVMapperImpl(ObjectMapper objectMapper) {
+    private final CVSkillRepository skillRepository;
+
+    public CVMapperImpl(ObjectMapper objectMapper, CVSkillRepository skillRepository) {
+        this.skillRepository = skillRepository;
         this.objectMapper = objectMapper;
     }
 
@@ -39,6 +43,10 @@ public class CVMapperImpl implements CVMapper {
                 .filePath(cv.getFilePath())
                 .extractedText(cv.getExtractedText())
                 .skills(parseList(cv.getSkills(), new TypeReference<>() {}))
+                .skillExperience(skillRepository.findByCvId(cv.getId()).stream()
+                        .map(link -> new ExtractedSkill(link.getSkill().getName(),
+                                link.getYearsOfExperience()))
+                        .toList())
                 .languages(parseList(cv.getLanguages(), new TypeReference<>() {}))
                 .objective(cv.getObjective())
                 .experience(parseList(cv.getExperience(), new TypeReference<>() {}))

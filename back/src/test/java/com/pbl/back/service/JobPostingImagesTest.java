@@ -1,6 +1,13 @@
 package com.pbl.back.service;
 
 import com.pbl.back.domain.entity.Company;
+import com.pbl.back.domain.entity.Skill;
+import com.pbl.back.domain.entity.CandidateProfile;
+import com.pbl.back.domain.entity.ProfileSkill;
+import com.pbl.back.domain.entity.JobPostingDetails;
+import com.pbl.back.domain.entity.JobPostingSkill;
+import com.pbl.back.domain.enums.JobStatus;
+import com.pbl.back.dto.jobposting.JobPostingResponse;
 import com.pbl.back.domain.entity.JobPosting;
 import com.pbl.back.domain.entity.JobPostingImage;
 import com.pbl.back.domain.entity.User;
@@ -83,6 +90,25 @@ class JobPostingImagesTest {
                 .id(15L)
                 .company(Company.builder().user(User.builder().id(8L).build()).build())
                 .build();
+    }
+
+    @Test
+    void countsOnlySkillsMeetingExperienceAndOmitsZeroScores() {
+        var skill = Skill.builder().id(2L).yearsOfExperience(8).build();
+        var profile = CandidateProfile.builder().id(3L).build();
+        var candidateSkill = ProfileSkill.builder().skill(skill).yearsOfExperience(1).build();
+        posting.setDetails(JobPostingDetails.builder().experience(6).build());
+        when(candidateProfileRepository.findByUserId(7L)).thenReturn(Optional.of(profile));
+        when(profileSkillRepository.findByProfileId(3L)).thenReturn(List.of(candidateSkill));
+        when(postingRepository.findByStatus(JobStatus.OPEN)).thenReturn(List.of(posting));
+        when(postingSkillRepository.findByJobPostingId(15L)).thenReturn(List.of(
+                JobPostingSkill.builder().skill(skill).requiredYears(2).build(),
+                JobPostingSkill.builder().skill(Skill.builder().id(4L).build()).build()));
+        when(postingMapper.toResponse(any(), anyList(), anyList(), org.mockito.ArgumentMatchers.anyDouble()))
+                .thenAnswer(call -> JobPostingResponse.builder().matchScore(call.getArgument(3)).build());
+        assertEquals(List.of(), service.getMatchesForUser(7L));
+        candidateSkill.setYearsOfExperience(2);
+        assertEquals(50.0, service.getMatchesForUser(7L).getFirst().getMatchScore());
     }
 
     private JobPostingServiceImpl newService(ImageStorageService storage) {

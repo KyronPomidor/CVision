@@ -66,22 +66,7 @@ public class JobPostingServiceImpl implements JobPostingService {
 
         JobPosting savedJob = repository.save(jobPosting);
 
-        if (request.getSkillIds() != null) {
-
-            for (Long skillId : request.getSkillIds()) {
-
-                Skill skill = skillRepository.findById(skillId)
-                        .orElseThrow(
-                                () -> new ResourceNotFoundException("Skill with id '" + skillId + "' not found."));
-
-                JobPostingSkill mapping = JobPostingSkill.builder()
-                        .jobPosting(savedJob)
-                        .skill(skill)
-                        .build();
-
-                jobPostingSkillRepository.save(mapping);
-            }
-        }
+        saveRequirements(savedJob, request);
         return getById(savedJob.getId());
     }
 
@@ -105,33 +90,28 @@ public class JobPostingServiceImpl implements JobPostingService {
 
     @Override
     public List<JobPostingResponse> getMatchesForUser(Long userId) {
-        Set<Long> userSkillIds = candidateProfileRepository.findByUserId(userId)
+        Map<Long, Integer> experienceBySkill = candidateProfileRepository.findByUserId(userId)
                 .map(CandidateProfile::getId)
                 .map(profileSkillRepository::findByProfileId)
                 .orElseGet(List::of)
                 .stream()
-                .map(profileSkill -> profileSkill.getSkill().getId())
-                .collect(Collectors.toSet());
+                .collect(Collectors.toMap(link -> link.getSkill().getId(),
+                        link -> Objects.requireNonNullElse(link.getYearsOfExperience(), 0), Math::max));
 
         return repository.findByStatus(JobStatus.OPEN).stream()
-                .map(posting -> toMatchResponse(posting, userSkillIds))
+                .map(posting -> toMatchResponse(posting, experienceBySkill))
+                .filter(posting -> posting.getMatchScore() > 0)
                 .sorted(Comparator.comparing(JobPostingResponse::getMatchScore).reversed())
                 .toList();
     }
 
-    private JobPostingResponse toMatchResponse(JobPosting posting, Set<Long> userSkillIds) {
+    private JobPostingResponse toMatchResponse(JobPosting posting, Map<Long, Integer> experienceBySkill) {
         List<JobPostingSkill> requiredSkills = jobPostingSkillRepository.findByJobPostingId(posting.getId());
-        Set<Long> requiredSkillIds = requiredSkills.stream()
-                .map(jobPostingSkill -> jobPostingSkill.getSkill().getId())
-                .collect(Collectors.toCollection(HashSet::new));
-
-        long matchedSkills = requiredSkillIds.stream()
-                .filter(userSkillIds::contains)
+        long matchedSkills = requiredSkills.stream()
+                .filter(link -> experienceBySkill.getOrDefault(link.getSkill().getId(), -1)
+                        >= Objects.requireNonNullElse(link.getRequiredYears(), 0))
                 .count();
-        double matchScore = requiredSkillIds.isEmpty()
-                ? 0.0
-                : (matchedSkills * 100.0) / requiredSkillIds.size();
-
+        double matchScore = requiredSkills.isEmpty() ? 0.0 : matchedSkills * 100.0 / requiredSkills.size();
         return mapper.toResponse(posting,
                 jobPostingSkillMapper.toSkillResponse(requiredSkills),
                 jobPostingImageRepository.findByJobPostingIdOrderBySortOrderAsc(posting.getId()),
@@ -168,28 +148,44 @@ public class JobPostingServiceImpl implements JobPostingService {
         posting.getDetails().setEducation(request.getDetails().getEducation());
         posting.getDetails().setContactEmail(request.getDetails().getContactEmail());
 
-        if (!request.getSkillIds().isEmpty()) {
-
-            jobPostingSkillRepository.deleteAll(jobPostingSkillRepository.findByJobPostingId(id));
-
-            for (Long skillId : request.getSkillIds()) {
-
-                Skill skill = skillRepository.findById(skillId)
-                        .orElseThrow(() -> new ResourceNotFoundException(
-                                "Skill with id '" + skillId + "' not found."));
-
-                JobPostingSkill mapping = JobPostingSkill.builder()
-                        .jobPosting(posting)
-                        .skill(skill)
-                        .build();
-
-                jobPostingSkillRepository.save(mapping);
-            }
-        }
-
+        saveRequirements(posting, request);
         return getById(posting.getId());
     }
 
+    @Override
+    @Transactional
+    public JobPostingResponse updateRequiredYears(Long postingId, Long skillId, int years) {
+        getOwnedPosting(postingId);
+        JobPostingSkill link = jobPostingSkillRepository.findByJobPostingIdAndSkillId(postingId, skillId)
+                .orElseThrow(() -> new ResourceNotFoundException("Skill not found on this posting."));
+        link.setRequiredYears(years);
+        return getById(postingId);
+    }
+
+    private void saveRequirements(JobPosting posting, JobPostingRequest request) {
+        Map<Long, Integer> years = request.getRequiredYearsBySkill();
+        if (years == null && request.getSkillIds().isEmpty()) return;
+        Set<Long> desired = years == null ? new LinkedHashSet<>(request.getSkillIds()) : years.keySet();
+        List<JobPostingSkill> existing = jobPostingSkillRepository.findByJobPostingId(posting.getId());
+        Set<Long> retained = new HashSet<>();
+        for (JobPostingSkill link : existing) {
+            Long id = link.getSkill().getId();
+            if (desired.contains(id)) {
+                retained.add(id);
+                if (years != null) link.setRequiredYears(years.get(id));
+            } else {
+                jobPostingSkillRepository.delete(link);
+            }
+        }
+        for (Long id : desired) {
+            if (retained.contains(id)) continue;
+            Skill skill = skillRepository.findById(id).orElseThrow(() ->
+                    new ResourceNotFoundException("Skill with id '" + id + "' not found."));
+            int minimum = years == null ? Objects.requireNonNullElse(request.getDetails().getExperience(), 0) : years.get(id);
+            jobPostingSkillRepository.save(JobPostingSkill.builder()
+                    .jobPosting(posting).skill(skill).requiredYears(minimum).build());
+        }
+    }
     @Override
     @Transactional
     public void delete(Long id) {

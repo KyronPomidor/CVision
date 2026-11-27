@@ -1,5 +1,6 @@
 package com.pbl.back.dto.cv;
 
+import com.pbl.back.dto.skill.ExtractedSkill;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -16,6 +17,9 @@ public class CVInformationRequest {
     @NotNull
     @Size(max = 100)
     private List<@NotBlank @Size(max = 100) String> skills = List.of();
+
+    @Size(max = 100)
+    private List<@NotNull @Valid ExtractedSkill> skillExperience;
 
     @NotNull
     @Valid

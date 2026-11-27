@@ -33,7 +33,7 @@ export function mapPosting(posting) {
   return {
     ...posting,
     company: posting.company ? mapCompany(posting.company) : null,
-    skills: (posting.skills || []).map((skill) => skill.name),
+    skills: posting.skills || [],
     gallery: (posting.images || []).map((image) => ({
       src: mediaUrl(image.url),
       alt: posting.title,
@@ -50,8 +50,21 @@ export function mapPosting(posting) {
 }
 
 export function mapCVInformation(cv, profile) {
+  const profileSkills = profile?.skills || [];
+  const years = new Map([
+    ...profileSkills.map((skill) => [skill.skillName.toLowerCase(), skill.yearsOfExperience]),
+    ...(cv?.skillExperience || []).map((skill) => [skill.name.toLowerCase(), skill.yearsOfExperience]),
+  ]);
+  const names = cv
+    ? [...(cv.skills || []), ...(cv.skillExperience || []).map((skill) => skill.name)]
+    : profileSkills.map((skill) => skill.skillName);
+  const skills = new Map();
+  for (const name of names) {
+    const key = name.toLowerCase();
+    if (!skills.has(key)) skills.set(key, { name, yearsOfExperience: years.get(key) });
+  }
   return {
-    skills: cv ? cv.skills || [] : (profile?.skills || []).map((skill) => skill.skillName),
+    skillExperience: [...skills.values()],
     languages: Array.isArray(cv?.languages) ? cv.languages : [],
     objective: cv?.objective || "",
     experience: Array.isArray(cv?.experience) ? cv.experience : [],

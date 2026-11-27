@@ -3,7 +3,7 @@ import typography from "../../../../Typography.module.css";
 import BookLogo from "./assets/book-logo.svg?react";
 import JobCard from "./JobCard";
 
-function RecommandCard({ jobs = [], title = "Recommended Opportunities", actionLabel = "Apply" }) {
+function RecommandCard({ children, jobs = [], title = "Recommended Opportunities", actionLabel = "Apply" }) {
   return (
     <div className={styles.RecommandCard}>
       <div className={styles.header}>
@@ -30,6 +30,7 @@ function RecommandCard({ jobs = [], title = "Recommended Opportunities", actionL
           />
         ))}
       </div>
+      {children}
     </div>
   );
 }

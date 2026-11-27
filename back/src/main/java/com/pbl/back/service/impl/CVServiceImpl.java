@@ -1,5 +1,7 @@
 package com.pbl.back.service.impl;
 
+import com.pbl.back.dto.skill.ExtractedSkill;
+
 import com.pbl.back.service.*;
 import org.springframework.security.access.AccessDeniedException;
 import com.pbl.back.domain.entity.CV;
@@ -98,9 +100,9 @@ public class CVServiceImpl implements CVService {
             String cvText = textExtractor.extract(file).trim();
 
             String skillsJson = perplexityService.extractSkills(file);
-            List<String> skillNames = objectMapper.readValue(
+            List<ExtractedSkill> extractedSkills = objectMapper.readValue(
                     skillsJson,
-                    new TypeReference<List<String>>() {}
+                    new TypeReference<List<ExtractedSkill>>() {}
             );
 
             User lockedUser = lockUser(user.getId());
@@ -116,7 +118,7 @@ public class CVServiceImpl implements CVService {
             cv.setExtractedText(cvText);
             cv.setUploadedAt(LocalDateTime.now());
 
-            return mapper.toResponse(cvSkillSyncService.replaceCvWithSkills(cv, skillNames));
+            return mapper.toResponse(cvSkillSyncService.replaceExtractedSkills(cv, extractedSkills));
         } catch (JsonProcessingException ex) {
             throw new FileStorageException("Gemini returned invalid skills JSON.", ex);
         } catch (RuntimeException ex) {
@@ -177,7 +179,10 @@ public class CVServiceImpl implements CVService {
         cv.setObjective(request.getObjective() == null ? null : request.getObjective().trim());
         cv.setAdditionalInfo(request.getAdditionalInfo() == null ? null : request.getAdditionalInfo().trim());
 
-        return mapper.toResponse(cvSkillSyncService.replaceCvWithSkills(cv, request.getSkills()));
+        CV saved = request.getSkillExperience() == null
+                ? cvSkillSyncService.replaceCvWithSkills(cv, request.getSkills())
+                : cvSkillSyncService.replaceExtractedSkills(cv, request.getSkillExperience());
+        return mapper.toResponse(saved);
     }
 
     private User lockUser(Long userId) {

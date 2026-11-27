@@ -8,10 +8,9 @@ import { getCurrentApplication } from "../../api/applications";
 import { createProfile, updateProfile, uploadProfilePicture } from "../../api/profiles";
 import { errorMessage, optionalResource } from "../../api/client";
 import { mapProfile, mapCVInformation } from "../../api/mappers";
-import { getCurrentCompany } from "../../api/companies";
 
 function ProfilePage() {
-  const { user, profile, setAccount } = useOutletContext();
+  const { user, profile, company, setAccount } = useOutletContext();
   const [cv, setCv] = useState(null);
   const [application, setApplication] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -23,27 +22,23 @@ function ProfilePage() {
   const editing = searchParams.get("edit") === "true";
   const [draft, setDraft] = useState(null);
   const [saving, setSaving] = useState(false);
-  const [company, setCompany] = useState(null);
+  const editorRef = useRef(null);
   const fileInput = useRef(null);
   const photoInput = useRef(null);
 
   useEffect(() => {
+    if (user.role === "EMPLOYER") return;
     let active = true;
-    const request =
-      user.role === "EMPLOYER"
-        ? optionalResource(getCurrentCompany()).then((data) => {
-            if (active) setCompany(data);
-          })
-        : Promise.all([
-            optionalResource(getCurrentCV()),
-            optionalResource(getCurrentApplication()),
-          ]).then(([data, mine]) => {
-            if (active) {
-              setCv(data);
-              setApplication(mine);
-            }
-          });
-    request
+    Promise.all([
+      optionalResource(getCurrentCV()),
+      optionalResource(getCurrentApplication()),
+    ])
+      .then(([data, mine]) => {
+        if (active) {
+          setCv(data);
+          setApplication(mine);
+        }
+      })
       .catch((err) => {
         if (active) setError(err);
       })
@@ -125,6 +120,9 @@ function ProfilePage() {
   }
 
   async function save() {
+    const skills = editorRef.current?.readSkills();
+    if (skills === null) return;
+    const nextInformation = { ...currentDraft.information, skillExperience: skills ?? currentDraft.information.skillExperience };
     setSaving(true);
     setActionError(null);
     const data = {
@@ -139,8 +137,8 @@ function ProfilePage() {
         const updated = await (profile.id ? updateProfile(data) : createProfile(data));
         setAccount((previous) => ({ ...previous, profile: mapProfile(updated, user) }));
       }
-      if (JSON.stringify(currentDraft.information) !== JSON.stringify(information)) {
-        setCv(await updateCVInformation(currentDraft.information));
+      if (JSON.stringify(nextInformation) !== JSON.stringify(information)) {
+        setCv(await updateCVInformation(nextInformation));
       }
       cancelEdit();
     } catch (err) {
@@ -150,14 +148,14 @@ function ProfilePage() {
     }
   }
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p role="alert">{errorMessage(error)}</p>;
   if (user.role === "EMPLOYER")
     return company ? (
       <a href={`/companies/${company.id}`}>View {company.name}</a>
     ) : (
       <p>No company profile has been created.</p>
     );
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p role="alert">{errorMessage(error)}</p>;
 
   return (
     <div className={styles.ProfilePage}>
@@ -202,6 +200,8 @@ function ProfilePage() {
       />
 
       <CVInformationCard
+        editorRef={editorRef}
+
         education={profile.education}
         experienceSummary={profile.experience}
         information={editing ? currentDraft.information : information}

@@ -1,12 +1,12 @@
-import apiClient from "./client";
+import apiClient, { getShared } from "./client";
 
 export async function getCurrentCVSkills() {
-  const response = await apiClient.get(`/cv/me/skills`);
+  const response = await getShared(`/cv/me/skills`);
   return response.data;
 }
 
 export async function getCVSkill(id) {
-  const response = await apiClient.get(`/cv/me/skills/${id}`);
+  const response = await getShared(`/cv/me/skills/${id}`);
   return response.data;
 }
 

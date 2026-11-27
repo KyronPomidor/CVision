@@ -7,5 +7,7 @@ import java.util.List;
 
 public interface JobPostingSkillRepository extends JpaRepository<JobPostingSkill, Long> {
 
+    java.util.Optional<JobPostingSkill> findByJobPostingIdAndSkillId(Long postingId, Long skillId);
+
     List<JobPostingSkill> findByJobPostingId(Long jobPostingId);
 }

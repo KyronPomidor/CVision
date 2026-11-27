@@ -9,8 +9,9 @@ import JobOffersCard from "../../components/JobOffersCard/JobOffersCard";
 import {
   getJobPosting,
   getCurrentCompanyPostings,
-  getMatchedPostings,
+  getCompanyMatches,
   getPostingApplicants,
+  updateRequiredYears,
 } from "../../api/postings";
 import { createApplication, getCurrentApplication } from "../../api/applications";
 import { getCurrentCV } from "../../api/cv";
@@ -45,7 +46,7 @@ function JobPostingPage() {
         }
       } else if (user.role === "EMPLOYEE") {
         const [matches, application] = await Promise.all([
-          getMatchedPostings(),
+          getCompanyMatches(posting.company.id),
           optionalResource(getCurrentApplication()),
         ]);
         if (active) setCurrentApplication(application);
@@ -105,6 +106,9 @@ function JobPostingPage() {
       <JobDescription
         className={`${styles.card} ${styles.jobDescription}`}
         skills={job.skills}
+        onSaveYears={user.role === "EMPLOYER" && job.company.userId === user.id
+          ? async (skillId, years) => setJob(mapPosting(await updateRequiredYears(job.id, skillId, years)))
+          : undefined}
         onApply={user.role === "EMPLOYEE" ? apply : undefined}
         applying={applying}
         applied={currentApplication?.jobPostingId === job.id || job.status === "CLOSED"}
