@@ -59,7 +59,9 @@ public class ApplicationServiceImpl implements ApplicationService {
 
     @Override
     public ApplicationResponse getMine() {
-        Application application = repository.findByUserId(currentUserService.getId())
+        Application application = repository.findByUserIdOrderByIdDesc(currentUserService.getId())
+                .stream()
+                .findFirst()
                 .orElseThrow(() -> new ResourceNotFoundException(
                         "Application for the authenticated user was not found."));
         return mapper.toResponse(application);

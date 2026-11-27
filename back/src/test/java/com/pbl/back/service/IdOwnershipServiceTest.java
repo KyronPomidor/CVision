@@ -58,7 +58,7 @@ class IdOwnershipServiceTest {
         when(currentUser.getId()).thenReturn(1L, 1L, 1L, 2L, 2L, 2L);
         when(mapper.toResponse(any(CV.class))).thenReturn(response);
         CVServiceImpl service = new CVServiceImpl(
-                repository, mapper, mock(UserRepository.class), currentUser,
+                repository, null, mapper, mock(UserRepository.class), currentUser,
                 mock(PerplexityService.class), mock(CvSkillSyncService.class), new ObjectMapper());
 
         assertThrows(ResourceNotFoundException.class, () -> service.getById(8L));

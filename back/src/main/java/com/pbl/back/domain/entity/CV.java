@@ -34,6 +34,18 @@ public class CV {
     @Column(name = "skills", columnDefinition = "TEXT")
     private String skills;
 
+    @Column(columnDefinition = "TEXT")
+    private String languages;
+
+    @Column(columnDefinition = "TEXT")
+    private String objective;
+
+    @Column(columnDefinition = "TEXT")
+    private String experience;
+
+    @Column(name = "additional_info", columnDefinition = "TEXT")
+    private String additionalInfo;
+
     @Column(name = "uploaded_at")
     private LocalDateTime uploadedAt;
 }

@@ -1,5 +1,6 @@
 package com.pbl.back.controller;
 
+import com.pbl.back.dto.cv.CVInformationRequest;
 import com.pbl.back.dto.cv.CVRequest;
 import com.pbl.back.dto.cv.CVResponse;
 import com.pbl.back.service.CVService;
@@ -36,6 +37,11 @@ public class CVController {
     @GetMapping("/me")
     public CVResponse getMyCv() {
         return service.getByUserId(currentUserService.getId());
+    }
+
+    @PutMapping("/me/information")
+    public CVResponse updateInformation(@Valid @RequestBody CVInformationRequest request) {
+        return service.updateInformation(currentUserService.getId(), request);
     }
 
     @PutMapping("/{id}")

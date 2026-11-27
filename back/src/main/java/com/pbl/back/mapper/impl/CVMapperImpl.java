@@ -38,19 +38,23 @@ public class CVMapperImpl implements CVMapper {
                 .fileName(cv.getFileName())
                 .filePath(cv.getFilePath())
                 .extractedText(cv.getExtractedText())
-                .skills(parseSkills(cv.getSkills()))
+                .skills(parseList(cv.getSkills(), new TypeReference<>() {}))
+                .languages(parseList(cv.getLanguages(), new TypeReference<>() {}))
+                .objective(cv.getObjective())
+                .experience(parseList(cv.getExperience(), new TypeReference<>() {}))
+                .additionalInfo(cv.getAdditionalInfo())
                 .uploadedAt(cv.getUploadedAt())
                 .build();
     }
 
-    private List<String> parseSkills(String skillsJson) {
-        if (skillsJson == null || skillsJson.isBlank()) {
+    private <T> List<T> parseList(String json, TypeReference<List<T>> type) {
+        if (json == null || json.isBlank()) {
             return List.of();
         }
         try {
-            return objectMapper.readValue(skillsJson, new TypeReference<>() {});
+            return objectMapper.readValue(json, type);
         } catch (JsonProcessingException ex) {
-            throw new IllegalStateException("Stored CV skills are not valid JSON", ex);
+            throw new IllegalStateException("Stored CV data is not valid JSON", ex);
         }
     }
 }

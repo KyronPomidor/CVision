@@ -78,7 +78,9 @@ public class CVSkillServiceImpl implements CVSkillService {
     }
 
     private CV getCurrentCv() {
-        return cvRepository.findByUserId(currentUserService.getId())
+        return cvRepository.findByUserIdOrderByIdDesc(currentUserService.getId())
+                .stream()
+                .findFirst()
                 .orElseThrow(() -> new ResourceNotFoundException("CV not found"));
     }
 

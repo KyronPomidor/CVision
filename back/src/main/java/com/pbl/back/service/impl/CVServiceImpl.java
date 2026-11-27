@@ -4,6 +4,7 @@ import com.pbl.back.service.*;
 import org.springframework.security.access.AccessDeniedException;
 import com.pbl.back.domain.entity.CV;
 import com.pbl.back.domain.entity.User;
+import com.pbl.back.dto.cv.CVInformationRequest;
 import com.pbl.back.dto.cv.CVRequest;
 import com.pbl.back.dto.cv.CVResponse;
 import com.pbl.back.exception.FileStorageException;
@@ -15,6 +16,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.TransactionSynchronization;
+import org.springframework.transaction.support.TransactionSynchronizationManager;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.util.StringUtils;
@@ -30,6 +35,7 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class CVServiceImpl implements CVService {
 
     private final CVRepository repository;
@@ -57,6 +63,7 @@ public class CVServiceImpl implements CVService {
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public CVResponse upload(Long userId, MultipartFile file) {
         if (file.isEmpty()) {
             throw new FileStorageException("A CV file is required.");
@@ -96,16 +103,20 @@ public class CVServiceImpl implements CVService {
                     new TypeReference<List<String>>() {}
             );
 
-            CV cv = CV.builder()
-                    .user(user)
-                    .fileName(originalFileName)
-                    .filePath(target.toString())
-                    .extractedText(cvText)
-                    .skills(skillsJson)
-                    .uploadedAt(LocalDateTime.now())
-                    .build();
+            User lockedUser = lockUser(user.getId());
+            CV cv = repository.findByUserIdOrderByIdDesc(userId)
+                    .stream()
+                    .findFirst()
+                    .orElseGet(() -> CV.builder().user(lockedUser).build());
+            String previousPath = cv.getFilePath();
+            registerFileCleanup(target, previousPath);
 
-            return mapper.toResponse(cvSkillSyncService.saveCvWithSkills(cv, skillNames));
+            cv.setFileName(originalFileName);
+            cv.setFilePath(target.toString());
+            cv.setExtractedText(cvText);
+            cv.setUploadedAt(LocalDateTime.now());
+
+            return mapper.toResponse(cvSkillSyncService.replaceCvWithSkills(cv, skillNames));
         } catch (JsonProcessingException ex) {
             throw new FileStorageException("Gemini returned invalid skills JSON.", ex);
         } catch (RuntimeException ex) {
@@ -120,7 +131,9 @@ public class CVServiceImpl implements CVService {
 
     @Override
     public CVResponse getByUserId(Long userId) {
-        CV cv = repository.findByUserId(userId)
+        CV cv = repository.findByUserIdOrderByIdDesc(userId)
+                    .stream()
+                    .findFirst()
                 .orElseThrow(() -> new ResourceNotFoundException("CV for user with id '" + userId + "' not found."));
 
         return mapper.toResponse(cv);
@@ -141,6 +154,58 @@ public class CVServiceImpl implements CVService {
         cv.setUploadedAt(LocalDateTime.now());
 
         return mapper.toResponse(repository.save(cv));
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public CVResponse updateInformation(Long userId, CVInformationRequest request) {
+        User user = lockUser(userId);
+        CV cv = repository.findByUserIdOrderByIdDesc(userId)
+                    .stream()
+                    .findFirst()
+                .orElseGet(() -> CV.builder()
+                        .user(user)
+                        .fileName("")
+                        .filePath("")
+                        .build());
+        try {
+            cv.setLanguages(objectMapper.writeValueAsString(request.getLanguages()));
+            cv.setExperience(objectMapper.writeValueAsString(request.getExperience()));
+        } catch (JsonProcessingException ex) {
+            throw new IllegalStateException("Could not serialize CV information", ex);
+        }
+        cv.setObjective(request.getObjective() == null ? null : request.getObjective().trim());
+        cv.setAdditionalInfo(request.getAdditionalInfo() == null ? null : request.getAdditionalInfo().trim());
+
+        return mapper.toResponse(cvSkillSyncService.replaceCvWithSkills(cv, request.getSkills()));
+    }
+
+    private User lockUser(Long userId) {
+        return userRepository.findWithLockById(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+    }
+
+    private void registerFileCleanup(Path uploadedFile, String previousPath) {
+        TransactionSynchronizationManager.registerSynchronization(new TransactionSynchronization() {
+            @Override
+            public void afterCompletion(int status) {
+                if (status != STATUS_COMMITTED) {
+                    deleteStoredFile(uploadedFile);
+                } else if (previousPath != null && !previousPath.isBlank()) {
+                    deleteStoredFile(Path.of(previousPath).toAbsolutePath().normalize());
+                }
+            }
+        });
+    }
+
+    private void deleteStoredFile(Path file) {
+        Path directory = Path.of(cvStorageDirectory).toAbsolutePath().normalize();
+        if (!file.startsWith(directory)) return;
+        try {
+            Files.deleteIfExists(file);
+        } catch (IOException ex) {
+            log.warn("Could not remove stored CV file '{}'", file, ex);
+        }
     }
 
     @Override
