@@ -7,7 +7,7 @@ import com.pbl.back.domain.enums.JobStatus;
 import com.pbl.back.exception.FileStorageException;
 import com.pbl.back.dto.jobposting.JobPostingRequest;
 import com.pbl.back.dto.jobposting.JobPostingResponse;
-import com.pbl.back.dto.skill.SkillResponse;
+import com.pbl.back.dto.jobposting.PostingSkillResponse;
 import com.pbl.back.exception.ResourceNotFoundException;
 import com.pbl.back.mapper.JobPostingMapper;
 import com.pbl.back.mapper.JobPostingSkillMapper;
@@ -79,7 +79,7 @@ public class JobPostingServiceImpl implements JobPostingService {
         List<JobPostingResponse> postingResponses = new ArrayList<>();
         postings.forEach(posting -> {
 
-            List<SkillResponse> skills = jobPostingSkillMapper.toSkillResponse(
+            List<PostingSkillResponse> skills = jobPostingSkillMapper.toSkillResponse(
                     jobPostingSkillRepository.findByJobPostingId(posting.getId()));
 
             postingResponses.add(mapper.toResponse(posting, skills,
@@ -123,7 +123,7 @@ public class JobPostingServiceImpl implements JobPostingService {
         JobPosting posting = repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("JobPosting with id '" + id + "' not found."));
 
-        List<SkillResponse> skills = jobPostingSkillMapper.toSkillResponse(
+        List<PostingSkillResponse> skills = jobPostingSkillMapper.toSkillResponse(
                 jobPostingSkillRepository.findByJobPostingId(id)
         );
 

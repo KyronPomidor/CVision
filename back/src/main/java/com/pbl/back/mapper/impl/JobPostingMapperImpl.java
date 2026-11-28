@@ -8,7 +8,7 @@ import com.pbl.back.dto.image.ImageResponse;
 import com.pbl.back.dto.jobposting.JobPostingDetailsResponse;
 import com.pbl.back.dto.jobposting.JobPostingRequest;
 import com.pbl.back.dto.jobposting.JobPostingResponse;
-import com.pbl.back.dto.skill.SkillResponse;
+import com.pbl.back.dto.jobposting.PostingSkillResponse;
 import com.pbl.back.mapper.CompanyMapper;
 import com.pbl.back.mapper.JobPostingMapper;
 import lombok.RequiredArgsConstructor;
@@ -48,7 +48,7 @@ public class JobPostingMapperImpl implements JobPostingMapper {
     @Override
     public JobPostingResponse toResponse(
             JobPosting posting,
-            List<SkillResponse> skills,
+            List<PostingSkillResponse> skills,
             List<JobPostingImage> images
     ) {
         return toResponse(posting, skills, images, null);
@@ -57,7 +57,7 @@ public class JobPostingMapperImpl implements JobPostingMapper {
     @Override
     public JobPostingResponse toResponse(
             JobPosting posting,
-            List<SkillResponse> skills,
+            List<PostingSkillResponse> skills,
             List<JobPostingImage> images,
             Double matchScore
     ) {

@@ -16,8 +16,4 @@ public class SkillRequest {
     @Size(max = 100, message = "must be at most 100 characters")
     private String name;
 
-    @NotNull
-    @Min(0)
-    @Max(60)
-    private Integer yearsOfExperience = 0;
 }

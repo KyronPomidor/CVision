@@ -3,7 +3,7 @@ package com.pbl.back.dto.jobposting;
 import com.pbl.back.domain.enums.JobStatus;
 import com.pbl.back.dto.company.CompanyResponse;
 import com.pbl.back.dto.image.ImageResponse;
-import com.pbl.back.dto.skill.SkillResponse;
+import com.pbl.back.dto.jobposting.PostingSkillResponse;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -28,7 +28,7 @@ public class JobPostingResponse {
 
     private JobStatus status;
 
-    private List<SkillResponse> skills;
+    private List<PostingSkillResponse> skills;
     private List<ImageResponse> images;
     private Double matchScore;
 }

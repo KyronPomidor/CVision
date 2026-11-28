@@ -4,15 +4,15 @@ import com.pbl.back.domain.entity.JobPosting;
 import com.pbl.back.domain.entity.JobPostingImage;
 import com.pbl.back.dto.jobposting.JobPostingRequest;
 import com.pbl.back.dto.jobposting.JobPostingResponse;
-import com.pbl.back.dto.skill.SkillResponse;
+import com.pbl.back.dto.jobposting.PostingSkillResponse;
 
 import java.util.List;
 
 public interface JobPostingMapper {
     JobPosting toEntity(JobPostingRequest request);
 
-    JobPostingResponse toResponse(JobPosting posting, List<SkillResponse> skills, List<JobPostingImage> images);
+    JobPostingResponse toResponse(JobPosting posting, List<PostingSkillResponse> skills, List<JobPostingImage> images);
 
-    JobPostingResponse toResponse(JobPosting posting, List<SkillResponse> skills,
+    JobPostingResponse toResponse(JobPosting posting, List<PostingSkillResponse> skills,
                                   List<JobPostingImage> images, Double matchScore);
 }

@@ -54,7 +54,7 @@ public class DataSeeder implements CommandLineRunner {
         for (String n : List.of("Java", "Spring Boot", "React", "JavaScript", "TypeScript", "SQL",
                 "Python", "Docker", "AWS", "Git", "Node.js", "Figma", "Kubernetes", "Machine Learning")) {
             Skill s = skillRepository.findAll().stream().filter(x -> x.getName().equalsIgnoreCase(n)).findFirst()
-                    .orElseGet(() -> skillRepository.save(Skill.builder().name(n).yearsOfExperience(0).build()));
+                    .orElseGet(() -> skillRepository.save(Skill.builder().name(n).build()));
             skills.put(n, s);
         }
 

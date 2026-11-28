@@ -94,7 +94,7 @@ class JobPostingImagesTest {
 
     @Test
     void countsOnlySkillsMeetingExperienceAndOmitsZeroScores() {
-        var skill = Skill.builder().id(2L).yearsOfExperience(8).build();
+        var skill = Skill.builder().id(2L).build();
         var profile = CandidateProfile.builder().id(3L).build();
         var candidateSkill = ProfileSkill.builder().skill(skill).yearsOfExperience(1).build();
         posting.setDetails(JobPostingDetails.builder().experience(6).build());

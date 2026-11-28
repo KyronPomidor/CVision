@@ -48,7 +48,6 @@ public class SkillServiceImpl implements SkillService {
                 .orElseThrow(() -> new ResourceNotFoundException("Skill with id '" + id + "' not found."));
 
         skill.setName(request.getName());
-        skill.setYearsOfExperience(request.getYearsOfExperience());
 
         return mapper.toResponse(repository.save(skill));
     }
